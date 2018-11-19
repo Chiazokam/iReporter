@@ -1,0 +1,89 @@
+/*---------------GENERAL STYLES--------------*/
+*{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a{
+  outline: none;
+  text-decoration: none;
+  color: black;
+}
+
+li{
+  list-style: none;
+}
+
+.logo{
+  width: 50px;
+  height: 45px;
+}
+/*------------NAV MENU----------*/
+header{
+  background: rgb(255, 255, 255);
+}
+
+div.logo-container{
+  background: #162661;
+  width: 100px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  float: left;
+  text-align: center;
+}
+
+.main-nav{
+  float: right;
+}
+
+.main-nav ul li{
+  margin-right: 15px;
+  padding-top: 7px;
+  float: left;
+  line-height: 50px;
+}
+.main-nav ul li a{
+  font-size: 12pt;
+  color: grey;
+  text-transform: uppercase;
+  transition-duration: 0.2s;
+  transition-property: color;
+  transition-property: border;
+  transition-timing-function: ease-in-out;
+}
+.main-nav ul:last-child{
+  padding-right: 40px;
+}
+.main-nav ul:first-child{
+  padding-left: 20px;
+}
+.main-nav ul li a:hover{
+  color: #162661;
+  cursor: pointer;
+  border-bottom: 2.5px solid #162661;
+}
+section.block-container{
+  padding: 0 100px 0 100px;
+}
+footer{
+  background: #162661;
+  color: white;
+  text-align: center;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+/*--------------MEDIA QUERIES--------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -18,6 +18,7 @@ a{
 /*------------NAV MENU----------*/
 header{
   background: rgb(255, 255, 255);
+  border-bottom: 5px solid #162661;
 }
 
 div.logo-container{
@@ -71,6 +72,10 @@ div.logo-container{
   color: #fe0100;
   cursor: pointer;
 }
+#current{
+  color: #fe0100;
+  font-weight: bold;
+}
 header nav.main-nav ul ul.sub-menu li{
   float: none;
   line-height: 2em;
@@ -108,8 +113,14 @@ header nav.main-nav ul li:hover ul.sub-menu li:last-child{
   background: url("../images/justice_keyboard.jpg");
   background-size: cover;
 }
-
-/*-------- ARTICLE --------*/
+/*------ CRIME REPORT ------*/
+.crime-report-container{
+  text-align: center;
+}
+.crime_report{
+  width: 60%;
+}
+/*-------- Welcome --------*/
 .visitors-message{
   background: rgba(255, 255, 255, 0.8);
   color: #162661;

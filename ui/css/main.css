@@ -1,0 +1,242 @@
+/*---------------GENERAL STYLES--------------*/
+body{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  /* background: url("../images/justice_keyboard.jpg"); */
+  background-size: cover; 
+}
+
+a{
+  outline: none;
+  text-decoration: none;
+  color: black;
+}
+
+.logo{
+  width: 50px;
+  height: 45px;
+}
+/*------------NAV MENU----------*/
+header{
+  background: rgb(255, 255, 255);
+  border-bottom: 5px solid #162661;
+}
+
+div.logo-container{
+  background: #162661;
+  width: 100px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  float: left;
+  text-align: center;
+}
+.sitename{
+  color: #162661;
+  font-size: 2em;
+  font-weight: 1000;
+  line-height: 55px;
+  padding-left: 0.5em;
+}
+
+.sitename label{
+  color: #fe0100;
+}
+.main-nav{
+  float: right;
+}
+
+.main-nav ul li{
+  position: relative;
+  margin-right: 15px;
+  padding-top: 7px;
+  float: left;
+  line-height: 50px;
+  list-style: none;
+  text-align: center
+}
+.main-nav ul li a{
+  font-size: 12pt;
+  font-weight: 100;
+  color: grey;
+  text-transform: uppercase;
+  transition-duration: 0.2s;
+  transition-property: color;
+  transition-timing-function: ease-in-out;
+}
+.main-nav ul:last-child{
+  padding-right: 40px;
+}
+.main-nav ul:first-child{
+  padding-left: 20px;
+}
+.main-nav ul li a:hover{
+  color: #fe0100;
+  cursor: pointer;
+}
+#current{
+  color: #fe0100;
+  font-weight: bold;
+}
+header nav.main-nav ul ul.sub-menu li{
+  float: none;
+  line-height: 2em;
+  padding: 1px;
+  background: #ffffff;
+  top: -10000em;
+
+  transition-duration: 0.4s;
+  transition-property: top;
+  transition-timing-function: ease-in-out;
+
+  transition-duration: 0.2s;
+  transition-property: padding;
+  transition-timing-function: ease-in-out;
+}
+header nav.main-nav ul ul.sub-menu {
+  position: absolute;
+  right: -5em;
+}
+
+header nav.main-nav ul li:hover ul.sub-menu{
+  display: block;
+  background: none;
+}
+header nav.main-nav ul li:hover ul.sub-menu li{
+  padding: 5px;
+  top: 0;
+}
+header nav.main-nav ul li:hover ul.sub-menu li:last-child{
+  border-radius: 0 0 5px 5px; 
+}
+
+.body-container{
+  padding: 0 100px 0 100px;
+  background: url("../images/justice_keyboard.jpg");
+  background-size: cover;
+}
+/*------ CRIME REPORT ------*/
+.crime-report-container{
+  text-align: center;
+}
+.crime_report{
+  width: 60%;
+}
+/*-------- Welcome --------*/
+.visitors-message{
+  background: rgba(255, 255, 255, 0.8);
+  color: #162661;
+  font-size: 1.2em;
+  width: 40%; 
+  padding: 30px 2.5%;
+  margin: 100px 2.5% 100px 2.5%;
+  border-radius: 20px;
+  float: left;
+  text-align: left;
+}
+
+.visitors-message h1{
+  font-size: 2em;
+  text-align: center;
+  padding: 0.5em;
+}
+/*-------REG FORMS------*/
+.signup-form{
+  display: none;
+}
+.body-container form{
+  width: 40%; 
+  padding: 100px 5%;
+}
+.signup-form, 
+.signin-form{
+  float: right;
+}
+
+form input[type="text"], 
+form input[type="password"],
+form input[type="submit"] {
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  margin-top: 10px; 
+  width: 100%;
+  font-size: 1.05em;
+}
+form input[type="text"], 
+form input[type="password"]{
+  background: #dad9d9;
+}
+form input[type="text"]:focus, 
+form input[type="password"]:focus{
+  background: #ffffff;
+}
+
+form h2{
+  text-align: center;
+  color: #223579;
+  font-size: 1.5em;
+}
+.switch-signin{
+  color: #3456d1;
+}
+form input[type="submit"]{
+  color: white;
+  background-color: #162661;
+  width: 104%;
+  font-size: 1.2em;
+  transition-duration: 0.2s;
+  transition-property: background-color;
+  transition-timing-function: ease-in-out;
+}
+form input[type="submit"]:hover{
+  background-color: #3456d1;
+  cursor: pointer;
+}
+
+.switch-signup:hover, .switch-signin:hover{
+  color: #3456d1;
+  cursor: pointer;
+}
+
+footer{
+  background: #162661;
+  color: white;
+  text-align: center;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+/*--------------MEDIA QUERIES--------------*/
+
+@media(max-width:768px) {
+  .visitors-message{
+    width: 90%;
+    float: none;
+    margin: 10% auto;
+  }
+
+  .signup-form, 
+  .signin-form{
+    float: none;
+    width: 90%;
+    margin: 10% auto;
+}
+.body-container form{
+    width: 90%;
+    padding: 50px 10px;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

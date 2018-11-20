@@ -1,6 +1,8 @@
 /*---------------GENERAL STYLES--------------*/
 body{
   font-family: Arial, Helvetica, sans-serif;
+  background: url("../images/justice_keyboard.jpg");
+  background-size: cover; 
 }
 
 a{
@@ -87,6 +89,7 @@ form input[type="submit"] {
   display: block;
   padding: 10px;
   border-radius: 5px;
+  border: none;
   outline: none;
   margin-top: 10px; 
   width: 100%;
@@ -98,9 +101,20 @@ form h2{
   color: #162661;
   font-size: 1.2em;
 }
+.switch-signin{
+  color: #3456d1;
+}
 form input[type="submit"]{
-  text-align: center;
+  color: white;
+  background-color: #162661;
   margin: 10px 15px;
+  transition-duration: 0.2s;
+  transition-property: background-color;
+  transition-timing-function: ease-in-out;
+}
+form input[type="submit"]:hover{
+  background-color: #3456d1;
+  cursor: pointer;
 }
 
 .switch-signup:hover, .switch-signin:hover{

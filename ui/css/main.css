@@ -11,10 +11,6 @@ a{
   color: black;
 }
 
-li{
-  list-style: none;
-}
-
 .logo{
   width: 50px;
   height: 45px;
@@ -52,6 +48,7 @@ div.logo-container{
   padding-top: 7px;
   float: left;
   line-height: 50px;
+  list-style: none;
 }
 .main-nav ul li a{
   font-size: 12pt;
@@ -76,14 +73,30 @@ div.logo-container{
 }
 
 .body-container{
-  padding: 0 150px 0 150px;
+  padding: 0 100px 0 100px;
+}
+/*-------- ARTICLE --------*/
+.visitors-message{
+  background: rgba(255, 255, 255, 0.8);
+  color: #162661;
+  font-size: 1.2em;
+  width: 30%;
+  padding: 30px 50px;
+  margin: 100px;
+  border-radius: 20px;
+  float: left;
+  text-align: justify;
+}
+
+.visitors-message h1{
+  font-size: 2em;
 }
 /*-------REG FORMS------*/
 .signup-form{
   display: none;
 }
 .body-container form{
-  width: 320px;
+  width: 30%;
   padding: 100px 20px;
 }
 .signup-form, 

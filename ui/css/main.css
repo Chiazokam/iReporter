@@ -1,7 +1,7 @@
 /*---------------GENERAL STYLES--------------*/
 body{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  background: url("../images/justice_keyboard.jpg");
+  /* background: url("../images/justice_keyboard.jpg"); */
   background-size: cover; 
 }
 
@@ -44,11 +44,13 @@ div.logo-container{
 }
 
 .main-nav ul li{
+  position: relative;
   margin-right: 15px;
   padding-top: 7px;
   float: left;
   line-height: 50px;
   list-style: none;
+  text-align: center
 }
 .main-nav ul li a{
   font-size: 12pt;
@@ -57,7 +59,6 @@ div.logo-container{
   text-transform: uppercase;
   transition-duration: 0.2s;
   transition-property: color;
-  transition-property: font-weight;
   transition-timing-function: ease-in-out;
 }
 .main-nav ul:last-child{
@@ -67,20 +68,53 @@ div.logo-container{
   padding-left: 20px;
 }
 .main-nav ul li a:hover{
-  color: #162661;
+  color: #fe0100;
   cursor: pointer;
-  font-weight: bold;
+}
+header nav.main-nav ul ul.sub-menu li{
+  float: none;
+  line-height: 2em;
+  padding: 1px;
+  background: #ffffff;
+  top: -10000em;
+
+  transition-duration: 0.4s;
+  transition-property: top;
+  transition-timing-function: ease-in-out;
+
+  transition-duration: 0.2s;
+  transition-property: padding;
+  transition-timing-function: ease-in-out;
+}
+header nav.main-nav ul ul.sub-menu {
+  position: absolute;
+  right: -5em;
+}
+
+header nav.main-nav ul li:hover ul.sub-menu{
+  display: block;
+  background: none;
+}
+header nav.main-nav ul li:hover ul.sub-menu li{
+  padding: 5px;
+  top: 0;
+}
+header nav.main-nav ul li:hover ul.sub-menu li:last-child{
+  border-radius: 0 0 5px 5px; 
 }
 
 .body-container{
   padding: 0 100px 0 100px;
+  background: url("../images/justice_keyboard.jpg");
+  background-size: cover;
 }
+
 /*-------- ARTICLE --------*/
 .visitors-message{
   background: rgba(255, 255, 255, 0.8);
   color: #162661;
   font-size: 1.2em;
-  width: 40%; /*30%*/
+  width: 40%; 
   padding: 30px 2.5%;
   margin: 100px 2.5% 100px 2.5%;
   border-radius: 20px;
@@ -98,16 +132,14 @@ div.logo-container{
   display: none;
 }
 .body-container form{
-  width: 40%; /*30%*/
+  width: 40%; 
   padding: 100px 5%;
 }
 .signup-form, 
 .signin-form{
   float: right;
 }
-.signin-form{
-  /* margin-left: 2em; */
-}
+
 form input[type="text"], 
 form input[type="password"],
 form input[type="submit"] {
@@ -122,16 +154,17 @@ form input[type="submit"] {
 }
 form input[type="text"], 
 form input[type="password"]{
-  background: #ebebeb;
+  background: #dad9d9;
 }
 form input[type="text"]:focus, 
 form input[type="password"]:focus{
   background: #ffffff;
 }
+
 form h2{
   text-align: center;
-  color: #162661;
-  font-size: 1.2em;
+  color: #223579;
+  font-size: 1.5em;
 }
 .switch-signin{
   color: #3456d1;
@@ -139,7 +172,8 @@ form h2{
 form input[type="submit"]{
   color: white;
   background-color: #162661;
-  width: 100%;
+  width: 104%;
+  font-size: 1.2em;
   transition-duration: 0.2s;
   transition-property: background-color;
   transition-timing-function: ease-in-out;

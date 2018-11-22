@@ -2,6 +2,9 @@
 body{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+#peg{
+  display: none;
+}
 .red{
   color: red;
 }
@@ -249,9 +252,7 @@ text-align: center;
 .comment-container .comment {
   text-align: center;
 }
-.comment-container .comment input[type="submit"]{
 
-}
 .comment-container .comment textarea{
   resize: none;
   width: 70%;
@@ -260,6 +261,7 @@ text-align: center;
   border: none;
   border-radius: 20px;
   padding: 30px;
+  font-size: 1.2em;
 }
 .comment-avatar{
   display: block;
@@ -276,7 +278,7 @@ text-align: center;
     height: 100%;
     width: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .inner-box {
@@ -292,6 +294,40 @@ text-align: center;
   width: 100%;
 }
 
+.record-frame{
+  width: 100%;
+  margin: 50px 0;
+  margin-top: 0;
+  border: none;
+
+    background-color: transparent;
+    border: 0px none transparent;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.choose-record {
+  text-align: center;
+}
+.choose-record a{
+  padding: 10px 0;
+  margin: 0;
+  display: inline-table;
+  font-size: 100%;
+  width: 48%;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+  border: 1px solid #162661;
+}
+.choose-record a:hover{
+  color: white;
+  background: #162661;
+}
+.default{
+  color: white;
+  background: #162661
+}
 /*-------- Welcome --------*/
 
 .visitors-message{
@@ -432,12 +468,12 @@ footer{
 /*--------------MEDIA QUERIES--------------*/
 
 @media(max-width:1000px) {
- /* .menu_close{
-    width: 30px;
-    height: 30px;
-    margin: 20px 50px 0 0;
-    float: right;
-  } */
+ .reply {
+   margin: 0;
+ }
+  .reply p{
+   text-align: left;
+ }
   .hamburger{
   width: 30px;
   height: 30px;
@@ -518,15 +554,7 @@ footer{
     list-style: none;
     text-align: center
   }
-  /* .main-nav ul li a{
-    font-size: 12pt;
-    font-weight: 400;
-    color: grey;
-    text-transform: uppercase;
-    transition-duration: 0.2s;
-    transition-property: color;
-    transition-timing-function: ease-in-out;
-  } */
+
 }
 
 @media(max-width:320px) {
@@ -537,6 +565,7 @@ footer{
   .video-display video{
   width: 90%;
 }
+
 }
 
 

@@ -16,31 +16,143 @@
         <div class="clearfix logo-container">
             <img src="../images/ir.png" class="logo">
         </div>
+
         <span class="sitename"><label>i</label>Reporter</span>
+
         <nav class="main-nav clearfix">
-            <ul class="clearfix">
-                <li><a href="#">home</a></li>
-                <li><a href="#">how it works</a></li>
-                <li><a href="#">about</a></li>
-                <li><a href="#" id="current">report</a>
-                    <ul class="sub-menu">
-                        <li> <a href="#">red flag</a> </li>
-                        <li><a href="#"> intervene </a></li>
-                    </ul>
-                </li>
+            <ul class="clearfix" id="desktop-nav">
+                <li><a href="./home.html">home</a></li>
+                <li><a href="./howitworks.html">how it works</a></li>
+                <li><a href="./about.html">about</a></li>
+                <li><a href="./report.html" id="current">report</a></li>
+                <li><a href="./profile.html">profile</a></li>
+                <li><a href="../index.html">signout</a></li>
             </ul>
         </nav>
 
+        <nav class="main-nav clearfix" id="mobile-nav">
+            <ul class="clearfix">
+                <li><a href="./home.html">home</a></li>
+                <li><a href="./howitworks.html">how it works</a></li>
+                <li><a href="./about.html">about</a></li>
+                <li><a href="./report.html" id="mobile-current">report</a></li>
+                <li><a href="./profile.html">profile</a></li>
+                <li><a href="../index.html">signout</a></li>
+            </ul>
+        </nav>
+        <img src="../images/menu_icon.png" class="hamburger" />
     </header>
-    <section class="crime-report-container">
-        <img src="../images/crime_report.png" class="crime_report" />
+
+    <section class="crime-form-container clearfix">
+        <h1 id="compose-heading">COMPOSE REPORT</h1>  
+        <form>
+            <input type="text" placeholder="ENTER HEADING OR TITLE" class="title" id="title"/>
+            <textarea placeholder="Tell your story..." class="post-text-area" id="post-text-area"></textarea>
+            <input type="radio" name="report-type" checked="checked" id="red-flag"> <label>RED-FLAG</label> 
+            <span> &nbsp; </span>
+            <input type="radio" name="report-type" id="intervene"><label>INTERVENE</label> 
+            <br> <br>
+            <h1 class="white">GEO-LOCATION</h1>
+            <input type="number" placeholder="ENTER LONGITUDE" id="longitude"> 
+            <br> <br>
+            <input type="number" placeholder="ENTER LATITUDE" id="latitude"> 
+            <br> <br>
+            <label>Upload image</label> <input type="file" accept="image/*" id="picture-upload"> 
+            <br> <br>
+            <label>Upload video</label> <input type="file" accept="video/*" id="video-upload">
+             <br>
+            <input type="submit" value="POST" class="report">
+        </form>
+
     </section>
 
-    <section class="body-container clearfix">
+    <section class="post-display">
+        <div class="post">
+            <article class="actual-post">
+                <img src="../images/avatar.png" class="avatar" title="avatar"/> <i><a href="#">Justice</a></i>
+                <br>
+                <h1> Murder In XYZ Town</h1>
+                <img src="../images/red_flag.png" class="red-flag-icon" title="Critical Red flag" />
+                <p>
+                In a few days along comes the letter you expect. Your merchandise is quite good — in fact the writer likes it and
+                wishes to talk to you about it if you will call at such and such a time.
+                
+                Promptly on the minute you present yourself, trying not to beam. Yes, Mr. Jones, of Smith & Jones, to whom your goods
+                were shown, thinks they’re just what the firm has been looking for. They’re going in to exploit them heavily for you.
+                All they want is their commission on any merchandise they sell.
+                
+                Oh yes — there’s going to be the postage on the twenty-five or fifty thousand letters they’re going to send out to all
+                their correspondents, with your prospectus in it. They send out their letters by first-class mail — about two hundred
+                dollars will cover it. And you’ll be kind enough to send Smith & Jones enough circulars so there won’t be any delay.</p>
+                <br>
+                <label class="blue">STATUS</label> : <span>Under Investigation</span> <br>
+                <label class="blue">LATITUDE</label> : <span>6.54579454 N</span> <br>
+                <label class="blue">LONGITUDE</label> : <span>13.3897463 E</span> <br> <br>
+
+                <div class="image-display">
+                    <img src="../images/murder.jpg" class="picture-evidence" title="picture-evidence" />
+                </div>
+                <br>
+                <div class="video-display">
+                    <video controls>
+                        <source src="../videos/Fail_Like_a_Child_Inspiration_by_Jay_Shetty.mp4" class="video-evidence">
+                    </video>
+                </div>
+                
+                <a class="blue edit">EDIT</a>
+                <span> &nbsp; &nbsp; </span>
+                <a class="red delete">DELETE</a>
+            </article>
 
 
+        </div>
+
+        <div class="post">
+            <article class="actual-post">
+                <img src="../images/avatar.png" class="avatar" title="avatar" /> <i><a href="#">Justice</a></i>
+                <br>
+                <h1> Bad Roads In ABC</h1>
+                <img src="../images/intervene_icon.png" class="red-flag-icon" title="Government Intervention" />
+                <p>
+                In a few days along comes the letter you expect. Your merchandise is quite good — in fact the writer likes it and
+                wishes to talk to you about it if you will call at such and such a time.
+                
+                Promptly on the minute you present yourself, trying not to beam. Yes, Mr. Jones, of Smith & Jones, to whom your goods
+                were shown, thinks they’re just what the firm has been looking for. They’re going in to exploit them heavily for you.
+                All they want is their commission on any merchandise they sell.
+                
+                Oh yes — there’s going to be the postage on the twenty-five or fifty thousand letters they’re going to send out to all
+                their correspondents, with your prospectus in it. They send out their letters by first-class mail — about two hundred
+                dollars will cover it. And you’ll be kind enough to send Smith & Jones enough circulars so there won’t be any delay.</p>
+                <br>
+                <label class="blue">STATUS</label> : <span>Resolved</span> <br>
+                <label class="blue">LATITUDE</label> : <span>2.54579454 S</span> <br>
+                <label class="blue">LONGITUDE</label> : <span>-15.3897463 W</span> <br> <br>
+                
+                <div class="image-display">
+                    <img src="../images/bad-road.jpg" class="picture-evidence" title="picture evidence"/>
+                </div>
+                <br>
+                <div class="video-display">
+                    <video controls title="video evidence">
+                        <source src="../videos/Fail_Like_a_Child_Inspiration_by_Jay_Shetty.mp4" type="video/mp4" class="video-evidence">
+                    </video>
+                </div>
+                
+                <a class="blue edit">EDIT</a>
+                <span> &nbsp; &nbsp; </span>
+                <a class="red delete">DELETE</a>
+            </article>
+
+            
+        </div>
     </section>
 
+    <section class="outer-modal">
+        <div class="inner-box">
+            <img src="" class="image-enlarge">
+        </div>
+    </section>
 
     <footer id="footer">
 

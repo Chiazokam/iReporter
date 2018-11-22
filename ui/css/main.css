@@ -1,26 +1,55 @@
 /*---------------GENERAL STYLES--------------*/
 body{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  /* background: url("../images/justice_keyboard.jpg"); */
-  background-size: cover; 
 }
-
+#peg{
+  display: none;
+}
+.red{
+  color: red;
+}
+.blue{
+  color: #3456d1;
+}
+.theme-blue{
+  color: #162661;
+}
+.white{
+  color: white;
+}
 a{
   outline: none;
   text-decoration: none;
-  color: black;
+  color: #162661;
 }
-
+a:hover{
+  text-decoration: underline;
+}
+.hamburger{
+  display: none;
+  cursor: pointer;
+}
+.menu_close{
+  display: none;
+  cursor: pointer;
+}
 .logo{
   width: 50px;
   height: 45px;
 }
+.avatar{
+  width: 30px;
+  height: 30px;
+}
+
 /*------------NAV MENU----------*/
 header{
   background: rgb(255, 255, 255);
   border-bottom: 5px solid #162661;
 }
-
+#mobile-nav{
+  display: none;
+}
 div.logo-container{
   background: #162661;
   width: 100px;
@@ -54,13 +83,40 @@ div.logo-container{
   text-align: center
 }
 .main-nav ul li a{
-  font-size: 12pt;
-  font-weight: 100;
+  font-size: 100%;
+  font-weight: 400;
   color: grey;
   text-transform: uppercase;
   transition-duration: 0.2s;
   transition-property: color;
   transition-timing-function: ease-in-out;
+}
+#mobile-nav ul:first-child,
+#mobile-nav ul:last-child{
+  padding: 0;
+}
+#mobile-nav {
+  right: 0;
+}
+#mobile-nav ul li a:hover{
+  color: white;
+}
+#mobile-nav ul li{
+  margin: 0;
+  padding: 0 20px 0 10px;
+  color: #fe0100;
+  background-color: white;
+  text-transform: uppercase;
+  transition-duration: 0.2s;
+  transition-property: color;
+  transition-property: background-color;
+  transition-timing-function: ease-in-out;
+}
+#mobile-nav ul li:hover{
+  background-color: #fe0100;
+}
+#mobile-nav ul li:hover a{
+ color: white;
 }
 .main-nav ul:last-child{
   padding-right: 40px;
@@ -72,40 +128,10 @@ div.logo-container{
   color: #fe0100;
   cursor: pointer;
 }
-#current{
+#current, 
+#mobile-current{
   color: #fe0100;
   font-weight: bold;
-}
-header nav.main-nav ul ul.sub-menu li{
-  float: none;
-  line-height: 2em;
-  padding: 1px;
-  background: #ffffff;
-  top: -10000em;
-
-  transition-duration: 0.4s;
-  transition-property: top;
-  transition-timing-function: ease-in-out;
-
-  transition-duration: 0.2s;
-  transition-property: padding;
-  transition-timing-function: ease-in-out;
-}
-header nav.main-nav ul ul.sub-menu {
-  position: absolute;
-  right: -5em;
-}
-
-header nav.main-nav ul li:hover ul.sub-menu{
-  display: block;
-  background: none;
-}
-header nav.main-nav ul li:hover ul.sub-menu li{
-  padding: 5px;
-  top: 0;
-}
-header nav.main-nav ul li:hover ul.sub-menu li:last-child{
-  border-radius: 0 0 5px 5px; 
 }
 
 .body-container{
@@ -116,42 +142,243 @@ header nav.main-nav ul li:hover ul.sub-menu li:last-child{
 /*------ CRIME REPORT ------*/
 .crime-report-container{
   text-align: center;
-}
-.crime_report{
-  width: 60%;
-}
-/*-------- Welcome --------*/
-.visitors-message{
-  background: rgba(255, 255, 255, 0.8);
-  color: #162661;
-  font-size: 1.2em;
-  width: 40%; 
-  padding: 30px 2.5%;
-  margin: 100px 2.5% 100px 2.5%;
-  border-radius: 20px;
-  float: left;
-  text-align: left;
+  background: #0f0b0a;
 }
 
-.visitors-message h1{
+.crime-report-container h1{
+  color: white;
+  padding: 1em;
+  font-size: 1.2em;
+}
+.crime-form-container form label,
+.crime-form-container form input[type="file"]{
+  color: white;
+}
+.crime-form-container form .title{
+  width: 100%;
+}
+.crime-form-container form input[type="file"]{
+  color: white;
+  background: #162661;
+  border-radius: 5px;
+  padding: 0.3em;
+}
+.crime-form-container form input[type="text"],
+.crime-form-container form input[type="number"]{
+  display: inline-table;
+  width: 320px;
+  text-align: center;
+  border-radius: 5px;
+  padding: 0.5em;
+}
+.crime-form-container form {
+text-align: center;
+}
+.crime_report_image{
+  width: 70%;
+}
+.crime-form-container{
+  text-align: left;
+  background: url("../images/justice.jpg");
+  background-size: cover;
+}
+#title{
+  margin-bottom: -40px;
+  width: 60%;
+}
+.crime-form-container .post-text-area{
+  display: block;
+  width: 60%;
+  padding: 30px;
+  height: 250px;
+  margin: 20px auto;
+  border-radius: 10px;
+  outline: none; 
+  resize: none;
+  font-size: 1.3em;
+}
+.crime-form-container input.report{
+  width: 100px;
+  margin: 50px auto;
+}
+.partition{
+  display: block;
+  padding: 0 50px;
+}
+.post-display .comment-heading{
+  text-align: center;
+  color: #162661;
+  font-size: 1.5em;
+  padding: 1em 0;
+  text-decoration: underline;
+}
+.post{
+  background: #9cb1ff28;
+  margin: 20px 100px;
+}
+.actual-post{
+  padding: 50px 100px;
+}
+.actual-post h1{
   font-size: 2em;
+  display: inline-table;
+}
+.actual-post p{
+  line-height: 2em;
+}
+.picture-evidence{
+  width: 30%;
+}
+.picture-evidence:hover{
+  box-shadow: 1px 1px 1px 1px black;
+  cursor: pointer;
+}
+.red-flag-icon{
+  width: 20px;
+  height: 20px;
+}
+.edit, .delete{
+  display: inline-table;
+  cursor: pointer;
+  margin-top: 10px; 
+}
+.edit:hover{
+  color: #162661;
+}
+.delete:hover{
+  color: #fc3535;
+}
+
+.comment-container .comment {
+  text-align: center;
+}
+
+.comment-container .comment textarea{
+  resize: none;
+  width: 70%;
+  height: 100px;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  padding: 30px;
+  font-size: 1.2em;
+}
+.comment-avatar{
+  display: block;
+  padding-bottom: 10px;
+}
+/*------Modal-------*/
+ 
+.outer-modal {
+    position: fixed;
+    z-index: 1;
+    display: none;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.inner-box {
+    width:80%;
+    min-width: 320px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+}
+.image-enlarge{
+  width: 100%;
+}
+
+.record-frame{
+  width: 100%;
+  margin: 50px 0;
+  margin-top: 0;
+  border: none;
+
+    background-color: transparent;
+    border: 0px none transparent;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.choose-record {
+  text-align: center;
+}
+.choose-record a{
+  padding: 10px 0;
+  margin: 0;
+  display: inline-table;
+  font-size: 100%;
+  width: 48%;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+  border: 1px solid #162661;
+}
+.choose-record a:hover{
+  color: white;
+  background: #162661;
+}
+.default{
+  color: white;
+  background: #162661
+}
+/*-------- Welcome --------*/
+
+.visitors-message{
+  background: rgba(255, 255, 255, 0.9);
+  color: #162661;
+  font-size: 1em;
+  line-height: 1.5em;
+  width: 36%; 
+  padding: 30px 40px;
+  margin: 100px 2% 100px 2%;
+  border-radius: 20px;
+  float: right;
+  text-align: left;
+}
+.body-container > h1{
+  color: #162661;
+  background: white;
+  border-radius: 0 0 10px 10px;
+}
+.secure{
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+}
+.visitors-message h1,
+.body-container > h1{
+  font-size: 1.5em;
   text-align: center;
   padding: 0.5em;
+}
+.visitors-message h1 label, 
+.body-container > h1 > label{
+  color: #fe0100;
 }
 /*-------REG FORMS------*/
 .signup-form{
   display: none;
 }
-.body-container form{
-  width: 40%; 
-  padding: 100px 5%;
+.body-container .signup-form,
+.body-container .signin-form{
+  text-align: center;
+  width: 40%;
+  padding: 100px 6% 100px 4%;
+  border-radius: 10px;
 }
 .signup-form, 
 .signin-form{
-  float: right;
+  float: left;
 }
 
-form input[type="text"], 
+form input[type="text"],
 form input[type="password"],
 form input[type="submit"] {
   display: block;
@@ -159,18 +386,30 @@ form input[type="submit"] {
   border-radius: 5px;
   border: none;
   outline: none;
-  margin-top: 10px; 
+  margin-top: 10px;
   width: 100%;
   font-size: 1.05em;
 }
 form input[type="text"], 
-form input[type="password"]{
+form input[type="password"],
+form input[type="number"],
+.crime-form-container .post-text-area,
+.comment-container .comment textarea{
   background: #dad9d9;
 }
 form input[type="text"]:focus, 
-form input[type="password"]:focus{
+form input[type="password"]:focus,
+form input[type="number"]:focus,
+.crime-form-container .post-text-area:focus,
+.comment-container .comment textarea:focus{
   background: #ffffff;
 }
+  h1#compose-heading{
+    color: white;
+    text-align: center;
+    font-size: 1.5em;
+    padding: 2em 0 0 0;
+  }
 
 form h2{
   text-align: center;
@@ -178,9 +417,10 @@ form h2{
   font-size: 1.5em;
 }
 .switch-signin{
-  color: #3456d1;
+  color: #fe0100;
 }
-form input[type="submit"]{
+form input[type="submit"],
+.comment-container .comment input[type="submit"]{
   color: white;
   background-color: #162661;
   width: 104%;
@@ -189,16 +429,35 @@ form input[type="submit"]{
   transition-property: background-color;
   transition-timing-function: ease-in-out;
 }
-form input[type="submit"]:hover{
+.comment-container .comment input[type="submit"]{
+  width: 100px;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+}
+form input[type="submit"]:hover,
+.comment-container .comment input[type="submit"]:hover{
   background-color: #3456d1;
   cursor: pointer;
 }
-
-.switch-signup:hover, .switch-signin:hover{
-  color: #3456d1;
-  cursor: pointer;
+.reply{
+  background: #16266110;
+  padding: 20px 0 0 0;
+  margin: 0 100px;
+  border-radius: 10px;
 }
 
+.reply p{
+  padding: 0 20px;
+  text-align: justify;
+}
+.switch-signup:hover, 
+.switch-signin:hover{
+  cursor: pointer;
+}
+.video-display video{
+  width: 30%;
+}
 footer{
   background: #162661;
   color: white;
@@ -208,22 +467,103 @@ footer{
 }
 /*--------------MEDIA QUERIES--------------*/
 
-@media(max-width:768px) {
+@media(max-width:1000px) {
+ .reply {
+   margin: 0;
+ }
+  .reply p{
+   text-align: left;
+ }
+  .hamburger{
+  width: 30px;
+  height: 30px;
+  display: block;
+  float: right;
+  margin: 20px 60px 0 0;
+}
+#desktop-nav{
+  display: none;
+}
   .visitors-message{
-    width: 90%;
+    width: 95%;
     float: none;
-    margin: 10% auto;
+    margin: 50px auto 0 -2em;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 100%;
   }
 
   .signup-form, 
   .signin-form{
     float: none;
     width: 90%;
-    margin: 10% auto;
+    margin: 0 auto 10% -2.5em;
 }
-.body-container form{
-    width: 90%;
-    padding: 50px 10px;
+
+  .body-container .signup-form,
+  .body-container .signin-form{
+    width: 100%;
+    padding: 100px 6% 100px 4%;
+  }
+  .crime-form-container .post-text-area{
+    width: 70%;
+  }
+#about,
+#howitworks{
+  text-align: left;
+  padding: 50px 50px;
+}
+.actual-post{
+  padding: 50px 15px;
+  text-align: center;
+}
+.actual-post h1{
+  font-size: 1.2em;
+  display: inline-block;
+}
+.actual-post p{
+  line-height: 1.5em;
+}
+.post{
+  margin: 20px 10px;
+}
+.picture-evidence,
+.video-evidence{
+  width: 50%;
+}
+#title{
+  width: 75%;
+}
+.video-display video{
+  width: 70%;
+}
+/******---------------*******/
+
+  .main-nav{
+    display: none;
+    position: absolute;
+    background: white;
+    right: -1em;
+  }
+
+  .main-nav ul li{
+    position: relative;
+    margin-right: 15px;
+    padding-top: 7px;
+    float: none;/*<------*/  
+    line-height: 50px;
+    list-style: none;
+    text-align: center
+  }
+
+}
+
+@media(max-width:320px) {
+  #longitude, 
+  #latitude{
+    width: 250px;
+  }
+  .video-display video{
+  width: 90%;
 }
 
 }

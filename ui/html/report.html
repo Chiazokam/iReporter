@@ -16,31 +16,70 @@
         <div class="clearfix logo-container">
             <img src="../images/ir.png" class="logo">
         </div>
+
         <span class="sitename"><label>i</label>Reporter</span>
+
         <nav class="main-nav clearfix">
-            <ul class="clearfix">
-                <li><a href="#">home</a></li>
-                <li><a href="#">how it works</a></li>
-                <li><a href="#">about</a></li>
-                <li><a href="#" id="current">report</a>
-                    <ul class="sub-menu">
-                        <li> <a href="#">red flag</a> </li>
-                        <li><a href="#"> intervene </a></li>
-                    </ul>
-                </li>
+            <ul class="clearfix" id="desktop-nav">
+                <li><a href="./home.html">home</a></li>
+                <li><a href="./howitworks.html">how it works</a></li>
+                <li><a href="./about.html">about</a></li>
+                <li><a href="./report.html" id="current">report</a></li>
+                <li><a href="./profile.html">profile</a></li>
+                <li><a href="../index.html">signout</a></li>
             </ul>
         </nav>
 
+        <nav class="main-nav clearfix" id="mobile-nav">
+            <ul class="clearfix">
+                <li><a href="./home.html">home</a></li>
+                <li><a href="./howitworks.html">how it works</a></li>
+                <li><a href="./about.html">about</a></li>
+                <li><a href="./report.html" id="mobile-current">report</a></li>
+                <li><a href="./profile.html">profile</a></li>
+                <li><a href="../index.html">signout</a></li>
+            </ul>
+        </nav>
+        <img src="../images/menu_icon.png" class="hamburger" />
     </header>
-    <section class="crime-report-container">
-        <img src="../images/crime_report.png" class="crime_report" />
+
+    <section class="crime-form-container clearfix">
+        <h1 id="compose-heading">COMPOSE REPORT</h1>  
+        <form>
+            <input type="text" placeholder="ENTER HEADING OR TITLE" class="title" id="title"/>
+            <textarea placeholder="Tell your story..." class="post-text-area" id="post-text-area"></textarea>
+            <input type="radio" name="report-type" checked="checked" id="red-flag"> <label>RED-FLAG</label> 
+            <span> &nbsp; </span>
+            <input type="radio" name="report-type" id="intervene"><label>INTERVENE</label> 
+            <br> <br>
+            <h1 class="white">GEO-LOCATION</h1>
+            <input type="number" placeholder="ENTER LONGITUDE" id="longitude"> 
+            <br> <br>
+            <input type="number" placeholder="ENTER LATITUDE" id="latitude"> 
+            <br> <br>
+            <label>Upload image</label> <input type="file" accept="image/*" id="picture-upload"> 
+            <br> <br>
+            <label>Upload video</label> <input type="file" accept="video/*" id="video-upload">
+             <br>
+            <input type="submit" value="POST" class="report">
+        </form>
+
     </section>
 
-    <section class="body-container clearfix">
+        <section class="feeds">        
+            <div class="choose-record">
+                <a href="./redflag.html" target="list-frame" class="default" id="redflag-record">RED FLAG</a>
+                <a href="./intervention.html" target="list-frame" id="intervention-record">INTERVENTION</a>
+            </div>
+        
+            <iframe class="record-frame" id="record-frame" src="./redflag.html" name="list-frame" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+        </section>
 
-
+    <section class="outer-modal">
+        <div class="inner-box">
+            <img src="" class="image-enlarge">
+        </div>
     </section>
-
 
     <footer id="footer">
 

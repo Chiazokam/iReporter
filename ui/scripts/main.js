@@ -95,10 +95,16 @@ window.addEventListener("click", controlHamburger);
  */
 window.addEventListener("resize", () => {
   if (screen.availWidth > 999) {
+    if (location.href === pageIndex || location.href === ghpagesPageIndex) {
     mobileNav.style.display = "none";
-    hamburger.src = "../images/menu_icon.png";
+    hamburger.src = "./images/menu_icon.png";
     status = "close";
-  }     
+  } else{
+        mobileNav.style.display = "none";
+        hamburger.src = "../images/menu_icon.png";
+        status = "close";
+    }
+}
 });
 
 

@@ -6,10 +6,16 @@ body{
   display: none;
 }
 .red{
-  color: red;
+  color: rgb(255, 0, 0);
 }
 .blue{
   color: #3456d1;
+}
+.green{
+  color: greenyellow;
+}
+.yellow{
+  color: yellow;
 }
 .theme-blue{
   color: #162661;
@@ -346,6 +352,8 @@ text-align: center;
   color: #162661;
   background: white;
   border-radius: 0 0 10px 10px;
+  border: 1px solid #162661;
+  border-top: none;
 }
 .secure{
   display: inline-block;
@@ -381,8 +389,9 @@ text-align: center;
 form input[type="text"],
 form input[type="password"],
 form input[type="submit"] {
+  text-align: center;
   display: block;
-  padding: 10px;
+  padding: 10px 0px;
   border-radius: 5px;
   border: none;
   outline: none;
@@ -423,7 +432,7 @@ form input[type="submit"],
 .comment-container .comment input[type="submit"]{
   color: white;
   background-color: #162661;
-  width: 104%;
+  width: 100%;
   font-size: 1.2em;
   transition-duration: 0.2s;
   transition-property: background-color;
@@ -458,6 +467,66 @@ form input[type="submit"]:hover,
 .video-display video{
   width: 30%;
 }
+.intervention-count-container,
+.redflag-count-container {
+  margin: 10px;
+}
+.profile,
+.record-list{
+  padding: 0 100px;
+  text-align: center;
+}
+.profile .profile-details{
+  text-align: center;
+}
+.profile .large-avatar{
+  width: 100px;
+  height: 100px;
+  margin: 50px auto 0 auto;
+  display: block;
+}
+.profile .record-count{
+  width: 33.333333%;
+  padding: 5px 0;
+  background-color: #576cbb98;
+  color: white;
+  float: left;
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 1px 5px 20px 1px rgb(155, 154, 154);
+}
+.profile .middle{
+  height: 100px;
+}
+.profile .record-count label{
+  font-size: 3em;
+  text-align: center;
+}
+.profile .record-count span{
+  font-size: 100%;
+  text-align: center;
+}
+.profile h1,
+.record-list h1{
+  font-size: 1.3em;
+  padding: 20px 0 10px 0;
+  color: #162661;
+  text-align: center;
+}
+.record-list li{
+  list-style: none;
+}
+.record-list{
+  padding-bottom: 50px
+}
+.redflag-list{
+  border-right: 1px solid #162661;
+}
+.redflag-list,
+.intervention-list{
+  display: inline-table;
+  padding: 0 50px;
+}
 footer{
   background: #162661;
   color: white;
@@ -466,7 +535,29 @@ footer{
   padding-bottom: 1em;
 }
 /*--------------MEDIA QUERIES--------------*/
+@media(max-width:800px) {
+  .profile .record-count{
+    float: none;
+    width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0;
+  }
+    .profile .record-count:first-of-type{
+    border-radius: 20px 20px 0 0;
+  }
+    .profile .record-count:last-of-type{
+    border-radius: 0 0 20px 20px;
+  }
+  .redflag-list,
+  .intervention-list{
+    display: block;
+    border: none;
+    margin-bottom: 20px;
+  }
 
+  }
 @media(max-width:1000px) {
  .reply {
    margin: 0;
@@ -495,14 +586,12 @@ footer{
   .signup-form, 
   .signin-form{
     float: none;
-    width: 90%;
-    margin: 0 auto 10% -2.5em;
+    width: 100%;
 }
-
   .body-container .signup-form,
   .body-container .signin-form{
     width: 100%;
-    padding: 100px 6% 100px 4%;
+    padding: 50px 0 100px 0;
   }
   .crime-form-container .post-text-area{
     width: 70%;

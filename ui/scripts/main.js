@@ -131,9 +131,9 @@ recordFrame.addEventListener("load", hideCommentSection);
  */
 const resizeIframe = () => {
   if (window.location.href == report) {
-    recordFrame.style.height = recordFrame.contentDocument.body.scrollHeight + 50 + 'px';
+    recordFrame.style.height = recordFrame.contentDocument.body.scrollHeight + 90 + "px";
   } else if (window.location.href == home) {
-    recordFrame.style.height = recordFrame.contentDocument.body.scrollHeight + 90 + 'px';
+    recordFrame.style.height = recordFrame.contentDocument.body.scrollHeight + 90 + "px";
   }
 }
 

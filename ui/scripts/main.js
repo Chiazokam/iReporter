@@ -142,7 +142,6 @@ const resizeIframe = () => {
 }
 
 window.addEventListener("load", resizeIframe);
-document.addEventListener("resize", resizeIframe);
 
 /**
  * Opens update status box modal for admin

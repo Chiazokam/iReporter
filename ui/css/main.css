@@ -185,7 +185,7 @@ text-align: center;
 }
 .crime-form-container{
   text-align: left;
-  background: url("../images/justice.jpg");
+  background: url("../images/justice.png");
   background-size: cover;
 }
 #title{
@@ -334,6 +334,88 @@ text-align: center;
   color: white;
   background: #162661
 }
+#admin{
+  padding: 0 0;
+}
+.admin-container{
+  background: #839dfc;
+  padding: 0;
+  margin-top: 50px;
+  width: 100%;
+}
+.admin-nav{
+  display: inline-table;
+  width: 30%;
+  background: #7c98fd;
+  float: left;
+}
+#admin .admin-nav h1,
+#admin .list-of-records h1{
+  background: #162661;
+  color: white;
+  line-height: 1em;
+}
+
+.list-of-records{
+  display: inline-table;
+  width: 70%;
+  background: #adbdf7;
+  float: left;
+}
+.list-of-records li{
+  text-align: center;
+  line-height: 2em;
+}
+.admin-nav li,
+.list-of-records{
+  list-style: none;
+  line-height: 2em;
+}
+.admin-nav li:hover, 
+.admin-current{
+  background: #2744aa;
+  cursor: pointer;
+}
+.admin-nav li:hover ,
+.admin-current {
+  color: white;
+}
+.admin-nav li a{
+  text-decoration: none;
+}
+.outer-modal .inner-box .update-status-form{
+  background: #0f0b0a;
+  padding: 50px 100px;
+}
+.outer-modal .inner-box 
+.update-status-form select{
+  cursor: pointer;
+  background: #162661;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  font-size: 1.1em;
+}
+.list-of-records .change{
+  color: red;
+  font-size: 0.8em;
+}
+.outer-modal .inner-box 
+.update-status-form div{
+  margin-top: 2em;
+}
+.list-of-records li{
+  list-style: none;
+}
+.list-of-records li:nth-child(even){
+  background: #a0aee0;
+}
+.list-of-records li a{
+  list-style: none;
+  font-size: 100%;
+}
 /*-------- Welcome --------*/
 
 .visitors-message{
@@ -416,8 +498,14 @@ form input[type="number"]:focus,
   h1#compose-heading{
     color: white;
     text-align: center;
-    font-size: 1.5em;
-    padding: 2em 0 0 0;
+    font-size: 1.2em;
+    padding: 0.5em 0 0.5em 0;
+    width: 320px;
+    margin: 0 auto 0.5em auto;
+    color: #837665;
+    background: #162661;
+    border-radius: 0 0 10px 10px;
+    border-top: none;
   }
 
 form h2{

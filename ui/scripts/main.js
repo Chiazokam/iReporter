@@ -3,8 +3,12 @@ const switchToSignin = document.getElementsByClassName("switch-signin")[0];
 const signupForm = document.getElementsByClassName("signup-form")[0];
 const signinForm = document.getElementsByClassName("signin-form")[0];
 
-const report = "http://127.0.0.1:5500/html/report.html";
+const report =  "http://127.0.0.1:5500/html/report.html";
 const home = "http://127.0.0.1:5500/html/home.html";
+
+const ghPagesReport = "https://shaolinmkz.github.io/iReporter/ui/html/report.html";
+const ghPagesHome = "https://shaolinmkz.github.io/iReporter/ui/html/home.html";
+
 
 let status = "close";
 
@@ -119,7 +123,7 @@ window.addEventListener("click", (e) => {
  * Hide Comment Area
  */
 const hideCommentSection = () => {
-  if (window.location.href == report) {
+  if (window.location.href == report || window.location.href == ghPagesReport) {
     const recordFrame = document.getElementById("record-frame");
     const frameContent = recordFrame.contentDocument;
     frameContent.getElementsByClassName("comment-heading")[0].remove();
@@ -134,9 +138,9 @@ recordFrame.addEventListener("load", hideCommentSection);
  * @param {object} obj - window object
  */
 const resizeIframe = () => {
-  if (window.location.href == report) {
+  if (window.location.href == report || window.location.href == ghPagesReport) {
     recordFrame.style.height = recordFrame.contentDocument.body.scrollHeight + 90 + "px";
-  } else if (window.location.href == home) {
+  } else if (window.location.href == home || window.location.href == ghPagesHome) {
     recordFrame.style.height = recordFrame.contentDocument.body.scrollHeight + 90 + "px";
   }
 }

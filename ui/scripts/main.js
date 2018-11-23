@@ -6,10 +6,12 @@ const signinForm = document.getElementsByClassName("signin-form")[0];
 const report =  "http://127.0.0.1:5500/html/report.html";
 const home = "http://127.0.0.1:5500/html/home.html";
 const admin = "http://127.0.0.1:5500/html/admin.html";
+const pageIndex = "http://127.0.0.1:5500/index.html";
 
 const ghPagesReport = "https://shaolinmkz.github.io/iReporter/ui/html/report.html";
 const ghPagesHome = "https://shaolinmkz.github.io/iReporter/ui/html/home.html";
 const ghPagesAdmin = "https://shaolinmkz.github.io/iReporter/ui/html/admin.html";
+const ghpagesPageIndex = "https://shaolinmkz.github.io/iReporter/ui/";
 
 
 let status = "close";
@@ -17,6 +19,7 @@ let status = "close";
 const hamburger = document.getElementsByClassName("hamburger")[0];
 const closeMenu = document.getElementsByClassName("menu_close")[0];
 const mainNav = document.getElementsByClassName("main-nav")[0];
+const hamburgerIndex = document.getElementById("hamburger");
 
 const desktopNav = document.getElementById("desktop-nav");
 const mobileNav = document.getElementById("mobile-nav");
@@ -56,16 +59,32 @@ window.addEventListener("click", switchForm);
  * @param {object} event - event object
  */
 const controlHamburger = (event) => {
-  if(event.target.className == "hamburger"){
+if(location.href === pageIndex || location.href === ghpagesPageIndex) {
+  if (event.target.id === hamburgerIndex.id) {
     if (status == "close") {
-      hamburger.src = "../images/menu_close_icon.png";
+      hamburger.src = "./images/menu_close_icon.png";
       mobileNav.style.display = "block";
       status = "open";
     } else if (status == "open") {
-      hamburger.src = "../images/menu_icon.png";
+      hamburger.src = "./images/menu_icon.png";
       mobileNav.style.display = "none";
-      status= "close";
-    } 
+      status = "close";
+    }
+  } 
+}
+  
+  if (event.target.className == "hamburger") {
+    if (event.target.id == "") {
+      if (status == "close") {
+        hamburger.src = "../images/menu_close_icon.png";
+        mobileNav.style.display = "block";
+        status = "open";
+      } else if (status == "open") {
+        hamburger.src = "../images/menu_icon.png";
+        mobileNav.style.display = "none";
+        status = "close";
+      }
+    }
   }
 }
 

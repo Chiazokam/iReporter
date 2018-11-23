@@ -3,14 +3,23 @@ const switchToSignin = document.getElementsByClassName("switch-signin")[0];
 const signupForm = document.getElementsByClassName("signup-form")[0];
 const signinForm = document.getElementsByClassName("signin-form")[0];
 
-const report = "http://127.0.0.1:5500/html/report.html";
+const report =  "http://127.0.0.1:5500/html/report.html";
 const home = "http://127.0.0.1:5500/html/home.html";
+const admin = "http://127.0.0.1:5500/html/admin.html";
+const pageIndex = "http://127.0.0.1:5500/index.html";
+
+const ghPagesReport = "https://shaolinmkz.github.io/iReporter/ui/html/report.html";
+const ghPagesHome = "https://shaolinmkz.github.io/iReporter/ui/html/home.html";
+const ghPagesAdmin = "https://shaolinmkz.github.io/iReporter/ui/html/admin.html";
+const ghpagesPageIndex = "https://shaolinmkz.github.io/iReporter/ui/";
+
 
 let status = "close";
 
 const hamburger = document.getElementsByClassName("hamburger")[0];
 const closeMenu = document.getElementsByClassName("menu_close")[0];
 const mainNav = document.getElementsByClassName("main-nav")[0];
+const hamburgerIndex = document.getElementById("hamburger");
 
 const desktopNav = document.getElementById("desktop-nav");
 const mobileNav = document.getElementById("mobile-nav");
@@ -50,16 +59,32 @@ window.addEventListener("click", switchForm);
  * @param {object} event - event object
  */
 const controlHamburger = (event) => {
-  if(event.target.className == "hamburger"){
+if(location.href === pageIndex || location.href === ghpagesPageIndex) {
+  if (event.target.id === hamburgerIndex.id) {
     if (status == "close") {
-      hamburger.src = "../images/menu_close_icon.png";
+      hamburger.src = "./images/menu_close_icon.png";
       mobileNav.style.display = "block";
       status = "open";
     } else if (status == "open") {
-      hamburger.src = "../images/menu_icon.png";
+      hamburger.src = "./images/menu_icon.png";
       mobileNav.style.display = "none";
-      status= "close";
-    } 
+      status = "close";
+    }
+  } 
+}
+  
+  if (event.target.className == "hamburger") {
+    if (event.target.id == "") {
+      if (status == "close") {
+        hamburger.src = "../images/menu_close_icon.png";
+        mobileNav.style.display = "block";
+        status = "open";
+      } else if (status == "open") {
+        hamburger.src = "../images/menu_icon.png";
+        mobileNav.style.display = "none";
+        status = "close";
+      }
+    }
   }
 }
 
@@ -119,7 +144,7 @@ window.addEventListener("click", (e) => {
  * Hide Comment Area
  */
 const hideCommentSection = () => {
-  if (window.location.href == report) {
+  if (location.href === ghPagesReport || location.href === report) {
     const recordFrame = document.getElementById("record-frame");
     const frameContent = recordFrame.contentDocument;
     frameContent.getElementsByClassName("comment-heading")[0].remove();
@@ -134,15 +159,14 @@ recordFrame.addEventListener("load", hideCommentSection);
  * @param {object} obj - window object
  */
 const resizeIframe = () => {
-  if (window.location.href == report) {
-    recordFrame.style.height = recordFrame.contentDocument.body.scrollHeight + 90 + "px";
-  } else if (window.location.href == home) {
-    recordFrame.style.height = recordFrame.contentDocument.body.scrollHeight + 90 + "px";
+  if (location.href === ghPagesReport || location.href === report) {
+    recordFrame.style.height = `${recordFrame.contentDocument.body.scrollHeight + 90}px`;
+  } else if (window.location.href === ghPagesHome || home) {
+    recordFrame.style.height = `${recordFrame.contentDocument.body.scrollHeight + 90}px`;
   }
 }
 
-window.addEventListener("load", resizeIframe);
-document.addEventListener("resize", resizeIframe);
+recordFrame.addEventListener("load", resizeIframe);
 
 /**
  * Opens update status box modal for admin
@@ -161,19 +185,20 @@ window.addEventListener("click", (e) => {
  * @param {object} event - event object
  */
 const switchCategory = (event) => {
-  if (event.target.id === adminRedFlagSwitch.id) {
-    adminRedFlagSwitch.className = "admin-current";
-    adminInterventionSwitch.className = "";
-    document.getElementsByClassName("admin-redflag-list")[0].style.display = "block";
-    document.getElementsByClassName("admin-intervention-list")[0].style.display = "none";
-  } else if (event.target.id  === adminInterventionSwitch.id) {
-    adminRedFlagSwitch.className = "";
-    adminInterventionSwitch.className = "admin-current";
-    document.getElementsByClassName("admin-redflag-list")[0].style.display = "none";
-    document.getElementsByClassName("admin-intervention-list")[0].style.display = "block";
+  if (location.href === ghPagesAdmin || location.href === admin){
+    if (event.target.id === adminRedFlagSwitch.id) {
+      adminRedFlagSwitch.className = "admin-current";
+      adminInterventionSwitch.className = "";
+      document.getElementsByClassName("admin-redflag-list")[0].style.display = "block";
+      document.getElementsByClassName("admin-intervention-list")[0].style.display = "none";
+    } else if (event.target.id  === adminInterventionSwitch.id) {
+      adminRedFlagSwitch.className = "";
+      adminInterventionSwitch.className = "admin-current";
+      document.getElementsByClassName("admin-redflag-list")[0].style.display = "none";
+      document.getElementsByClassName("admin-intervention-list")[0].style.display = "block";
+    }
   }
 }
 
 window.addEventListener("click", switchCategory);
 window.addEventListener("click", switchCategory);
-

@@ -5,9 +5,11 @@ const signinForm = document.getElementsByClassName("signin-form")[0];
 
 const report =  "http://127.0.0.1:5500/html/report.html";
 const home = "http://127.0.0.1:5500/html/home.html";
+const admin = "http://127.0.0.1:5500/html/admin.html";
 
 const ghPagesReport = "https://shaolinmkz.github.io/iReporter/ui/html/report.html";
 const ghPagesHome = "https://shaolinmkz.github.io/iReporter/ui/html/home.html";
+const ghPagesAdmin = "https://shaolinmkz.github.io/iReporter/ui/html/admin.html";
 
 
 let status = "close";
@@ -123,7 +125,7 @@ window.addEventListener("click", (e) => {
  * Hide Comment Area
  */
 const hideCommentSection = () => {
-  if (window.location.href == report || window.location.href == ghPagesReport) {
+  if (location.href === ghPagesReport || location.href === report) {
     const recordFrame = document.getElementById("record-frame");
     const frameContent = recordFrame.contentDocument;
     frameContent.getElementsByClassName("comment-heading")[0].remove();
@@ -138,14 +140,14 @@ recordFrame.addEventListener("load", hideCommentSection);
  * @param {object} obj - window object
  */
 const resizeIframe = () => {
-  if (window.location.href == report || window.location.href == ghPagesReport) {
-    recordFrame.style.height = recordFrame.contentDocument.body.scrollHeight + 90 + "px";
-  } else if (window.location.href == home || window.location.href == ghPagesHome) {
-    recordFrame.style.height = recordFrame.contentDocument.body.scrollHeight + 90 + "px";
+  if (location.href === ghPagesReport || location.href === report) {
+    recordFrame.style.height = `${recordFrame.contentDocument.body.scrollHeight + 90}px`;
+  } else if (window.location.href === ghPagesHome || home) {
+    recordFrame.style.height = `${recordFrame.contentDocument.body.scrollHeight + 90}px`;
   }
 }
 
-window.addEventListener("load", resizeIframe);
+recordFrame.addEventListener("load", resizeIframe);
 
 /**
  * Opens update status box modal for admin
@@ -164,19 +166,20 @@ window.addEventListener("click", (e) => {
  * @param {object} event - event object
  */
 const switchCategory = (event) => {
-  if (event.target.id === adminRedFlagSwitch.id) {
-    adminRedFlagSwitch.className = "admin-current";
-    adminInterventionSwitch.className = "";
-    document.getElementsByClassName("admin-redflag-list")[0].style.display = "block";
-    document.getElementsByClassName("admin-intervention-list")[0].style.display = "none";
-  } else if (event.target.id  === adminInterventionSwitch.id) {
-    adminRedFlagSwitch.className = "";
-    adminInterventionSwitch.className = "admin-current";
-    document.getElementsByClassName("admin-redflag-list")[0].style.display = "none";
-    document.getElementsByClassName("admin-intervention-list")[0].style.display = "block";
+  if (location.href === ghPagesAdmin || location.href === admin){
+    if (event.target.id === adminRedFlagSwitch.id) {
+      adminRedFlagSwitch.className = "admin-current";
+      adminInterventionSwitch.className = "";
+      document.getElementsByClassName("admin-redflag-list")[0].style.display = "block";
+      document.getElementsByClassName("admin-intervention-list")[0].style.display = "none";
+    } else if (event.target.id  === adminInterventionSwitch.id) {
+      adminRedFlagSwitch.className = "";
+      adminInterventionSwitch.className = "admin-current";
+      document.getElementsByClassName("admin-redflag-list")[0].style.display = "none";
+      document.getElementsByClassName("admin-intervention-list")[0].style.display = "block";
+    }
   }
 }
 
 window.addEventListener("click", switchCategory);
 window.addEventListener("click", switchCategory);
-

@@ -20,6 +20,10 @@ const interventionRecord = document.getElementById("intervention-record");
 
 const recordFrame = document.getElementById("record-frame");
 
+const adminRedFlagSwitch = document.getElementById("admin-red-flag");
+const adminInterventionSwitch = document.getElementById("admin-intervention");
+
+
 /**
  * Switch to signin or signup form
  * @param {object} event - event object
@@ -139,4 +143,37 @@ const resizeIframe = () => {
 
 window.addEventListener("load", resizeIframe);
 document.addEventListener("resize", resizeIframe);
+
+/**
+ * Opens update status box modal for admin
+ */
+window.addEventListener("click", (e) => {
+  if (e.target.className == "change") {
+    document.getElementsByClassName("outer-modal")[0].style.display = "block";
+  } else if (e.target.className == "outer-modal") {
+    document.getElementsByClassName("outer-modal")[0].style.display = "none";
+  }
+});
+
+
+/**
+ * Admin Category switch
+ * @param {object} event - event object
+ */
+const switchCategory = (event) => {
+  if (event.target.id === adminRedFlagSwitch.id) {
+    adminRedFlagSwitch.className = "admin-current";
+    adminInterventionSwitch.className = "";
+    document.getElementsByClassName("admin-redflag-list")[0].style.display = "block";
+    document.getElementsByClassName("admin-intervention-list")[0].style.display = "none";
+  } else if (event.target.id  === adminInterventionSwitch.id) {
+    adminRedFlagSwitch.className = "";
+    adminInterventionSwitch.className = "admin-current";
+    document.getElementsByClassName("admin-redflag-list")[0].style.display = "none";
+    document.getElementsByClassName("admin-intervention-list")[0].style.display = "block";
+  }
+}
+
+window.addEventListener("click", switchCategory);
+window.addEventListener("click", switchCategory);
 

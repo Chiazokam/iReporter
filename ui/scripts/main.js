@@ -13,7 +13,6 @@ const ghPagesHome = "https://shaolinmkz.github.io/iReporter/ui/html/home.html";
 const ghPagesAdmin = "https://shaolinmkz.github.io/iReporter/ui/html/admin.html";
 const ghpagesPageIndex = "https://shaolinmkz.github.io/iReporter/ui/";
 
-
 let status = "close";
 
 const hamburger = document.getElementsByClassName("hamburger")[0];
@@ -32,6 +31,9 @@ const recordFrame = document.getElementById("record-frame");
 const adminRedFlagSwitch = document.getElementById("admin-red-flag");
 const adminInterventionSwitch = document.getElementById("admin-intervention");
 
+const checkUrl = (admin, elem) => {
+  return admin.search(elem);
+}
 
 /**
  * Switch to signin or signup form
@@ -99,7 +101,7 @@ window.addEventListener("resize", () => {
     mobileNav.style.display = "none";
     hamburger.src = "./images/menu_icon.png";
     status = "close";
-  } else{
+  } else {
         mobileNav.style.display = "none";
         hamburger.src = "../images/menu_icon.png";
         status = "close";
@@ -147,28 +149,28 @@ window.addEventListener("click", (e) => {
 
 
 /**
- * Hide Comment Area
- */
-const hideCommentSection = () => {
-  if (location.href === ghPagesReport || location.href === report) {
-    const recordFrame = document.getElementById("record-frame");
-    const frameContent = recordFrame.contentDocument;
-    frameContent.getElementsByClassName("comment-heading")[0].remove();
-    frameContent.getElementsByClassName("comment-container")[0].remove();
-    frameContent.getElementsByClassName("partition")[0].remove();
-  }
-}
-recordFrame.addEventListener("load", hideCommentSection);
-
-/**
  * Increases window length to accommodate content
  * @param {object} obj - window object
  */
 const resizeIframe = () => {
   if (location.href === ghPagesReport || location.href === report) {
     recordFrame.style.height = `${recordFrame.contentDocument.body.scrollHeight + 90}px`;
+    document.getElementsByClassName("image-enlarge")[0].src = "../images/loader.gif";
+    document.getElementsByClassName("image-enlarge")[0].style.width = "10%";
+    document.getElementsByClassName("outer-modal")[0].style.textAlign = "center";
+    document.getElementsByClassName("outer-modal")[0].style.display = "block";
+    setTimeout(() => {
+      document.getElementsByClassName("outer-modal")[0].style.display = "none";
+    }, 1000);
   } else if (window.location.href === ghPagesHome || home) {
     recordFrame.style.height = `${recordFrame.contentDocument.body.scrollHeight + 90}px`;
+    document.getElementsByClassName("image-enlarge")[0].src = "../images/loader.gif";
+    document.getElementsByClassName("image-enlarge")[0].style.width = "10%";
+    document.getElementsByClassName("outer-modal")[0].style.textAlign = "center";
+    document.getElementsByClassName("outer-modal")[0].style.display = "block";
+    setTimeout(()=>{
+      document.getElementsByClassName("outer-modal")[0].style.display = "none";
+    },1000);
   }
 }
 
@@ -191,7 +193,7 @@ window.addEventListener("click", (e) => {
  * @param {object} event - event object
  */
 const switchCategory = (event) => {
-  if (location.href === ghPagesAdmin || location.href === admin){
+  if (location.href == ghPagesAdmin || location.href == admin){
     if (event.target.id === adminRedFlagSwitch.id) {
       adminRedFlagSwitch.className = "admin-current";
       adminInterventionSwitch.className = "";

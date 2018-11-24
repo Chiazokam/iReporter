@@ -1,0 +1,44 @@
+{
+  "name": "ireporter",
+  "version": "1.0.0",
+  "description": "Corruption is a huge bane to Africa’s development. African countries must develop novel and localised solutions that will curb this menace, hence the birth of iReporter. iReporter enables any/every citizen to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention.",
+  "main": "server.js",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test && nyc --reporter=html --reporter=text mocha --require babel-register --timeout 10000 ./test/*.js --exit",
+    "start": "babel-node ./server.js",
+    "start:dev": "nodemon --watch server --exec babel-node ./server.js",
+    "test:dev": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register ./test*.js --timeout 20000 --exit",
+    "coverage": "nyc --reporter=html --reporter=text --reporter=lcov mocha --reporter spec --require babel-register ./test/*.js --exit",
+    "coveralls": "npm run coverage -- --report lcovonly && cat coverage/lcov.info | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaolinmkz/iReporter.git"
+  },
+  "author": "Nwabuzor Chukwuemeka Obiora",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "mocha": "^5.2.0",
+    "morgan": "^1.9.1",
+    "supertest": "^3.3.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "eslint": "^5.9.0",
+    "jsdoc": "^3.5.5",
+    "nyc": "^13.1.0"
+  },
+  "engines": {
+    "node": "8.11.3"
+  },
+  "bugs": {
+    "url": "https://github.com/shaolinmkz/iReporter/issues"
+  },
+  "homepage": "https://github.com/shaolinmkz/iReporter#readme"
+}

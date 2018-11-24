@@ -143,7 +143,7 @@ div.logo-container{
   padding-left: 20px;
 }
 .main-nav ul li a:hover{
-  color: #ffffff;
+  color: #fe0100;
   cursor: pointer;
 }
 #mobile-nav ul li:hover a{
@@ -643,6 +643,18 @@ footer{
 }
 /*--------------MEDIA QUERIES--------------*/
 @media(max-width:800px) {
+  .admin-nav{
+  display: block;
+  width: 100%;
+  background: #7c98fd;
+  float: none;
+}
+.list-of-records{
+  display: block;
+  width: 100%;
+  background: #adbdf7;
+  float: none;
+}
   .profile .record-count{
     float: none;
     width: 200px;

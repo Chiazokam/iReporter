@@ -119,11 +119,22 @@ div.logo-container{
   transition-property: background-color;
   transition-timing-function: ease-in-out;
 }
+
+#mobile-nav ul li {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
 #mobile-nav ul li:hover{
-  background-color: #fe0100;
+  background: #fe0100;
+}
+
+#mobile-nav ul li a{
+ width: 100%;
+ padding: 1em 4em;
 }
 #mobile-nav ul li:hover a{
- color: white;
+ color: #fe0100;
 }
 .main-nav ul:last-child{
   padding-right: 40px;
@@ -132,13 +143,20 @@ div.logo-container{
   padding-left: 20px;
 }
 .main-nav ul li a:hover{
-  color: #fe0100;
+  color: #ffffff;
   cursor: pointer;
+}
+#mobile-nav ul li:hover a{
+  color: #ffffff;
 }
 #current, 
 #mobile-current{
   color: #fe0100;
   font-weight: bold;
+}
+#mobile-current{
+  color: white;
+   background: #fe0100;
 }
 
 .body-container{

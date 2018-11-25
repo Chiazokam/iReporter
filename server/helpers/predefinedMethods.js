@@ -1,10 +1,7 @@
-
-
-
 /**
  * @class \{{{object}}\} {{Helper}}{{Methods for validation}}
  */
-export class Helper {
+export class Helpers {
 	/**
    * Validates an email field
    * @param {string} email - users email
@@ -31,23 +28,53 @@ export class Helper {
 
 	/**
  * Checks for a valid array
- * @param {object} elem - array of elements
+ * @param {object} array - array of elements
  */
-	static arrayCheck(elem) {
-		return Array.isArray(elem);
+	static isNotArray(array) {
+		for (let inputs in array) {
+			if (!Array.isArray(array[inputs])) {
+				return true;
+			}
+		}
 	}
 
 	/**
  * Validates for strings
- * @param {string} elem - set of strings
+ * @param {string} elem - strings
  */
-	static	stringCheck(elem) {
-		if (typeof elem === "string") {
+	static isNotString(elem) {
+		if (typeof elem !== "string") {
 			return true;
 		} else {
 			return false;
 		}
 	}
+
+	/**
+* Validates values inside an array if its a string
+* @param {any} arr - all datatypes
+*/
+	static isStringInsideArray(arr) {
+		for (let inputs in arr) {
+			if (typeof arr[inputs] !== "string") {
+				return true;
+			}
+		}
+	}
+
+	/**
+* Validates values inside an array is undefined
+* @param {any} arr - all datatypes
+*/
+	static isValueInsideArrayEmpty(arr) {
+		for (let inputs in arr) {
+			if (!arr[inputs]) {
+				return true;
+			}
+		}
+	}
 }
+
+
 
 

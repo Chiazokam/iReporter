@@ -1,3 +1,3 @@
-import { Incidents } from "./createIncidentReport";
+import { Incidents } from "./incidentReport";
 
 export { Incidents };

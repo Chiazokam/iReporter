@@ -4,9 +4,7 @@ export class Incidents {
 	createIncidentReport(req, res){
 		const { title, comment, type, latitude, longitude, location, images, videos } = req.body;
 
-    console.log(title, comment, type, latitude, longitude, location, images, videos);
-
-    const numberOfIncidents = incidentsDB.length;
+		const numberOfIncidents = incidentsDB.length;
 		const newIncidentId = numberOfIncidents + 1;
 
 		const newIncident = {
@@ -28,8 +26,19 @@ export class Incidents {
 		return res.status(201).json({
 			status: 201,
 			data: [{
-				newIncident,
-				message: "Incident record created"
+				message: "Incident record created",
+				newIncident
+			}]
+		});
+	}
+
+	getAllReports(req, res){
+
+		return res.status(200).json({
+			status: 200,
+			data: [{
+				message: "All records received",
+				incidentsDB,
 			}]
 		});
 	}

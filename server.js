@@ -15,6 +15,14 @@ app.use(bodyParser.json({ type: "application/json" }));
 
 app.use(incidentRoutes);
 
+app.get("*", (req, res) => {
+	return res.status(200).json({
+		status: 200,
+		data: [{
+			message: "welcome to ireporter"
+		}]
+	});
+});
 
 app.listen(port, () => {
 	console.log(`Listening On Port ${port}`);

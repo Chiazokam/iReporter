@@ -1,12 +1,13 @@
 import express from "express";
 import { Incidents } from "../controllers";
+import { reportValidation, isDummyDbEmpty } from "../middlewares";
 
-const newIncident = new Incidents();
+const incident = new Incidents();
 
 const incidentRoutes = express.Router();
 
-
-incidentRoutes.post("/api/v1/incident", newIncident.createIncidentReport);
+incidentRoutes.get("/api/v1/incident", isDummyDbEmpty, incident.getAllReports);
+incidentRoutes.post("/api/v1/incident", reportValidation, incident.createIncidentReport);
 
 
 export default incidentRoutes;

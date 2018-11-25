@@ -2,13 +2,14 @@ import { incidentsDB } from "../dummyDB";
 
 export class Incidents {
 	createIncidentReport(req, res){
-		const { title, comment, type, latitude, longitude, location, images, videos } = req.body;
+		const { createdBy, title, comment, type, latitude, longitude, location, images, videos } = req.body;
 
 		const numberOfIncidents = incidentsDB.length;
 		const newIncidentId = numberOfIncidents + 1;
 
 		const newIncident = {
 			id: newIncidentId,
+			createdBy,
 			createdOn: Date(),
 			type,
 			location,
@@ -23,23 +24,30 @@ export class Incidents {
 
 		incidentsDB.push(newIncident);
 
-		return res.status(201).json({
-			status: 201,
-			data: [{
-				message: "Incident record created",
-				newIncident
-			}]
-		});
+		if (type === "red-flag") {
+			return res.status(201).json({
+				status: 201,
+				data: [{
+					id: newIncidentId,
+					message: "Created red-flag record",
+				}]
+			});
+		} else {
+			return res.status(201).json({
+				status: 201,
+				data: [{
+					id: newIncidentId,
+					message: "Created intervention record",
+				}]
+			});
+		}
+
 	}
 
 	getAllReports(req, res){
-
 		return res.status(200).json({
 			status: 200,
-			data: [{
-				message: "All records received",
-				incidentsDB,
-			}]
+			data: [{ incidentsDB }]
 		});
 	}
 }

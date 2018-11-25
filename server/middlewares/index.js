@@ -1,3 +1,3 @@
-import { reportValidation, isDummyDbEmpty } from "./validateReport";
+import { reportValidation, isDummyDbEmpty, isUser, isRedFlag } from "./validateReport";
 
-export { reportValidation, isDummyDbEmpty };
+export { reportValidation, isDummyDbEmpty, isUser, isRedFlag };

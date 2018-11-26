@@ -20,7 +20,7 @@ describe("Update red flag location end-point", () => {
 		request.patch(edit_red_flag_location)
 			.send({
 				"createdBy": 1,
-				"location": "Maiduguri",
+				"location": "12.233334, 2.323123",
 			}).end((err, res) => {
 				expect(res.status).to.eql(200);
 				expect(res.body.data[0].message).to.eql("Updated red-flag record's location");
@@ -33,6 +33,25 @@ describe("Update red flag location end-point", () => {
 				done();
 			});
 	});
+
+	it("should return 400 if geo-location is a valid geo-coordinate format", (done) => {
+		request.patch(edit_red_flag_location)
+			.send({
+				"createdBy": 1,
+				"location": "North1.233, Lagos",
+			}).end((err, res) => {
+				expect(res.status).to.eql(400);
+				expect(res.body.error).to.eql("invalid input");
+				expect(res.body.error).to.be.a("string");
+				expect(res.body.status).to.be.a("number");
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
 
 	it("should return 400 if location is a not a string", (done) => {
 		request.patch(edit_red_flag_location)
@@ -93,7 +112,7 @@ describe("Update red flag location end-point", () => {
 		request.patch(`/api/v1/red-flags/${3}/location`)
 			.send({
 				"createdBy": 1,
-				"location": "Maiduguri",
+				"location": "12.233334, 2.323123",
 			}).end((err, res) => {
 				expect(res.status).to.eql(401);
 				expect(res.body.error).to.eql("invalid user");

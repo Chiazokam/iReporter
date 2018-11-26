@@ -51,6 +51,22 @@ export class Helpers {
 	}
 
 	/**
+* Validates a stringed geolocation
+* @param { string } string - all datatypes
+*/
+	static isNotAValidGeolocation(req, res, next) {
+		const { location } = req.body;
+		if (!(/^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/gm.test(location))) {
+			return res.status(400).json({
+				status: 400,
+				error: "invalid input",
+			});
+		} else {
+			next();
+		}
+	}
+
+	/**
    * Validates users input for a single string field
    * @param  { object } req - Contains the body of the request.
    * @param { object } res - Contains the returned response.

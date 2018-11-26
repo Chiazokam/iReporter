@@ -1,5 +1,5 @@
 import { Helpers } from "../helpers";
-import { incidentsDB, userDB } from "../dummyDB";
+import { userDB } from "../dummyDB";
 
 let inputs;
 
@@ -11,7 +11,6 @@ let inputs;
  */
 export const reportValidation = (req, res, next) => {
 	const { title, comment, type, latitude, longitude, location, images, videos } = req.body;
-
 	const urlArray = [images, videos];
 	const strings = [title, comment, type, latitude, longitude, location];
 	const reqArray = [title, comment, type, latitude, longitude, location, images, videos];
@@ -85,23 +84,6 @@ export const isRedFlag = (req, res, next) => {
 		return res.status(400).json({
 			status: 400,
 			error: "invalid input",
-		});
-	} else {
-		return next();
-	}
-};
-
-/**
- * Checks if database is empty
- * @param  { object } req - Contains the body of the request.
- * @param { object } res - Contains the returned response.
- * @param  { next } - Proceeds to the next method on the route
- */
-export const isDummyDbEmpty = (req, res, next) => {
-	if (incidentsDB.length < 1) {
-		return res.status(404).json({
-			status: 404,
-			error: "records not found",
 		});
 	} else {
 		return next();

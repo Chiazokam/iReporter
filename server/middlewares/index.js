@@ -1,3 +1,6 @@
-import { reportValidation, isDummyDbEmpty, isUser, isRedFlag } from "./validateReport";
+import { reportValidation, isUser, isRedFlag } from "./validatePostRecords";
+import { isDummyDbEmpty, doesRedFlagRecordExist } from "./validateGetRecords";
 
-export { reportValidation, isDummyDbEmpty, isUser, isRedFlag };
+export { reportValidation, isUser, isRedFlag, isDummyDbEmpty, doesRedFlagRecordExist };
+
+

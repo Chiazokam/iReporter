@@ -3,7 +3,7 @@ export const incidentsDB = [
 		id: 1,
 		createdOn: "Sat Nov 24 2018 19:01:22 GMT+0100 (West Africa Standard Time)",
 		createdBy: 1,
-		type: "redflag",
+		type: "red-flag",
 		location: "Jos",
 		latitude: "3.20145",
 		longitude: "-16.32382",

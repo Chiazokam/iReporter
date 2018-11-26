@@ -21,8 +21,6 @@ describe("Create red-flag record end-point", () => {
 				"title": "Stealing",
 				"type": "red-flag",
 				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
 				"images": [
 					"imageURL1",
 					"imageURL2" ],
@@ -50,8 +48,6 @@ describe("Create red-flag record end-point", () => {
 				"title": "Stealing",
 				"type": "red-flag",
 				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
 				"images": [],
 				"videos": [],
 				"comment": "This is a report on... to be continued"
@@ -75,8 +71,6 @@ describe("Create red-flag record end-point", () => {
 				"title": "Stealing",
 				"type": "red-flag",
 				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
 				"images": [
 					"imageURL1",
 					"imageURL2"],
@@ -104,8 +98,6 @@ describe("Create red-flag record end-point", () => {
 				"title": "Theft",
 				"type": "red-flag",
 				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
 				"images": [
 					"imageURL1",
 					"imageURL2"],
@@ -133,8 +125,6 @@ describe("Create red-flag record end-point", () => {
 				"title": "Theft",
 				"type": "intervention",
 				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
 				"images": [
 					"imageURL1",
 					"imageURL2"],
@@ -162,8 +152,6 @@ describe("Create red-flag record end-point", () => {
 				"title": "",
 				"type": "red-flag",
 				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
 				"images": [
 					"imageURL1",
 					"imageURL2"],
@@ -191,8 +179,6 @@ describe("Create red-flag record end-point", () => {
 				"title": true,
 				"type": "red-flag",
 				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
 				"images": [
 					"imageURL1",
 					"imageURL2"],
@@ -220,8 +206,6 @@ describe("Create red-flag record end-point", () => {
 				"title": "        ",
 				"type": "red-flag",
 				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
 				"images": [
 					"imageURL1",
 					"imageURL2"],
@@ -249,8 +233,6 @@ describe("Create red-flag record end-point", () => {
 				"title": "Theft",
 				"type": "red-flag",
 				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
 				"images": "imageURL1",
 				"videos": [
 					"videoURL1",
@@ -276,8 +258,6 @@ describe("Create red-flag record end-point", () => {
 				"title": "Theft",
 				"type": "red-flag",
 				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
 				"images": ["imageURL1"],
 				"videos": [
 					2468,
@@ -304,8 +284,6 @@ describe("Create red-flag record end-point", () => {
 				"title": "Theft",
 				"type": "red-flag",
 				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
 				"images": [
 					2,
 					"imageURL1"],
@@ -334,8 +312,6 @@ describe("Create red-flag record end-point", () => {
 				"title": "Theft",
 				"type": "red-flag",
 				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
 				"images": [
 					"",
 					"imageURL1"],
@@ -364,8 +340,6 @@ describe("Create red-flag record end-point", () => {
 				"title": "Theft",
 				"type": "red-flag",
 				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
 				"images": [
 					"imageURL1",
 					"imageURL1"],

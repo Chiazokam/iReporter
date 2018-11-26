@@ -2,11 +2,10 @@
  * @class \{{{object}}\} {{Helper}}{{Methods for validation}}
  */
 export class Helpers {
-
 	/**
- * Checks for a valid array
- * @param {object} array - array of elements
- */
+   * Checks for a valid array
+   * @param {object} array - array of elements
+   */
 	static isNotArray(array) {
 		for (let inputs in array) {
 			if (!Array.isArray(array[inputs])) {
@@ -16,9 +15,9 @@ export class Helpers {
 	}
 
 	/**
- * Validates for strings
- * @param {string} elem - strings
- */
+   * Validates for strings
+   * @param {string} elem - strings
+   */
 	static isNotString(elem) {
 		if (typeof elem !== "string") {
 			return true;
@@ -40,14 +39,42 @@ export class Helpers {
 	}
 
 	/**
-* Validates values inside an array is undefined
-* @param {any} arr - all datatypes
-*/
+  * Validates values inside an array is undefined
+  * @param {any} arr - all datatypes
+  */
 	static isValueInsideArrayEmpty(arr) {
 		for (let inputs in arr) {
 			if (!arr[inputs] || !(/[^\s+]/g.test(arr[inputs]))) {
 				return true;
 			}
+		}
+	}
+
+	/**
+   * Validates users input for a single string field
+   * @param  { object } req - Contains the body of the request.
+   * @param { object } res - Contains the returned response.
+   * @param { string } string - Contains a stringed value
+   * @param  { next } - Proceeds to the next method on the route
+   */
+	static thoroughStringCheck(req, res, string, next) {
+		if (Helpers.isNotString(string)) {
+			return res.status(400).json({
+				status: 400,
+				error: "invalid input",
+			});
+		} else if (!string) {
+			return res.status(400).json({
+				status: 400,
+				error: "undefined input",
+			});
+		} else if (!(/[^\s+]/g.test(string))) {
+			return res.status(400).json({
+				status: 400,
+				error: "undefined input",
+			});
+		} else {
+			next();
 		}
 	}
 }

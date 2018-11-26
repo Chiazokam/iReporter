@@ -1,6 +1,6 @@
-import { reportValidation, isUser, isRedFlag } from "./validatePostRecords";
+import { multipleStringValidation, singleStringValidation, isUser, isRedFlag } from "./validatePostRecords";
 import { isDummyDbEmpty, doesRedFlagRecordExist, doesSpecificRedFlagIdRecordExist } from "./validateGetRecords";
 
-export { reportValidation, isUser, isRedFlag, isDummyDbEmpty, doesRedFlagRecordExist, doesSpecificRedFlagIdRecordExist };
+export { multipleStringValidation, singleStringValidation, isUser, isRedFlag, isDummyDbEmpty, doesRedFlagRecordExist, doesSpecificRedFlagIdRecordExist };
 
 

@@ -91,7 +91,7 @@ export const isRedFlag = (req, res, next) => {
 };
 
 /**
- * Validates users input
+ * Validates if users exist in the database
  * @param  { object } req - Contains the body of the request.
  * @param { object } res - Contains the returned response.
  * @param  { next } - Proceeds to the next method on the route

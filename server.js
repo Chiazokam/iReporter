@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/json" }));
 
-app.use(incidentRoutes);
+app.use("/api/v1", incidentRoutes);
 
 app.get("*", (req, res) => {
 	return res.status(200).json({
@@ -27,4 +27,6 @@ app.listen(port, () => {
 });
 
 export default app;
+
+
 

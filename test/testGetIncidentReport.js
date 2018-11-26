@@ -7,12 +7,14 @@ const should = chai.should();
 
 const request = supertest.agent(app);
 
+const incidents = "/api/v1/incidents";
+const rootFile = "/api/v1/";
 
 describe("GET all incident report endpoint", () => {
 
 	it("should return status 200 if records exist in the database", (done) => {
 		request
-			.get("/api/v1/incidents")
+			.get(incidents)
 			.end((err, res) => {
 				expect(res.status).to.eql(200);
 				expect(res.body.status).to.eql(200);
@@ -27,7 +29,7 @@ describe("GET all incident report endpoint", () => {
 
 	it("should return status 200 if you access ony the root directory", (done) => {
 		request
-			.get("/api/v1/")
+			.get(rootFile)
 			.end((err, res) => {
 				expect(res.status).to.eql(200);
 				expect(res.body.status).to.eql(200);

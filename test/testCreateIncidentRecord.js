@@ -7,6 +7,7 @@ const should = chai.should();
 
 const request = supertest.agent(app);
 
+const red_flags = "/api/v1/red-flags";
 
 /**
  * Create red-flag record
@@ -14,7 +15,7 @@ const request = supertest.agent(app);
 describe("Create red-flag record end-point", () => {
 
 	it("should return 201 if all input fields are validated correctly", (done) => {
-		request.post("/api/v1/red-flags")
+		request.post(red_flags)
 			.send({
 				"createdBy": 2,
 				"title": "Stealing",
@@ -43,7 +44,7 @@ describe("Create red-flag record end-point", () => {
 	});
 
 	it("should return 201 if all input fields are validated and their are no video or image links", (done) => {
-		request.post("/api/v1/red-flags")
+		request.post(red_flags)
 			.send({
 				"createdBy": 1,
 				"title": "Stealing",
@@ -68,7 +69,7 @@ describe("Create red-flag record end-point", () => {
 	});
 
 	it("should return 404 if user doesn't exist", (done) => {
-		request.post("/api/v1/red-flags")
+		request.post(red_flags)
 			.send({
 				"createdBy": 100000,
 				"title": "Stealing",
@@ -97,7 +98,7 @@ describe("Create red-flag record end-point", () => {
 	});
 
 	it("should return 400 if the createdBy input is not a number datatype", (done) => {
-		request.post("/api/v1/red-flags")
+		request.post(red_flags)
 			.send({
 				"createdBy": "1",
 				"title": "Theft",
@@ -126,7 +127,7 @@ describe("Create red-flag record end-point", () => {
 	});
 
 	it("should return 400 if the type input isn't tightly equal to red-flag", (done) => {
-		request.post("/api/v1/red-flags")
+		request.post(red_flags)
 			.send({
 				"createdBy": 1,
 				"title": "Theft",
@@ -155,7 +156,7 @@ describe("Create red-flag record end-point", () => {
 	});
 
 	it("should return 400 if some inputs are left empty", (done) => {
-		request.post("/api/v1/red-flags")
+		request.post(red_flags)
 			.send({
 				"createdBy": 1,
 				"title": "",
@@ -184,7 +185,7 @@ describe("Create red-flag record end-point", () => {
 	});
 
 	it("should return 400 if some inputs are not strings", (done) => {
-		request.post("/api/v1/red-flags")
+		request.post(red_flags)
 			.send({
 				"createdBy": 1,
 				"title": true,
@@ -213,7 +214,7 @@ describe("Create red-flag record end-point", () => {
 	});
 
 	it("should return 400 if some inputs have white space althrough", (done) => {
-		request.post("/api/v1/red-flags")
+		request.post(red_flags)
 			.send({
 				"createdBy": 1,
 				"title": "        ",
@@ -242,7 +243,7 @@ describe("Create red-flag record end-point", () => {
 	});
 
 	it("should return 400 if some inputs are not arrays", (done) => {
-		request.post("/api/v1/red-flags")
+		request.post(red_flags)
 			.send({
 				"createdBy": 1,
 				"title": "Theft",
@@ -269,7 +270,7 @@ describe("Create red-flag record end-point", () => {
 	});
 
 	it("should return 400 if inputs inside the images array are not strings", (done) => {
-		request.post("/api/v1/red-flags")
+		request.post(red_flags)
 			.send({
 				"createdBy": 1,
 				"title": "Theft",
@@ -297,7 +298,7 @@ describe("Create red-flag record end-point", () => {
 	});
 
 	it("should return 400 if inputs inside the videos array are not strings", (done) => {
-		request.post("/api/v1/red-flags")
+		request.post(red_flags)
 			.send({
 				"createdBy": 1,
 				"title": "Theft",
@@ -327,7 +328,7 @@ describe("Create red-flag record end-point", () => {
 	});
 
 	it("should return 400 if inputs inside the images array are undefined", (done) => {
-		request.post("/api/v1/red-flags")
+		request.post(red_flags)
 			.send({
 				"createdBy": 1,
 				"title": "Theft",
@@ -357,7 +358,7 @@ describe("Create red-flag record end-point", () => {
 	});
 
 	it("should return 400 if inputs inside the video array are undefined", (done) => {
-		request.post("/api/v1/red-flags")
+		request.post(red_flags)
 			.send({
 				"createdBy": 1,
 				"title": "Theft",

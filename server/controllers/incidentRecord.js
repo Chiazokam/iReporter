@@ -1,5 +1,7 @@
 import { incidentsDB } from "../dummyDB";
 
+const red_flag_string = "red-flag";
+
 export class Incidents {
 	/**Creates a red-flag or intervention record
   * @param  { object } req - Contains the body of the request.
@@ -28,7 +30,7 @@ export class Incidents {
 
 		incidentsDB.push(newIncident);
 
-		if (type === "red-flag") {
+		if (type === red_flag_string) {
 			return res.status(201).json({
 				status: 201,
 				data: [{
@@ -64,7 +66,7 @@ export class Incidents {
   * @param { object } res - Contains the returned response.
   */
 	getAllRedflagRecords(req, res) {
-		const allRedFlagsRecords = incidentsDB.filter((redFlag) => redFlag.type === "red-flag");
+		const allRedFlagsRecords = incidentsDB.filter((redFlag) => redFlag.type === red_flag_string);
 		return res.status(200).json({
 			status: 200,
 			data: allRedFlagsRecords,
@@ -77,12 +79,39 @@ export class Incidents {
   */
 	getSpecificRedflagRecord(req, res) {
 		const specifiedRedFlagRecordId = parseInt(req.params.id, 10);
-		const allRedFlagsRecords = incidentsDB.filter((redFlag) => redFlag.type === "red-flag");
+		const allRedFlagsRecords = incidentsDB.filter((redFlag) => redFlag.type === red_flag_string);
 		const specificRedFlag = allRedFlagsRecords.filter((redFlagId) => redFlagId.id === specifiedRedFlagRecordId);
 
 		return res.status(200).json({
 			status: 200,
 			data: specificRedFlag,
+		});
+	}
+
+	/**Returns a specific redflag record
+    * @param  { object } req - Contains the body of the request.
+    * @param { object } res - Contains the returned response.
+    */
+	updateRedflagRecordLocation(req, res) {
+		const { location, createdBy } = req.body;
+		const specifiedRedFlagRecordId = parseInt(req.params.id, 10);
+		const allRedFlagsRecords = incidentsDB.filter((redFlag) => redFlag.type === red_flag_string);
+		const specificRedFlag = allRedFlagsRecords.filter((redFlagId) => redFlagId.id === specifiedRedFlagRecordId);
+
+		if (createdBy !== specificRedFlag[0].createdBy) {
+			return res.status(401).json({
+				status: 401,
+				error: "invalid user"
+			});
+		}
+		specificRedFlag[0].location = location;
+
+		return res.status(200).json({
+			status: 200,
+			data: [{
+				id: specificRedFlag[0].id,
+				message: "Updated red-flag record's location",
+			}]
 		});
 	}
 

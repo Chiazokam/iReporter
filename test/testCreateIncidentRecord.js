@@ -8,6 +8,7 @@ const should = chai.should();
 const request = supertest.agent(app);
 
 const red_flags = "/api/v1/red-flags";
+const geo_location = "12.233334, 2.323123";
 
 /**
  * Create red-flag record
@@ -20,9 +21,7 @@ describe("Create red-flag record end-point", () => {
 				"createdBy": 2,
 				"title": "Stealing",
 				"type": "red-flag",
-				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
+				"location": geo_location,
 				"images": [
 					"imageURL1",
 					"imageURL2" ],
@@ -49,9 +48,7 @@ describe("Create red-flag record end-point", () => {
 				"createdBy": 1,
 				"title": "Stealing",
 				"type": "red-flag",
-				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
+				"location": geo_location,
 				"images": [],
 				"videos": [],
 				"comment": "This is a report on... to be continued"
@@ -74,9 +71,7 @@ describe("Create red-flag record end-point", () => {
 				"createdBy": 100000,
 				"title": "Stealing",
 				"type": "red-flag",
-				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
+				"location": geo_location,
 				"images": [
 					"imageURL1",
 					"imageURL2"],
@@ -103,9 +98,7 @@ describe("Create red-flag record end-point", () => {
 				"createdBy": "1",
 				"title": "Theft",
 				"type": "red-flag",
-				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
+				"location": geo_location,
 				"images": [
 					"imageURL1",
 					"imageURL2"],
@@ -132,9 +125,7 @@ describe("Create red-flag record end-point", () => {
 				"createdBy": 1,
 				"title": "Theft",
 				"type": "intervention",
-				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
+				"location": geo_location,
 				"images": [
 					"imageURL1",
 					"imageURL2"],
@@ -161,9 +152,7 @@ describe("Create red-flag record end-point", () => {
 				"createdBy": 1,
 				"title": "",
 				"type": "red-flag",
-				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
+				"location": geo_location,
 				"images": [
 					"imageURL1",
 					"imageURL2"],
@@ -190,9 +179,7 @@ describe("Create red-flag record end-point", () => {
 				"createdBy": 1,
 				"title": true,
 				"type": "red-flag",
-				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
+				"location": geo_location,
 				"images": [
 					"imageURL1",
 					"imageURL2"],
@@ -219,9 +206,7 @@ describe("Create red-flag record end-point", () => {
 				"createdBy": 1,
 				"title": "        ",
 				"type": "red-flag",
-				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
+				"location": geo_location,
 				"images": [
 					"imageURL1",
 					"imageURL2"],
@@ -248,9 +233,7 @@ describe("Create red-flag record end-point", () => {
 				"createdBy": 1,
 				"title": "Theft",
 				"type": "red-flag",
-				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
+				"location": geo_location,
 				"images": "imageURL1",
 				"videos": [
 					"videoURL1",
@@ -275,9 +258,7 @@ describe("Create red-flag record end-point", () => {
 				"createdBy": 1,
 				"title": "Theft",
 				"type": "red-flag",
-				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
+				"location": geo_location,
 				"images": ["imageURL1"],
 				"videos": [
 					2468,
@@ -303,9 +284,7 @@ describe("Create red-flag record end-point", () => {
 				"createdBy": 1,
 				"title": "Theft",
 				"type": "red-flag",
-				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
+				"location": geo_location,
 				"images": [
 					2,
 					"imageURL1"],
@@ -333,9 +312,7 @@ describe("Create red-flag record end-point", () => {
 				"createdBy": 1,
 				"title": "Theft",
 				"type": "red-flag",
-				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
+				"location": geo_location,
 				"images": [
 					"",
 					"imageURL1"],
@@ -363,9 +340,7 @@ describe("Create red-flag record end-point", () => {
 				"createdBy": 1,
 				"title": "Theft",
 				"type": "red-flag",
-				"location": "Jos",
-				"latitude": "2.123456",
-				"longitude": "13.131131",
+				"location": geo_location,
 				"images": [
 					"imageURL1",
 					"imageURL1"],

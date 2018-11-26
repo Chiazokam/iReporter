@@ -64,4 +64,39 @@ describe("GET all red-flag records endpoint", () => {
 
 });
 
+describe("GET a specific red-flag record endpoint", () => {
+
+	it("should return status 200 if specified red-flag record exist in the database", (done) => {
+		request
+			.get(`${red_flags}/1`)
+			.end((err, res) => {
+				expect(res.status).to.eql(200);
+				expect(res.body.status).to.eql(200);
+				expect(res.body.status).to.be.a("number");
+				(res.body.data[0]).should.be.an("object");
+				should.not.exist(err);
+				should.exist(res.body);
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
+	it("should return status 404 if specified red-flag record doesn't exist in the database", (done) => {
+		request
+			.get(`${red_flags}/10000`)
+			.end((err, res) => {
+				expect(res.status).to.eql(404);
+				expect(res.body.error).to.eql("record not found");
+				expect(res.body.status).to.eql(404);
+				expect(res.body.status).to.be.a("number");
+				expect(res.body.error).to.be.a("string");
+				should.not.exist(err);
+				should.exist(res.body);
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
+});
+
 

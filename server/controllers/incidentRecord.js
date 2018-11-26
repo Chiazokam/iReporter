@@ -64,11 +64,28 @@ export class Incidents {
   * @param { object } res - Contains the returned response.
   */
 	getAllRedflagRecords(req, res) {
-		const redFlagsOnly = incidentsDB.filter((redFlag) => redFlag.type === "red-flag");
+		const allRedFlagsRecords = incidentsDB.filter((redFlag) => redFlag.type === "red-flag");
 		return res.status(200).json({
 			status: 200,
-			data: redFlagsOnly,
+			data: allRedFlagsRecords,
 		});
 	}
+
+	/**Returns a specific redflag record
+  * @param  { object } req - Contains the body of the request.
+  * @param { object } res - Contains the returned response.
+  */
+	getSpecificRedflagRecord(req, res) {
+		const specifiedRedFlagRecordId = parseInt(req.params.id, 10);
+		const allRedFlagsRecords = incidentsDB.filter((redFlag) => redFlag.type === "red-flag");
+		const specificRedFlag = allRedFlagsRecords.filter((redFlagId) => redFlagId.id === specifiedRedFlagRecordId);
+
+		return res.status(200).json({
+			status: 200,
+			data: specificRedFlag,
+		});
+	}
+
 }
+
 

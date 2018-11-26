@@ -11,11 +11,19 @@ export class Helpers {
 	}
 
 	/**
-   * Validates a number field
+   * Validates a stringed number field
    * @param {string} number - set of stringed number(s)
    */
 	static isValidNumber(number) {
 		return /^[0-9]*$/gm.test(number);
+	}
+
+	/**
+ * Validates a stringed number field
+ * @param {string} number - set of stringed number(s)
+ */
+	static isAlphaNumeric(alphaNumeric) {
+		return /[^A-Za-z0-9]+/gm.test(alphaNumeric);
 	}
 
 	/**
@@ -68,7 +76,7 @@ export class Helpers {
 */
 	static isValueInsideArrayEmpty(arr) {
 		for (let inputs in arr) {
-			if (!arr[inputs]) {
+			if (!arr[inputs] || !(/[^\s+]/g.test(arr[inputs]))) {
 				return true;
 			}
 		}

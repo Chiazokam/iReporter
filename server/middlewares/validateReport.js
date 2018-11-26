@@ -26,6 +26,15 @@ export const reportValidation = (req, res, next) => {
 	}
 
 	for (inputs in strings) {
+		if (!(/[^\s+]/g.test(reqArray[inputs]))) {
+			return res.status(400).json({
+				status: 400,
+				error: "undefined input",
+			});
+		}
+	}
+
+	for (inputs in strings) {
 		if (Helpers.isNotString(strings[inputs])) {
 			return res.status(400).json({
 				status: 400,

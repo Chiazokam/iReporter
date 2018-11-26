@@ -6,7 +6,7 @@ const incident = new Incidents();
 
 const incidentRoutes = express.Router();
 
-incidentRoutes.get("/api/v1/incident", isDummyDbEmpty, incident.getAllReports);
+incidentRoutes.get("/api/v1/incidents", isDummyDbEmpty, incident.getAllReports);
 incidentRoutes.post("/api/v1/red-flags", isUser, reportValidation, isRedFlag, incident.createIncidentReport);
 
 

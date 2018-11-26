@@ -2,37 +2,6 @@
  * @class \{{{object}}\} {{Helper}}{{Methods for validation}}
  */
 export class Helpers {
-	/**
-   * Validates an email field
-   * @param {string} email - users email
-   */
-	static isValidEmail(email) {
-		return (/\S+@\S+\.\S+/.test(email) && /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email));
-	}
-
-	/**
-   * Validates a stringed number field
-   * @param {string} number - set of stringed number(s)
-   */
-	static isValidNumber(number) {
-		return /^[0-9]*$/gm.test(number);
-	}
-
-	/**
- * Validates a stringed number field
- * @param {string} number - set of stringed number(s)
- */
-	static isAlphaNumeric(alphaNumeric) {
-		return /[^A-Za-z0-9]+/gm.test(alphaNumeric);
-	}
-
-	/**
- * Validates a string field for valid alphabet
- * @param {string} string - set of strings
- */
-	static isValidAlphabet(string) {
-		return /^[a-z]*$/gm.test(string);
-	}
 
 	/**
  * Checks for a valid array

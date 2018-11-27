@@ -27,5 +27,8 @@ incidentRoutes.patch("/red-flags/:id/location", isUser, locationStringValidation
 /**Update a red-flag record comment*/
 incidentRoutes.patch("/red-flags/:id/comment", isUser, commentStringValidation, doesSpecificRedFlagIdRecordExist, incident.updateRedflagRecordComment);
 
+/**Delete a red-flag record comment*/
+incidentRoutes.delete("/red-flags/:id", isUser, doesSpecificRedFlagIdRecordExist, incident.deleteRecord);
+
 export default incidentRoutes;
 

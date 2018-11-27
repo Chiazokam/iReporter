@@ -86,9 +86,9 @@ export class Incidents {
 			status: 200,
 			data: specificRedFlag,
 		});
-	}
+  }
 
-	/**Returns a specific redflag record
+	/**Updates a specific redflag record's location
     * @param  { object } req - Contains the body of the request.
     * @param { object } res - Contains the returned response.
     */
@@ -106,15 +106,43 @@ export class Incidents {
 		}
 		specificRedFlag[0].location = location;
 
+
 		return res.status(200).json({
 			status: 200,
 			data: [{
-				id: specificRedFlag[0].id,
+				id: specifiedRedFlagRecordId,
 				message: "Updated red-flag record's location",
 			}]
 		});
 	}
 
+	/**Update a specific redflag record's comment
+  * @param  { object } req - Contains the body of the request.
+  * @param { object } res - Contains the returned response.
+  */
+	updateRedflagRecordComment(req, res) {
+		const { comment, createdBy } = req.body;
+		const specifiedRedFlagRecordId = parseInt(req.params.id, 10);
+		const allRedFlagsRecords = incidentsDB.filter((redFlag) => redFlag.type === red_flag_string);
+		const specificRedFlag = allRedFlagsRecords.filter((redFlagId) => redFlagId.id === specifiedRedFlagRecordId);
+
+		if (createdBy !== specificRedFlag[0].createdBy) {
+			return res.status(401).json({
+				status: 401,
+				error: "invalid user"
+			});
+		}
+		specificRedFlag[0].comment = comment;
+
+
+		return res.status(200).json({
+			status: 200,
+			data: [{
+				id: specifiedRedFlagRecordId,
+				message: "Updated red-flag record's comment",
+			}]
+		});
+	}
 }
 
 

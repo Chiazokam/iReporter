@@ -2,8 +2,8 @@ import express from "express";
 import { Helpers } from "../helpers";
 import { Incidents } from "../controllers";
 import {
-  multipleStringValidation, singleStringValidation, isDummyDbEmpty, isUser, isRedFlag,
-	doesRedFlagRecordExist, doesSpecificRedFlagIdRecordExist } from "../middlewares";
+  multipleStringValidation, locationStringValidation, isDummyDbEmpty, isUser, isRedFlag,
+  doesRedFlagRecordExist, doesSpecificRedFlagIdRecordExist, commentStringValidation } from "../middlewares";
 
 const incident = new Incidents();
 
@@ -22,7 +22,10 @@ incidentRoutes.get("/red-flags", doesRedFlagRecordExist, incident.getAllRedflagR
 incidentRoutes.get("/red-flags/:id", doesSpecificRedFlagIdRecordExist, incident.getSpecificRedflagRecord);
 
 /**Update a red-flag record location*/
-incidentRoutes.patch("/red-flags/:id/location", isUser, singleStringValidation, Helpers.isNotAValidGeolocation, doesSpecificRedFlagIdRecordExist, incident.updateRedflagRecordLocation);
+incidentRoutes.patch("/red-flags/:id/location", isUser, locationStringValidation, Helpers.isNotAValidGeolocation, doesSpecificRedFlagIdRecordExist, incident.updateRedflagRecordLocation);
+
+/**Update a red-flag record comment*/
+incidentRoutes.patch("/red-flags/:id/comment", isUser, commentStringValidation, doesSpecificRedFlagIdRecordExist, incident.updateRedflagRecordComment);
 
 export default incidentRoutes;
 

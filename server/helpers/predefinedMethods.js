@@ -57,10 +57,7 @@ export class Helpers {
 	static isNotAValidGeolocation(req, res, next) {
 		const { location } = req.body;
 		if (!(/^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/gm.test(location))) {
-			return res.status(400).json({
-				status: 400,
-				error: "invalid input",
-			});
+			Helpers.returnForError(req, res, 400, "invalid input");
 		} else {
 			next();
 		}
@@ -75,23 +72,60 @@ export class Helpers {
    */
 	static thoroughStringCheck(req, res, string, next) {
 		if (Helpers.isNotString(string)) {
-			return res.status(400).json({
-				status: 400,
-				error: "invalid input",
-			});
+			Helpers.returnForError(req, res, 400, "invalid input");
 		} else if (!string) {
-			return res.status(400).json({
-				status: 400,
-				error: "undefined input",
-			});
+			Helpers.returnForError(req, res, 400, "undefined input");
 		} else if (!(/[^\s+]/g.test(string))) {
-			return res.status(400).json({
-				status: 400,
-				error: "undefined input",
-			});
+			Helpers.returnForError(req, res, 400, "undefined input");
 		} else {
 			next();
 		}
+	}
+
+	/**
+   * Return template for CREATE or Update success
+   * @param  { object } req - Contains the body of the request.
+   * @param { object } res - Contains the returned response.
+   * @param { number } statusCode - Contains the http-status code
+   * @param { number } id - Contains the resource id
+   * @param { string } message - Contains the return message
+   */
+	static returnForSuccess(req, res, statusCode, id, message) {
+		res.status(statusCode).json({
+			status: statusCode,
+			data: [{
+				id: id,
+				message,
+			}]
+		});
+	}
+
+	/**
+   * Return template for Error
+   * @param  { object } req - Contains the body of the request.
+   * @param { object } res - Contains the returned response.
+   * @param { number } statusCode - Contains the http-status code
+   * @param { string } message - Contains the return message
+   */
+	static returnForError(req, res, statusCode, message) {
+		res.status(statusCode).json({
+			status: statusCode,
+			error: message,
+		});
+	}
+
+	/**
+ * Return template for GET success
+ * @param  { object } req - Contains the body of the request.
+ * @param { object } res - Contains the returned response.
+ * @param { number } statusCode - Contains the http-status code
+ * @param { object } data - Contains the return message
+ */
+	static returnSuccessForGET(req, res, statusCode, data) {
+		res.status(statusCode).json({
+			status: statusCode,
+			data: data,
+		});
 	}
 
 }

@@ -10,6 +10,7 @@ const request = supertest.agent(app);
 const red_flags = "/api/v1/red-flags";
 const geo_location = "12.233334, 2.323123";
 
+
 /**
  * Create red-flag record
  */

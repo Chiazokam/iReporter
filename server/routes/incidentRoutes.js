@@ -2,8 +2,8 @@ import express from "express";
 import { Helpers } from "../helpers";
 import { Incidents } from "../controllers";
 import {
-  multipleStringValidation, locationStringValidation, isDummyDbEmpty, isUser, isRedFlag,
-  doesRedFlagRecordExist, doesSpecificRedFlagIdRecordExist, commentStringValidation } from "../middlewares";
+	multipleStringValidation, locationStringValidation, isDummyDbEmpty, isUser, isRedFlag,
+	doesRedFlagRecordExist, doesSpecificRedFlagIdRecordExist, commentStringValidation } from "../middlewares";
 
 const incident = new Incidents();
 
@@ -27,5 +27,9 @@ incidentRoutes.patch("/red-flags/:id/location", isUser, locationStringValidation
 /**Update a red-flag record comment*/
 incidentRoutes.patch("/red-flags/:id/comment", isUser, commentStringValidation, doesSpecificRedFlagIdRecordExist, incident.updateRedflagRecordComment);
 
+/**Delete a red-flag record comment*/
+incidentRoutes.delete("/red-flags/:id", isUser, doesSpecificRedFlagIdRecordExist, incident.deleteRecord);
+
 export default incidentRoutes;
+
 

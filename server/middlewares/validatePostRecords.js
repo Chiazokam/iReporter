@@ -14,32 +14,22 @@ export const validateArrayValues = (req, res, next) => {
 	const urlArray = [images, videos];
 
 	if (Helpers.isNotArray(urlArray)) {
-		return res.status(400).json({
-			status: 400,
-			error: "invalid input",
-		});
+		Helpers.returnForError(req, res, 400, "invalid input");
+
 	} else if (Helpers.isStringInsideArray(images)) {
-		return res.status(400).json({
-			status: 400,
-			error: "invalid input",
-		});
+		Helpers.returnForError(req, res, 400, "invalid input");
+
 	} else if (Helpers.isStringInsideArray(videos)) {
-		return res.status(400).json({
-			status: 400,
-			error: "invalid input",
-		});
+		Helpers.returnForError(req, res, 400, "invalid input");
+
 	} else if (Helpers.isValueInsideArrayEmpty(images)) {
-		return res.status(400).json({
-			status: 400,
-			error: "undefined input",
-		});
+		Helpers.returnForError(req, res, 400, "undefined input");
+
 	} else if (Helpers.isValueInsideArrayEmpty(videos)) {
-		return res.status(400).json({
-			status: 400,
-			error: "undefined input",
-		});
+		Helpers.returnForError(req, res, 400, "undefined input");
+
 	} else {
-		return next();
+		next();
 	}
 };
 
@@ -53,7 +43,6 @@ export const locationStringValidation = (req, res, next) => {
 	const { location } = req.body;
 
 	Helpers.thoroughStringCheck(req, res, location, next);
-
 };
 
 /**
@@ -66,7 +55,6 @@ export const commentStringValidation = (req, res, next) => {
 	const { comment } = req.body;
 
 	Helpers.thoroughStringCheck(req, res, comment, next);
-
 };
 
 
@@ -83,33 +71,20 @@ export const multipleStringValidation = (req, res, next) => {
 
 	for (inputs in reqArray) {
 		if (!reqArray[inputs]) {
-			return res.status(400).json({
-				status: 400,
-				error: "undefined input",
-			});
+			return Helpers.returnForError(req, res, 400, "undefined input");
 		}
 	}
-
 	for (inputs in strings) {
 		if (!(/[^\s+]/g.test(reqArray[inputs]))) {
-			return res.status(400).json({
-				status: 400,
-				error: "undefined input",
-			});
+			return Helpers.returnForError(req, res, 400, "undefined input");
 		}
 	}
-
 	for (inputs in strings) {
 		if (Helpers.isNotString(strings[inputs])) {
-			return res.status(400).json({
-				status: 400,
-				error: "invalid input",
-			});
+			return Helpers.returnForError(req, res, 400, "invalid input");
 		}
 	}
-
 	validateArrayValues(req, res, next);
-
 };
 
 /**
@@ -121,10 +96,7 @@ export const multipleStringValidation = (req, res, next) => {
 export const isRedFlag = (req, res, next) => {
 	const { type } = req.body;
 	if (type.toLowerCase() !== "red-flag") {
-		return res.status(400).json({
-			status: 400,
-			error: "invalid input",
-		});
+		Helpers.returnForError(req, res, 400, "invalid input");
 	} else {
 		next();
 	}
@@ -141,15 +113,9 @@ export const isUser = (req, res, next) => {
 	const userId = userDB.filter((user) => user.id === createdBy);
 
 	if (typeof createdBy !== "number") {
-		return res.status(400).json({
-			status: 400,
-			error: "invalid input",
-		});
+		Helpers.returnForError(req, res, 400, "invalid input");
 	} else if (userId.length < 1) {
-		return res.status(404).json({
-			status: 404,
-			error: "user not found",
-		});
+		Helpers.returnForError(req, res, 404, "user not found");
 	} else {
 		next();
 	}

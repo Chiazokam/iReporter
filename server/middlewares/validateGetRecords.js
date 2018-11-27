@@ -1,4 +1,9 @@
 import { incidentsDB } from "../dummyDB";
+import { Helpers } from "../helpers/predefinedMethods";
+import { Incidents } from "../controllers";
+
+
+const red_flag_string = "red-flag";
 
 /**
  * Checks if database is empty
@@ -8,10 +13,7 @@ import { incidentsDB } from "../dummyDB";
  */
 export const isDummyDbEmpty = (req, res, next) => {
 	if (incidentsDB.length < 1) {
-		return res.status(404).json({
-			status: 404,
-			error: "records not found",
-		});
+		Helpers.returnForError(req, res, 404, "records not found");
 	} else {
 		next();
 	}
@@ -26,10 +28,7 @@ export const isDummyDbEmpty = (req, res, next) => {
 export const doesRedFlagRecordExist = (req, res, next) => {
 	const redFlagsOnly = incidentsDB.filter((redFlag) => redFlag.type === "red-flag");
 	if (redFlagsOnly.length < 1) {
-		return res.status(404).json({
-			status: 404,
-			error: "records not found",
-		});
+		Helpers.returnForError(req, res, 404, "records not found");
 	} else {
 		next();
 	}
@@ -42,19 +41,14 @@ export const doesRedFlagRecordExist = (req, res, next) => {
 * @param  { next } - Proceeds to the next method on the route
 */
 export const doesSpecificRedFlagIdRecordExist = (req, res, next) => {
-	const specifiedRedFlagRecordId = parseInt(req.params.id, 10);
-	const allRedFlagsRecords = incidentsDB.filter((redFlag) => redFlag.type === "red-flag");
-	const specificRedFlag = allRedFlagsRecords.filter((redFlagId) => redFlagId.id === specifiedRedFlagRecordId);
+	const filtered = Incidents.filterRecords(req, res, red_flag_string);
+	const specificRedFlag = filtered[2];
 
-	if (specificRedFlag.length < 1){
-		return res.status(404).json({
-			status: 404,
-			error: "record not found",
-		});
+	if (specificRedFlag.length < 1) {
+		Helpers.returnForError(req, res, 404, "record not found");
 	} else {
 		next();
 	}
-
 };
 
 

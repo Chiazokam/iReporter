@@ -44,15 +44,29 @@ export const validateArrayValues = (req, res, next) => {
 };
 
 /**
- * Validates users input for a single string field
+ * Validates users location input field for a single string field
  * @param  { object } req - Contains the body of the request.
  * @param { object } res - Contains the returned response.
  * @param  { next } - Proceeds to the next method on the route
  */
-export const singleStringValidation = (req, res, next) => {
+export const locationStringValidation = (req, res, next) => {
 	const { location } = req.body;
 
 	Helpers.thoroughStringCheck(req, res, location, next);
+
+};
+
+/**
+ * Validates the comment input field for a single string field
+ * @param  { object } req - Contains the body of the request.
+ * @param { object } res - Contains the returned response.
+ * @param  { next } - Proceeds to the next method on the route
+ */
+export const commentStringValidation = (req, res, next) => {
+	const { comment } = req.body;
+
+	Helpers.thoroughStringCheck(req, res, comment, next);
+
 };
 
 
@@ -112,7 +126,7 @@ export const isRedFlag = (req, res, next) => {
 			error: "invalid input",
 		});
 	} else {
-		return next();
+		next();
 	}
 };
 
@@ -137,7 +151,7 @@ export const isUser = (req, res, next) => {
 			error: "user not found",
 		});
 	} else {
-		return next();
+		next();
 	}
 };
 

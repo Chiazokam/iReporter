@@ -13,7 +13,7 @@ export const isDummyDbEmpty = (req, res, next) => {
 			error: "records not found",
 		});
 	} else {
-		return next();
+		next();
 	}
 };
 
@@ -31,7 +31,7 @@ export const doesRedFlagRecordExist = (req, res, next) => {
 			error: "records not found",
 		});
 	} else {
-		return next();
+		next();
 	}
 };
 
@@ -52,7 +52,7 @@ export const doesSpecificRedFlagIdRecordExist = (req, res, next) => {
 			error: "record not found",
 		});
 	} else {
-		return next();
+		next();
 	}
 
 };

@@ -20,7 +20,7 @@ const editComment = (event) => {
         //target the parent node of the target element
         const target = event.target.parentNode;
 
-        //hide paragragh i.e hide initial comment
+        //hide the paragragh inside the div with a class="story"
         target.children[0].style.display = "none";
 
         //Insert HTML mark-up into the the second child of the target element
@@ -50,10 +50,13 @@ const cancelUpdate = () => {
         const target = event.target.parentNode.parentNode.parentNode;
         const childrenLength = target.children.length;
         
+        //display the paragragh inside the div with a class="story"
         target.children[0].style.display = "block";
 
         //display the update button feature
         target.children[childrenLength - 1].style.display = "inline-block";
+        
+        //remove the content inside the div with class= "insert-editing-tag-here"
         target.children[1].innerHTML = "";
     }
 }

@@ -1,10 +1,13 @@
 /*---------------GENERAL STYLES--------------*/
 body{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  min-width: 480px;
+  min-width: 320px;
 }
 #peg{
   display: none;
+}
+.font-seting{
+  font-size: 1.5em;
 }
 .red{
   color: rgb(255, 0, 0);
@@ -189,7 +192,8 @@ div.logo-container{
   padding: 0.3em;
 }
 .crime-form-container form input[type="text"],
-.crime-form-container form input[type="number"]{
+.crime-form-container form input[type="number"],
+.post-display .location-input{
   display: inline-table;
   width: 320px;
   text-align: center;
@@ -310,7 +314,7 @@ text-align: center;
   margin-top: 50px;
 }
 
-.comment-container .comment {
+/* .comment-container .comment {
   text-align: center;
 }
 
@@ -327,7 +331,7 @@ text-align: center;
 .comment-avatar{
   display: block;
   padding-bottom: 10px;
-}
+} */
 /*------Modal-------*/
  
 .outer-modal {
@@ -486,7 +490,7 @@ text-align: center;
   padding: 30px 40px;
   margin: 100px 2% 100px 2%;
   border-radius: 20px;
-  float: right;
+  float: left;
   text-align: left;
 }
 .body-container > h1{
@@ -515,16 +519,28 @@ text-align: center;
 .signup-form{
   display: none;
 }
+.signup-form a,
+.signin-form a{
+  cursor: pointer;
+  color: #162661;
+}
+.signup-form a:hover,
+.signin-form a:hover{
+  color: #3456d1;
+  text-shadow: 1px 5px 1px 1px grey;
+}
 .body-container .signup-form,
 .body-container .signin-form{
   text-align: center;
   width: 40%;
-  padding: 100px 6% 100px 4%;
+  padding: 50px 6% 50px 4%;
   border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  margin: 100px 0;
 }
 .signup-form, 
 .signin-form{
-  float: left;
+  float: right;
 }
 
 form input[type="text"],
@@ -574,7 +590,31 @@ form h2{
 }
 .switch-signin{
   color: #fe0100;
+  border-radius: 0 5px 5px 0;
 }
+.switch-signup{
+  border-radius: 5px 0 0 5px;
+}
+.switch-signin,
+.switch-signup{
+  transition-duration: 0.2s;
+  transition-property: padding;
+  transition-timing-function: ease-in-out;
+}
+.switch-signin:hover,
+.switch-signup:hover{
+  box-shadow: 1px 1px 10px 1px #162661;
+  padding: 5px;
+  background: white;
+}
+
+.signup-form a:hover,
+.signin-form a:hover{
+  box-shadow: none;
+  padding: 0;
+  background: none;
+}
+
 form input[type="submit"],
 .comment-container .comment input[type="submit"]{
   color: white;
@@ -602,17 +642,25 @@ form input[type="submit"]:hover,
   margin: 0 100px;
   border-radius: 10px;
 }
+.actual-post input.location-input{
+  width: 250px;
+  padding: 5px
+}
+textarea.editing-tag,
+input.location-input{
+  font-size: 1.2em;
+}
 .editing-tag{
-  /* display: none; */
   resize: vertical;
-  width: 100%;
-  height: 100px;
+  width: 90%;
+  height: 200px;
   outline: none;
   border: none;
   border-radius: 20px;
-  padding: 30px;
-  font-size: 1.2em;
+  padding: 25px 5%;
+  font-size: 1em;
   text-align: left;
+  margin-top: 10px;
 }
 .reply p{
   padding: 0 20px;
@@ -760,12 +808,16 @@ footer{
 #desktop-nav{
   display: none;
 }
+ .visitors-message ul{
+   padding: 0 1em;
+ }
   .visitors-message{
-    width: 95%;
+    width: 90%;
     float: none;
-    margin: 50px auto 0 -2em;
-    background: rgba(255, 255, 255, 0.9);
-    font-size: 100%;
+    margin: 50px 0;
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 1em;
+    padding: 25px 5%;
   }
 
   .signup-form, 
@@ -775,8 +827,10 @@ footer{
 }
   .body-container .signup-form,
   .body-container .signin-form{
-    width: 100%;
-    padding: 50px 0 100px 0;
+    width: 90%;
+    padding: 50px 5% 50px 5%;
+    margin: 50px 0;
+    background: rgba(255, 255, 255, 0.8);
   }
   .crime-form-container .post-text-area{
     width: 70%;
@@ -835,6 +889,14 @@ footer{
  .crime-form-container form input[type="button"]{
   margin-top: 1em;
  }
+  .body-container {
+   padding: 0 40px; 
+ }
+   .hamburger{
+  width: 40px;
+  height: 40px;
+  margin: 10px 25px 0 0;
+}
 }
 
 @media(max-width:320px) {
@@ -844,6 +906,29 @@ footer{
   }
   .video-display video{
   width: 90%;
+}
+.sitename{
+  display: inline-block;
+  position: absolute;
+  top: 10px; 
+  font-size: 1.4em;
+}
+ .body-container {
+   padding: 0 20px;
+ }
+ .body-container h1{
+  font-size: 120%
+ }
+  .hamburger{
+  width: 40px;
+  height: 40px;
+  display: block;
+  float: right;
+  margin: 10px 25px 0 0;
+}
+#mobile-nav{
+  position: absolute;
+  top: 3.5em;
 }
 }
 

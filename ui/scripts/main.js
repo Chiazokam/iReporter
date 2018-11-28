@@ -33,12 +33,12 @@ const adminInterventionSwitch = document.getElementById("admin-intervention");
  * @param {object} event - event object
  */
 const switchForm = (event) => {
-	if (event.target.className == "switch-signup"){
+	if (/switch-signup/gm.test(event.target.className)){
 		signinForm.style.display = "none";
 		signupForm.style.display = "block";
 		switchToSignin.style.color = "#162661";
 		switchToSignup.style.color = "#fe0100";
-	} else if (event.target.className == "switch-signin") {
+	} else if (/switch-signin/gm.test(event.target.className)) {
 		signupForm.style.display = "none";
 		signinForm.style.display = "block";
 		switchToSignup.style.color = "#162661";
@@ -168,6 +168,7 @@ const resizeIframe = () => {
 };
 
 recordFrame.addEventListener("load", resizeIframe);
+window.addEventListener("resize", resizeIframe);
 
 /**
  * Opens update status box modal for admin

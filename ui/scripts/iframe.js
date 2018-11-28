@@ -45,7 +45,7 @@ const hideMe = (elem) => {
 }
 
 
-const cancelUpdate = () => {
+const cancelCommentUpdate = () => {
     if (/cancel/gm.test(event.target.className)) {
         const target = event.target.parentNode.parentNode.parentNode;
         const childrenLength = target.children.length;
@@ -61,11 +61,49 @@ const cancelUpdate = () => {
     }
 }
 
-window.addEventListener("click", cancelUpdate);
+window.addEventListener("click", cancelCommentUpdate);
 
 
+const editLocation = (event) => {
+    
+    if (/edit-location/gm.test(event.target.className)) {
+       //target the parent node of the target element
+        const target = event.target.parentNode;
+        const initialLoaction = target.children[12];
+        
+        //hide the initial location field
+        initialLoaction.style.display = "none";
+
+        //insert the string of mark-up into the HTML element with class="insert-location-editing-tag-here"
+        target.children[14].innerHTML += `
+        <input type="text" class="location-input" value="${initialLoaction.innerHTML}" />
+        <span class="editing-button-tag">
+         <a class="red edit exit">cancel</a> 
+         <span>&nbsp;</span><a class="blue edit">update</a></span> `
+    }
+    
+
+}
+
+window.addEventListener("click", editLocation);
 
 
+const cancelLocationUpdate = (event) => {
+    if (/exit/gm.test(event.target.className)) {
+        const target = event.target.parentNode;
+        
+        //set the location back to default
+        target.parentNode.parentNode.children[12].style.display = "inline-block";
+
+        //set the modify button back to its original position
+        target.parentNode.parentNode.children[15].style.display = "inline-block";
+
+        //Remove the edit location input field
+        target.parentNode.innerHTML = "";       
+    }
+}
+
+window.addEventListener("click", cancelLocationUpdate);
 
 
 

@@ -196,6 +196,33 @@ div.logo-container{
   border-radius: 5px;
   padding: 0.5em;
 }
+ .crime-form-container form input[type="button"]{
+  color: white;
+  background: #162661;
+  border-radius: 5px;
+  padding: 0.5em;
+  border: none;
+ }
+ .crime-form-container form input[type="button"]:hover{
+  box-shadow: 1px 1px 20px 1px white;
+  color: #162661;
+  background:  white;
+  cursor: pointer;
+ }
+ .crime-form-container .place-images,
+.crime-form-container .place-videos{
+  display: block;
+  text-align: center;
+}
+.crime-form-container .video-uploads, 
+.crime-form-container .image-uploads{
+  margin: 0.5em 0;
+  font-style: italic;
+}
+.attachment{
+  width: 15px;
+  height: 15px;
+}
 .crime-form-container form {
 text-align: center;
 }
@@ -217,9 +244,8 @@ text-align: center;
   padding: 30px;
   height: 250px;
   margin: 20px auto;
-  border-radius: 10px;
   outline: none; 
-  resize: none;
+  resize: vertical;
   font-size: 1.3em;
 }
 .crime-form-container input.report{
@@ -248,7 +274,7 @@ text-align: center;
   font-size: 2em;
   display: inline-table;
 }
-.actual-post p{
+.actual-post div p{
   line-height: 2em;
 }
 .picture-evidence{
@@ -262,16 +288,26 @@ text-align: center;
   width: 20px;
   height: 20px;
 }
-.edit, .delete{
+.edit-comment,
+.edit-location,
+ .delete,
+ .edit{
   display: inline-table;
   cursor: pointer;
-  margin-top: 10px; 
+  text-transform: capitalize;
+  font-style: italic;
 }
+.edit-comment:hover,
+.edit-location:hover,
 .edit:hover{
-  color: #162661;
+  text-shadow: 1px 1px 1px rgb(99, 98, 98);
 }
 .delete:hover{
-  color: #fc3535;
+  text-shadow: 1px 1px 1px rgb(92, 91, 91)
+}
+.post-display .post .actual-post .delete-record-container{
+  text-align: center;
+  margin-top: 50px;
 }
 
 .comment-container .comment {
@@ -325,10 +361,10 @@ text-align: center;
   margin-top: 0;
   border: none;
 
-    background-color: transparent;
-    border: 0px none transparent;
-    padding: 0px;
-    overflow: hidden;
+  background-color: transparent;
+  border: 0px none transparent;
+  padding: 0px;
+  overflow: hidden;
 }
 
 .choose-record {
@@ -344,6 +380,10 @@ text-align: center;
   text-align: center;
   border-radius: 0 0 10px 10px;
   border: 1px solid #162661;
+
+  transition-duration: 0.4s;
+  transition-property: background;
+  transition-timing-function: ease-in-out;
 }
 .choose-record a:hover{
   color: white;
@@ -351,7 +391,7 @@ text-align: center;
 }
 .default{
   color: white;
-  background: #162661
+  background: #162661;
 }
 #admin{
   padding: 0 0;
@@ -562,7 +602,18 @@ form input[type="submit"]:hover,
   margin: 0 100px;
   border-radius: 10px;
 }
-
+.editing-tag{
+  /* display: none; */
+  resize: vertical;
+  width: 100%;
+  height: 100px;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  padding: 30px;
+  font-size: 1.2em;
+  text-align: left;
+}
 .reply p{
   padding: 0 20px;
   text-align: justify;
@@ -578,10 +629,25 @@ form input[type="submit"]:hover,
 .redflag-count-container {
   margin: 10px;
 }
+.profile{
+  background: #7c98fd1c;
+}
 .profile,
 .record-list{
   padding: 0 100px;
   text-align: center;
+}
+.profile > section.inner-profile-border{
+  box-shadow: 1px 1px 1px 1px rgb(155, 154, 154);
+  border-radius: 20px;
+}
+.profile-details-border{
+  box-shadow: 1px 1px 1px 1px rgb(155, 154, 154);
+  border-radius: 20px;
+  width: 320px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0.5em 0;
 }
 .profile .profile-details{
   text-align: center;
@@ -593,14 +659,14 @@ form input[type="submit"]:hover,
   display: block;
 }
 .profile .record-count{
-  width: 33.333333%;
+  width: 33.33333333333333%;
   padding: 5px 0;
   background-color: #576cbb98;
   color: white;
   float: left;
   text-align: center;
   border-radius: 0 0 10px 10px;
-  box-shadow: 1px 5px 20px 1px rgb(155, 154, 154);
+  box-shadow: 1px 5px 15px 1px rgb(155, 154, 154);
 }
 .profile .middle{
   height: 100px;
@@ -765,6 +831,12 @@ footer{
 
 }
 
+@media(max-width: 500px) {
+ .crime-form-container form input[type="button"]{
+  margin-top: 1em;
+ }
+}
+
 @media(max-width:320px) {
   #longitude, 
   #latitude{
@@ -773,7 +845,6 @@ footer{
   .video-display video{
   width: 90%;
 }
-
 }
 
 

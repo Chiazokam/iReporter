@@ -146,7 +146,7 @@ window.addEventListener("click", (e) => {
  * @param {object} obj - window object
  */
 const resizeIframe = () => {
-	if (location.href === ghPagesReport || location.href === report) {
+	if (/report/gm.test(location.href)) {
 		recordFrame.style.height = `${recordFrame.contentDocument.body.scrollHeight + 150}px`;
 		document.getElementsByClassName("image-enlarge")[0].src = "../images/loader.gif";
 		document.getElementsByClassName("image-enlarge")[0].style.width = "10%";
@@ -155,7 +155,7 @@ const resizeIframe = () => {
 		setTimeout(() => {
 			document.getElementsByClassName("outer-modal")[0].style.display = "none";
 		}, 1000);
-	} else if (window.location.href === ghPagesHome || home) {
+	} else if (/home/gm.test(location.href)) {
 		recordFrame.style.height = `${recordFrame.contentDocument.body.scrollHeight + 150}px`;
 		document.getElementsByClassName("image-enlarge")[0].src = "../images/loader.gif";
 		document.getElementsByClassName("image-enlarge")[0].style.width = "10%";
@@ -186,7 +186,7 @@ window.addEventListener("click", (e) => {
  * @param {object} event - event object
  */
 const switchCategory = (event) => {
-	if (location.href == ghPagesAdmin || location.href == admin){
+	if (/admin/gm.test(location.href)){
 		if (event.target.id === adminRedFlagSwitch.id) {
 			adminRedFlagSwitch.className = "admin-current";
 			adminInterventionSwitch.className = "";

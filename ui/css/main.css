@@ -3,11 +3,14 @@ body{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   min-width: 320px;
 }
-#peg{
+#peg, 
+#loading{
   display: none;
 }
-.crime-form-container .font-seting{
-  font-size: 1.5em;
+.crime-form-container .font-setting,
+.record-list .font-setting,
+.font-setting{
+  font-size: 1.3em;
 }
 .red{
   color: rgb(255, 0, 0);
@@ -23,6 +26,9 @@ body{
 }
 .theme-blue{
   color: #162661;
+}
+.theme-orange{
+  color: #fe0100;
 }
 .white{
   color: white;
@@ -397,6 +403,10 @@ text-align: center;
   color: white;
   background: #162661;
 }
+body.admin-body{
+  background: url("../images/admin_bg.png");
+  background-size: cover;
+}
 #admin{
   padding: 0 0;
 }
@@ -675,26 +685,30 @@ input.location-input{
 }
 .intervention-count-container,
 .redflag-count-container {
-  margin: 10px;
+  margin: 10px 0;
 }
-.profile{
-  background: #7c98fd1c;
+.profile-body{
+  background: url("../images/profile_bg.png");
+  background-size: cover; 
+}
+#profile{
+  background: rgba(255, 255, 255, 0.95);
 }
 .profile,
 .record-list{
-  padding: 0 100px;
+  padding: 0 50px;
   text-align: center;
 }
 .profile > section.inner-profile-border{
-  box-shadow: 1px 1px 1px 1px rgb(155, 154, 154);
   border-radius: 20px;
 }
 .profile-details-border{
+  background: white;
   box-shadow: 1px 1px 1px 1px rgb(155, 154, 154);
   border-radius: 20px;
   width: 300px;
   text-align: center;
-  margin: 0 auto;
+  margin: 50px auto 0 auto;
   padding: 0.5em 0;
 }
 .profile .profile-details{
@@ -727,26 +741,44 @@ input.location-input{
   font-size: 100%;
   text-align: center;
 }
-.profile h1,
-.record-list h1{
+.profile h1{
   font-size: 1.3em;
   padding: 20px 0 10px 0;
   color: #162661;
   text-align: center;
 }
+.record-list h1,
+.intervention-count-container h1,
+.redflag-count-container h1{
+  font-size: 1.5em;
+  padding: 20px 0;
+  color: #ffffff;
+  background: #162661;
+  text-align: center;
+  margin: 50px 0;
+}
 .record-list li{
   list-style: none;
 }
+
 .record-list{
   padding-bottom: 50px
 }
-.redflag-list{
-  border-right: 1px solid #162661;
-}
+
 .redflag-list,
 .intervention-list{
-  display: inline-table;
-  padding: 0 50px;
+  float: left;
+  width: 50%;
+}
+#howitworks div,
+#about div{
+  box-shadow: 1px 5px 10px 1px grey;
+  padding: 50px 50px;
+}
+#howitworks div h1.theme-blue,
+#about div h1.theme-blue{
+  text-align: center;
+  width: 100%;
 }
 footer{
   background: #162661;
@@ -755,6 +787,8 @@ footer{
   padding-top: 1em;
   padding-bottom: 1em;
 }
+
+
 /*--------------MEDIA QUERIES--------------*/
 @media(max-width:800px) {
   .admin-nav{
@@ -783,14 +817,34 @@ footer{
     .profile .record-count:last-of-type{
     border-radius: 0 0 20px 20px;
   }
+   .redflag-list{
+     border-bottom: #162661 1px solid;
+   }
   .redflag-list,
   .intervention-list{
-    display: block;
-    border: none;
-    margin-bottom: 20px;
+    float: none;
+    width: 100%;
+    padding: 25px 0;
+  }
+  .profile{
+  padding: 0 10px;
+}
+.record-list h1{
+  padding: 10px 0;
+  color: #ffffff;
+  background: #162661;
+  text-align: center;
+  /* margin: 25px 0; */
+  margin-bottom: 0;
+}
+#howitworks div h1.theme-blue,
+#about div h1.theme-blue{
+  font-size: 1.5em;
+  }
   }
 
-  }
+
+
 @media(max-width:1000px) {
   #mobile-nav ul{
   box-shadow: 1px 5px 20px 1px rgb(0, 0, 0);
@@ -885,6 +939,10 @@ footer{
     list-style: none;
     text-align: center
   }
+  #howitworks div h1.theme-blue,
+#about div h1.theme-blue{
+  font-size: 1.5em;
+  }
 
 }
 
@@ -905,6 +963,17 @@ footer{
   padding: 0 10px;
   text-align: center;
 }
+#howitworks div, 
+#about div{
+  box-shadow: 1px 5px 10px 1px grey;
+  padding: 50px 10px;
+  font-size: 100%;
+}
+#howitworks, 
+#about{
+  padding: 50px 10px;
+}
+
 }
 
 @media(max-width:320px) {

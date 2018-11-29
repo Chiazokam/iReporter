@@ -221,6 +221,7 @@ const switchCategory = (event) => {
 window.addEventListener("click", switchCategory);
 window.addEventListener("click", switchCategory);
 
+const loading = document.getElementById("loading");
 
 /**
  * Find current location of user using the inbuilt geolocator fron the navigator object
@@ -229,9 +230,10 @@ const findMe = (e) => {
 	if (e.target.id !== "myCurrentLocation" ) {
 		return;
 	} else if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(revealCoordinates);
-		
+		loading.style.display = "inline-block";
+		navigator.geolocation.getCurrentPosition(revealCoordinates);		
 	} else {
+		loading.style.display = "none";
 		errorMessage.innerHTML = "GPS location not supported on this browser";
 	}
 }
@@ -243,9 +245,26 @@ const findMe = (e) => {
 const revealCoordinates = (position) => {
 	latitude.value = position.coords.latitude;
 	longitude.value = position.coords.longitude;
+	loading.style.display = "none";
 }
 
 window.addEventListener("click", findMe);
+
+/**
+ * Change color for report page
+ * @param { object } event 
+ */
+
+const changeColor = (event) => {
+	if (event.target.className === "theme-blue font-setting"){
+		event.target.className = "white font-setting";
+	} else if (event.target.className === "white font-setting"){
+		event.target.className = "theme-blue font-setting"; 
+	}
+}
+
+window.addEventListener("click", changeColor);
+
 
 
 

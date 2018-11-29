@@ -81,7 +81,7 @@ const controlHamburgerForOtherPages = (event) => {
 };
 
 const controlHamburger = (event) => {
-	if(location.href === pageIndex || location.href === ghpagesPageIndex) {
+	if (location.href === pageIndex || location.href === ghpagesPageIndex || /index/gm.test(location.href)) {
 		if (event.target.id === hamburgerIndex.id) {
 			if (status == "close") {
 				hamburger.src = "./images/menu_close_icon.png";

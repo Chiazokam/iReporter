@@ -28,17 +28,26 @@ const recordFrame = document.getElementById("record-frame");
 const adminRedFlagSwitch = document.getElementById("admin-red-flag");
 const adminInterventionSwitch = document.getElementById("admin-intervention");
 
+
+const latitude = document.getElementById("latitude");
+const longitude = document.getElementById("longitude");
+const errorMessage = document.getElementById("errorMessage");
+const myCurrentPosition = document.getElementById("myCurrentLocation");
+
+const src1 = "./images/menu_close_icon.png";
+const src2 =  "./images/menu_icon.png";
+
 /**
  * Switch to signin or signup form
  * @param {object} event - event object
  */
 const switchForm = (event) => {
-	if (event.target.className == "switch-signup"){
+	if (/switch-signup/gm.test(event.target.className)){
 		signinForm.style.display = "none";
 		signupForm.style.display = "block";
 		switchToSignin.style.color = "#162661";
 		switchToSignup.style.color = "#fe0100";
-	} else if (event.target.className == "switch-signin") {
+	} else if (/switch-signin/gm.test(event.target.className)) {
 		signupForm.style.display = "none";
 		signinForm.style.display = "block";
 		switchToSignup.style.color = "#162661";
@@ -49,25 +58,13 @@ const switchForm = (event) => {
 window.addEventListener("click", switchForm);
 window.addEventListener("click", switchForm);
 
+
 /**
  * Control hamburger menu
  * @param {object} event - event object
  */
-const controlHamburger = (event) => {
-	if(location.href === pageIndex || location.href === ghpagesPageIndex) {
-		if (event.target.id === hamburgerIndex.id) {
-			if (status == "close") {
-				hamburger.src = "./images/menu_close_icon.png";
-				mobileNav.style.display = "block";
-				status = "open";
-			} else if (status == "open") {
-				hamburger.src = "./images/menu_icon.png";
-				mobileNav.style.display = "none";
-				status = "close";
-			}
-		}
-	}
 
+const controlHamburgerForOtherPages = (event) => {
 	if (event.target.className == "hamburger") {
 		if (event.target.id == "") {
 			if (status == "close") {
@@ -82,6 +79,25 @@ const controlHamburger = (event) => {
 		}
 	}
 };
+
+const controlHamburger = (event) => {
+	if(location.href === pageIndex || location.href === ghpagesPageIndex) {
+		if (event.target.id === hamburgerIndex.id) {
+			if (status == "close") {
+				hamburger.src = "./images/menu_close_icon.png";
+				mobileNav.style.display = "block";
+				status = "open";
+			} else if (status == "open") {
+				hamburger.src = "./images/menu_icon.png";
+				mobileNav.style.display = "none";
+				status = "close";
+			}
+		}
+	}
+	controlHamburgerForOtherPages(event);
+};
+
+
 
 window.addEventListener("click", controlHamburger);
 
@@ -146,7 +162,7 @@ window.addEventListener("click", (e) => {
  * @param {object} obj - window object
  */
 const resizeIframe = () => {
-	if (location.href === ghPagesReport || location.href === report) {
+	if (/report/gm.test(location.href)) {
 		recordFrame.style.height = `${recordFrame.contentDocument.body.scrollHeight + 150}px`;
 		document.getElementsByClassName("image-enlarge")[0].src = "../images/loader.gif";
 		document.getElementsByClassName("image-enlarge")[0].style.width = "10%";
@@ -155,7 +171,7 @@ const resizeIframe = () => {
 		setTimeout(() => {
 			document.getElementsByClassName("outer-modal")[0].style.display = "none";
 		}, 1000);
-	} else if (window.location.href === ghPagesHome || home) {
+	} else if (/home/gm.test(location.href)) {
 		recordFrame.style.height = `${recordFrame.contentDocument.body.scrollHeight + 150}px`;
 		document.getElementsByClassName("image-enlarge")[0].src = "../images/loader.gif";
 		document.getElementsByClassName("image-enlarge")[0].style.width = "10%";
@@ -168,6 +184,7 @@ const resizeIframe = () => {
 };
 
 recordFrame.addEventListener("load", resizeIframe);
+window.addEventListener("resize", resizeIframe);
 
 /**
  * Opens update status box modal for admin
@@ -186,7 +203,7 @@ window.addEventListener("click", (e) => {
  * @param {object} event - event object
  */
 const switchCategory = (event) => {
-	if (location.href == ghPagesAdmin || location.href == admin){
+	if (/admin/gm.test(location.href)){
 		if (event.target.id === adminRedFlagSwitch.id) {
 			adminRedFlagSwitch.className = "admin-current";
 			adminInterventionSwitch.className = "";
@@ -203,5 +220,51 @@ const switchCategory = (event) => {
 
 window.addEventListener("click", switchCategory);
 window.addEventListener("click", switchCategory);
+
+const loading = document.getElementById("loading");
+
+/**
+ * Find current location of user using the inbuilt geolocator fron the navigator object
+ */
+const findMe = (e) => {
+	if (e.target.id !== "myCurrentLocation" ) {
+		return;
+	} else if (navigator.geolocation) {
+		loading.style.display = "inline-block";
+		navigator.geolocation.getCurrentPosition(revealCoordinates);		
+	} else {
+		loading.style.display = "none";
+		errorMessage.innerHTML = "GPS location not supported on this browser";
+	}
+}
+
+/**
+ * Shows the coordinate position of user
+ * @param {object} position 
+ */
+const revealCoordinates = (position) => {
+	latitude.value = position.coords.latitude;
+	longitude.value = position.coords.longitude;
+	loading.style.display = "none";
+}
+
+window.addEventListener("click", findMe);
+
+/**
+ * Change color for report page
+ * @param { object } event 
+ */
+
+const changeColor = (event) => {
+	if (event.target.className === "theme-blue font-setting"){
+		event.target.className = "white font-setting";
+	} else if (event.target.className === "white font-setting"){
+		event.target.className = "theme-blue font-setting"; 
+	}
+}
+
+window.addEventListener("click", changeColor);
+
+
 
 

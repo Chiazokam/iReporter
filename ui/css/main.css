@@ -1,10 +1,16 @@
 /*---------------GENERAL STYLES--------------*/
 body{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  min-width: 480px;
+  min-width: 320px;
 }
-#peg{
+#peg, 
+#loading{
   display: none;
+}
+.crime-form-container .font-setting,
+.record-list .font-setting,
+.font-setting{
+  font-size: 1.3em;
 }
 .red{
   color: rgb(255, 0, 0);
@@ -20,6 +26,9 @@ body{
 }
 .theme-blue{
   color: #162661;
+}
+.theme-orange{
+  color: #fe0100;
 }
 .white{
   color: white;
@@ -189,12 +198,40 @@ div.logo-container{
   padding: 0.3em;
 }
 .crime-form-container form input[type="text"],
-.crime-form-container form input[type="number"]{
+.crime-form-container form input[type="number"],
+.post-display .location-input{
   display: inline-table;
   width: 320px;
   text-align: center;
   border-radius: 5px;
   padding: 0.5em;
+}
+ .crime-form-container form input[type="button"]{
+  color: white;
+  background: #162661;
+  border-radius: 5px;
+  padding: 0.5em;
+  border: none;
+ }
+ .crime-form-container form input[type="button"]:hover{
+  box-shadow: 1px 1px 20px 1px white;
+  color: #162661;
+  background:  white;
+  cursor: pointer;
+ }
+ .crime-form-container .place-images,
+.crime-form-container .place-videos{
+  display: block;
+  text-align: center;
+}
+.crime-form-container .video-uploads, 
+.crime-form-container .image-uploads{
+  margin: 0.5em 0;
+  font-style: italic;
+}
+.attachment{
+  width: 15px;
+  height: 15px;
 }
 .crime-form-container form {
 text-align: center;
@@ -217,9 +254,8 @@ text-align: center;
   padding: 30px;
   height: 250px;
   margin: 20px auto;
-  border-radius: 10px;
   outline: none; 
-  resize: none;
+  resize: vertical;
   font-size: 1.3em;
 }
 .crime-form-container input.report{
@@ -248,7 +284,7 @@ text-align: center;
   font-size: 2em;
   display: inline-table;
 }
-.actual-post p{
+.actual-post div p{
   line-height: 2em;
 }
 .picture-evidence{
@@ -262,19 +298,29 @@ text-align: center;
   width: 20px;
   height: 20px;
 }
-.edit, .delete{
+.edit-comment,
+.edit-location,
+ .delete,
+ .edit{
   display: inline-table;
   cursor: pointer;
-  margin-top: 10px; 
+  text-transform: capitalize;
+  font-style: italic;
 }
+.edit-comment:hover,
+.edit-location:hover,
 .edit:hover{
-  color: #162661;
+  text-shadow: 1px 1px 1px rgb(99, 98, 98);
 }
 .delete:hover{
-  color: #fc3535;
+  text-shadow: 1px 1px 1px rgb(92, 91, 91)
+}
+.post-display .post .actual-post .delete-record-container{
+  text-align: center;
+  margin-top: 50px;
 }
 
-.comment-container .comment {
+/* .comment-container .comment {
   text-align: center;
 }
 
@@ -291,7 +337,7 @@ text-align: center;
 .comment-avatar{
   display: block;
   padding-bottom: 10px;
-}
+} */
 /*------Modal-------*/
  
 .outer-modal {
@@ -325,10 +371,10 @@ text-align: center;
   margin-top: 0;
   border: none;
 
-    background-color: transparent;
-    border: 0px none transparent;
-    padding: 0px;
-    overflow: hidden;
+  background-color: transparent;
+  border: 0px none transparent;
+  padding: 0px;
+  overflow: hidden;
 }
 
 .choose-record {
@@ -344,6 +390,10 @@ text-align: center;
   text-align: center;
   border-radius: 0 0 10px 10px;
   border: 1px solid #162661;
+
+  transition-duration: 0.4s;
+  transition-property: background;
+  transition-timing-function: ease-in-out;
 }
 .choose-record a:hover{
   color: white;
@@ -351,7 +401,11 @@ text-align: center;
 }
 .default{
   color: white;
-  background: #162661
+  background: #162661;
+}
+body.admin-body{
+  background: url("../images/admin_bg.png");
+  background-size: cover;
 }
 #admin{
   padding: 0 0;
@@ -446,7 +500,7 @@ text-align: center;
   padding: 30px 40px;
   margin: 100px 2% 100px 2%;
   border-radius: 20px;
-  float: right;
+  float: left;
   text-align: left;
 }
 .body-container > h1{
@@ -475,16 +529,28 @@ text-align: center;
 .signup-form{
   display: none;
 }
+.signup-form a,
+.signin-form a{
+  cursor: pointer;
+  color: #162661;
+}
+.signup-form a:hover,
+.signin-form a:hover{
+  color: #3456d1;
+  text-shadow: 1px 5px 1px 1px grey;
+}
 .body-container .signup-form,
 .body-container .signin-form{
   text-align: center;
   width: 40%;
-  padding: 100px 6% 100px 4%;
+  padding: 50px 6% 50px 4%;
   border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  margin: 100px 0;
 }
 .signup-form, 
 .signin-form{
-  float: left;
+  float: right;
 }
 
 form input[type="text"],
@@ -534,7 +600,31 @@ form h2{
 }
 .switch-signin{
   color: #fe0100;
+  border-radius: 0 5px 5px 0;
 }
+.switch-signup{
+  border-radius: 5px 0 0 5px;
+}
+.switch-signin,
+.switch-signup{
+  transition-duration: 0.2s;
+  transition-property: padding;
+  transition-timing-function: ease-in-out;
+}
+.switch-signin:hover,
+.switch-signup:hover{
+  box-shadow: 1px 1px 10px 1px #162661;
+  padding: 5px;
+  background: white;
+}
+
+.signup-form a:hover,
+.signin-form a:hover{
+  box-shadow: none;
+  padding: 0;
+  background: none;
+}
+
 form input[type="submit"],
 .comment-container .comment input[type="submit"]{
   color: white;
@@ -562,7 +652,26 @@ form input[type="submit"]:hover,
   margin: 0 100px;
   border-radius: 10px;
 }
-
+.actual-post input.location-input{
+  width: 250px;
+  padding: 5px
+}
+textarea.editing-tag,
+input.location-input{
+  font-size: 1.2em;
+}
+.editing-tag{
+  resize: vertical;
+  width: 90%;
+  height: 200px;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  padding: 25px 5%;
+  font-size: 1em;
+  text-align: left;
+  margin-top: 10px;
+}
 .reply p{
   padding: 0 20px;
   text-align: justify;
@@ -576,12 +685,31 @@ form input[type="submit"]:hover,
 }
 .intervention-count-container,
 .redflag-count-container {
-  margin: 10px;
+  margin: 10px 0;
+}
+.profile-body{
+  background: url("../images/profile_bg.png");
+  background-size: cover; 
+}
+#profile{
+  background: rgba(255, 255, 255, 0.95);
 }
 .profile,
 .record-list{
-  padding: 0 100px;
+  padding: 0 50px;
   text-align: center;
+}
+.profile > section.inner-profile-border{
+  border-radius: 20px;
+}
+.profile-details-border{
+  background: white;
+  box-shadow: 1px 1px 1px 1px rgb(155, 154, 154);
+  border-radius: 20px;
+  width: 300px;
+  text-align: center;
+  margin: 50px auto 0 auto;
+  padding: 0.5em 0;
 }
 .profile .profile-details{
   text-align: center;
@@ -593,14 +721,14 @@ form input[type="submit"]:hover,
   display: block;
 }
 .profile .record-count{
-  width: 33.333333%;
+  width: 33.33333333333333%;
   padding: 5px 0;
   background-color: #576cbb98;
   color: white;
   float: left;
   text-align: center;
   border-radius: 0 0 10px 10px;
-  box-shadow: 1px 5px 20px 1px rgb(155, 154, 154);
+  box-shadow: 1px 5px 15px 1px rgb(155, 154, 154);
 }
 .profile .middle{
   height: 100px;
@@ -613,26 +741,44 @@ form input[type="submit"]:hover,
   font-size: 100%;
   text-align: center;
 }
-.profile h1,
-.record-list h1{
+.profile h1{
   font-size: 1.3em;
   padding: 20px 0 10px 0;
   color: #162661;
   text-align: center;
 }
+.record-list h1,
+.intervention-count-container h1,
+.redflag-count-container h1{
+  font-size: 1.5em;
+  padding: 20px 0;
+  color: #ffffff;
+  background: #162661;
+  text-align: center;
+  margin: 50px 0;
+}
 .record-list li{
   list-style: none;
 }
+
 .record-list{
   padding-bottom: 50px
 }
-.redflag-list{
-  border-right: 1px solid #162661;
-}
+
 .redflag-list,
 .intervention-list{
-  display: inline-table;
-  padding: 0 50px;
+  float: left;
+  width: 50%;
+}
+#howitworks div,
+#about div{
+  box-shadow: 1px 5px 10px 1px grey;
+  padding: 50px 50px;
+}
+#howitworks div h1.theme-blue,
+#about div h1.theme-blue{
+  text-align: center;
+  width: 100%;
 }
 footer{
   background: #162661;
@@ -641,6 +787,8 @@ footer{
   padding-top: 1em;
   padding-bottom: 1em;
 }
+
+
 /*--------------MEDIA QUERIES--------------*/
 @media(max-width:800px) {
   .admin-nav{
@@ -669,15 +817,38 @@ footer{
     .profile .record-count:last-of-type{
     border-radius: 0 0 20px 20px;
   }
+   .redflag-list{
+     border-bottom: #162661 1px solid;
+   }
   .redflag-list,
   .intervention-list{
-    display: block;
-    border: none;
-    margin-bottom: 20px;
+    float: none;
+    width: 100%;
+    padding: 25px 0;
+  }
+  .profile{
+  padding: 0 10px;
+}
+.record-list h1{
+  padding: 10px 0;
+  color: #ffffff;
+  background: #162661;
+  text-align: center;
+  /* margin: 25px 0; */
+  margin-bottom: 0;
+}
+#howitworks div h1.theme-blue,
+#about div h1.theme-blue{
+  font-size: 1.5em;
+  }
   }
 
-  }
+
+
 @media(max-width:1000px) {
+  #mobile-nav ul{
+  box-shadow: 1px 5px 20px 1px rgb(0, 0, 0);
+}
  .reply {
    margin: 0;
  }
@@ -694,12 +865,16 @@ footer{
 #desktop-nav{
   display: none;
 }
+ .visitors-message ul{
+   padding: 0 1em;
+ }
   .visitors-message{
-    width: 95%;
+    width: 90%;
     float: none;
-    margin: 50px auto 0 -2em;
-    background: rgba(255, 255, 255, 0.9);
-    font-size: 100%;
+    margin: 50px 0;
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 1em;
+    padding: 25px 5%;
   }
 
   .signup-form, 
@@ -709,8 +884,10 @@ footer{
 }
   .body-container .signup-form,
   .body-container .signin-form{
-    width: 100%;
-    padding: 50px 0 100px 0;
+    width: 90%;
+    padding: 50px 5% 50px 5%;
+    margin: 50px 0;
+    background: rgba(255, 255, 255, 0.8);
   }
   .crime-form-container .post-text-area{
     width: 70%;
@@ -762,6 +939,40 @@ footer{
     list-style: none;
     text-align: center
   }
+  #howitworks div h1.theme-blue,
+#about div h1.theme-blue{
+  font-size: 1.5em;
+  }
+
+}
+
+@media(max-width: 500px) {
+ .crime-form-container form input[type="button"]{
+  margin-top: 1em;
+ }
+  .body-container {
+   padding: 0 40px; 
+ }
+   .hamburger{
+  width: 40px;
+  height: 40px;
+  margin: 10px 25px 0 0;
+}
+.profile,
+.record-list{
+  padding: 0 10px;
+  text-align: center;
+}
+#howitworks div, 
+#about div{
+  box-shadow: 1px 5px 10px 1px grey;
+  padding: 50px 10px;
+  font-size: 100%;
+}
+#howitworks, 
+#about{
+  padding: 50px 10px;
+}
 
 }
 
@@ -773,7 +984,29 @@ footer{
   .video-display video{
   width: 90%;
 }
-
+.sitename{
+  display: inline-block;
+  position: absolute;
+  top: 10px; 
+  font-size: 1.4em;
+}
+ .body-container {
+   padding: 0 20px;
+ }
+ .body-container h1{
+  font-size: 120%
+ }
+  .hamburger{
+  width: 40px;
+  height: 40px;
+  display: block;
+  float: right;
+  margin: 10px 25px 0 0;
+}
+#mobile-nav{
+  position: absolute;
+  top: 3.5em;
+}
 }
 
 

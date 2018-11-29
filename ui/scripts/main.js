@@ -37,6 +37,19 @@ const myCurrentPosition = document.getElementById("myCurrentLocation");
 const src1 = "./images/menu_close_icon.png";
 const src2 =  "./images/menu_icon.png";
 
+const loading = document.getElementById("loading");
+
+
+/**
+ * Time out function to remove display
+ * */
+const timeOut = (elem) => {
+	setTimeout(() => {
+		elem.innerHTML = " ";
+	}, 2000);
+}
+
+
 /**
  * Switch to signin or signup form
  * @param {object} event - event object
@@ -221,7 +234,6 @@ const switchCategory = (event) => {
 window.addEventListener("click", switchCategory);
 window.addEventListener("click", switchCategory);
 
-const loading = document.getElementById("loading");
 
 /**
  * Find current location of user using the inbuilt geolocator fron the navigator object
@@ -230,13 +242,17 @@ const findMe = (e) => {
 	if (e.target.id !== "myCurrentLocation" ) {
 		return;
 	} else if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(revealCoordinates, errorResponse);
 		loading.style.display = "inline-block";
-		navigator.geolocation.getCurrentPosition(revealCoordinates);		
+		errorMessage.style.marginTop = "1em";
 	} else {
 		loading.style.display = "none";
-		errorMessage.innerHTML = "GPS location not supported on this browser";
+		errorMessage.innerHTML = `<span style="color:#ff0000">GPS location not supported on this browser</span>`;
+		timeOut(errorMessage);
 	}
 }
+
+window.addEventListener("click", findMe);
 
 /**
  * Shows the coordinate position of user
@@ -245,10 +261,34 @@ const findMe = (e) => {
 const revealCoordinates = (position) => {
 	latitude.value = position.coords.latitude;
 	longitude.value = position.coords.longitude;
+	errorMessage.innerHTML = `<span style="color: #35f50e; font-weight: bold;"> LOCATION FOUND <span>`;
+	timeOut(errorMessage);	
 	loading.style.display = "none";
 }
 
-window.addEventListener("click", findMe);
+
+
+
+/**
+ * Error response if location couldn't be found
+ * @param {object} error 
+ */
+const errorResponse = (err) => {
+	loading.style.display = "none";
+	errorMessage.style.marginTop = "0";
+	timeOut(errorMessage);
+		if (err.PERMISSION_DENIED === err.code) {
+			errorMessage.innerHTML = `<span style="color: white">User denied the request for Geolocation</span>`;
+		} else if (err.POSITION_UNAVAILABLE === err.code) {
+			errorMessage.innerHTML = `<span style="color: white">Location information is unavailable</span>`;
+		} else if (err.TIMEOUT === err.code) {
+			errorMessage.innerHTML = `<span style="color: white">The request to get user location timed out</span>`;
+		} else if (err.UNKNOWN_ERROR === err.code) {
+			errorMessage.innerHTML = `<span style="color: white">An unknown error occurred</span>`;
+		}
+
+}
+
 
 /**
  * Change color for report page

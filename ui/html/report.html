@@ -57,9 +57,9 @@
 
             <h1 class="theme-blue font-seting">COMMENT</h1>
             <textarea placeholder="Tell your story..." class="post-text-area" id="post-text-area"></textarea>
-            <input type="radio" name="report-type" checked="checked" id="red-flag"> <label for="red-flag" style="cursor: pointer;">RED-FLAG</label> 
+            <input type="radio" name="report-type" checked="checked" id="red-flag"> <label for="red-flag" style="cursor: pointer;">RED-FLAG</label> <img src="../images/red_flag.png" class="red-flag-icon" title="Red flag" />
             <span> &nbsp; </span>
-            <input type="radio" name="report-type" id="intervention"><label for="intervention" style="cursor: pointer;">INTERVENE</label> 
+            <input type="radio" name="report-type" id="intervention"><label for="intervention" style="cursor: pointer;">INTERVENE</label> <img src="../images/intervene_icon.png" class="red-flag-icon" title="Red flag" />
             <br> 
             <br> 
             <br>
@@ -71,6 +71,9 @@
             <br>
             <input type="number" placeholder="ENTER LONGITUDE" id="longitude"> 
             <br>
+            <br>
+            <input type="button" value="FIND ME" id="myCurrentLocation" />
+            <div id="errorMessage"></div>
             <br>
             <br>
             

@@ -6,7 +6,7 @@ body{
 #peg{
   display: none;
 }
-.font-seting{
+.crime-form-container .font-seting{
   font-size: 1.5em;
 }
 .red{
@@ -792,6 +792,9 @@ footer{
 
   }
 @media(max-width:1000px) {
+  #mobile-nav ul{
+  box-shadow: 1px 5px 20px 1px rgb(0, 0, 0);
+}
  .reply {
    margin: 0;
  }

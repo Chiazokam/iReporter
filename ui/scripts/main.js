@@ -197,7 +197,15 @@ const resizeIframe = () => {
 };
 
 recordFrame.addEventListener("load", resizeIframe);
-window.addEventListener("resize", resizeIframe);
+
+/**Handles frame height on resize */
+window.addEventListener("resize", () => {
+	if (/report/gm.test(location.href)) {
+		recordFrame.style.height = `${recordFrame.contentDocument.body.scrollHeight + 100}px`;
+	} else if (/home/gm.test(location.href)) {
+		recordFrame.style.height = `${recordFrame.contentDocument.body.scrollHeight + 100}px`;
+	}
+});
 
 /**
  * Opens update status box modal for admin
@@ -261,7 +269,7 @@ window.addEventListener("click", findMe);
 const revealCoordinates = (position) => {
 	latitude.value = position.coords.latitude;
 	longitude.value = position.coords.longitude;
-	errorMessage.innerHTML = `<span style="color: #35f50e; font-weight: bold;"> LOCATION FOUND <span>`;
+	errorMessage.innerHTML = `<span style="color: green; font-weight: bold;"> LOCATION FOUND <span>`;
 	timeOut(errorMessage);	
 	loading.style.display = "none";
 }
@@ -278,32 +286,32 @@ const errorResponse = (err) => {
 	errorMessage.style.marginTop = "0";
 	timeOut(errorMessage);
 		if (err.PERMISSION_DENIED === err.code) {
-			errorMessage.innerHTML = `<span style="color: white">User denied the request for Geolocation</span>`;
+			errorMessage.innerHTML = `<span style="color: red">User denied the request for Geolocation</span>`;
 		} else if (err.POSITION_UNAVAILABLE === err.code) {
-			errorMessage.innerHTML = `<span style="color: white">Location information is unavailable</span>`;
+			errorMessage.innerHTML = `<span style="color: red">Location information is unavailable</span>`;
 		} else if (err.TIMEOUT === err.code) {
-			errorMessage.innerHTML = `<span style="color: white">The request to get user location timed out</span>`;
+			errorMessage.innerHTML = `<span style="color: red">The request to get user location timed out</span>`;
 		} else if (err.UNKNOWN_ERROR === err.code) {
-			errorMessage.innerHTML = `<span style="color: white">An unknown error occurred</span>`;
+			errorMessage.innerHTML = `<span style="color: red">An unknown error occurred</span>`;
 		}
 
 }
 
 
-/**
- * Change color for report page
- * @param { object } event 
- */
+// /**
+//  * Change color for report page
+//  * @param { object } event 
+//  */
 
-const changeColor = (event) => {
-	if (event.target.className === "theme-blue font-setting"){
-		event.target.className = "white font-setting";
-	} else if (event.target.className === "white font-setting"){
-		event.target.className = "theme-blue font-setting"; 
-	}
-}
+// const changeColor = (event) => {
+// 	if (event.target.className === "theme-blue font-setting"){
+// 		event.target.className = "white font-setting";
+// 	} else if (event.target.className === "white font-setting"){
+// 		event.target.className = "theme-blue font-setting"; 
+// 	}
+// }
 
-window.addEventListener("click", changeColor);
+// window.addEventListener("click", changeColor);
 
 
 

@@ -24,7 +24,8 @@ body{
 .yellow{
   color: yellow;
 }
-.theme-blue{
+.theme-blue,
+.crime-form-container .theme-blue{
   color: #162661;
 }
 .theme-orange{
@@ -184,7 +185,10 @@ div.logo-container{
   padding: 1em;
   font-size: 1.2em;
 }
-.crime-form-container form label,
+.crime-form-container form label{
+  color: #162661;
+  font-weight: bold;
+}
 .crime-form-container form input[type="file"]{
   color: white;
 }
@@ -212,9 +216,13 @@ div.logo-container{
   border-radius: 5px;
   padding: 0.5em;
   border: none;
+
+  transition-property: background;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.2s;
  }
  .crime-form-container form input[type="button"]:hover{
-  box-shadow: 1px 1px 20px 1px white;
+  box-shadow: 1px 1px 20px 1px #162661;
   color: #162661;
   background:  white;
   cursor: pointer;
@@ -241,8 +249,10 @@ text-align: center;
 }
 .crime-form-container{
   text-align: left;
-  background: url("../images/justice.png");
-  background-size: cover;
+
+}
+.crime-form-container form{
+    box-shadow: 1px 5px 20px 1px #162661;
 }
 #title{
   margin-bottom: -40px;
@@ -587,7 +597,6 @@ form input[type="number"]:focus,
     padding: 0.5em 0 0.5em 0;
     width: 320px;
     margin: 0 auto 0.5em auto;
-    color: #837665;
     background: #162661;
     border-radius: 0 0 10px 10px;
     border-top: none;

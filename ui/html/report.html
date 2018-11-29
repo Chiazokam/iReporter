@@ -46,17 +46,18 @@
     </header>
 
     <section class="crime-form-container clearfix">
-        <h1 id="compose-heading">COMPOSE</h1>  
         <form>
+            <h1 id="compose-heading">COMPOSE</h1>
+            
             <h1 class="theme-blue font-setting">TITLE</h1>
-            <input type="text" placeholder="ENTER TITLE" class="title" id="title"/>
+            <input type="text" placeholder="ENTER TITLE" class="title" id="title" required/>
 
             <br>
             <br>
             <br>
 
             <h1 class="theme-blue font-setting">COMMENT</h1>
-            <textarea placeholder="Tell your story..." class="post-text-area" id="post-text-area"></textarea>
+            <textarea required placeholder="Tell your story..." class="post-text-area" id="post-text-area"></textarea>
             <input type="radio" name="report-type" checked="checked" id="red-flag"> <label for="red-flag" style="cursor: pointer;">RED-FLAG<img src="../images/red_flag.png" class="red-flag-icon" title="Red-flag" /></label> 
             <span> &nbsp; </span>
             <input type="radio" name="report-type" id="intervention"><label for="intervention" style="cursor: pointer;">INTERVENE<img src="../images/intervene_icon.png" class="red-flag-icon" title="Intervention" /></label> 
@@ -66,22 +67,22 @@
 
             <h1 class="theme-blue font-setting">LOCATION CO-ORDINATES</h1>
             <br>
-            <input type="number" placeholder="ENTER LATITUDE" id="latitude"> 
+            <input type="number" placeholder="ENTER LATITUDE" id="latitude" required> 
             <br> 
             <br>
-            <input type="number" placeholder="ENTER LONGITUDE" id="longitude"> 
+            <input type="number" placeholder="ENTER LONGITUDE" id="longitude" required> 
             <br>
             <br>
-            <input type="button" value="FIND ME" id="myCurrentLocation" /> <img src="../images/loading.gif" id="loading" title="loading please wait"/>
+            <input type="button" value="FIND ME" id="myCurrentLocation" required/> <img src="../images/loading.gif" id="loading" title="loading please wait"/>
             <div id="errorMessage"></div>
             <br>
             <br>
             
-            <label>Upload image</label> <input type="file" accept="image/*" id="picture-upload">
+            <label class="theme-blue">Upload image</label> <input type="file" accept="image/*" id="picture-upload">
             <input type="button" value="UPLOAD IMAGE" title="upload image"/>
             <ul class="place-images">
-                <li title="uploaded file" class="video-uploads white"><img title="attachment icon" src="../images/attachment.png" class="attachment">uploaded image1</li>
-                <li title="uploaded file" class="video-uploads white"><img title="attachment icon" src="../images/attachment.png" class="attachment">uploaded image2</li>
+                <li title="uploaded file" class="video-uploads theme-orange"><img title="attachment icon" src="../images/attachment.png" class="attachment">uploaded image1</li>
+                <li title="uploaded file" class="video-uploads theme-orange"><img title="attachment icon" src="../images/attachment.png" class="attachment">uploaded image2</li>
             </ul>
 
             <br> 
@@ -90,11 +91,14 @@
             <label>Upload video</label> <input type="file" accept="video/*" id="video-upload">
             <input type="button" value="UPLOAD VIDEO" title="upload video"/>
             <ul class="place-videos">
-                <li title="uploaded file" class="image-uploads white"><img title="attachment icon" src="../images/attachment.png" class="attachment">uploaded video1</li>
+                <li title="uploaded file" class="image-uploads theme-orange"><img title="attachment icon" src="../images/attachment.png" class="attachment">uploaded video1</li>
             </ul>
              <br>
 
             <input type="submit" value="SEND" class="report" title="submit report">
+            
+            <br>
+        
         </form>
     </section>
     

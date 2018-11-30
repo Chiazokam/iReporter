@@ -26,6 +26,7 @@ const createTable = () => {
             lastname TEXT NOT NULL,
             othername TEXT,
             email TEXT UNIQUE NOT NULL,
+            profileImage TEXT,
             password TEXT NOT NULL,
             phoneNumber TEXT UNIQUE NOT NULL,
             isAdmin BOOLEAN,

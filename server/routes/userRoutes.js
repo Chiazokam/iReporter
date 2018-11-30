@@ -1,15 +1,20 @@
-// import express from "express";
-// import { Helpers } from "../helpers";
-// import { Users } from "../controllers";
-// import {  } from "../middlewares";
+import express from "express";
+import { Users } from "../controllers";
+import { SignUpSignInValidator } from "../middlewares";
+
+const signUpIn = new SignUpSignInValidator();
+
+const users = new Users();
+
+const userRoutes = express.Router();
+
+/**SignUp User */
+userRoutes.post("/signup", signUpIn.namesValidation, signUpIn.multiStringValidation, signUpIn.validateNumber, signUpIn.doesUserExist, users.createNewUsers);
+userRoutes.post("/signin", signUpIn.signInValidation, users.signinUser);
 
 
-// const users = new Users();
 
-// const userRoutes = express.Router();
-
-// /**SignUp User */
-// userRoutes.post("/signup", users.createNewUsers);
+export default userRoutes;
 
 
 

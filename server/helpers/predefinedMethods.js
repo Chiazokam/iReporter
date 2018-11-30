@@ -1,7 +1,37 @@
+
+
 /**
  * @class \{{{object}}\} {{Helper}}{{Methods for validation}}
  */
 export class Helpers {
+
+	/**
+  * Validates a string field for valid alphabet
+  * @param {string} string - set of strings
+  */
+	static isValidAlphabet(string) {
+		return /^[a-z]*$/gm.test(string.toString().toLowerCase());
+	}
+
+	/**
+   * Validates a number field
+   * @param {string} number - set of stringed number(s)
+   */
+	static isValidNumber(number) {
+		return /^[0-9]*$/gm.test(number);
+	}
+
+	/**
+   * Validates an email field
+   * @param {string} email - users email
+   * @return {object} boolean response
+   */
+	static isValidEmail(email) {
+		const emailEvaluation = (/\S+@\S+\.\S+/.test(email) && /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email));
+
+		return emailEvaluation;
+	}
+
 	/**
    * Checks for a valid array
    * @param {object} array - array of elements
@@ -94,7 +124,7 @@ export class Helpers {
 		res.status(statusCode).json({
 			status: statusCode,
 			data: [{
-				id: id,
+				id,
 				message,
 			}]
 		});
@@ -124,9 +154,37 @@ export class Helpers {
 	static returnSuccessForGET(req, res, statusCode, data) {
 		res.status(statusCode).json({
 			status: statusCode,
-			data: data,
+			data,
 		});
 	}
+
+	/**
+ * Return template for user Signup and Signin success
+ * @param  { object } req - Contains the body of the request.
+ * @param { object } res - Contains the returned response.
+ * @param { number } statusCode - Contains the http-status code
+ * @param { string } token - string of encrypted user details
+ * @param { string } message - Contains the return message
+ */
+	static returnForSigninSignUp(req, res, statusCode, token, message) {
+		res.status(statusCode).json({
+			status: statusCode,
+			data: [{
+				token,
+				message,
+			}]
+		});
+	}
+
+	/**
+   * Trims off white-spaces from the strings extremes
+   * @param { number } elem - number
+   * @param { string } elem - string
+   */
+	trimMe(elem) {
+		return elem.toString().trim();
+	}
+
 
 }
 

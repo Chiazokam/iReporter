@@ -7,6 +7,7 @@ import { incidentRoutes } from "./server/routes";
 const port = process.env.PORT || 8000;
 
 const app = express();
+
 app.use(logger("dev"));
 
 app.use(bodyParser.urlencoded({ extended: false }));

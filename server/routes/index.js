@@ -1,5 +1,6 @@
 import incidentRoutes from "./incidentRoutes.js";
+import userRoutes from "./userRoutes";
 
-export { incidentRoutes };
+export { incidentRoutes, userRoutes };
 
 

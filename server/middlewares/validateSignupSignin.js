@@ -21,13 +21,10 @@ export class SignUpSignInValidator {
 			if (!(/[^\s+]/g.test(reqArray[inputs]))) {
 				return Helpers.returnForError(req, res, 400, "undefined input");
 			}
-			if (Helpers.isNotString(reqArray[inputs])) {
-				return Helpers.returnForError(req, res, 400, "invalid input");
-			}
 		}
 
-		if (Helpers.isValidEmail(email)[0].emailEvaluation !== true && Helpers.isValidEmail(email)[0].hasHostName !== true) {
-			Helpers.returnForError(req, res, 400, "invalid email");
+		if (Helpers.isValidEmail(email) !== true) {
+			return Helpers.returnForError(req, res, 400, "invalid email");
 		} else if (password !== confirmPassword) {
 			return Helpers.returnForError(req, res, 400, "password didn't match");
 		}
@@ -42,22 +39,27 @@ export class SignUpSignInValidator {
    * @param  { next } - Proceeds to the next method on the route
    */
 	namesValidation(req, res, next) {
-		const { othername, firstname, lastname } = req.body;
+		const { username, firstname, lastname, phoneNumber, email, password, othername } = req.body;
 		const userFullname = [firstname, lastname];
+		const reqArray = [username, firstname, lastname, phoneNumber, email, password];
+
+		for (inputs = 0; inputs < reqArray.length; inputs++) {
+			if (Helpers.isNotString(reqArray[inputs])) {
+				return Helpers.returnForError(req, res, 400, "invalid input");
+			}
+		}
 
 		for (inputs = 0; inputs < userFullname.length; inputs++) {
 			if (!Helpers.isValidAlphabet(userFullname[inputs])) {
-				return Helpers.returnForError(req, res, 400, "invalid name character");
-			}
+				return Helpers.returnForError(req, res, 400, "invalid name field character"); }
 		}
 
 		if (!othername) {
 			return next();
 		} else if (Helpers.isNotString(othername)) {
-			Helpers.returnForError(req, res, 400, "invalid input");
+			return Helpers.returnForError(req, res, 400, "invalid input");
 		} else if (!(/[^\s+]/g.test(othername))) {
-			Helpers.returnForError(req, res, 400, "undefined input");
-		}
+			return Helpers.returnForError(req, res, 400, "undefined input"); }
 		next();
 	}
 
@@ -104,15 +106,15 @@ export class SignUpSignInValidator {
  * @param {object} next - function to execute next middleware
  */
 	signInValidation (req, res, next) {
-		const { emailOrUsername, password } = req.body;
+		const { emailUsername, password } = req.body;
 
-		if (typeof emailOrUsername === "boolean" || typeof password == "boolean") {
+		if (typeof emailUsername === "boolean" || typeof password == "boolean") {
 			Helpers.returnForError(req, res, 400, "invalid input");
-		} else if (!emailOrUsername) {
+		} else if (!emailUsername) {
 			Helpers.returnForError(req, res, 400, "undefined input");
 		} else if (!password) {
 			Helpers.returnForError(req, res, 400, "undefined input");
-		} else if (!(/[^\s+]/g.test(emailOrUsername))) {
+		} else if (!(/[^\s+]/g.test(emailUsername))) {
 			Helpers.returnForError(req, res, 400, "undefined input");
 		} else {
 			next();

@@ -44,8 +44,8 @@ export class Users {
    * @param { object } res - body response
    */
 	signinUser(req, res) {
-		const { emailOrUsername, password } = req.body;
-		db.any("SELECT * FROM users WHERE email = $1 OR username = $2", [trim.trimMe(emailOrUsername), trim.trimMe(emailOrUsername)])
+		const { emailUsername, password } = req.body;
+		db.any("SELECT * FROM users WHERE email = $1 OR username = $2", [trim.trimMe(emailUsername), trim.trimMe(emailUsername)])
 			.then(data => {
 				const user = data[0];
 				if (data.length > 0) {

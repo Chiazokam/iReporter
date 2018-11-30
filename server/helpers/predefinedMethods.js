@@ -1,7 +1,4 @@
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 
-dotenv.load();
 
 /**
  * @class \{{{object}}\} {{Helper}}{{Methods for validation}}
@@ -13,7 +10,7 @@ export class Helpers {
   * @param {string} string - set of strings
   */
 	static isValidAlphabet(string) {
-		return /^[a-z]*$/gm.test(string.toLowerCase());
+		return /^[a-z]*$/gm.test(string.toString().toLowerCase());
 	}
 
 	/**
@@ -31,21 +28,8 @@ export class Helpers {
    */
 	static isValidEmail(email) {
 		const emailEvaluation = (/\S+@\S+\.\S+/.test(email) && /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email));
-		const validHostname = ["@gmail.com", "@yahoo.com", "@aol.com", "@hotmail.com"];
 
-		const hasHostName = () => {
-			for ( let hostname in validHostname) {
-				if (RegExp(validHostname[hostname]).test(email)) {
-					return true;
-				}
-			}
-			return false;
-		};
-
-		return [{
-			emailEvaluation,
-			hasHostName,
-		}];
+		return emailEvaluation;
 	}
 
 	/**
@@ -201,31 +185,6 @@ export class Helpers {
 		return elem.toString().trim();
 	}
 
-	/**
-  * Token verification for Users
-  * @param {object} req - The request body
-  * @param {object} res - The response body
-  * @param {object} next - calls the next middleware
-  */
-	static verifyUsersToken(req, res, next) {
-		const bearerHeader = req.headers["authorization"];
-
-		if (typeof bearerHeader !== "undefined") {
-
-			req.token = bearerHeader;
-
-			jwt.verify(req.token, process.env.SECRET_KEY, (err, decodedToken) => {
-				if (err) {
-					Helpers.returnForError(req, res, 401, "Invalid Token");
-				} else if (decodedToken) {
-					req.userInfo = decodedToken;
-					next();
-				}
-			});
-		} else {
-			Helpers.returnForError(req, res, 403, "Token not provided");
-		}
-	}
 
 }
 

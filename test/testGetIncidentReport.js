@@ -7,7 +7,7 @@ const should = chai.should();
 
 const request = supertest.agent(app);
 
-const incidents = "/api/v1/incidents";
+const incidents = "/api/v1/red-flags/incidents"; /**remember to remove this route */
 const rootFile = "/api/v1/";
 const red_flags = "/api/v1/red-flags";
 const validURI = 1;

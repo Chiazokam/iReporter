@@ -7,6 +7,8 @@ const should = chai.should();
 
 const request = supertest.agent(app);
 
+const validToken = process.env.VALID_TOKEN;
+
 const rootFile = "/";
 const red_flags = "/api/v1/red-flags";
 const validURI = 1;
@@ -37,6 +39,7 @@ describe("GET all red-flag records endpoint", () => {
 	it("should return status 200 if red-flag records exist in the database", (done) => {
 		request
 			.get(red_flags)
+			.set("authorization", validToken)
 			.end((err, res) => {
 				expect(res.status).to.eql(200);
 				expect(res.body.status).to.eql(200);

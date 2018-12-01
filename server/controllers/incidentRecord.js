@@ -30,7 +30,7 @@ export class Incidents {
 		const { title, comment, type, location, images, videos } = req.body;
 		const { id } = req.userInfo; //userId
 
-		db.any("INSERT INTO incidents(title, comment, type, location, images, videos, status, createdBy) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [title, comment, type, location, images.join(), videos.join(), "draft", id])
+		db.any("INSERT INTO incidents(title, comment, type, location, images, videos, status, createdBy) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [title, comment, type, location, images.join(" , "), videos.join(" , "), "draft", id])
 			.then(() => {
 				db.any("SELECT * FROM incidents WHERE createdBy = $1", [id])
 					.then((data) => {
@@ -55,8 +55,10 @@ export class Incidents {
   * @param { object } res - Contains the returned response.
   */
 	getAllRedflagRecords(req, res) {
-		const allRedFlagsRecords = incidentsDB.filter((redFlag) => redFlag.type === red_flag_string);
-		Helpers.returnSuccessForGET(req, res, 200, allRedFlagsRecords);
+		db.any("SELECT * FROM incidents WHERE type = $1", ["red-flag"])
+			.then((data) => {
+				Helpers.returnSuccessForGET(req, res, 200, data);
+			});
 	}
 
 	/**Returns a specific redflag record

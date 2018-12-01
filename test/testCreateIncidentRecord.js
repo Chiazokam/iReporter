@@ -13,8 +13,7 @@ const request = supertest.agent(app);
 const red_flags = "/api/v1/red-flags";
 const geo_location = "12.233334, 2.323123";
 
-const validToken = process.env.VALID_TOKEN;
-let validToken2 = "";
+let validToken = "";
 const invalidToken = "invalidToken";
 
 
@@ -38,7 +37,7 @@ describe("Create red-flag record end-point", () => {
 				"confirmPassword": "asdfghj"
 			})
 			.end((error, res) => {
-				validToken2 = res.body.data[0].token;
+				validToken = res.body.data[0].token;
 				done();
 			});
 
@@ -47,7 +46,7 @@ describe("Create red-flag record end-point", () => {
 
 	it("should return 201 if all input fields are validated correctly", (done) => {
 		request.post(red_flags)
-			.set("authorization", validToken2)
+			.set("authorization", validToken)
 			.send({
 				"title": "Stealing",
 				"type": "red-flag",

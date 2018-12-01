@@ -1,5 +1,6 @@
 import { incidentsDB } from "../dummyDB";
 import { Helpers } from "../helpers/predefinedMethods";
+import { db } from "../database";
 
 const red_flag_string = "red-flag";
 
@@ -26,37 +27,18 @@ export class Incidents {
   * @param { object } res - Contains the returned response.
   */
 	createAnIncidentRecord(req, res){
-		const { createdBy, title, comment, type, location, images, videos } = req.body;
+		const { title, comment, type, location, images, videos } = req.body;
+		const { id } = req.userInfo; //userId
 
-		let newIncidentId = "";
-		const numberOfIncidents = incidentsDB.length;
-		let newId = numberOfIncidents + 1;
-		let anotherId = incidentsDB[numberOfIncidents-1].id + 1;
-
-		if (anotherId > newId) {
-			newIncidentId = anotherId;
-		} else if (anotherId < newId) {
-			newIncidentId = anotherId;
-		} else {
-			newIncidentId = newId;
-		}
-
-		const newIncident = {
-			id: newIncidentId,
-			createdBy,
-			createdOn: Date(),
-			type,
-			location,
-			status: "Draft",
-			images: images,
-			videos: videos,
-			title,
-			comment
-		};
-
-		incidentsDB.push(newIncident);
-
-		Helpers.returnForSuccess(req, res, 201, newIncidentId, "Created red-flag record");
+		db.any("INSERT INTO incidents(title, comment, type, location, images, videos, status, createdBy) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [title, comment, type, location, images.join(), videos.join(), "draft", id])
+			.then(() => {
+				db.any("SELECT * FROM incidents WHERE createdBy = $1", [id])
+					.then((data) => {
+						const lastRecord = (data.length - 1);
+						const recordId = data[lastRecord].id;
+						Helpers.returnForSuccess(req, res, 201, recordId, "Created red-flag record");
+					});
+			});
 
 	}
 

@@ -7,11 +7,8 @@ const incident = new Incidents();
 
 const incidentRoutes = express.Router();
 
-/**Fetch all incident record */
-incidentRoutes.get("/incidents", GetValidator.isDummyDbEmpty, incident.getAllRecords);
-
 /**Create a red-flag record */
-incidentRoutes.post("/", PostValidator.isUser, PostValidator.multipleStringValidation, PostValidator.validateArrayValues, PostValidator.isRedFlag, Helpers.isNotAValidGeolocation, incident.createAnIncidentRecord);
+incidentRoutes.post("/", Helpers.verifyUsersToken, PostValidator.multipleStringValidation, PostValidator.validateArrayValues, PostValidator.isRedFlag, Helpers.isNotAValidGeolocation, incident.createAnIncidentRecord);
 
 /**Fetch all red-flag records */
 incidentRoutes.get("/", GetValidator.doesRedFlagRecordExist, incident.getAllRedflagRecords);

@@ -7,28 +7,13 @@ const should = chai.should();
 
 const request = supertest.agent(app);
 
-const incidents = "/api/v1/red-flags/incidents"; /**remember to remove this route */
-const rootFile = "/api/v1/";
+const rootFile = "/";
 const red_flags = "/api/v1/red-flags";
 const validURI = 1;
 const invalidURI = 1000000;
 
-describe("GET all incident records endpoint", () => {
+describe("the root endpoint", () => {
 
-	it("should return status 200 if records exist in the database", (done) => {
-		request
-			.get(incidents)
-			.end((err, res) => {
-				expect(res.status).to.eql(200);
-				expect(res.body.status).to.eql(200);
-				expect(res.body.status).to.be.a("number");
-				should.not.exist(err);
-				should.exist(res.body);
-				(res.body.data[0]).should.be.an("object");
-				if (err) { return done(err); }
-				done();
-			});
-	});
 
 	it("should return status 200 if you access ony the root directory", (done) => {
 		request

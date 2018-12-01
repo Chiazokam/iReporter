@@ -32,6 +32,7 @@ export class Users {
 							firstname: user.firstname,
 							lastname: user.lastname,
 							phoneNumber: user.phonenumber,
+							profileImage: user.profileimage,
 							isAdmin: user.isadmin,
 						}, process.env.SECRET_KEY, { expiresIn: "1d" });
 						Helpers.returnForSigninSignUp(req, res, 201, token, "User created successfully");
@@ -63,6 +64,7 @@ export class Users {
 								firstname: user.firstname,
 								lastname: user.lastname,
 								phoneNumber: user.phonenumber,
+								profileImage: user.profileimage,
 								isAdmin: user.isadmin,
 							}, process.env.SECRET_KEY, { expiresIn: "1d" });
 							Helpers.returnForSigninSignUp(req, res, 200, token, "signin successful"); }

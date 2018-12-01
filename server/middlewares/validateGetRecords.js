@@ -1,4 +1,3 @@
-import { incidentsDB } from "../dummyDB";
 import { Helpers } from "../helpers/predefinedMethods";
 import { Incidents } from "../controllers";
 import { db } from "../database";
@@ -7,19 +6,6 @@ import { db } from "../database";
 const red_flag_string = "red-flag";
 
 export class GetValidator {
-/**
- * Checks if database is empty
- * @param  { object } req - Contains the body of the request.
- * @param { object } res - Contains the returned response.
- * @param  { next } - Proceeds to the next method on the route
- */
-	static isDummyDbEmpty (req, res, next) {
-		if (incidentsDB.length < 1) {
-			Helpers.returnForError(req, res, 404, "records not found");
-		} else {
-			next();
-		}
-	}
 
 	/**
  * Checks if any red-flag record is found in the database

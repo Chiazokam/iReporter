@@ -42,13 +42,6 @@ export class Incidents {
 
 	}
 
-	/**Returns all incident records
-  * @param  { object } req - Contains the body of the request.
-  * @param { object } res - Contains the returned response.
-  */
-	getAllRecords(req, res) {
-		Helpers.returnSuccessForGET(req, res, 200, incidentsDB);
-	}
 
 	/**Returns all redflag records
   * @param  { object } req - Contains the body of the request.
@@ -76,16 +69,24 @@ export class Incidents {
   * @param { object } res - Contains the returned response.
   */
 	updateRedflagRecordLocation(req, res) {
-		const { location, createdBy } = req.body;
+		const { location } = req.body;
+		const recordId = req.params.id;
+		const userId = req.userInfo.id;
 
-		Incidents.filterRecords(req, res, red_flag_string);
-
-		if (createdBy !== specificRedFlag[0].createdBy) {
-			return Helpers.returnForError(req, res, 401, "invalid user");
-		}
-		specificRedFlag[0].location = location;
-
-		Helpers.returnForSuccess(req, res, 200, specifiedRedFlagRecordId, "Updated red-flag record's location");
+		db.any("SELECT * FROM incidents WHERE id = $1", [recordId])
+			.then((data) => {
+				if (data.length < 1) {
+					Helpers.returnForError(req, res, 404, "record not found");
+				} else if (data[0].createdby !== userId) {
+					Helpers.returnForError(req, res, 400, "invalid user");
+				} else {
+					db.any("UPDATE incidents SET location = $1 WHERE id = $2 RETURNING *", [location, recordId])
+						.then((updatedLocationData) => {
+							const updatedLocationRecordId = updatedLocationData[0].id;
+							Helpers.returnForSuccess(req, res, 200, updatedLocationRecordId, "Updated red-flag record's location");
+						});
+				}
+			});
 	}
 
 	/**Update a specific redflag record's comment
@@ -93,16 +94,24 @@ export class Incidents {
   * @param { object } res - Contains the returned response.
   */
 	updateRedflagRecordComment(req, res) {
-		const { comment, createdBy } = req.body;
+		const { comment } = req.body;
+		const recordId = req.params.id;
+		const userId = req.userInfo.id;
 
-		Incidents.filterRecords(req, res, red_flag_string);
-
-		if (createdBy !== specificRedFlag[0].createdBy) {
-			return Helpers.returnForError(req, res, 401, "invalid user");
-		}
-		specificRedFlag[0].comment = comment;
-
-		Helpers.returnForSuccess(req, res, 200, specifiedRedFlagRecordId, "Updated red-flag record's comment");
+		db.any("SELECT * FROM incidents WHERE id = $1", [recordId])
+			.then((data) => {
+				if (data.length < 1) {
+					Helpers.returnForError(req, res, 404, "record not found");
+				} else if (data[0].createdby !== userId) {
+					Helpers.returnForError(req, res, 400, "invalid user");
+				} else {
+					db.any("UPDATE incidents SET comment = $1 WHERE id = $2 RETURNING *", [comment, recordId])
+						.then((updatedCommentData) => {
+							const updatedCommentRecordId = updatedCommentData[0].id;
+							Helpers.returnForSuccess(req, res, 200, updatedCommentRecordId, "Updated red-flag record's comment");
+						});
+				}
+			});
 	}
 
 	/**Delete a specific redflag record's record

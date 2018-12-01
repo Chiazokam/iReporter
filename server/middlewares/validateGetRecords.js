@@ -1,6 +1,7 @@
 import { incidentsDB } from "../dummyDB";
 import { Helpers } from "../helpers/predefinedMethods";
 import { Incidents } from "../controllers";
+import { db } from "../database";
 
 
 const red_flag_string = "red-flag";
@@ -27,12 +28,14 @@ export class GetValidator {
  * @param  { next } - Proceeds to the next method on the route
  */
 	static doesRedFlagRecordExist (req, res, next) {
-		const redFlagsOnly = incidentsDB.filter((redFlag) => redFlag.type === "red-flag");
-		if (redFlagsOnly.length < 1) {
-			Helpers.returnForError(req, res, 404, "records not found");
-		} else {
-			next();
-		}
+		db.any("SELECT * FROM incidents WHERE type = $1", ["red-flag"])
+			.then((data) => {
+				if (data.length < 1){
+					Helpers.returnForError(req, res, 404, "records not found");
+				} else {
+					next();
+				}
+			});
 	}
 
 	/**

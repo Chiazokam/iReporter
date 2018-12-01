@@ -11,7 +11,7 @@ const incidentRoutes = express.Router();
 incidentRoutes.post("/", Helpers.verifyUsersToken, PostValidator.multipleStringValidation, PostValidator.validateArrayValues, PostValidator.isRedFlag, Helpers.isNotAValidGeolocation, incident.createAnIncidentRecord);
 
 /**Fetch all red-flag records */
-incidentRoutes.get("/", GetValidator.doesRedFlagRecordExist, incident.getAllRedflagRecords);
+incidentRoutes.get("/", Helpers.verifyUsersToken, GetValidator.doesRedFlagRecordExist, incident.getAllRedflagRecords);
 
 /**Fetch a red-flag record */
 incidentRoutes.get("/:id", GetValidator.doesSpecificRedFlagIdRecordExist, incident.getSpecificRedflagRecord);

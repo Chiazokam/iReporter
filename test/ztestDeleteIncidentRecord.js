@@ -61,37 +61,6 @@ describe("DELETE a specific red-flag record endpoint", () => {
 });
 
 
-describe("The if condition in the Create red-flag record controller end-point", () => {
-
-	it("should return 201 if all input fields are validated correctly", (done) => {
-		request.post(red_flags)
-			.send({
-				"createdBy": 2,
-				"title": "Stealing",
-				"type": "red-flag",
-				"location": geo_location,
-				"images": [
-					"imageURL1",
-					"imageURL2"],
-				"videos": [
-					"videoURL1",
-					"videoURL2"],
-				"comment": "This is a report on... to be continued"
-			}).end((err, res) => {
-				expect(res.status).to.eql(201);
-				expect(res.body.data[0].message).to.eql("Created red-flag record");
-				expect(res.body.data[0].message).to.be.a("string");
-				expect(res.body.status).to.be.a("number");
-				should.not.exist(err);
-				should.exist(res.body);
-				(res.body).should.be.an("object");
-				if (err) { return done(err); }
-				done();
-			});
-	});
-
-});
-
 
 
 

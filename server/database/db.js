@@ -1,13 +1,14 @@
 import dotenv from "dotenv";
 import pg from "pg-promise";
 import { Pool } from "pg";
+import { polulateDB } from "./populateDB";
 
 dotenv.config();
 
 
 const connectionString = process.env.DATABASE_URL;
 
-const createTable = () => {
+const createTables = () => {
 	const pool = new Pool({ connectionString });
 	pool.connect();
 
@@ -15,8 +16,6 @@ const createTable = () => {
         `
         DROP TABLE IF EXISTS users CASCADE;
         DROP TABLE IF EXISTS incidents CASCADE;
-        DROP TABLE IF EXISTS images CASCADE;
-        DROP TABLE IF EXISTS videos CASCADE;
 
 
         CREATE TABLE IF NOT EXISTS users(
@@ -40,21 +39,9 @@ const createTable = () => {
             type TEXT NOT NULL,
             location TEXT NOT NULL,
             status TEXT NOT NULL,
+            images TEXT,
+            videos TEXT,
             createdBy INT REFERENCES users(id),
-            createdOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-          );
-
-        CREATE TABLE IF NOT EXISTS images(
-            id SERIAL PRIMARY KEY,
-            incident INT REFERENCES incidents(id),
-            imageURL TEXT,
-            createdOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-          );
-
-        CREATE TABLE IF NOT EXISTS videos(
-            id SERIAL PRIMARY KEY,
-            incident INT REFERENCES incidents(id),
-            videoURL TEXT,
             createdOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP
           );
         `;
@@ -64,15 +51,15 @@ const createTable = () => {
 		.catch(() => pool.end());
 };
 
-createTable();
+
+createTables();
 
 const pgp = pg();
 export const db = pgp(connectionString);
 
-if (connectionString) {
-	console.log("Database Connected");
-	console.log(connectionString);
-}
+console.log("Database Connected");
+
+polulateDB();
 
 
 

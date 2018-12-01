@@ -9,8 +9,8 @@ const users = new Users();
 const userRoutes = express.Router();
 
 /**SignUp User */
-userRoutes.post("/signup", signUpIn.namesValidation, signUpIn.multiStringValidation, signUpIn.validateNumber, signUpIn.doesUserExist, users.createNewUsers);
-userRoutes.post("/signin", signUpIn.signInValidation, users.signinUser);
+userRoutes.post("/auth/signup", signUpIn.namesValidation, signUpIn.multiStringValidation, signUpIn.validateNumber, signUpIn.doesUserExist, users.createNewUsers);
+userRoutes.post("/auth/signin", signUpIn.signInValidation, users.signinUser);
 
 
 

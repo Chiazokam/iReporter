@@ -19,19 +19,20 @@ export class Users {
 
 		const hash = bcrypt.hashSync(password, 10);
 
-		db.none("INSERT INTO users(username, firstname, lastname, othername, email, phoneNumber, password, isAdmin)" +
+		db.none("INSERT INTO users(username, firstname, lastname, othername, email, phonenumber, password, isadmin)" +
       "VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [trim.trimMe(username), trim.trimMe(firstname), trim.trimMe(lastname), trim.trimMe(othername), trim.trimMe(email), trim.trimMe(phoneNumber), hash, false])
 			.then(() => {
 				db.any("SELECT * FROM users WHERE email = $1", [email])
-					.then(data => {
+					.then((data) => {
 						const user = data[0];
 						const token = jwt.sign({
 							id: user.id,
+							username: user.username,
 							email: user.email,
 							firstname: user.firstname,
 							lastname: user.lastname,
-							phoneNumber: user.phoneNumber,
-							isAdmin: user.isAdmin,
+							phoneNumber: user.phonenumber,
+							isAdmin: user.isadmin,
 						}, process.env.SECRET_KEY, { expiresIn: "1d" });
 						Helpers.returnForSigninSignUp(req, res, 201, token, "User created successfully");
 					});
@@ -57,18 +58,17 @@ export class Users {
 						else {
 							const token = jwt.sign({
 								id: user.id,
+								username: user.username,
 								email: user.email,
 								firstname: user.firstname,
 								lastname: user.lastname,
-								phoneNumber: user.phoneNumber,
-								isAdmin: user.isAdmin,
+								phoneNumber: user.phonenumber,
+								isAdmin: user.isadmin,
 							}, process.env.SECRET_KEY, { expiresIn: "1d" });
-							Helpers.returnForSigninSignUp(req, res, 200, token, "signin successful");
-						}
+							Helpers.returnForSigninSignUp(req, res, 200, token, "signin successful"); }
 					});
 				} else {
-					Helpers.returnForError(req, res, 400, "User doesn't exist");
-				}
+					Helpers.returnForError(req, res, 400, "User doesn't exist"); }
 			});
 	}
 

@@ -1,4 +1,7 @@
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
+dotenv.load();
 
 /**
  * @class \{{{object}}\} {{Helper}}{{Methods for validation}}
@@ -177,7 +180,7 @@ export class Helpers {
 	}
 
 	/**
-   * Trims off white-spaces from the strings extremes
+   * Trims off white-spaces from the strings extremes and also converts numbers to strings
    * @param { number } elem - number
    * @param { string } elem - string
    */
@@ -185,6 +188,32 @@ export class Helpers {
 		return elem.toString().trim();
 	}
 
+
+	/**
+* Token verification for Users
+* @param {object} req - The request body
+* @param {object} res - The response body
+* @param {object} next - calls the next middleware
+*/
+	static verifyUsersToken(req, res, next) {
+		const bearerHeader = req.headers["authorization"];
+
+		if (typeof bearerHeader !== "undefined") {
+
+			req.token = bearerHeader;
+
+			jwt.verify(req.token, process.env.SECRET_KEY, (err, decodedToken) => {
+				if (err) {
+					Helpers.returnForError(req, res, 401, "Invalid Token");
+				} else {
+					req.userInfo = decodedToken;
+					next();
+				}
+			});
+		} else {
+			Helpers.returnForError(req, res, 403, "Token not provided");
+		}
+	}
 
 }
 

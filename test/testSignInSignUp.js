@@ -7,8 +7,8 @@ const should = chai.should();
 
 const request = supertest.agent(app);
 
-const signupRoute = "/api/v1/signup";
-const signinRoute = "/api/v1/signin";
+const signupRoute = "/api/v1/auth/signup";
+const signinRoute = "/api/v1/auth/signin";
 
 
 /**
@@ -19,12 +19,12 @@ describe("Signup user end-point", () => {
 	it("should return 201 if all input fields are validated correctly", (done) => {
 		request.post(signupRoute)
 			.send({
-				"username": "obiora007",
+				"username": "Emie007",
 				"firstname": "Emeka",
 				"lastname": "Nwabuzor",
 				"othername": "obi",
-				"phoneNumber": "07067443245",
-				"email": "nwabuzor.obiora@gmail.com",
+				"phoneNumber": "07012345678",
+				"email": "mcemie4eva@gmail.com",
 				"password": "asdfghj",
 				"confirmPassword": "asdfghj"
 			}).end((err, res) => {
@@ -325,8 +325,8 @@ describe("Signin user end-point", () => {
 	it("should return 200 if all input fields are validated correctly", (done) => {
 		request.post(signinRoute)
 			.send({
-				"emailUsername": "obiora007",
-				"password": "asdfghj",
+				"emailUsername": "nwabuzor.obiora@gmail.com",
+				"password": "asdf;lkj",
 			}).end((err, res) => {
 				expect(res.status).to.eql(200);
 				expect(res.body.data[0].message).to.eql("signin successful");
@@ -344,7 +344,7 @@ describe("Signin user end-point", () => {
 	it("should return 400 if password is incorrect", (done) => {
 		request.post(signinRoute)
 			.send({
-				"emailUsername": "obiora007",
+				"emailUsername": "nwabuzor.obiora@gmail.com",
 				"password": "iAmInCorrect",
 			}).end((err, res) => {
 				expect(res.status).to.eql(400);

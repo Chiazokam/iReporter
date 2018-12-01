@@ -1,3 +1,4 @@
+
 export const incidentsDB = [
 	{
 		id: 1,

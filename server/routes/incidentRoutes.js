@@ -13,7 +13,7 @@ incidentRoutes.post("/", Helpers.verifyUsersToken, PostValidator.multipleStringV
 /**Fetch all red-flag records */
 incidentRoutes.get("/", Helpers.verifyUsersToken, GetValidator.doesRedFlagRecordExist, incident.getAllRedflagRecords);
 
-/**Fetch specific red-flag record */
+/**Fetch specific red-flag record */                      /** Remaining */
 incidentRoutes.get("/:id", GetValidator.doesSpecificRedFlagIdRecordExist, incident.getSpecificRedflagRecord);
 
 /**Update a red-flag record location*/
@@ -22,9 +22,14 @@ incidentRoutes.patch("/:id/location", Helpers.verifyUsersToken, PostValidator.lo
 /**Update a red-flag record comment*/
 incidentRoutes.patch("/:id/comment", Helpers.verifyUsersToken, PostValidator.commentStringValidation, incident.updateRedflagRecordComment);
 
-/**Delete a red-flag record comment*/
+/**Update a red-flag record comment*/
+incidentRoutes.patch("/:id/comment", Helpers.verifyUsersToken, PostValidator.commentStringValidation, incident.updateRedflagRecordComment);
+
+/**Delete a red-flag record comment*/                   /** Remaining this */
 incidentRoutes.delete("/:id", PostValidator.isUser, GetValidator.doesSpecificRedFlagIdRecordExist, incident.deleteRecord);
 
 export default incidentRoutes;
+
+
 
 

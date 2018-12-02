@@ -88,6 +88,41 @@ export class Incidents {
 		Helpers.updateSpecificRecord(req, res, "incidents", recordId, userId, "comment", comment, 200, "Updated red-flag record's comment");
 	}
 
+
+	/**
+   * Update incident record
+   * @param  { object } req - Contains the body of the request.
+   * @param { object } res - Contains the returned response.
+   */
+	updateIncidentsStatus(req, res) {
+		const { status } = req.body;
+		const incidentsId = req.params.id;
+		const userId = req.userInfo.id;
+
+		db.any("SELECT * FROM users WHERE id = $1", [userId])
+			.then((data) => {
+				if (data.length < 1) {
+					return Helpers.returnForError(req, res, 404, "user not found");
+				} else if (data[0].isadmin !== true) {
+					return Helpers.returnForError(req, res, 400, "not an admin"); }
+
+				db.any("SELECT * FROM incidents WHERE id = $1", [incidentsId])
+					.then((data2) => {
+						if (data2.length < 1) {
+							return Helpers.returnForError(req, res, 404, "record not found");
+						} else {
+							db.any("UPDATE incidents SET status = $1 WHERE id = $2 RETURNING *", [status, incidentsId])
+								.then((updatedData) => {
+									const updatedRecordId = updatedData[0].id;
+									Helpers.returnForSuccess(req, res, 200, updatedRecordId, "record's status updated");
+								}); }
+					});
+			});
+	}
+
+
+
+
 	/**Delete a specific redflag record's record
   * @param  { object } req - Contains the body of the request.
   * @param { object } res - Contains the returned response.
@@ -109,6 +144,7 @@ export class Incidents {
 		}
 	}
 }
+
 
 
 

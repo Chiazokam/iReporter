@@ -27,6 +27,8 @@ const edit_red_flag_comment = `/api/v1/red-flags/${redFlagId}/comment`;
 
 const profile_image_endpoint = `/api/v1/users/${usersId}/profile-image`;
 
+const edit_status_endpoint = `/api/v1/incidents/${redFlagId}/status`;
+
 
 
 /**
@@ -669,6 +671,108 @@ describe("Update user profile image end-point", () => {
 });
 
 
+/**
+ * Update user status by Admin
+ */
+describe("Update status of an incident", () => {
 
+	it("should return 200 if status updates successfully", (done) => {
+		request.patch(edit_status_endpoint)
+			.set("authorization", process.env.VALID_TOKEN)
+			.send({
+				status: "resolved",
+			}).end((err, res) => {
+				expect(res.status).to.eql(200);
+				expect(res.body.data[0].message).to.eql("record's status updated");
+				expect(res.body.data[0].message).to.be.a("string");
+				expect(res.body.status).to.be.a("number");
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
+
+	it("should return 400 if status is undefined", (done) => {
+		request.patch(edit_status_endpoint)
+			.set("authorization", process.env.VALID_TOKEN)
+			.send({
+				status: "",
+			}).end((err, res) => {
+				expect(res.status).to.eql(400);
+				expect(res.body.error).to.eql("undefined input");
+				expect(res.body.error).to.be.a("string");
+				expect(res.body.status).to.be.a("number");
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
+
+	it("should return 400 if status is not a string", (done) => {
+		request.patch(edit_status_endpoint)
+			.set("authorization", process.env.VALID_TOKEN)
+			.send({
+				status: 1232434,
+			}).end((err, res) => {
+				expect(res.status).to.eql(400);
+				expect(res.body.error).to.eql("invalid input");
+				expect(res.body.error).to.be.a("string");
+				expect(res.body.status).to.be.a("number");
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
+
+	it("should return 400 if status not a required status", (done) => {
+		request.patch(edit_status_endpoint)
+			.set("authorization", process.env.VALID_TOKEN)
+			.send({
+				status: "disposed",
+			}).end((err, res) => {
+				expect(res.status).to.eql(400);
+				expect(res.body.error).to.eql("invalid input");
+				expect(res.body.error).to.be.a("string");
+				expect(res.body.status).to.be.a("number");
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
+
+	it("should return 400 if user is not admin", (done) => {
+		request.patch(edit_status_endpoint)
+			.set("authorization", validToken)
+			.send({
+				status: "under investigation",
+			}).end((err, res) => {
+				expect(res.status).to.eql(400);
+				expect(res.body.error).to.eql("not an admin");
+				expect(res.body.error).to.be.a("string");
+				expect(res.body.status).to.be.a("number");
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
+
+
+
+});
 
 

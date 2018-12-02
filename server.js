@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import logger from "morgan";
 
-import { incidentRoutes, userRoutes } from "./server/routes";
+import { incidentRoutes, userRoutes, adminRoutes } from "./server/routes";
 
 const port = process.env.PORT || 8000;
 
@@ -16,6 +16,7 @@ app.use(bodyParser.json({ type: "application/json" }));
 
 app.use("/api/v1/red-flags", incidentRoutes);
 app.use("/api/v1", userRoutes);
+app.use("/api/v1", adminRoutes);
 
 app.get("*", (req, res) => {
 	return res.status(200).json({

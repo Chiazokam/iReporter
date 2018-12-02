@@ -13,21 +13,25 @@ export class SignUpSignInValidator {
 	multiStringValidation(req, res, next) {
 		const { username, firstname, lastname, phoneNumber, email, password, confirmPassword } = req.body;
 		const reqArray = [username, firstname, lastname, phoneNumber, email, password];
+		const reqArray2 = [username, phoneNumber, email];
 
 		for (inputs = 0; inputs < reqArray.length; inputs++) {
 			if (!reqArray[inputs]) {
 				return Helpers.returnForError(req, res, 400, "undefined input");
 			}
 			if (!(/[^\s+]/g.test(reqArray[inputs]))) {
-				return Helpers.returnForError(req, res, 400, "undefined input");
-			}
+				return Helpers.returnForError(req, res, 400, "undefined input"); }
+		}
+
+		for (inputs = 0; inputs < reqArray2.length; inputs++) {
+			if (Helpers.nowhiteSpace(reqArray2[inputs])) {
+				return Helpers.returnForError(req, res, 400, "white space detected"); }
 		}
 
 		if (Helpers.isValidEmail(email) !== true) {
 			return Helpers.returnForError(req, res, 400, "invalid email");
 		} else if (password !== confirmPassword) {
-			return Helpers.returnForError(req, res, 400, "password didn't match");
-		}
+			return Helpers.returnForError(req, res, 400, "password didn't match"); }
 		next();
 	}
 

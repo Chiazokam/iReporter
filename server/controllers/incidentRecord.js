@@ -73,20 +73,7 @@ export class Incidents {
 		const recordId = req.params.id;
 		const userId = req.userInfo.id;
 
-		db.any("SELECT * FROM incidents WHERE id = $1", [recordId])
-			.then((data) => {
-				if (data.length < 1) {
-					Helpers.returnForError(req, res, 404, "record not found");
-				} else if (data[0].createdby !== userId) {
-					Helpers.returnForError(req, res, 400, "invalid user");
-				} else {
-					db.any("UPDATE incidents SET location = $1 WHERE id = $2 RETURNING *", [location, recordId])
-						.then((updatedLocationData) => {
-							const updatedLocationRecordId = updatedLocationData[0].id;
-							Helpers.returnForSuccess(req, res, 200, updatedLocationRecordId, "Updated red-flag record's location");
-						});
-				}
-			});
+		Helpers.updateSpecificRecord(req, res, "incidents", recordId, userId, "location", location, 200, "Updated red-flag record's location");
 	}
 
 	/**Update a specific redflag record's comment
@@ -98,20 +85,7 @@ export class Incidents {
 		const recordId = req.params.id;
 		const userId = req.userInfo.id;
 
-		db.any("SELECT * FROM incidents WHERE id = $1", [recordId])
-			.then((data) => {
-				if (data.length < 1) {
-					Helpers.returnForError(req, res, 404, "record not found");
-				} else if (data[0].createdby !== userId) {
-					Helpers.returnForError(req, res, 400, "invalid user");
-				} else {
-					db.any("UPDATE incidents SET comment = $1 WHERE id = $2 RETURNING *", [comment, recordId])
-						.then((updatedCommentData) => {
-							const updatedCommentRecordId = updatedCommentData[0].id;
-							Helpers.returnForSuccess(req, res, 200, updatedCommentRecordId, "Updated red-flag record's comment");
-						});
-				}
-			});
+		Helpers.updateSpecificRecord(req, res, "incidents", recordId, userId, "comment", comment, 200, "Updated red-flag record's comment");
 	}
 
 	/**Delete a specific redflag record's record

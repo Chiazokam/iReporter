@@ -22,9 +22,6 @@ incidentRoutes.patch("/:id/location", Helpers.verifyUsersToken, PostValidator.lo
 /**Update a red-flag record comment*/
 incidentRoutes.patch("/:id/comment", Helpers.verifyUsersToken, PostValidator.commentStringValidation, incident.updateRedflagRecordComment);
 
-/**Update a red-flag record comment*/
-incidentRoutes.patch("/:id/comment", Helpers.verifyUsersToken, PostValidator.commentStringValidation, incident.updateRedflagRecordComment);
-
 /**Delete a red-flag record comment*/                   /** Remaining this */
 incidentRoutes.delete("/:id", PostValidator.isUser, GetValidator.doesSpecificRedFlagIdRecordExist, incident.deleteRecord);
 

@@ -67,13 +67,26 @@
 
             <h1 class="theme-blue font-setting">LOCATION CO-ORDINATES</h1>
             <br>
-            <input type="number" placeholder="ENTER LATITUDE" id="latitude" required> 
-            <br> 
             <br>
-            <input type="number" placeholder="ENTER LONGITUDE" id="longitude" required> 
+            <input type="text" id="incident_address" placeholder="Enter Incident Address" > <img src="../images/loading.gif" id="loading2" title="loading please wait" />
+            <br>
+            <br>
+            <input type="button" id="getCoordinates" value="GET COORDINATES">
+            <br>
+            <br>
+            <div id="latlongdisplay">
+                <label>Latitude : </label></label><span id="latitude" class="latlngfont"></span>
+                <br>
+                <br>
+                <label>Longitude : </label></label><span id="longitude" class="latlngfont"></span>
+            </div>
+
             <br>
             <br>
             <input type="button" value="FIND ME" id="myCurrentLocation" required/> <img src="../images/loading.gif" id="loading" title="loading please wait"/>
+            <br>
+            <br>
+            <br>
             <div id="errorMessage"></div>
             <br>
             <br>
@@ -125,7 +138,9 @@
         </div>
 
     </footer>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
     <script src="../scripts/main.js"></script>
+    
 </body>
 
 </html>

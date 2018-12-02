@@ -4,13 +4,18 @@ body{
   min-width: 320px;
 }
 #peg, 
-#loading{
+#loading,
+#loading2,
+#latlongdisplay{
   display: none;
 }
 .crime-form-container .font-setting,
 .record-list .font-setting,
 .font-setting{
   font-size: 1.3em;
+}
+.crime-form-container .latlngfont{
+  font-size: 1.1em;
 }
 .red{
   color: rgb(255, 0, 0);
@@ -588,7 +593,7 @@ form input[type="password"]:focus,
 form input[type="number"]:focus,
 .crime-form-container .post-text-area:focus,
 .comment-container .comment textarea:focus{
-  background: #ffffff;
+  background: #f7f5f5;
 }
   h1#compose-heading{
     color: white;
@@ -1015,6 +1020,10 @@ footer{
 #mobile-nav{
   position: absolute;
   top: 3.5em;
+}
+.crime-form-container form input[type="text"], .crime-form-container form input[type="number"], .post-display .location-input{
+  padding-left: 0;
+  padding-right: 0;
 }
 }
 

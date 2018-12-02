@@ -39,6 +39,7 @@ const src2 =  "./images/menu_icon.png";
 
 const loading = document.getElementById("loading");
 
+const displayLatLng = document.getElementById("latlongdisplay");
 
 /**
  * Time out function to remove display
@@ -267,8 +268,9 @@ window.addEventListener("click", findMe);
  * @param {object} position 
  */
 const revealCoordinates = (position) => {
-	latitude.value = position.coords.latitude;
-	longitude.value = position.coords.longitude;
+	latitude.innerHTML = Number(position.coords.latitude).toPrecision(10);
+	longitude.innerHTML = Number(position.coords.longitude).toFixed(10);
+	displayLatLng.style.display = "block";
 	errorMessage.innerHTML = `<span style="color: green; font-weight: bold;"> LOCATION FOUND <span>`;
 	timeOut(errorMessage);	
 	loading.style.display = "none";
@@ -297,21 +299,53 @@ const errorResponse = (err) => {
 
 }
 
+let address;
+const loading2 = document.getElementById("loading2");
 
-// /**
-//  * Change color for report page
-//  * @param { object } event 
-//  */
+const initialize = () => {
+	const incidentAddress = (document.getElementById("incident_address"));
+	let autocomplete = new google.maps.places.Autocomplete(incidentAddress);
+	autocomplete.setTypes(['geocode']);
+	google.maps.event.addListener(autocomplete, 'place_changed', () => {
+		let place = autocomplete.getPlace();
+		if (!place.geometry) {
+			return;
+		}
+		
+		if (place.address_components) {
+			address = [
+				(place.address_components[0] && place.address_components[0].short_name || ''),
+				(place.address_components[1] && place.address_components[1].short_name || ''),
+				(place.address_components[2] && place.address_components[2].short_name || '')
+			].join(' ');
+		}
+	});
+}
 
-// const changeColor = (event) => {
-// 	if (event.target.className === "theme-blue font-setting"){
-// 		event.target.className = "white font-setting";
-// 	} else if (event.target.className === "white font-setting"){
-// 		event.target.className = "theme-blue font-setting"; 
-// 	}
-// }
+const getAddress = () => {
+	geocoder = new google.maps.Geocoder();
+	const address = document.getElementById("incident_address").value;
+	loading2.style.display = "inline-block";
+	geocoder.geocode({ 'address': address }, (results, status) => {
+		if (status == google.maps.GeocoderStatus.OK) {
+			document.getElementById("latitude").innerHTML = Number(results[0].geometry.location.lat()).toPrecision(10);
+			document.getElementById("longitude").innerHTML = Number(results[0].geometry.location.lng()).toPrecision(10);
+			displayLatLng.style.display = "block";
+			errorMessage.innerHTML = `<span style="color: green; font-weight: bold;"> LOCATION FOUND <span>`;
+			timeOut(errorMessage);
+			loading2.style.display = "none";
+		}
 
-// window.addEventListener("click", changeColor);
+		else {
+			errorMessage.innerHTML = `<span style="color: red">${status}</span>`;
+			timeOut(errorMessage);
+			loading2.style.display = "none";
+		}
+	});
+}
+document.getElementById("getCoordinates").addEventListener("click", getAddress)
+;
+google.maps.event.addDomListener(window, 'load', initialize);
 
 
 

@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { db } from "../database";
 
 dotenv.load();
 
@@ -214,6 +215,51 @@ export class Helpers {
 			Helpers.returnForError(req, res, 403, "Token not provided");
 		}
 	}
+
+
+	/**
+   * Updates a specific record
+   * @param  { object } req - Contains the body of the request.
+   * @param { object } res - Contains the returned response.
+   * @param { string } tableName - Intended table to edit
+   * @param { number } recordId - resource Id to edit
+   * @param { number } userId - user who created the resource
+   * @param { string } requestBodyPropertyTOBeUpdated - body request property
+   * @param { number } statusCode - Http status code
+   * @param { string } message - response message
+   */
+	static updateSpecificRecord(req, res, tableName, recordId, userId, requestBodyPropertyName, requestBodyPropertyValue, statusCode, message ) {
+
+		db.any("SELECT * FROM " + tableName + " WHERE id = $1", [recordId])
+			.then((data) => {
+				if (data.length < 1) {
+					Helpers.returnForError(req, res, 404, "record not found");
+				} else if (data[0].createdby !== userId) {
+					Helpers.returnForError(req, res, 400, "invalid user");
+				} else {
+					db.any("UPDATE " + tableName + " SET " + requestBodyPropertyName + " = $1 WHERE id = $2 RETURNING *", [requestBodyPropertyValue, recordId])
+						.then((updatedData) => {
+							const updatedRecordId = updatedData[0].id;
+							Helpers.returnForSuccess(req, res, statusCode, updatedRecordId, message);
+						});
+				}
+			});
+	}
+
+	/**
+   * Flags a single white space if found
+   * @param { string }
+   */
+	static nowhiteSpace(string){
+		const value = /\s/.test(string);
+		return value;
+	}
+
+
+
+
+
+
 
 }
 

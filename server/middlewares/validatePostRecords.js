@@ -1,5 +1,6 @@
 import { Helpers } from "../helpers";
 import { userDB } from "../dummyDB";
+import { userInfo } from "os";
 
 let inputs;
 
@@ -58,6 +59,22 @@ export class PostValidator {
 		Helpers.thoroughStringCheck(req, res, comment, next);
 	}
 
+	/**
+ * Validates the profile image input field
+ * @param  { object } req - Contains the body of the request.
+ * @param { object } res - Contains the returned response.
+ * @param  { next } - Proceeds to the next method on the route
+ */
+	static profileImageStringValidation(req, res, next) {
+		const { profileImage } = req.body;
+
+		if (Helpers.nowhiteSpace(profileImage)) {
+			Helpers.returnForError(req, res, 400, "white space detected");
+		} else {
+			Helpers.thoroughStringCheck(req, res, profileImage, next);
+		}
+	}
+
 
 	/**
    * Validates users input for report creation
@@ -103,6 +120,33 @@ export class PostValidator {
 			next();
 		}
 	}
+
+
+	/**
+   * Validate status input by admin
+   * @param  { object } req - Contains the body of the request.
+   * @param { object } res - Contains the returned response.
+   * @param  { next } - Proceeds to the next method on the route
+   */
+	static validateStatus(req, res, next) {
+		const { status } = req.body;
+		const validValues = ["draft", "under investigation", "resolved", "rejected"];
+		let inputs;
+
+		if (!status) {
+			return Helpers.returnForError(req, res, 400, "undefined input");
+		} else if (typeof status !== "string") {
+			return Helpers.returnForError(req, res, 400, "invalid input");
+		}
+
+		for (inputs = 0; inputs < validValues.length; inputs++) {
+			if (status.toString().toLowerCase() === validValues[inputs] ){
+				return next();
+			}
+		}
+		Helpers.returnForError(req, res, 400, "invalid input");
+	}
+
 
 	/**
    * Validates if users exist in the database

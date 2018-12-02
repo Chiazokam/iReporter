@@ -55,8 +55,7 @@ export class Users {
 					bcrypt.compare(password, user.password, (error, result) => {
 						if (!result) {
 							Helpers.returnForError(req, res, 400, "password incorrect");
-						}
-						else {
+						}	else {
 							const token = jwt.sign({
 								id: user.id,
 								username: user.username,
@@ -71,6 +70,32 @@ export class Users {
 					});
 				} else {
 					Helpers.returnForError(req, res, 400, "User doesn't exist"); }
+			});
+	}
+
+	/**
+   * Method to update users profile picture
+   * @param { object } req - body request
+   * @param { object } res - body response
+   */
+	updateProfileImage(req, res){
+		const { profileImage } = req.body;
+		const paramId = req.params.id;
+		const userId = req.userInfo.id;
+
+		db.any("SELECT * FROM users WHERE id = $1", [paramId])
+			.then((data) => {
+				if (data.length < 1) {
+					Helpers.returnForError(req, res, 404, "user not found");
+				} else if (data[0].id !== userId) {
+					Helpers.returnForError(req, res, 400, "invalid user");
+				} else {
+					db.any("UPDATE users SET profileimage = $1 WHERE id = $2 RETURNING *", [profileImage, userId])
+						.then((updatedData) => {
+							const updatedRecordId = updatedData[0].id;
+							Helpers.returnForSuccess(req, res, 200, updatedRecordId, "profile image updated");
+						});
+				}
 			});
 	}
 

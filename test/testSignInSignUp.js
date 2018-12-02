@@ -114,6 +114,30 @@ describe("Signup user end-point", () => {
 			});
 	});
 
+	it("should return 400 if white space is detected in some fields", (done) => {
+		request.post(signupRoute)
+			.send({
+				"username": "mekus mekus",
+				"firstname": "Emeka",
+				"lastname": "Nwabuzor",
+				"othername": "obi",
+				"phoneNumber": "07067443245",
+				"email": "nwabuzor.obiora@gmail.com",
+				"password": "asdfghj",
+				"confirmPassword": "asdfghj"
+			}).end((err, res) => {
+				expect(res.status).to.eql(400);
+				expect(res.body.error).to.eql("white space detected");
+				expect(res.body.error).to.be.a("string");
+				expect(res.body.status).to.be.a("number");
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
 	it("should return 400 if any input field has only white-spaces", (done) => {
 		request.post(signupRoute)
 			.send({

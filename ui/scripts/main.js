@@ -322,7 +322,10 @@ const initialize = () => {
 	});
 }
 
-const getAddress = () => {
+const getAddress = (event) => {
+	if (event.target.id !== "getCoordinates") {
+		return;
+	}
 	geocoder = new google.maps.Geocoder();
 	const address = document.getElementById("incident_address").value;
 	loading2.style.display = "inline-block";
@@ -343,9 +346,11 @@ const getAddress = () => {
 		}
 	});
 }
-document.getElementById("getCoordinates").addEventListener("click", getAddress)
-;
-google.maps.event.addDomListener(window, 'load', initialize);
+window.addEventListener("click", getAddress);
+
+if (/report/gm.test(location.href)) {
+	google.maps.event.addDomListener(window, 'load', initialize);
+}
 
 
 

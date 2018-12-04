@@ -3,14 +3,10 @@ const switchToSignin = document.getElementsByClassName("switch-signin")[0];
 const signupForm = document.getElementsByClassName("signup-form")[0];
 const signinForm = document.getElementsByClassName("signin-form")[0];
 
-const report =  "http://127.0.0.1:5500/ui/html/report.html";
-const home = "http://127.0.0.1:5500/ui/html/home.html";
-const admin = "http://127.0.0.1:5500/ui/html/admin.html";
+
 const pageIndex = "http://127.0.0.1:5500/ui/index.html";
 
-const ghPagesReport = "https://shaolinmkz.github.io/iReporter/ui/html/report.html";
-const ghPagesHome = "https://shaolinmkz.github.io/iReporter/ui/html/home.html";
-const ghPagesAdmin = "https://shaolinmkz.github.io/iReporter/ui/html/admin.html";
+
 const ghpagesPageIndex = "https://shaolinmkz.github.io/iReporter/ui/";
 
 let status = "close";
@@ -31,7 +27,7 @@ const adminInterventionSwitch = document.getElementById("admin-intervention");
 
 const latitude = document.getElementById("latitude");
 const longitude = document.getElementById("longitude");
-const errorMessage = document.getElementById("errorMessage");
+const responseMessage = document.getElementById("responseMessage");
 const myCurrentPosition = document.getElementById("myCurrentLocation");
 
 const src1 = "./images/menu_close_icon.png";
@@ -40,6 +36,13 @@ const src2 =  "./images/menu_icon.png";
 const loading = document.getElementById("loading");
 
 const displayLatLng = document.getElementById("latlongdisplay");
+
+
+window.addEventListener("click", (e) => {
+	if (e.target.id === "signup" || e.target.id === "signin") {
+		location.assign("./html/home.html");
+	}
+});
 
 /**
  * Time out function to remove display
@@ -112,7 +115,6 @@ const controlHamburger = (event) => {
 };
 
 
-
 window.addEventListener("click", controlHamburger);
 
 /**
@@ -148,10 +150,10 @@ window.addEventListener("click", (e) => {
  * @param {object} event - event object
  */
 const switchToRecord = (event) => {
-	if (event.target.id == "redflag-record") {
+	if (event.target.id === "redflag-record") {
 		redFlagRecord.className = "default";
 		interventionRecord.className = "";
-	} else if (event.target.id == "intervention-record") {
+	} else if (event.target.id === "intervention-record") {
 		redFlagRecord.className = "";
 		interventionRecord.className = "default";
 	}
@@ -171,42 +173,6 @@ window.addEventListener("click", (e) => {
 });
 
 
-/**
- * Increases window length to accommodate content
- * @param {object} obj - window object
- */
-const resizeIframe = () => {
-	if (/report/gm.test(location.href)) {
-		recordFrame.style.height = `${recordFrame.contentDocument.body.scrollHeight + 150}px`;
-		document.getElementsByClassName("image-enlarge")[0].src = "../images/loader.gif";
-		document.getElementsByClassName("image-enlarge")[0].style.width = "10%";
-		document.getElementsByClassName("outer-modal")[0].style.textAlign = "center";
-		document.getElementsByClassName("outer-modal")[0].style.display = "block";
-		setTimeout(() => {
-			document.getElementsByClassName("outer-modal")[0].style.display = "none";
-		}, 1000);
-	} else if (/home/gm.test(location.href)) {
-		recordFrame.style.height = `${recordFrame.contentDocument.body.scrollHeight + 150}px`;
-		document.getElementsByClassName("image-enlarge")[0].src = "../images/loader.gif";
-		document.getElementsByClassName("image-enlarge")[0].style.width = "10%";
-		document.getElementsByClassName("outer-modal")[0].style.textAlign = "center";
-		document.getElementsByClassName("outer-modal")[0].style.display = "block";
-		setTimeout(()=>{
-			document.getElementsByClassName("outer-modal")[0].style.display = "none";
-		},1000);
-	}
-};
-
-recordFrame.addEventListener("load", resizeIframe);
-
-/**Handles frame height on resize */
-window.addEventListener("resize", () => {
-	if (/report/gm.test(location.href)) {
-		recordFrame.style.height = `${recordFrame.contentDocument.body.scrollHeight + 100}px`;
-	} else if (/home/gm.test(location.href)) {
-		recordFrame.style.height = `${recordFrame.contentDocument.body.scrollHeight + 100}px`;
-	}
-});
 
 /**
  * Opens update status box modal for admin
@@ -253,11 +219,11 @@ const findMe = (e) => {
 	} else if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(revealCoordinates, errorResponse);
 		loading.style.display = "inline-block";
-		errorMessage.style.marginTop = "1em";
+		responseMessage.style.marginTop = "1em";
 	} else {
 		loading.style.display = "none";
-		errorMessage.innerHTML = `<span style="color:#ff0000">GPS location not supported on this browser</span>`;
-		timeOut(errorMessage);
+		responseMessage.innerHTML = `<span style="color:#ff0000">GPS location not supported on this browser</span>`;
+		timeOut(responseMessage);
 	}
 }
 
@@ -271,8 +237,8 @@ const revealCoordinates = (position) => {
 	latitude.innerHTML = Number(position.coords.latitude).toPrecision(10);
 	longitude.innerHTML = Number(position.coords.longitude).toFixed(10);
 	displayLatLng.style.display = "block";
-	errorMessage.innerHTML = `<span style="color: green; font-weight: bold;"> LOCATION FOUND <span>`;
-	timeOut(errorMessage);	
+	responseMessage.innerHTML = `<span style="color: green; font-weight: bold;"> LOCATION FOUND <span>`;
+	timeOut(responseMessage);	
 	loading.style.display = "none";
 }
 
@@ -285,16 +251,16 @@ const revealCoordinates = (position) => {
  */
 const errorResponse = (err) => {
 	loading.style.display = "none";
-	errorMessage.style.marginTop = "0";
-	timeOut(errorMessage);
+	responseMessage.style.marginTop = "0";
+	timeOut(responseMessage);
 		if (err.PERMISSION_DENIED === err.code) {
-			errorMessage.innerHTML = `<span style="color: red">User denied the request for Geolocation</span>`;
+			responseMessage.innerHTML = `<span style="color: red">User denied the request for Geolocation</span>`;
 		} else if (err.POSITION_UNAVAILABLE === err.code) {
-			errorMessage.innerHTML = `<span style="color: red">Location information is unavailable</span>`;
+			responseMessage.innerHTML = `<span style="color: red">Location information is unavailable</span>`;
 		} else if (err.TIMEOUT === err.code) {
-			errorMessage.innerHTML = `<span style="color: red">The request to get user location timed out</span>`;
+			responseMessage.innerHTML = `<span style="color: red">The request to get user location timed out</span>`;
 		} else if (err.UNKNOWN_ERROR === err.code) {
-			errorMessage.innerHTML = `<span style="color: red">An unknown error occurred</span>`;
+			responseMessage.innerHTML = `<span style="color: red">An unknown error occurred</span>`;
 		}
 
 }
@@ -302,9 +268,9 @@ const errorResponse = (err) => {
 let address;
 const loading2 = document.getElementById("loading2");
 
-const initialize = () => {
+const initAutocomplete = () => {
 	const incidentAddress = (document.getElementById("incident_address"));
-	let autocomplete = new google.maps.places.Autocomplete(incidentAddress);
+	const autocomplete = new google.maps.places.Autocomplete(incidentAddress);
 	autocomplete.setTypes(['geocode']);
 	google.maps.event.addListener(autocomplete, 'place_changed', () => {
 		let place = autocomplete.getPlace();
@@ -334,23 +300,123 @@ const getAddress = (event) => {
 			document.getElementById("latitude").innerHTML = Number(results[0].geometry.location.lat()).toPrecision(10);
 			document.getElementById("longitude").innerHTML = Number(results[0].geometry.location.lng()).toPrecision(10);
 			displayLatLng.style.display = "block";
-			errorMessage.innerHTML = `<span style="color: green; font-weight: bold;"> LOCATION FOUND <span>`;
-			timeOut(errorMessage);
+			responseMessage.innerHTML = `<span style="color: green; font-weight: bold;"> LOCATION FOUND <span>`;
+			timeOut(responseMessage);
 			loading2.style.display = "none";
 		}
 
 		else {
-			errorMessage.innerHTML = `<span style="color: red">${status}</span>`;
-			timeOut(errorMessage);
+			responseMessage.innerHTML = `<span style="color: red">${status}</span>`;
+			timeOut(responseMessage);
 			loading2.style.display = "none";
 		}
 	});
 }
 window.addEventListener("click", getAddress);
 
+
 if (/report/gm.test(location.href)) {
-	google.maps.event.addDomListener(window, 'load', initialize);
+	window.addEventListener("load", initAutocomplete);
 }
+
+
+/**
+ * edit comment
+ */
+const editComment = (event) => {
+	const initialComment = event.target.parentNode.children[0].innerHTML.trim();
+
+	if (/edit-comment/gm.test(event.target.className)) {
+		//target the parent node of the target element
+		const target = event.target.parentNode;
+
+		//hide the paragragh inside the div with a class="story"
+		target.children[0].style.display = "none";
+
+		//Insert HTML mark-up into the the second child of the target element
+		target.children[1].innerHTML = `
+            <textarea class="editing-tag" id="updatedComment">${initialComment}</textarea>
+            <span class="editing-tag"><a class="red edit cancel">cancel</a> <span>&nbsp;</span><a class="blue edit">update</a></span>
+            `
+	}
+
+}
+window.addEventListener("click", editComment);
+
+
+
+
+/**
+ * hide an element
+ * @param { elem } elem - html element/tag
+ */
+const hideMe = (elem) => {
+	elem.style.display = "none";
+}
+
+
+const cancelCommentUpdate = () => {
+	if (/cancel/gm.test(event.target.className)) {
+		const target = event.target.parentNode.parentNode.parentNode;
+		const childrenLength = target.children.length;
+
+		//display the paragragh inside the div with a class="story"
+		target.children[0].style.display = "block";
+
+		//display the update button feature
+		target.children[childrenLength - 1].style.display = "inline-block";
+
+		//remove the content inside the div with class= "insert-editing-tag-here"
+		target.children[1].innerHTML = "";
+	}
+}
+
+window.addEventListener("click", cancelCommentUpdate);
+
+
+const editLocation = (event) => {
+
+	if (/edit-location/gm.test(event.target.className)) {
+		//target the parent node of the target element
+		const target = event.target.parentNode;
+		const initialLoaction = target.children[12];
+
+		//hide the initial location field
+		initialLoaction.style.display = "none";
+
+		//insert the string of mark-up into the HTML element with class="insert-location-editing-tag-here"
+		target.children[14].innerHTML += `
+        <input type="text" class="location-input" value="${initialLoaction.innerHTML}" />
+        <span class="editing-button-tag">
+         <a class="red edit exit">cancel</a> 
+         <span>&nbsp;</span><a class="blue edit">update</a></span> `
+	}
+
+
+}
+
+window.addEventListener("click", editLocation);
+
+
+const cancelLocationUpdate = (event) => {
+	if (/exit/gm.test(event.target.className)) {
+		const target = event.target.parentNode;
+
+		//set the location back to default
+		target.parentNode.parentNode.children[12].style.display = "inline-block";
+
+		//set the modify button back to its original position
+		target.parentNode.parentNode.children[15].style.display = "inline-block";
+
+		//Remove the edit location input field
+		target.parentNode.innerHTML = "";
+	}
+}
+
+window.addEventListener("click", cancelLocationUpdate);
+
+
+
 
 
 

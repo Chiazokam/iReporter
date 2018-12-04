@@ -47,52 +47,59 @@
 
     <section class="crime-form-container clearfix">
         <form>
-            <h1 id="compose-heading">COMPOSE</h1>
+            <section id="boundary">
+            <h2 id="compose-heading">COMPOSE REPORT</h2>
             
-            <h1 class="theme-blue font-setting">TITLE</h1>
+            <h1 class="font-setting">TITLE</h1>
+            <br>
             <input type="text" placeholder="ENTER TITLE" class="title" id="title" required/>
 
             <br>
             <br>
             <br>
 
-            <h1 class="theme-blue font-setting">COMMENT</h1>
+            <h1 class=" font-setting">COMMENT</h1>
             <textarea required placeholder="Tell your story..." class="post-text-area" id="post-text-area"></textarea>
-            <input type="radio" name="report-type" checked="checked" id="red-flag"> <label for="red-flag" style="cursor: pointer;">RED-FLAG<img src="../images/red_flag.png" class="red-flag-icon" title="Red-flag" /></label> 
+            <br>
+            <h1 class=" font-setting">INCIDENT TYPE</h1>
+            <br>
+            <input type="radio" name="report-type" id="red-flag" required> <label for="red-flag" style="cursor: pointer;">RED-FLAG<img src="../images/red_flag.png" class="red-flag-icon" title="Red-flag" /></label> 
             <span> &nbsp; </span>
-            <input type="radio" name="report-type" id="intervention"><label for="intervention" style="cursor: pointer;">INTERVENE<img src="../images/intervene_icon.png" class="red-flag-icon" title="Intervention" /></label> 
+            <input type="radio" name="report-type" id="intervention" required><label for="intervention" style="cursor: pointer;">INTERVENE<img src="../images/intervene_icon.png" class="red-flag-icon" title="Intervention" /></label> 
             <br> 
             <br> 
             <br>
 
-            <h1 class="theme-blue font-setting">LOCATION CO-ORDINATES</h1>
+            <h1 class=" font-setting">GEOLOCATION</h1>
             <br>
-            <br>
-            <input type="text" id="incident_address" placeholder="Enter Incident Address" > <img src="../images/loading.gif" id="loading2" title="loading please wait" />
+            <input type="text" id="incident_address" placeholder="ENTER INCIDENT ADDRESS" required> <img src="../images/loading.gif" id="loading2" title="loading please wait" />
             <br>
             <br>
             <input type="button" id="getCoordinates" value="GET COORDINATES">
             <br>
             <br>
             <div id="latlongdisplay">
-                <label>Latitude : </label></label><span id="latitude" class="latlngfont"></span>
+                <div id="map"></div>
+                <label>Latitude : </label> <span id="latitude" class="latlngfont green" ></span>
                 <br>
                 <br>
-                <label>Longitude : </label></label><span id="longitude" class="latlngfont"></span>
+                <label>Longitude : </label> <span id="longitude" class="latlngfont green"></span>
             </div>
-
-            <br>
-            <br>
-            <input type="button" value="FIND ME" id="myCurrentLocation" required/> <img src="../images/loading.gif" id="loading" title="loading please wait"/>
-            <br>
-            <br>
-            <br>
-            <div id="errorMessage"></div>
-            <br>
-            <br>
             
-            <label class="theme-blue">Upload image</label> <input type="file" accept="image/*" id="picture-upload">
-            <input type="button" value="UPLOAD IMAGE" title="upload image"/>
+            <br>
+            <br>
+            <small class="theme-orange">If your in the current location, then click the <strong>FINDME</strong> button below</small>
+            <br>
+            <br>
+            <input type="button" value="FIND ME" id="myCurrentLocation"/> <img src="../images/loading.gif" id="loading" title="loading please wait"/>
+            <br>
+            <br>
+            <div id="responseMessage"></div>
+            <br>
+            <h1 class=" font-setting">FILE UPLOADS</h1>
+            <br>
+            <label class="theme-blue">Image</label> <input type="file" accept="image/*" id="picture-upload" required>
+            <input type="button" value="UPLOAD IMAGE" title="upload image" required/>
             <ul class="place-images">
                 <li title="uploaded file" class="video-uploads theme-orange"><img title="attachment icon" src="../images/attachment.png" class="attachment">uploaded image1</li>
                 <li title="uploaded file" class="video-uploads theme-orange"><img title="attachment icon" src="../images/attachment.png" class="attachment">uploaded image2</li>
@@ -101,7 +108,7 @@
             <br> 
             <br>
 
-            <label>Upload video</label> <input type="file" accept="video/*" id="video-upload">
+            <label>Video</label> <input type="file" accept="video/*" id="video-upload">
             <input type="button" value="UPLOAD VIDEO" title="upload video"/>
             <ul class="place-videos">
                 <li title="uploaded file" class="image-uploads theme-orange"><img title="attachment icon" src="../images/attachment.png" class="attachment">uploaded video1</li>
@@ -111,18 +118,81 @@
             <input type="submit" value="SEND" class="report" title="submit report">
             
             <br>
-        
+        </section>
         </form>
     </section>
     
         <section class="feeds">        
+
             <div class="choose-record">
-                <a href="./redflag.html" target="list-frame" class="default" id="redflag-record">RED FLAG</a>
-                <a href="./intervention.html" target="list-frame" id="intervention-record">INTERVENTION</a>
+                <input type="button" value="RED FLAG" class="default" id="redflag-record">
+                <input type="button" value="INTERVENTION" id="intervention-record">
             </div>
-        
-            <iframe class="record-frame" id="record-frame" src="./redflag.html" name="list-frame" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+            
+            <section class="post-display">
+                <div class="post">
+                    <article class="actual-post">
+                        <img src="../images/avatar.png" class="avatar" title="avatar" /> <i class="profile-name"><a href="./profile.html">Mark</a></i>
+                        <br>
+                        <h1> Murder In XYZ Town</h1>
+                        <img src="../images/red_flag.png" class="red-flag-icon" title="Red flag" />
+            
+                        <div class="story">
+                            <p>
+In a few days along comes the letter you expect. Your merchandise is quite good — in fact the
+writer likes it and wishes to talk to you about it if you will call at such and such a time.
+
+Promptly on the minute you present yourself, trying not to beam. Yes, Mr. Jones, of Smith & Jones,
+to whom your goods were shown, thinks they’re just what the firm has been looking for. They’re
+going in to exploit them heavily for you.
+All they want is their commission on any merchandise they sell.
+
+Oh yes — there’s going to be the postage on the twenty-five or fifty thousand letters they’re going
+to send out to all their correspondents, with your prospectus in it.
+They send out their letters by first-class mail — about two hundred dollars will cover it.
+
+And you’ll be kind enough to send Smith & Jones enough circulars so there won’t be any delay.
+                            </p>
+            
+                            <div class="insert-editing-tag-here"></div>
+            
+                            <button class="blue edit-comment" onclick=hideMe(this)>modify comment</button>
+                        </div>
+            
+            
+                        <br>
+                        <br>
+                        <label class="blue">STATUS</label> : <span>Under Investigation</span> <br>
+                        <label class="blue">LOCATION</label> : <span>-6.54579454, 13.3897463</span>
+                        <span> &nbsp; </span> <span class="insert-location-editing-tag-here"></span>
+                        <button class="blue edit-location" onclick=hideMe(this)>modify location</button><br>
+                        <br>
+                        <br>
+            
+                        <div class="image-display">
+                            <img src="../images/murder.jpg" class="picture-evidence" title="picture-evidence" />
+                        </div>
+                        <br>
+                        <div class="video-display">
+                            <video controls class="video-evidence">
+                                <source src="../videos/Fail_Like_a_Child_Inspiration_by_Jay_Shetty.mp4">
+                            </video>
+                        </div>
+            
+                        <div class="delete-record-container">
+                            <button class="red delete">delete</button>
+                        </div>
+                    </article>
+                </div>
+            
+            </section>
+
+
         </section>
+
+
+
+
 
     <section class="outer-modal">
         <div class="inner-box">
@@ -133,13 +203,14 @@
     <footer id="footer">
 
         <div class="logo-footer-container">
-            <img src="../images/ir.png" class="logo">
-            <p>&copy; <span>i</span>Reporter 2018</p>
+            <p>&copy; <span class="theme-orange">i</span>Reporter 2018</p>
         </div>
 
     </footer>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeFdalDissHNDZBQ_utZRn-0dkTSkNS3g&libraries=places"></script>
     <script src="../scripts/main.js"></script>
+    <script src="../scripts/injectmarkups.js"></script>
     
 </body>
 

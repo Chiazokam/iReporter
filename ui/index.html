@@ -58,33 +58,33 @@
         </article>
 
         <form class="signup-form clearfix">
-            <h2><span class="switch-signup">SIGNUP</span> | <span class="switch-signin">SIGNIN</span></h2>
-            <input type="text" placeholder="Username"/>
-            <input type="text" placeholder="Email"/>
-            <input type="text" placeholder="Firstname"/>
-            <input type="text" placeholder="Lastname"/>
-            <input type="text" placeholder="Othername"/>
-            <input type="text" placeholder="Phone number"/>
-            <input type="password" placeholder="Password"/>
-            <input type="password" placeholder="Confirm password" />
-            <input type="submit" value="SIGNUP" id="signup">
+            <h2><span class="switch-signup">SIGNUP</span> | <span class="switch-signin">LOGIN</span></h2>
+            <input type="text" placeholder="Username" required/>
+            <input type="email" placeholder="Email" required/>
+            <input type="text" placeholder="Firstname" required/>
+            <input type="text" placeholder="Lastname" required/>
+            <input type="text" placeholder="Othername" required/>
+            <input type="number" placeholder="Phone number" required/>
+            <input type="password" placeholder="Password" required/>
+            <input type="password" placeholder="Confirm password" required />
+            <input type="submit" value="CREATE ACCOUNT" id="signup">
             <br>
             <span class="theme-blue">Already have an account?</span> 
             <br>
             <br>
-            <a class="switch-signin" title="existing user signin"> Sign in here</a>
+            <button class="switch-signin deactivate" title="existing user signin"> Sign in here</button>
         </form>
 
         <form class="signin-form clearfix">
-            <h2><span class="switch-signup">SIGNUP</span> | <span class="switch-signin">SIGNIN</span></h2>
-            <input type="text" placeholder="Email or Username"/>
-            <input type="password" placeholder="Password" />
-            <input type="submit" value="SIGNIN" id="signin"/>
+            <h2><span class="switch-signup">SIGNUP</span> | <span class="switch-signin">LOGIN</span></h2>
+            <input type="text" placeholder="Email or Username" required/>
+            <input type="password" placeholder="Password" required/>
+            <input type="submit" value="LOGIN" id="signin"/>
             <br>
             <span class="theme-blue">New user?</span> 
             <br> 
             <br>
-            <a title="new user sign-up" class="switch-signup">Create an account here</a>
+            <button title="new user sign-up" class="switch-signup theme-orange deactivate">Create an account here</button>
         </form>
 
     </section>
@@ -93,13 +93,12 @@
             <img src="./images/crime_report.png" class="crime_report_image" />
             <h1>SEE SOMETHING SAY SOMETHING...</h1>
         </section>
-<i id="record-frame" style="display:none"></i>
+
 
     <footer id="footer">
 
         <div class="logo-footer-container">
-            <img src="./images/ir.png" class="logo">
-            <p>&copy; <span>i</span>Reporter 2018</p>
+            <p>&copy; <span class="theme-orange">i</span>Reporter 2018</p>
         </div>
 
     </footer>

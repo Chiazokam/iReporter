@@ -43,7 +43,6 @@ describe("Update red flag location end-point", () => {
 				"location": "North1.233, Lagos",
 			}).end((err, res) => {
 				expect(res.status).to.eql(400);
-				expect(res.body.error).to.eql("invalid input");
 				expect(res.body.error).to.be.a("string");
 				expect(res.body.status).to.be.a("number");
 				should.not.exist(err);
@@ -62,7 +61,6 @@ describe("Update red flag location end-point", () => {
 				"location": ["6757"],
 			}).end((err, res) => {
 				expect(res.status).to.eql(400);
-				expect(res.body.error).to.eql("invalid input");
 				expect(res.body.error).to.be.a("string");
 				expect(res.body.status).to.be.a("number");
 				should.not.exist(err);
@@ -80,7 +78,6 @@ describe("Update red flag location end-point", () => {
 				"location": "     ",
 			}).end((err, res) => {
 				expect(res.status).to.eql(400);
-				expect(res.body.error).to.eql("undefined input");
 				expect(res.body.error).to.be.a("string");
 				expect(res.body.status).to.be.a("number");
 				should.not.exist(err);
@@ -99,7 +96,6 @@ describe("Update red flag location end-point", () => {
 				"location": "",
 			}).end((err, res) => {
 				expect(res.status).to.eql(400);
-				expect(res.body.error).to.eql("undefined input");
 				expect(res.body.error).to.be.a("string");
 				expect(res.body.status).to.be.a("number");
 				should.not.exist(err);
@@ -117,7 +113,6 @@ describe("Update red flag location end-point", () => {
 				"location": "12.233334, 2.323123",
 			}).end((err, res) => {
 				expect(res.status).to.eql(401);
-				expect(res.body.error).to.eql("invalid user");
 				expect(res.body.error).to.be.a("string");
 				expect(res.body.status).to.be.a("number");
 				should.not.exist(err);
@@ -160,7 +155,6 @@ describe("Update red flag comment end-point", () => {
 				"comment": "changed the comment again",
 			}).end((err, res) => {
 				expect(res.status).to.eql(401);
-				expect(res.body.error).to.eql("invalid user");
 				expect(res.body.error).to.be.a("string");
 				expect(res.body.status).to.be.a("number");
 				should.not.exist(err);

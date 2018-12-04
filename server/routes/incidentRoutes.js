@@ -1,9 +1,16 @@
 import express from "express";
 import { Helpers } from "../helpers";
 import { Incidents } from "../controllers";
+
 import {
-	multipleStringValidation, locationStringValidation, isDummyDbEmpty, isUser, isRedFlag,
-	doesRedFlagRecordExist, doesSpecificRedFlagIdRecordExist, commentStringValidation } from "../middlewares";
+	multipleStringValidation,
+	locationStringValidation,
+	isDummyDbEmpty,
+	isUser,
+	isRedFlag,
+	doesRedFlagRecordExist,
+	doesSpecificRedFlagIdRecordExist,
+	commentStringValidation } from "../middlewares";
 
 const incident = new Incidents();
 

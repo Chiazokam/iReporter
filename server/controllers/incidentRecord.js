@@ -1,37 +1,36 @@
 import { incidentsDB } from "../dummyDB";
 import { Helpers } from "../helpers/predefinedMethods";
 
-const red_flag_string = "red-flag";
-
-let specifiedRedFlagRecordId = "";
-let allRedFlagsRecords = "";
-let specificRedFlag = "";
 
 export class Incidents {
-	/**filter Incident Record(s)
-  * @param  { object } req - Contains the body of the request.
-  * @param { object } res - Contains the returned response.
-  */
+	/**
+   * filter Incident Record(s)
+   * @param  { object } req - Contains the body of the request.
+   * @param { object } res - Contains the returned response.
+   * @returns { Array } returns an array of numbers and an array of array of object
+   */
 	static filterRecords (req, res, incident_record) {
-		specifiedRedFlagRecordId = parseInt(req.params.id, 10);
-		allRedFlagsRecords = incidentsDB.filter((redFlag) => redFlag.type === incident_record);
-		specificRedFlag = allRedFlagsRecords.filter((redFlagId) => redFlagId.id === specifiedRedFlagRecordId);
+
+		const specifiedRedFlagRecordId = parseInt(req.params.id, 10);
+		const allRedFlagsRecords = incidentsDB.filter((redFlag) => redFlag.type === incident_record);
+		const specificRedFlag = allRedFlagsRecords.filter((redFlagId) => redFlagId.id === specifiedRedFlagRecordId);
 
 		return [specifiedRedFlagRecordId, allRedFlagsRecords, specificRedFlag];
 	}
 
 
-	/**Creates a red-flag or intervention record
-  * @param  { object } req - Contains the body of the request.
-  * @param { object } res - Contains the returned response.
-  */
+	/**
+   * Creates a red-flag or intervention record
+   * @param  { object } req - Contains the body of the request.
+   * @param { object } res - Contains the returned response.
+   */
 	createAnIncidentRecord(req, res){
 		const { createdBy, title, comment, type, location, images, videos } = req.body;
 
 		let newIncidentId = "";
 		const numberOfIncidents = incidentsDB.length;
-		let newId = numberOfIncidents + 1;
-		let anotherId = incidentsDB[numberOfIncidents-1].id + 1;
+		const newId = numberOfIncidents + 1;
+		const anotherId = incidentsDB[numberOfIncidents-1].id + 1;
 
 		if (anotherId > newId) {
 			newIncidentId = anotherId;
@@ -60,41 +59,53 @@ export class Incidents {
 
 	}
 
-	/**Returns all incident records
-  * @param  { object } req - Contains the body of the request.
-  * @param { object } res - Contains the returned response.
-  */
+	/**
+   * Returns all incident records
+   * @param  { object } req - Contains the body of the request.
+   * @param { object } res - Contains the returned response.
+   */
 	getAllRecords(req, res) {
 		Helpers.returnSuccessForGET(req, res, 200, incidentsDB);
 	}
 
-	/**Returns all redflag records
-  * @param  { object } req - Contains the body of the request.
-  * @param { object } res - Contains the returned response.
-  */
+	/**
+   * Returns all redflag records
+   * @param  { object } req - Contains the body of the request.
+   * @param { object } res - Contains the returned response.
+   */
 	getAllRedflagRecords(req, res) {
+		const red_flag_string = "red-flag";
+
 		const allRedFlagsRecords = incidentsDB.filter((redFlag) => redFlag.type === red_flag_string);
 		Helpers.returnSuccessForGET(req, res, 200, allRedFlagsRecords);
 	}
 
-	/**Returns a specific redflag record
-  * @param  { object } req - Contains the body of the request.
-  * @param { object } res - Contains the returned response.
-  */
+	/**
+   * Returns a specific redflag record
+   * @param  { object } req - Contains the body of the request.
+   * @param { object } res - Contains the returned response.
+   */
 	getSpecificRedflagRecord(req, res) {
-		Incidents.filterRecords(req, res, red_flag_string);
+		const red_flag_string = "red-flag";
+
+		const specificRedFlag = Incidents.filterRecords(req, res, red_flag_string)[2];
 
 		Helpers.returnSuccessForGET(req, res, 200, specificRedFlag);
 	}
 
-	/**Updates a specific redflag record's location
-  * @param  { object } req - Contains the body of the request.
-  * @param { object } res - Contains the returned response.
-  */
+	/**
+   * Updates a specific redflag record's location
+   * @param  { object } req - Contains the body of the request.
+   * @param { object } res - Contains the returned response.
+   * @return { undefined }
+   */
 	updateRedflagRecordLocation(req, res) {
 		const { location, createdBy } = req.body;
 
-		Incidents.filterRecords(req, res, red_flag_string);
+		const red_flag_string = "red-flag";
+
+		const specificRedFlag = Incidents.filterRecords(req, res, red_flag_string)[2];
+		const specifiedRedFlagRecordId = Incidents.filterRecords(req, res, red_flag_string)[0];
 
 		if (createdBy !== specificRedFlag[0].createdBy) {
 			return Helpers.returnForError(req, res, 401, "invalid user");
@@ -104,14 +115,20 @@ export class Incidents {
 		Helpers.returnForSuccess(req, res, 200, specifiedRedFlagRecordId, "Updated red-flag record's location");
 	}
 
-	/**Update a specific redflag record's comment
-  * @param  { object } req - Contains the body of the request.
-  * @param { object } res - Contains the returned response.
-  */
+	/**
+   * Update a specific redflag record's comment
+   * @param  { object } req - Contains the body of the request.
+   * @param { object } res - Contains the returned response.
+   * @return { undefined }
+   */
 	updateRedflagRecordComment(req, res) {
 		const { comment, createdBy } = req.body;
 
-		Incidents.filterRecords(req, res, red_flag_string);
+    const red_flag_string = "red-flag";
+
+    const specificRedFlag = Incidents.filterRecords(req, res, red_flag_string)[2];
+
+    const specifiedRedFlagRecordId = Incidents.filterRecords(req, res, red_flag_string)[0];
 
 		if (createdBy !== specificRedFlag[0].createdBy) {
 			return Helpers.returnForError(req, res, 401, "invalid user");
@@ -121,14 +138,20 @@ export class Incidents {
 		Helpers.returnForSuccess(req, res, 200, specifiedRedFlagRecordId, "Updated red-flag record's comment");
 	}
 
-	/**Delete a specific redflag record's record
-  * @param  { object } req - Contains the body of the request.
-  * @param { object } res - Contains the returned response.
-  */
+	/**
+   * Delete a specific redflag record's record
+   * @param  { object } req - Contains the body of the request.
+   * @param { object } res - Contains the returned response.
+   * @return { undefined }
+   */
 	deleteRecord(req, res) {
 		const { createdBy } = req.body;
 
-		Incidents.filterRecords(req, res, red_flag_string);
+    const red_flag_string = "red-flag";
+
+    const specificRedFlag = Incidents.filterRecords(req, res, red_flag_string)[2];
+
+    const specifiedRedFlagRecordId = Incidents.filterRecords(req, res, red_flag_string)[0];
 
 		if (createdBy !== specificRedFlag[0].createdBy) {
 			return Helpers.returnForError(req, res, 401, "invalid user");

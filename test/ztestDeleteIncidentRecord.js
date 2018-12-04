@@ -47,7 +47,6 @@ describe("DELETE a specific red-flag record endpoint", () => {
 			})
 			.end((err, res) => {
 				expect(res.status).to.eql(401);
-				expect(res.body.error).to.eql("invalid user");
 				expect(res.body.status).to.eql(401);
 				expect(res.body.status).to.be.a("number");
 				expect(res.body.error).to.be.a("string");

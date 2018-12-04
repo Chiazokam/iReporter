@@ -109,7 +109,6 @@ describe("Create red-flag record end-point", () => {
 				"comment": "This is a report on... to be continued"
 			}).end((err, res) => {
 				expect(res.status).to.eql(400);
-				expect(res.body.error).to.eql("invalid input");
 				expect(res.body.error).to.be.a("string");
 				expect(res.body.status).to.be.a("number");
 				should.not.exist(err);
@@ -136,7 +135,6 @@ describe("Create red-flag record end-point", () => {
 				"comment": "This is a report on... to be continued"
 			}).end((err, res) => {
 				expect(res.status).to.eql(400);
-				expect(res.body.error).to.eql("invalid input");
 				expect(res.body.error).to.be.a("string");
 				expect(res.body.status).to.be.a("number");
 				should.not.exist(err);
@@ -163,7 +161,6 @@ describe("Create red-flag record end-point", () => {
 				"comment": "This is a report on... to be continued"
 			}).end((err, res) => {
 				expect(res.status).to.eql(400);
-				expect(res.body.error).to.eql("undefined input");
 				expect(res.body.error).to.be.a("string");
 				expect(res.body.status).to.be.a("number");
 				should.not.exist(err);
@@ -190,7 +187,6 @@ describe("Create red-flag record end-point", () => {
 				"comment": "This is a report on... to be continued"
 			}).end((err, res) => {
 				expect(res.status).to.eql(400);
-				expect(res.body.error).to.eql("invalid input");
 				expect(res.body.error).to.be.a("string");
 				expect(res.body.status).to.be.a("number");
 				should.not.exist(err);
@@ -217,7 +213,6 @@ describe("Create red-flag record end-point", () => {
 				"comment": "This is a report on... to be continued"
 			}).end((err, res) => {
 				expect(res.status).to.eql(400);
-				expect(res.body.error).to.eql("undefined input");
 				expect(res.body.error).to.be.a("string");
 				expect(res.body.status).to.be.a("number");
 				should.not.exist(err);
@@ -242,7 +237,6 @@ describe("Create red-flag record end-point", () => {
 				"comment": "This is a report on... to be continued"
 			}).end((err, res) => {
 				expect(res.status).to.eql(400);
-				expect(res.body.error).to.eql("invalid input");
 				expect(res.body.error).to.be.a("string");
 				expect(res.body.status).to.be.a("number");
 				should.not.exist(err);
@@ -267,7 +261,6 @@ describe("Create red-flag record end-point", () => {
 				"comment": "This is a report on... to be continued"
 			}).end((err, res) => {
 				expect(res.status).to.eql(400);
-				expect(res.body.error).to.eql("invalid input");
 				expect(res.body.status).to.eql(400);
 				expect(res.body.error).to.be.a("string");
 				expect(res.body.status).to.be.a("number");
@@ -295,7 +288,6 @@ describe("Create red-flag record end-point", () => {
 				"comment": "This is a report on... to be continued"
 			}).end((err, res) => {
 				expect(res.status).to.eql(400);
-				expect(res.body.error).to.eql("invalid input");
 				expect(res.body.status).to.eql(400);
 				expect(res.body.error).to.be.a("string");
 				expect(res.body.status).to.be.a("number");
@@ -323,7 +315,6 @@ describe("Create red-flag record end-point", () => {
 				"comment": "This is a report on... to be continued"
 			}).end((err, res) => {
 				expect(res.status).to.eql(400);
-				expect(res.body.error).to.eql("undefined input");
 				expect(res.body.status).to.eql(400);
 				expect(res.body.error).to.be.a("string");
 				expect(res.body.status).to.be.a("number");
@@ -351,7 +342,6 @@ describe("Create red-flag record end-point", () => {
 				"comment": "This is a report on... to be continued"
 			}).end((err, res) => {
 				expect(res.status).to.eql(400);
-				expect(res.body.error).to.eql("undefined input");
 				expect(res.body.status).to.eql(400);
 				expect(res.body.error).to.be.a("string");
 				expect(res.body.status).to.be.a("number");

@@ -1,10 +1,12 @@
 /**
- * @class \{{{object}}\} {{Helper}}{{Methods for validation}}
+ * Methods to avoid repetition
+ * @class { object }
  */
 export class Helpers {
 	/**
    * Checks for a valid array
    * @param {object} array - array of elements
+   * @return { boolean } returns true
    */
 	static isNotArray(array) {
 		for (let inputs in array) {
@@ -17,6 +19,7 @@ export class Helpers {
 	/**
    * Validates for strings
    * @param {string} elem - strings
+   * @return { boolean } returns true or false
    */
 	static isNotString(elem) {
 		if (typeof elem !== "string") {
@@ -27,9 +30,10 @@ export class Helpers {
 	}
 
 	/**
-* Validates values inside an array if its a string
-* @param {any} arr - all datatypes
-*/
+  * Validates values inside an array if its a string
+  * @param {any} arr - all datatypes
+  * @return { boolean } returns true
+  */
 	static isStringInsideArray(arr) {
 		for (let inputs in arr) {
 			if (typeof arr[inputs] !== "string") {
@@ -41,6 +45,7 @@ export class Helpers {
 	/**
   * Validates values inside an array is undefined
   * @param {any} arr - all datatypes
+  * @return { boolean } returns true
   */
 	static isValueInsideArrayEmpty(arr) {
 		for (let inputs in arr) {
@@ -51,13 +56,13 @@ export class Helpers {
 	}
 
 	/**
-* Validates a stringed geolocation
-* @param { string } string - all datatypes
-*/
+  * Validates a stringed geolocation
+  * @param { string } string - all datatypes
+  */
 	static isNotAValidGeolocation(req, res, next) {
 		const { location } = req.body;
 		if (!(/^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/gm.test(location))) {
-			Helpers.returnForError(req, res, 400, "invalid input");
+			Helpers.returnForError(req, res, 400, "invalid location coordinates");
 		} else {
 			next();
 		}
@@ -72,11 +77,11 @@ export class Helpers {
    */
 	static thoroughStringCheck(req, res, string, next) {
 		if (Helpers.isNotString(string)) {
-			Helpers.returnForError(req, res, 400, "invalid input");
+			Helpers.returnForError(req, res, 400, `invalid input ${string}`);
 		} else if (!string) {
-			Helpers.returnForError(req, res, 400, "undefined input");
+			Helpers.returnForError(req, res, 400, `invalid input ${string}`);
 		} else if (!(/[^\s+]/g.test(string))) {
-			Helpers.returnForError(req, res, 400, "undefined input");
+			Helpers.returnForError(req, res, 400, `undefined input ${string}`);
 		} else {
 			next();
 		}

@@ -58,41 +58,6 @@ Delete a specific red-flag record
 DELETE `host:port/api/v1/red-flags/<red-flag-id>`
 
 
-_Using the application/json format_
-```
-e.g
-POST host:port/api/v1/red-flags
-
-{
-	"createdBy": 2,
-    "title": "Theft",
-    "type": "red-flag",
-    "location": "12.233, -3.1232313",
-    "images": [
-        "imageURL1",
-        "imageURL2"
-    ],
-    "videos": [
-        "videoURL1",
-        "videoURL2"
-    ],
-    "comment": "This is a report on how they stole my car... Last week i was... to be continued"
-}
-
-```
-Hit send on Postman and expect this:
-```
-{
-    "status": 201,
-    "data": [
-        {
-            "id": 4,
-            "message": "Created red-flag record"
-        }
-    ]
-}
-```
-
 ## Running the tests
 Use `npm test` to run test to see a tabulated test result coverage
 
@@ -101,45 +66,6 @@ e.g
 User@guest MINGW64 ~/iReporter
 $ npm test
 ```
-
-### Break down into end to end tests
-The test checks all the routes mention above for conformity. It also tests all the methods and classes used to control backend activities.
-
-```
-e.g
-describe("Create red-flag record end-point", () => {
-
-	it("should return 201 if all input fields are validated correctly", (done) => {
-		request.post("/api/v1/red-flags")
-			.send({
-				"createdBy": 2,
-				"title": "Stealing",
-				"type": "red-flag",
-				"location": "12.233334, 2.323123",
-				"images": [
-					"imageURL1",
-					"imageURL2" ],
-				"videos": [
-					"videoURL1",
-					"videoURL2" ],
-				"comment": "This is a report on... to be continued"
-			}).end((err, res) => {
-				expect(res.status).to.eql(201);
-				expect(res.body.data[0].message).to.eql("Created red-flag record");
-				expect(res.body.data[0].message).to.be.a("string");
-				expect(res.body.status).to.be.a("number");
-				should.not.exist(err);
-				should.exist(res.body);
-				(res.body).should.be.an("object");
-				if (err) { return done(err); }
-				done();
-			});
-	});
-});
-```
-The example able is a test to validate the user form input fields.
-It expects a status code of 201 if the user accesses the route `host:port/api/v1/red-flags` and checks if it truly returns a 201 status.
-
 
 ## Deployment
 You can host this application on any server that is compatible with Nodejs apps.

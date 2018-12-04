@@ -3,8 +3,6 @@ import { Helpers } from "../helpers/predefinedMethods";
 import { Incidents } from "../controllers";
 
 
-const red_flag_string = "red-flag";
-
 /**
  * Checks if database is empty
  * @param  { object } req - Contains the body of the request.
@@ -41,6 +39,7 @@ export const doesRedFlagRecordExist = (req, res, next) => {
 * @param  { next } - Proceeds to the next method on the route
 */
 export const doesSpecificRedFlagIdRecordExist = (req, res, next) => {
+	const red_flag_string = "red-flag";
 	const filtered = Incidents.filterRecords(req, res, red_flag_string);
 	const specificRedFlag = filtered[2];
 

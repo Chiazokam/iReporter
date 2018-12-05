@@ -1,10 +1,47 @@
 /*---------------GENERAL STYLES--------------*/
 body{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  min-width: 480px;
+  min-width: 320px;
 }
-#peg{
+.remove-element{
+  color: #162661;
+  font-style: normal;
+  font-size: 1.2em;
+
+  transition-property: color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+.remove-element:hover{
+  color: #ff0000;
+  cursor: pointer;
+}
+#loading,
+#loading2,
+#latlongdisplay{
   display: none;
+}
+textarea{
+		font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+		text-align: left;
+}
+#boundary{
+  border: 1px ridge #162661;
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+.crime-form-container form {
+  padding: 2em 0;
+}
+
+.crime-form-container .font-setting,
+.record-list .font-setting,
+.font-setting{
+  font-size: 1.3em;
+}
+.crime-form-container .latlngfont{
+  font-size: 1.1em;
 }
 .red{
   color: rgb(255, 0, 0);
@@ -13,13 +50,17 @@ body{
   color: #3456d1;
 }
 .green{
-  color: greenyellow;
+  color: green;
 }
 .yellow{
   color: yellow;
 }
-.theme-blue{
+.theme-blue,
+.crime-form-container .theme-blue{
   color: #162661;
+}
+.theme-orange{
+  color: #fe0100;
 }
 .white{
   color: white;
@@ -29,6 +70,38 @@ a{
   text-decoration: none;
   color: #162661;
 }
+button{
+  border: none;
+  outline: none;
+  padding: 0;
+  background: none;
+  font-size: 1.0em;
+}
+button:hover{
+text-decoration: underline;
+}
+.post-display{
+  margin: 0 0 10% 0;
+}
+.post-display .profile-name{
+  position: relative;
+  display: inline-table;
+  padding-top: 0.5em;
+}
+.post-display .profile-name a{
+  position: absolute;
+  bottom: 0.2em;
+}
+.signin-form .deactivate:hover,
+.signup-form .deactivate:hover{
+  border: none;
+  outline: none;
+  padding: 0em;
+  background: none;
+  font-size: 1.0em;
+  box-shadow: none;
+}
+
 a:hover{
   text-decoration: underline;
 }
@@ -44,6 +117,7 @@ a:hover{
   width: 50px;
   height: 45px;
 }
+
 .avatar{
   width: 30px;
   height: 30px;
@@ -149,7 +223,7 @@ div.logo-container{
 #mobile-nav ul li:hover a{
   color: #ffffff;
 }
-#current, 
+#current,
 #mobile-current{
   color: #fe0100;
   font-weight: bold;
@@ -170,12 +244,19 @@ div.logo-container{
   background: #0f0b0a;
 }
 
+.crime-form-container{
+  background: #ffffff;
+}
+
 .crime-report-container h1{
   color: white;
   padding: 1em;
   font-size: 1.2em;
 }
-.crime-form-container form label,
+.crime-form-container form label{
+  color: #162661;
+  font-weight: bold;
+}
 .crime-form-container form input[type="file"]{
   color: white;
 }
@@ -189,12 +270,58 @@ div.logo-container{
   padding: 0.3em;
 }
 .crime-form-container form input[type="text"],
-.crime-form-container form input[type="number"]{
+.crime-form-container form input[type="number"],
+.post-display .location-input{
   display: inline-table;
   width: 320px;
   text-align: center;
   border-radius: 5px;
   padding: 0.5em;
+}
+ .crime-form-container form input[type="button"]{
+  color: white;
+  background: #162661;
+  border-radius: 5px;
+  padding: 0.5em;
+  border: none;
+
+  transition-property: background;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.2s;
+ }
+
+ .crime-form-container form input[type="button"]:hover{
+  box-shadow: 1px 1px 20px 1px #162661;
+  color: #162661;
+  background:  white;
+  cursor: pointer;
+ }
+ .crime-form-container .place-images,
+.crime-form-container .place-videos{
+  display: block;
+  text-align: center;
+}
+.crime-form-container #boundary h1{
+  padding: 0.1em 0;
+  background: #162661;
+  color: white;
+  width: 100%;
+}
+#boundary .place-images li,
+#boundary .place-videos li{
+  list-style: none;
+}
+.crime-form-container .video-uploads,
+.crime-form-container .image-uploads{
+  margin: 0.5em 0;
+  font-style: italic;
+}
+#incident_address{
+  width: 64%;
+}
+.attachment{
+  width: 15px;
+  height: 15px;
 }
 .crime-form-container form {
 text-align: center;
@@ -204,12 +331,14 @@ text-align: center;
 }
 .crime-form-container{
   text-align: left;
-  background: url("../images/justice.png");
-  background-size: cover;
+
+}
+.crime-form-container form{
+    box-shadow: 1px 5px 20px 1px #162661;
 }
 #title{
   margin-bottom: -40px;
-  width: 60%;
+  width: 64%;
 }
 .crime-form-container .post-text-area{
   display: block;
@@ -217,10 +346,17 @@ text-align: center;
   padding: 30px;
   height: 250px;
   margin: 20px auto;
-  border-radius: 10px;
-  outline: none; 
-  resize: none;
-  font-size: 1.3em;
+  outline: none;
+  resize: vertical;
+  font-size: 1.1em;
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 2px 1px #162661;
+  border: 1px solid #162661;
+}
+.crime-form-container form input[type="text"],
+.crime-form-container form input[type="number"]{
+  box-shadow: 1px 1px 2px 1px #162661;
+  border: 1px solid #162661;
 }
 .crime-form-container input.report{
   width: 100px;
@@ -248,7 +384,7 @@ text-align: center;
   font-size: 2em;
   display: inline-table;
 }
-.actual-post p{
+.actual-post div p{
   line-height: 2em;
 }
 .picture-evidence{
@@ -262,38 +398,30 @@ text-align: center;
   width: 20px;
   height: 20px;
 }
-.edit, .delete{
+.edit-comment,
+.edit-location,
+ .delete,
+ .edit{
   display: inline-table;
   cursor: pointer;
-  margin-top: 10px; 
+  text-transform: capitalize;
+  font-style: italic;
 }
+.edit-comment:hover,
+.edit-location:hover,
 .edit:hover{
-  color: #162661;
+  text-shadow: 1px 1px 1px rgb(99, 98, 98);
 }
 .delete:hover{
-  color: #fc3535;
+  text-shadow: 1px 1px 1px rgb(92, 91, 91)
 }
-
-.comment-container .comment {
+.post-display .post .actual-post .delete-record-container{
   text-align: center;
+  margin-top: 50px;
 }
 
-.comment-container .comment textarea{
-  resize: none;
-  width: 70%;
-  height: 100px;
-  outline: none;
-  border: none;
-  border-radius: 20px;
-  padding: 30px;
-  font-size: 1.2em;
-}
-.comment-avatar{
-  display: block;
-  padding-bottom: 10px;
-}
 /*------Modal-------*/
- 
+
 .outer-modal {
     position: fixed;
     z-index: 1;
@@ -325,16 +453,16 @@ text-align: center;
   margin-top: 0;
   border: none;
 
-    background-color: transparent;
-    border: 0px none transparent;
-    padding: 0px;
-    overflow: hidden;
+  background-color: transparent;
+  border: 0px none transparent;
+  padding: 0px;
+  overflow: hidden;
 }
 
 .choose-record {
   text-align: center;
 }
-.choose-record a{
+.choose-record input[type="button"]{
   padding: 10px 0;
   margin: 0;
   display: inline-table;
@@ -344,22 +472,32 @@ text-align: center;
   text-align: center;
   border-radius: 0 0 10px 10px;
   border: 1px solid #162661;
+
+  transition-duration: 0.4s;
+  transition-property: background;
+  transition-timing-function: ease-in-out;
 }
-.choose-record a:hover{
+.choose-record input[type="button"]:hover{
   color: white;
   background: #162661;
+  cursor: pointer;
 }
 .default{
   color: white;
-  background: #162661
+  background: #162661;
+}
+body.admin-body{
+  background: url("../images/admin_bg.png");
+  background-size: cover;
 }
 #admin{
+  background: rgba(255, 255, 255, 0.8);
   padding: 0 0;
 }
 .admin-container{
   background: #839dfc;
   padding: 0;
-  margin-top: 50px;
+  margin: 50px 0 15% 0;
   width: 100%;
 }
 .admin-nav{
@@ -380,6 +518,7 @@ text-align: center;
   width: 70%;
   background: #adbdf7;
   float: left;
+  padding-bottom: 10%;
 }
 .list-of-records li{
   text-align: center;
@@ -390,7 +529,7 @@ text-align: center;
   list-style: none;
   line-height: 2em;
 }
-.admin-nav li:hover, 
+.admin-nav li:hover,
 .admin-current{
   background: #2744aa;
   cursor: pointer;
@@ -406,7 +545,7 @@ text-align: center;
   background: #0f0b0a;
   padding: 50px 100px;
 }
-.outer-modal .inner-box 
+.outer-modal .inner-box
 .update-status-form select{
   cursor: pointer;
   background: #162661;
@@ -421,7 +560,7 @@ text-align: center;
   color: red;
   font-size: 0.8em;
 }
-.outer-modal .inner-box 
+.outer-modal .inner-box
 .update-status-form div{
   margin-top: 2em;
 }
@@ -442,11 +581,11 @@ text-align: center;
   color: #162661;
   font-size: 1em;
   line-height: 1.5em;
-  width: 36%; 
+  width: 36%;
   padding: 30px 40px;
   margin: 100px 2% 100px 2%;
   border-radius: 20px;
-  float: right;
+  float: left;
   text-align: left;
 }
 .body-container > h1{
@@ -467,7 +606,7 @@ text-align: center;
   text-align: center;
   padding: 0.5em;
 }
-.visitors-message h1 label, 
+.visitors-message h1 label,
 .body-container > h1 > label{
   color: #fe0100;
 }
@@ -475,19 +614,33 @@ text-align: center;
 .signup-form{
   display: none;
 }
+.signup-form a,
+.signin-form a{
+  cursor: pointer;
+  color: #162661;
+}
+.signup-form a:hover,
+.signin-form a:hover{
+  color: #3456d1;
+  text-shadow: 1px 5px 1px 1px grey;
+}
 .body-container .signup-form,
 .body-container .signin-form{
   text-align: center;
   width: 40%;
-  padding: 100px 6% 100px 4%;
+  padding: 50px 6% 50px 4%;
   border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  margin: 100px 0;
 }
-.signup-form, 
+.signup-form,
 .signin-form{
-  float: left;
+  float: right;
 }
 
 form input[type="text"],
+form input[type="number"],
+form input[type="email"],
 form input[type="password"],
 form input[type="submit"] {
   text-align: center;
@@ -500,31 +653,39 @@ form input[type="submit"] {
   width: 100%;
   font-size: 1.05em;
 }
-form input[type="text"], 
-form input[type="password"],
-form input[type="number"],
+
+.crime-form-container form input[type="text"],
+.crime-form-container form input[type="number"],
 .crime-form-container .post-text-area,
-.comment-container .comment textarea{
+.comment-container .comment textarea {
+  background: #f5f7ff;
+}
+
+.body-container form input[type="text"],
+.body-container form input[type="password"],
+.body-container form input[type="email"],
+.body-container form input[type="number"]{
   background: #dad9d9;
 }
-form input[type="text"]:focus, 
+form input[type="text"]:focus,
 form input[type="password"]:focus,
 form input[type="number"]:focus,
+form input[type="email"],
 .crime-form-container .post-text-area:focus,
 .comment-container .comment textarea:focus{
   background: #ffffff;
 }
-  h1#compose-heading{
-    color: white;
+  h2#compose-heading{
+    color: #162661;
     text-align: center;
     font-size: 1.2em;
     padding: 0.5em 0 0.5em 0;
     width: 320px;
-    margin: 0 auto 0.5em auto;
-    color: #837665;
-    background: #162661;
+    margin: 0 auto 2em auto;
+    background: white;
     border-radius: 0 0 10px 10px;
     border-top: none;
+    box-shadow: 1px 1px 1px 1px #162661;
   }
 
 form h2{
@@ -534,7 +695,31 @@ form h2{
 }
 .switch-signin{
   color: #fe0100;
+  border-radius: 0 5px 5px 0;
 }
+.switch-signup{
+  border-radius: 5px 0 0 5px;
+}
+.switch-signin,
+.switch-signup{
+  transition-duration: 0.2s;
+  transition-property: padding;
+  transition-timing-function: ease-in-out;
+}
+.switch-signin:hover,
+.switch-signup:hover{
+  box-shadow: 1px 1px 10px 1px #162661;
+  padding: 5px;
+  background: white;
+}
+
+.signup-form a:hover,
+.signin-form a:hover{
+  box-shadow: none;
+  padding: 0;
+  background: none;
+}
+
 form input[type="submit"],
 .comment-container .comment input[type="submit"]{
   color: white;
@@ -562,12 +747,31 @@ form input[type="submit"]:hover,
   margin: 0 100px;
   border-radius: 10px;
 }
-
+.actual-post input.location-input{
+  width: 250px;
+  padding: 5px
+}
+textarea.editing-tag,
+input.location-input{
+  font-size: 1em;
+}
+.editing-tag{
+  resize: vertical;
+  width: 90%;
+  height: 200px;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  padding: 25px 5%;
+  font-size: 1em;
+  text-align: left;
+  margin-top: 10px;
+}
 .reply p{
   padding: 0 20px;
   text-align: justify;
 }
-.switch-signup:hover, 
+.switch-signup:hover,
 .switch-signin:hover{
   cursor: pointer;
 }
@@ -576,15 +780,39 @@ form input[type="submit"]:hover,
 }
 .intervention-count-container,
 .redflag-count-container {
-  margin: 10px;
+  margin: 10px 0;
+}
+.profile-body{
+  background: url("../images/profile_bg.png");
+  background-size: cover;
+}
+#profile{
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0 0 15% 0;
 }
 .profile,
 .record-list{
-  padding: 0 100px;
+  padding: 0 50px;
   text-align: center;
 }
-.profile .profile-details{
+.profile > section.inner-profile-border{
+  border-radius: 20px;
+}
+.profile-details label{
+  display: inline-block;
+  padding: 0.2em 0;
+}
+.profile-details-border{
+  background: white;
+  box-shadow: 1px 1px 1px 1px rgb(155, 154, 154);
+  border-radius: 20px;
+  width: 300px;
   text-align: center;
+  margin: 50px auto 0 auto;
+  padding: 1em 2em;
+}
+.profile .profile-details{
+  text-align: left;
 }
 .profile .large-avatar{
   width: 100px;
@@ -593,14 +821,14 @@ form input[type="submit"]:hover,
   display: block;
 }
 .profile .record-count{
-  width: 33.333333%;
+  width: 33.33333333333333%;
   padding: 5px 0;
-  background-color: #576cbb98;
+  background-color: #a2b4fc;
   color: white;
   float: left;
   text-align: center;
   border-radius: 0 0 10px 10px;
-  box-shadow: 1px 5px 20px 1px rgb(155, 154, 154);
+  box-shadow: 1px 5px 15px 1px rgb(155, 154, 154);
 }
 .profile .middle{
   height: 100px;
@@ -613,34 +841,64 @@ form input[type="submit"]:hover,
   font-size: 100%;
   text-align: center;
 }
-.profile h1,
-.record-list h1{
+.profile h1{
   font-size: 1.3em;
   padding: 20px 0 10px 0;
   color: #162661;
   text-align: center;
 }
+.record-list h1,
+.intervention-count-container h1,
+.redflag-count-container h1{
+  font-size: 1.5em;
+  padding: 20px 0;
+  color: #ffffff;
+  background: #162661;
+  text-align: center;
+  margin: 50px 0 10px 0;
+}
 .record-list li{
   list-style: none;
+  padding: 0.3em 0;
 }
+
 .record-list{
   padding-bottom: 50px
 }
-.redflag-list{
-  border-right: 1px solid #162661;
-}
+
 .redflag-list,
 .intervention-list{
-  display: inline-table;
-  padding: 0 50px;
+  float: left;
+  width: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 0 0 20px 0;
+  box-shadow: 1px 1px 1px 1px #162661;
+  margin-top: 1em;
+}
+.redflag-list h2,
+.intervention-list h2{
+  background: #d4d4d6;
+
+}
+#howitworks div,
+#about div{
+  box-shadow: 1px 5px 10px 1px grey;
+  padding: 50px 50px;
+  margin: 0 0 25% 0
+}
+#howitworks div h1.theme-blue,
+#about div h1.theme-blue{
+  text-align: center;
+  width: 100%;
 }
 footer{
   background: #162661;
   color: white;
   text-align: center;
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding-top: 0.9em;
+  padding-bottom: 0.9em;
 }
+
 /*--------------MEDIA QUERIES--------------*/
 @media(max-width:800px) {
   .admin-nav{
@@ -669,15 +927,38 @@ footer{
     .profile .record-count:last-of-type{
     border-radius: 0 0 20px 20px;
   }
+   .redflag-list{
+     border-bottom: #162661 1px solid;
+   }
   .redflag-list,
   .intervention-list{
-    display: block;
-    border: none;
-    margin-bottom: 20px;
+    float: none;
+    width: 100%;
+    padding: 0 0 25px 0;
+    margin-bottom: 50px;
+  }
+  .profile{
+  padding: 0 10px;
+}
+.record-list h1{
+  padding: 10px 0;
+  color: #ffffff;
+  background: #162661;
+  text-align: center;
+  margin-bottom: 0;
+}
+#howitworks div h1.theme-blue,
+#about div h1.theme-blue{
+  font-size: 1.5em;
+  }
   }
 
-  }
+
+
 @media(max-width:1000px) {
+  #mobile-nav ul{
+  box-shadow: 1px 5px 20px 1px rgb(0, 0, 0);
+}
  .reply {
    margin: 0;
  }
@@ -694,23 +975,29 @@ footer{
 #desktop-nav{
   display: none;
 }
+ .visitors-message ul{
+   padding: 0 1em;
+ }
   .visitors-message{
-    width: 95%;
+    width: 90%;
     float: none;
-    margin: 50px auto 0 -2em;
-    background: rgba(255, 255, 255, 0.9);
-    font-size: 100%;
+    margin: 50px 0;
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 1em;
+    padding: 25px 5%;
   }
 
-  .signup-form, 
+  .signup-form,
   .signin-form{
     float: none;
     width: 100%;
 }
   .body-container .signup-form,
   .body-container .signin-form{
-    width: 100%;
-    padding: 50px 0 100px 0;
+    width: 90%;
+    padding: 50px 5% 50px 5%;
+    margin: 50px 0;
+    background: rgba(255, 255, 255, 0.8);
   }
   .crime-form-container .post-text-area{
     width: 70%;
@@ -739,7 +1026,7 @@ footer{
   width: 50%;
 }
 #title{
-  width: 75%;
+  width: 64%;
 }
 .video-display video{
   width: 70%;
@@ -757,23 +1044,108 @@ footer{
     position: relative;
     margin-right: 15px;
     padding-top: 7px;
-    float: none;/*<------*/  
+    float: none;/*<------*/
     line-height: 50px;
     list-style: none;
     text-align: center
   }
+  #howitworks div h1.theme-blue,
+#about div h1.theme-blue{
+  font-size: 1.5em;
+  }
+
+}
+
+@media(max-width: 500px) {
+ .crime-form-container form input[type="button"]{
+  margin-top: 1em;
+ }
+  .body-container {
+   padding: 0 40px;
+ }
+   .hamburger{
+  width: 40px;
+  height: 40px;
+  margin: 10px 25px 0 0;
+}
+.profile,
+.record-list{
+  padding: 0 10px;
+  text-align: center;
+}
+#howitworks div,
+#about div{
+  box-shadow: 1px 5px 10px 1px grey;
+  padding: 50px 10px;
+  font-size: 100%;
+}
+#howitworks,
+#about{
+  padding: 50px 10px;
+}
+
+.post-display .profile-name{
+  position: initial;
+  display: inline-table;
+  padding-top: 0;
+  display: block;
+}
+.post-display .profile-name a{
+  position: initial;
+  bottom: 0;
+}
+#incident_address{
+  width: 90%;
+}
 
 }
 
 @media(max-width:320px) {
-  #longitude, 
+  #longitude,
   #latitude{
     width: 250px;
   }
   .video-display video{
   width: 90%;
 }
-
+h2#compose-heading{
+  font-size: 100%;
+  width: 100%;
+}
+.sitename{
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  font-size: 1.4em;
+}
+ .body-container {
+   padding: 0 20px;
+ }
+ .body-container h1{
+  font-size: 120%
+ }
+  .hamburger{
+  width: 40px;
+  height: 40px;
+  display: block;
+  float: right;
+  margin: 10px 25px 0 0;
+}
+#mobile-nav{
+  position: absolute;
+  top: 3.5em;
+}
+.crime-form-container form input[type="text"], .crime-form-container form input[type="number"], .post-display .location-input{
+  padding-left: 0;
+  padding-right: 0;
+}
+.profile-details-border{
+  padding: 1em 0;
+}
+.profile .profile-details{
+  text-align: center;
+  font-size: 100%;
+}
 }
 
 

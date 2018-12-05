@@ -4,7 +4,7 @@
   "description": "Corruption is a huge bane to Africa’s development. African countries must develop novel and localised solutions that will curb this menace, hence the birth of iReporter. iReporter enables any/every citizen to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention.",
   "main": "server.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test && nyc --reporter=html --reporter=text mocha --require babel-register --timeout 10000 ./test/*.js --exit",
+    "test": "cross-env NODE_ENV=test && nyc --reporter=html --reporter=text mocha --require babel-register --timeout 10000 ./test/ --exit",
     "start": "babel-node ./server.js",
     "start:dev": "nodemon --watch server --exec babel-node ./server.js",
     "test:dev": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register ./test*.js --timeout 20000 --exit",

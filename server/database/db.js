@@ -1,18 +1,17 @@
 import dotenv from "dotenv";
 import pg from "pg-promise";
 import { Pool } from "pg";
-import { polulateDB } from "./populateDB";
 
 dotenv.config();
 
 
 const connectionString = process.env.DATABASE_URL;
 
-const createTables = () => {
-	const pool = new Pool({ connectionString });
-	pool.connect();
+const runQuery = () => {
+  const pool = new Pool({ connectionString });
+  pool.connect();
 
-	const query =
+  const query =
         `
         DROP TABLE IF EXISTS users CASCADE;
         DROP TABLE IF EXISTS incidents CASCADE;
@@ -44,22 +43,58 @@ const createTables = () => {
             createdBy INT REFERENCES users(id),
             createdOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP
           );
-        `;
 
-	pool.query(query)
-		.then(() => pool.end())
-		.catch(() => pool.end());
+        INSERT INTO users(
+          username,
+          firstname,
+          lastname,
+          othername,
+          email,
+          phoneNumber,
+          password,
+          isAdmin)
+        VALUES (
+          'shaolinmkz',
+          'Chukwuemeka',
+          'Nwabuzor',
+          'Obiora',
+          'nwabuzor.obiora@gmail.com',
+          '07067443245',
+          '$2a$10$TRKGYcUtvqxaBFuBWZlccOF559mfcAFtKrrKZw/KWA507nTioM6x6',
+          'true');
+
+        INSERT INTO incidents(
+          title,
+          comment,
+          type,
+          location,
+          images,
+          videos,
+          status,
+          createdBy)
+          VALUES (
+            'People are suffering from mal-nutrition',
+            'It all started when the earth rumbled...',
+            'red-flag',
+            '12.233334, 2.323123',
+            'http://jamaica-star.com/sites/default/files/styles/460px/public/media/article_images/2017/11/21/BadroadsA20171121RM.jpg?itok=K72fUdU5',
+            'https://youtu.be/bPYbg-nrWzg',
+            'draft',
+            1);
+              `;
+
+  pool.query(query)
+    .then(() => pool.end())
+    .catch(() => pool.end());
 };
 
 
-createTables();
+runQuery();
 
 const pgp = pg();
 export const db = pgp(connectionString);
 
 console.log("Database Connected");
-
-polulateDB();
 
 
 

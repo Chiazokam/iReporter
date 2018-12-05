@@ -4,9 +4,10 @@ import { userDB } from "../dummyDB";
 
 /**
  * Validate values inside an array
- * @param  { object } req - Contains the body of the request.
- * @param { object } res - Contains the returned response.
- * @param  { next } - Proceeds to the next method on the route
+ * @param  {object} req - Contains the body of the request.
+ * @param {object} res - Contains the returned response.
+ * @param  {next} - Proceeds to the next method on the route
+ * @return {undefined}
  */
 export const validateArrayValues = (req, res, next) => {
 	const { images, videos } = req.body;
@@ -22,10 +23,10 @@ export const validateArrayValues = (req, res, next) => {
 		Helpers.returnForError(req, res, 400, "videos content is not a string");
 
 	} else if (Helpers.isValueInsideArrayEmpty(images)) {
-		Helpers.returnForError(req, res, 400, "undefined input images");
+		Helpers.returnForError(req, res, 400, "unspecified input images");
 
 	} else if (Helpers.isValueInsideArrayEmpty(videos)) {
-		Helpers.returnForError(req, res, 400, "undefined input videos");
+		Helpers.returnForError(req, res, 400, "unspecified input videos");
 
 	} else {
 		next();
@@ -34,9 +35,10 @@ export const validateArrayValues = (req, res, next) => {
 
 /**
  * Validates users location input field for a single string field
- * @param  { object } req - Contains the body of the request.
- * @param { object } res - Contains the returned response.
- * @param  { next } - Proceeds to the next method on the route
+ * @param  {object} req - Contains the body of the request.
+ * @param {object} res - Contains the returned response.
+ * @param  {next} - Proceeds to the next method on the route
+ * @return {undefined}
  */
 export const locationStringValidation = (req, res, next) => {
 	const { location } = req.body;
@@ -46,9 +48,10 @@ export const locationStringValidation = (req, res, next) => {
 
 /**
  * Validates the comment input field for a single string field
- * @param  { object } req - Contains the body of the request.
- * @param { object } res - Contains the returned response.
- * @param  { next } - Proceeds to the next method on the route
+ * @param  {object} req - Contains the body of the request.
+ * @param {object} res - Contains the returned response.
+ * @param  {next} - Proceeds to the next method on the route
+ * @return {undefined}
  */
 export const commentStringValidation = (req, res, next) => {
 	const { comment } = req.body;
@@ -59,10 +62,10 @@ export const commentStringValidation = (req, res, next) => {
 
 /**
  * Validates users input for report creation
- * @param  { object } req - Contains the body of the request.
- * @param { object } res - Contains the returned response.
- * @param  { next } - Proceeds to the next method on the route
- * @return { undefined }
+ * @param  {object} req - Contains the body of the request.
+ * @param {object} res - Contains the returned response.
+ * @param  {next} - Proceeds to the next method on the route
+ * @return {undefined}
  */
 export const multipleStringValidation = (req, res, next) => {
 	const { title, comment, type, location, images, videos } = req.body;
@@ -73,17 +76,17 @@ export const multipleStringValidation = (req, res, next) => {
 
 	for (inputs in reqArray) {
 		if (!reqArray[inputs]) {
-			return Helpers.returnForError(req, res, 400, `undefined input ${reqArray[inputs]}`);
+			return Helpers.returnForError(req, res, 400, `input ${reqArray[inputs]} not specified`);
 		}
 	}
 	for (inputs in strings) {
 		if (!(/[^\s+]/g.test(reqArray[inputs]))) {
-			return Helpers.returnForError(req, res, 400, `undefined input ${strings[inputs]}`);
+			return Helpers.returnForError(req, res, 400, `input ${reqArray[inputs]} not specified`);
 		}
 	}
 	for (inputs in strings) {
 		if (Helpers.isNotString(strings[inputs])) {
-			return Helpers.returnForError(req, res, 400, `undefined input ${strings[inputs]}`);
+			return Helpers.returnForError(req, res, 400, `input ${reqArray[inputs]} not specified`);
 		}
 	}
 	validateArrayValues(req, res, next);
@@ -91,9 +94,10 @@ export const multipleStringValidation = (req, res, next) => {
 
 /**
  * Checks if input is a red-flag type
- * @param  { object } req - Contains the body of the request.
- * @param { object } res - Contains the returned response.
- * @param  { next } - Proceeds to the next method on the route
+ * @param  {object} req - Contains the body of the request.
+ * @param {object} res - Contains the returned response.
+ * @param  {next} - Proceeds to the next method on the route
+ * @return {undefined}
  */
 export const isRedFlag = (req, res, next) => {
 	const { type } = req.body;
@@ -106,9 +110,10 @@ export const isRedFlag = (req, res, next) => {
 
 /**
  * Validates if users exist in the database
- * @param  { object } req - Contains the body of the request.
- * @param { object } res - Contains the returned response.
- * @param  { next } - Proceeds to the next method on the route
+ * @param  {object} req - Contains the body of the request.
+ * @param {object} res - Contains the returned response.
+ * @param  {next} - Proceeds to the next method on the route
+ * @return {undefined}
  */
 export const isUser = (req, res, next) => {
 	const { createdBy } = req.body;

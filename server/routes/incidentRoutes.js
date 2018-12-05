@@ -10,7 +10,8 @@ import {
 	isRedFlag,
 	doesRedFlagRecordExist,
 	doesSpecificRedFlagIdRecordExist,
-	commentStringValidation } from "../middlewares";
+	commentStringValidation
+} from "../middlewares";
 
 const incident = new Incidents();
 

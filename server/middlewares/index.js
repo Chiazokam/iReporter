@@ -3,13 +3,17 @@ import {
 	locationStringValidation,
 	commentStringValidation,
 	isUser,
-	isRedFlag } from "./validatePostRecords";
+	isRedFlag
+} from "./validatePostRecords";
 
-import { isDummyDbEmpty,
+import {
+	isDummyDbEmpty,
 	doesRedFlagRecordExist,
-	doesSpecificRedFlagIdRecordExist } from "./validateGetRecords";
+	doesSpecificRedFlagIdRecordExist
+} from "./validateGetRecords";
 
-export { multipleStringValidation,
+export {
+	multipleStringValidation,
 	locationStringValidation,
 	commentStringValidation,
 	isUser,

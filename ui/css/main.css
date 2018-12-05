@@ -3,7 +3,19 @@ body{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   min-width: 320px;
 }
+.remove-element{
+  color: #162661;
+  font-style: normal;
+  font-size: 1.2em;
 
+  transition-property: color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+.remove-element:hover{
+  color: #ff0000;
+  cursor: pointer;
+}
 #loading,
 #loading2,
 #latlongdisplay{
@@ -336,7 +348,7 @@ text-align: center;
   margin: 20px auto;
   outline: none;
   resize: vertical;
-  font-size: 1.3em;
+  font-size: 1.1em;
   border-radius: 0.3em;
   box-shadow: 1px 1px 2px 1px #162661;
   border: 1px solid #162661;
@@ -741,7 +753,7 @@ form input[type="submit"]:hover,
 }
 textarea.editing-tag,
 input.location-input{
-  font-size: 1.2em;
+  font-size: 1em;
 }
 .editing-tag{
   resize: vertical;

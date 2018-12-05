@@ -37,10 +37,7 @@ const loading = document.getElementById("loading");
 
 const displayLatLng = document.getElementById("latlongdisplay");
 
-/**
- * Dummy login function
- * @return {undefined}
- */
+/** Dummy login function */
 window.addEventListener("click", (e) => {
 	if (e.target.id === "signup" || e.target.id === "signin") {
 		location.assign("./html/home.html");
@@ -103,6 +100,11 @@ const controlHamburgerForOtherPages = (event) => {
 	}
 };
 
+/**
+ * Control hamburger menu for the index-page
+ * @param {object} event - event object
+ * @return {undefined}
+ */
 const controlHamburger = (event) => {
 	if(location.href === pageIndex || location.href === ghpagesPageIndex || /index/gm.test(location.href)) {
 		if (event.target.id === hamburgerIndex.id) {
@@ -123,13 +125,11 @@ const controlHamburger = (event) => {
 
 window.addEventListener("click", controlHamburger);
 
-/**
- * Hamburger menu initializer
- * @return {undefined}
- */
+
+/** Hamburger menu initializer */
 window.addEventListener("resize", () => {
 	if (screen.availWidth > 999) {
-		if (location.href === pageIndex || location.href === ghpagesPageIndex) {
+    if (location.href === pageIndex || location.href === ghpagesPageIndex || /index/gm.test(location.href)) {
 			mobileNav.style.display = "none";
 			hamburger.src = "./images/menu_icon.png";
 			status = "close";
@@ -142,10 +142,7 @@ window.addEventListener("resize", () => {
 });
 
 
-/**
- * Enlarges an image
- * @return {undefined}
- */
+/** Enlarges an image */
 window.addEventListener("click", (e) => {
 	if (e.target.className == "picture-evidence"){
 		document.getElementsByClassName("image-enlarge")[0].src = e.target.src;
@@ -174,10 +171,7 @@ const switchToRecord = (event) => {
 window.addEventListener("click", switchToRecord);
 
 
-/**
- * Opens update status box modal for admin
- * @return {undefined}
- */
+/** Opens update status box modal for admin */
 window.addEventListener("click", (e) => {
 	if (e.target.className == "change") {
 		document.getElementsByClassName("outer-modal")[0].style.display = "block";
@@ -334,6 +328,7 @@ if (/report/gm.test(location.href)) {
 
 /**
  * Edit comment
+ * @param {object} - click event object
  * @return {undefined}
  */
 const editComment = (event) => {
@@ -348,15 +343,22 @@ const editComment = (event) => {
 
 		//Insert HTML mark-up into the the second child of the target element
 		target.children[1].innerHTML = `
-            <textarea class="editing-tag" id="updatedComment">${initialComment}</textarea>
-            <span class="editing-tag"><a class="red edit cancel">cancel</a> <span>&nbsp;</span><a class="blue edit">update</a></span>
-            `
+        <textarea class="editing-tag" id="updatedComment">${initialComment}</textarea>
+        <span class="editing-tag"><a class="red edit cancel">cancel</a> <span>&nbsp;</span><a class="blue edit">update</a></span>
+        `
 	}
-
 }
 window.addEventListener("click", editComment);
 
 
+/**
+ * Removes an element from the DOM
+ * @param { elem } elem - html element/tag
+ * @return {undefined}
+ */
+const removeMe = (elem) => {
+  elem.parentNode.remove();
+}
 
 
 /**
@@ -368,7 +370,10 @@ const hideMe = (elem) => {
 	elem.style.display = "none";
 }
 
-
+/**
+ * Cancels modification of the comment field
+ * @return {undefined}
+ */
 const cancelCommentUpdate = () => {
 	if (/cancel/gm.test(event.target.className)) {
 		const target = event.target.parentNode.parentNode.parentNode;
@@ -406,11 +411,9 @@ const editLocation = (event) => {
 		target.children[14].innerHTML += `
         <input type="text" class="location-input" value="${initialLoaction.innerHTML}" />
         <span class="editing-button-tag">
-         <a class="red edit exit">cancel</a>
-         <span>&nbsp;</span><a class="blue edit">update</a></span> `
+        <a class="red edit exit">cancel</a>
+        <span>&nbsp;</span><a class="blue edit">update</a></span> `
 	}
-
-
 }
 
 window.addEventListener("click", editLocation);

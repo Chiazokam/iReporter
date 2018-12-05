@@ -65,7 +65,7 @@
             <br>
             <input type="radio" name="report-type" id="red-flag" required> <label for="red-flag" style="cursor: pointer;">RED-FLAG<img src="../images/red_flag.png" class="red-flag-icon" title="Red-flag" /></label>
             <span> &nbsp; </span>
-            <input type="radio" name="report-type" id="intervention" required><label for="intervention" style="cursor: pointer;">INTERVENE<img src="../images/intervene_icon.png" class="red-flag-icon" title="Intervention" /></label>
+            <input type="radio" name="report-type" id="intervention" required><label for="intervention" style="cursor: pointer;">INTERVENTION<img src="../images/intervene_icon.png" class="red-flag-icon" title="Intervention" /></label>
             <br>
             <br>
             <br>
@@ -96,13 +96,15 @@
             <br>
             <div id="responseMessage"></div>
             <br>
+
             <h1 class=" font-setting">FILE UPLOADS</h1>
             <br>
-            <label class="theme-blue">Image</label> <input type="file" accept="image/*" id="picture-upload" required>
-            <input type="button" value="UPLOAD IMAGE" title="upload image" required/>
+
+            <label>Image</label> <input type="file" accept="image/*" id="picture-upload" >
+            <input type="button" value="UPLOAD IMAGE" title="upload image" />
             <ul class="place-images">
-                <li title="uploaded file" class="video-uploads theme-orange"><img title="attachment icon" src="../images/attachment.png" class="attachment">uploaded image1</li>
-                <li title="uploaded file" class="video-uploads theme-orange"><img title="attachment icon" src="../images/attachment.png" class="attachment">uploaded image2</li>
+                <li title="uploaded file" class="video-uploads theme-orange"><img title="attachment icon" src="../images/attachment.png" class="attachment">uploaded image1 <span onclick="removeMe(this)" class="remove-element"> &times;</span></li>
+                <li title="uploaded file" class="video-uploads theme-orange"><img title="attachment icon" src="../images/attachment.png" class="attachment">uploaded image2 <span onclick="removeMe(this)" class="remove-element"> &times;</span></li>
             </ul>
 
             <br>
@@ -111,7 +113,7 @@
             <label>Video</label> <input type="file" accept="video/*" id="video-upload">
             <input type="button" value="UPLOAD VIDEO" title="upload video"/>
             <ul class="place-videos">
-                <li title="uploaded file" class="image-uploads theme-orange"><img title="attachment icon" src="../images/attachment.png" class="attachment">uploaded video1</li>
+                <li title="uploaded file" class="image-uploads theme-orange"><img title="attachment icon" src="../images/attachment.png" class="attachment">uploaded video1 <span onclick="removeMe(this)" class="remove-element"> &times;</span></li>
             </ul>
              <br>
 

@@ -259,13 +259,13 @@ const errorResponse = (err) => {
 	responseMessage.style.marginTop = "0";
 	timeOut(responseMessage);
 		if (err.PERMISSION_DENIED === err.code) {
-			responseMessage.innerHTML = `<span style="color: red">User denied the request for Geolocation</span>`;
+		  responseMessage.innerHTML = `<span style="color: red">User denied the request for Geolocation</span>`;
 		} else if (err.POSITION_UNAVAILABLE === err.code) {
-			responseMessage.innerHTML = `<span style="color: red">Location information is unavailable</span>`;
+		  responseMessage.innerHTML = `<span style="color: red">Location information is unavailable</span>`;
 		} else if (err.TIMEOUT === err.code) {
-			responseMessage.innerHTML = `<span style="color: red">The request to get user location timed out</span>`;
+		  responseMessage.innerHTML = `<span style="color: red">The request to get user location timed out</span>`;
 		} else if (err.UNKNOWN_ERROR === err.code) {
-			responseMessage.innerHTML = `<span style="color: red">An unknown error occurred</span>`;
+		  responseMessage.innerHTML = `<span style="color: red">An unknown error occurred</span>`;
 		}
 
 }
@@ -287,9 +287,9 @@ const initAutocomplete = () => {
 
 		if (place.address_components) {
 			address = [
-				(place.address_components[0] && place.address_components[0].short_name || ''),
-				(place.address_components[1] && place.address_components[1].short_name || ''),
-				(place.address_components[2] && place.address_components[2].short_name || '')
+        (place.address_components[0] && place.address_components[0].short_name || ''),
+        (place.address_components[1] && place.address_components[1].short_name || ''),
+        (place.address_components[2] && place.address_components[2].short_name || '')
 			].join(' ');
 		}
 	});

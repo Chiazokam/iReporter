@@ -49,7 +49,7 @@
         <form>
             <section id="boundary">
             <h2 id="compose-heading">COMPOSE REPORT</h2>
-            
+
             <h1 class="font-setting">TITLE</h1>
             <br>
             <input type="text" placeholder="ENTER TITLE" class="title" id="title" required/>
@@ -63,11 +63,11 @@
             <br>
             <h1 class=" font-setting">INCIDENT TYPE</h1>
             <br>
-            <input type="radio" name="report-type" id="red-flag" required> <label for="red-flag" style="cursor: pointer;">RED-FLAG<img src="../images/red_flag.png" class="red-flag-icon" title="Red-flag" /></label> 
+            <input type="radio" name="report-type" id="red-flag" required> <label for="red-flag" style="cursor: pointer;">RED-FLAG<img src="../images/red_flag.png" class="red-flag-icon" title="Red-flag" /></label>
             <span> &nbsp; </span>
-            <input type="radio" name="report-type" id="intervention" required><label for="intervention" style="cursor: pointer;">INTERVENE<img src="../images/intervene_icon.png" class="red-flag-icon" title="Intervention" /></label> 
-            <br> 
-            <br> 
+            <input type="radio" name="report-type" id="intervention" required><label for="intervention" style="cursor: pointer;">INTERVENE<img src="../images/intervene_icon.png" class="red-flag-icon" title="Intervention" /></label>
+            <br>
+            <br>
             <br>
 
             <h1 class=" font-setting">GEOLOCATION</h1>
@@ -85,7 +85,7 @@
                 <br>
                 <label>Longitude : </label> <span id="longitude" class="latlngfont green"></span>
             </div>
-            
+
             <br>
             <br>
             <small class="theme-orange">If your in the current location, then click the <strong>FINDME</strong> button below</small>
@@ -105,7 +105,7 @@
                 <li title="uploaded file" class="video-uploads theme-orange"><img title="attachment icon" src="../images/attachment.png" class="attachment">uploaded image2</li>
             </ul>
 
-            <br> 
+            <br>
             <br>
 
             <label>Video</label> <input type="file" accept="video/*" id="video-upload">
@@ -116,19 +116,19 @@
              <br>
 
             <input type="submit" value="SEND" class="report" title="submit report">
-            
+
             <br>
         </section>
         </form>
     </section>
-    
-        <section class="feeds">        
+
+        <section class="feeds">
 
             <div class="choose-record">
                 <input type="button" value="RED FLAG" class="default" id="redflag-record">
                 <input type="button" value="INTERVENTION" id="intervention-record">
             </div>
-            
+
             <section class="post-display">
                 <div class="post">
                     <article class="actual-post">
@@ -136,7 +136,7 @@
                         <br>
                         <h1> Murder In XYZ Town</h1>
                         <img src="../images/red_flag.png" class="red-flag-icon" title="Red flag" />
-            
+
                         <div class="story">
                             <p>
 In a few days along comes the letter you expect. Your merchandise is quite good — in fact the
@@ -153,13 +153,13 @@ They send out their letters by first-class mail — about two hundred dollars wi
 
 And you’ll be kind enough to send Smith & Jones enough circulars so there won’t be any delay.
                             </p>
-            
+
                             <div class="insert-editing-tag-here"></div>
-            
+
                             <button class="blue edit-comment" onclick=hideMe(this)>modify comment</button>
                         </div>
-            
-            
+
+
                         <br>
                         <br>
                         <label class="blue">STATUS</label> : <span>Under Investigation</span> <br>
@@ -168,7 +168,7 @@ And you’ll be kind enough to send Smith & Jones enough circulars so there won�
                         <button class="blue edit-location" onclick=hideMe(this)>modify location</button><br>
                         <br>
                         <br>
-            
+
                         <div class="image-display">
                             <img src="../images/murder.jpg" class="picture-evidence" title="picture-evidence" />
                         </div>
@@ -178,13 +178,13 @@ And you’ll be kind enough to send Smith & Jones enough circulars so there won�
                                 <source src="../videos/Fail_Like_a_Child_Inspiration_by_Jay_Shetty.mp4">
                             </video>
                         </div>
-            
+
                         <div class="delete-record-container">
                             <button class="red delete">delete</button>
                         </div>
                     </article>
                 </div>
-            
+
             </section>
 
 
@@ -207,11 +207,11 @@ And you’ll be kind enough to send Smith & Jones enough circulars so there won�
         </div>
 
     </footer>
-    
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeFdalDissHNDZBQ_utZRn-0dkTSkNS3g&libraries=places"></script>
     <script src="../scripts/main.js"></script>
     <script src="../scripts/injectmarkups.js"></script>
-    
+
 </body>
 
 </html>

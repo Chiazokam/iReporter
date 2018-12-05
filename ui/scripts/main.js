@@ -37,7 +37,10 @@ const loading = document.getElementById("loading");
 
 const displayLatLng = document.getElementById("latlongdisplay");
 
-
+/**
+ * Dummy login function
+ * @return {undefined}
+ */
 window.addEventListener("click", (e) => {
 	if (e.target.id === "signup" || e.target.id === "signin") {
 		location.assign("./html/home.html");
@@ -46,7 +49,8 @@ window.addEventListener("click", (e) => {
 
 /**
  * Time out function to remove display
- * */
+ * @return {undefined}
+ */
 const timeOut = (elem) => {
 	setTimeout(() => {
 		elem.innerHTML = " ";
@@ -57,6 +61,7 @@ const timeOut = (elem) => {
 /**
  * Switch to signin or signup form
  * @param {object} event - event object
+ * @return {undefined}
  */
 const switchForm = (event) => {
 	if (/switch-signup/gm.test(event.target.className)){
@@ -79,6 +84,7 @@ window.addEventListener("click", switchForm);
 /**
  * Control hamburger menu
  * @param {object} event - event object
+ * @return {undefined}
  */
 
 const controlHamburgerForOtherPages = (event) => {
@@ -119,6 +125,7 @@ window.addEventListener("click", controlHamburger);
 
 /**
  * Hamburger menu initializer
+ * @return {undefined}
  */
 window.addEventListener("resize", () => {
 	if (screen.availWidth > 999) {
@@ -135,6 +142,10 @@ window.addEventListener("resize", () => {
 });
 
 
+/**
+ * Enlarges an image
+ * @return {undefined}
+ */
 window.addEventListener("click", (e) => {
 	if (e.target.className == "picture-evidence"){
 		document.getElementsByClassName("image-enlarge")[0].src = e.target.src;
@@ -148,6 +159,7 @@ window.addEventListener("click", (e) => {
 /**
  * Indicates Current records switch
  * @param {object} event - event object
+ * @return {undefined}
  */
 const switchToRecord = (event) => {
 	if (event.target.id === "redflag-record") {
@@ -162,20 +174,9 @@ const switchToRecord = (event) => {
 window.addEventListener("click", switchToRecord);
 
 
-
-window.addEventListener("click", (e) => {
-	if (e.target.className == "picture-evidence") {
-		document.getElementsByClassName("image-enlarge")[0].src = e.target.src;
-		document.getElementsByClassName("outer-modal")[0].style.display = "block";
-	} else if (e.target.className == "outer-modal") {
-		document.getElementsByClassName("outer-modal")[0].style.display = "none";
-	}
-});
-
-
-
 /**
  * Opens update status box modal for admin
+ * @return {undefined}
  */
 window.addEventListener("click", (e) => {
 	if (e.target.className == "change") {
@@ -189,6 +190,7 @@ window.addEventListener("click", (e) => {
 /**
  * Admin Category switch
  * @param {object} event - event object
+ * @return {undefined}
  */
 const switchCategory = (event) => {
 	if (/admin/gm.test(location.href)){
@@ -212,6 +214,7 @@ window.addEventListener("click", switchCategory);
 
 /**
  * Find current location of user using the inbuilt geolocator fron the navigator object
+ * @return {undefined}
  */
 const findMe = (e) => {
 	if (e.target.id !== "myCurrentLocation" ) {
@@ -231,14 +234,15 @@ window.addEventListener("click", findMe);
 
 /**
  * Shows the coordinate position of user
- * @param {object} position 
+ * @param {object} position
+ * @return {undefined}
  */
 const revealCoordinates = (position) => {
 	latitude.innerHTML = Number(position.coords.latitude).toPrecision(10);
 	longitude.innerHTML = Number(position.coords.longitude).toFixed(10);
 	displayLatLng.style.display = "block";
 	responseMessage.innerHTML = `<span style="color: green; font-weight: bold;"> LOCATION FOUND <span>`;
-	timeOut(responseMessage);	
+	timeOut(responseMessage);
 	loading.style.display = "none";
 }
 
@@ -247,7 +251,8 @@ const revealCoordinates = (position) => {
 
 /**
  * Error response if location couldn't be found
- * @param {object} error 
+ * @param {object} error
+ * @return {undefined}
  */
 const errorResponse = (err) => {
 	loading.style.display = "none";
@@ -265,9 +270,11 @@ const errorResponse = (err) => {
 
 }
 
-let address;
 const loading2 = document.getElementById("loading2");
-
+/**
+ * Initiates google autocomplete
+ * @return {undefined}
+ */
 const initAutocomplete = () => {
 	const incidentAddress = (document.getElementById("incident_address"));
 	const autocomplete = new google.maps.places.Autocomplete(incidentAddress);
@@ -277,7 +284,7 @@ const initAutocomplete = () => {
 		if (!place.geometry) {
 			return;
 		}
-		
+
 		if (place.address_components) {
 			address = [
 				(place.address_components[0] && place.address_components[0].short_name || ''),
@@ -288,6 +295,11 @@ const initAutocomplete = () => {
 	});
 }
 
+/**
+ * Gets the coordinates of a location
+ * @param {object} event - event object
+ * @return {undefined}
+ */
 const getAddress = (event) => {
 	if (event.target.id !== "getCoordinates") {
 		return;
@@ -321,7 +333,8 @@ if (/report/gm.test(location.href)) {
 
 
 /**
- * edit comment
+ * Edit comment
+ * @return {undefined}
  */
 const editComment = (event) => {
 	const initialComment = event.target.parentNode.children[0].innerHTML.trim();
@@ -347,8 +360,9 @@ window.addEventListener("click", editComment);
 
 
 /**
- * hide an element
+ * Hide an element
  * @param { elem } elem - html element/tag
+ * @return {undefined}
  */
 const hideMe = (elem) => {
 	elem.style.display = "none";
@@ -373,7 +387,11 @@ const cancelCommentUpdate = () => {
 
 window.addEventListener("click", cancelCommentUpdate);
 
-
+/**
+ * Edit location
+ * @param {object} event - event object
+ * @return {undefined}
+ */
 const editLocation = (event) => {
 
 	if (/edit-location/gm.test(event.target.className)) {
@@ -388,7 +406,7 @@ const editLocation = (event) => {
 		target.children[14].innerHTML += `
         <input type="text" class="location-input" value="${initialLoaction.innerHTML}" />
         <span class="editing-button-tag">
-         <a class="red edit exit">cancel</a> 
+         <a class="red edit exit">cancel</a>
          <span>&nbsp;</span><a class="blue edit">update</a></span> `
 	}
 
@@ -397,7 +415,11 @@ const editLocation = (event) => {
 
 window.addEventListener("click", editLocation);
 
-
+/**
+ * Cancel Edit
+ * @param {object} event
+ * @return {undefined}
+ */
 const cancelLocationUpdate = (event) => {
 	if (/exit/gm.test(event.target.className)) {
 		const target = event.target.parentNode;
@@ -414,10 +436,4 @@ const cancelLocationUpdate = (event) => {
 }
 
 window.addEventListener("click", cancelLocationUpdate);
-
-
-
-
-
-
 

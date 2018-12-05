@@ -1,19 +1,20 @@
 /**
  * Indicates Current records switch
  * @param {object} event - event object
+ * @return {undefined}
  */
 const injectIncidentRecord = (event) => {
     let displayPost = document.getElementsByClassName("post-display")[0];
     if (event.target.id === "redflag-record") {
         displayPost.innerHTML = "";
-        displayPost.innerHTML =`        
+        displayPost.innerHTML =`
         <div class="post">
             <article class="actual-post">
                 <img src="../images/avatar.png" class="avatar" title="avatar" /> <i class="profile-name"><a href="./profile.html">Mark</a></i>
                 <br>
                 <h1> Murder In XYZ Town</h1>
                 <img src="../images/red_flag.png" class="red-flag-icon" title="Red flag" />
-                
+
                 <div class="story">
                     <p>
 In a few days along comes the letter you expect. Your merchandise is quite good — in fact the writer likes it and wishes to talk to you about it if you will call at such and such a time.
@@ -21,8 +22,8 @@ In a few days along comes the letter you expect. Your merchandise is quite good 
 Promptly on the minute you present yourself, trying not to beam. Yes, Mr. Jones, of Smith & Jones, to whom your goods were shown, thinks they’re just what the firm has been looking for. They’re going in to exploit them heavily for you.
 All they want is their commission on any merchandise they sell.
 
-Oh yes — there’s going to be the postage on the twenty-five or fifty thousand letters they’re going to send out to all their correspondents, with your prospectus in it. 
-They send out their letters by first-class mail — about two hundred dollars will cover it. 
+Oh yes — there’s going to be the postage on the twenty-five or fifty thousand letters they’re going to send out to all their correspondents, with your prospectus in it.
+They send out their letters by first-class mail — about two hundred dollars will cover it.
 
 And you’ll be kind enough to send Smith & Jones enough circulars so there won’t be any delay.
                     </p>
@@ -30,16 +31,16 @@ And you’ll be kind enough to send Smith & Jones enough circulars so there won�
                     <div class="insert-editing-tag-here"></div>
 
                     <button class="blue edit-comment" onclick=hideMe(this)>modify comment</button>
-                </div> 
-                                      
-                    
+                </div>
+
+
                 <br>
                 <br>
                 <label class="blue">STATUS</label> : <span>Under Investigation</span> <br>
-                <label class="blue">LOCATION</label> : <span>-6.54579454, 13.3897463</span> 
+                <label class="blue">LOCATION</label> : <span>-6.54579454, 13.3897463</span>
                 <span> &nbsp; </span> <span class="insert-location-editing-tag-here"></span>
                 <button class="blue edit-location" onclick=hideMe(this)>modify location</button><br>
-                <br> 
+                <br>
                 <br>
 
                 <div class="image-display">
@@ -74,7 +75,7 @@ In a few days along comes the letter you expect. Your merchandise is quite good 
 Promptly on the minute you present yourself, trying not to beam. Yes, Mr. Jones, of Smith & Jones, to whom your goods were shown, thinks they’re just what the firm has been looking for. They’re going in to exploit them heavily for you.
 All they want is their commission on any merchandise they sell.
 
-Oh yes — there’s going to be the postage on the twenty-five or fifty thousand letters they’re going to send out to all their correspondents, with your prospectus in it. 
+Oh yes — there’s going to be the postage on the twenty-five or fifty thousand letters they’re going to send out to all their correspondents, with your prospectus in it.
 They send out their letters by first-class mail — about two hundred dollars will cover it.
 
 And you’ll be kind enough to send Smith & Jones enough circulars so there won’t be any delay.

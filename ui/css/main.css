@@ -10,7 +10,8 @@ body{
   display: none;
 }
 textarea{
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+		font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+		text-align: left;
 }
 #boundary{
   border: 1px ridge #162661;
@@ -210,7 +211,7 @@ div.logo-container{
 #mobile-nav ul li:hover a{
   color: #ffffff;
 }
-#current, 
+#current,
 #mobile-current{
   color: #fe0100;
   font-weight: bold;
@@ -276,7 +277,7 @@ div.logo-container{
   transition-timing-function: ease-in-out;
   transition-duration: 0.2s;
  }
- 
+
  .crime-form-container form input[type="button"]:hover{
   box-shadow: 1px 1px 20px 1px #162661;
   color: #162661;
@@ -298,7 +299,7 @@ div.logo-container{
 #boundary .place-videos li{
   list-style: none;
 }
-.crime-form-container .video-uploads, 
+.crime-form-container .video-uploads,
 .crime-form-container .image-uploads{
   margin: 0.5em 0;
   font-style: italic;
@@ -333,14 +334,14 @@ text-align: center;
   padding: 30px;
   height: 250px;
   margin: 20px auto;
-  outline: none; 
+  outline: none;
   resize: vertical;
   font-size: 1.3em;
   border-radius: 0.3em;
   box-shadow: 1px 1px 2px 1px #162661;
   border: 1px solid #162661;
 }
-.crime-form-container form input[type="text"], 
+.crime-form-container form input[type="text"],
 .crime-form-container form input[type="number"]{
   box-shadow: 1px 1px 2px 1px #162661;
   border: 1px solid #162661;
@@ -408,7 +409,7 @@ text-align: center;
 }
 
 /*------Modal-------*/
- 
+
 .outer-modal {
     position: fixed;
     z-index: 1;
@@ -516,7 +517,7 @@ body.admin-body{
   list-style: none;
   line-height: 2em;
 }
-.admin-nav li:hover, 
+.admin-nav li:hover,
 .admin-current{
   background: #2744aa;
   cursor: pointer;
@@ -532,7 +533,7 @@ body.admin-body{
   background: #0f0b0a;
   padding: 50px 100px;
 }
-.outer-modal .inner-box 
+.outer-modal .inner-box
 .update-status-form select{
   cursor: pointer;
   background: #162661;
@@ -547,7 +548,7 @@ body.admin-body{
   color: red;
   font-size: 0.8em;
 }
-.outer-modal .inner-box 
+.outer-modal .inner-box
 .update-status-form div{
   margin-top: 2em;
 }
@@ -568,7 +569,7 @@ body.admin-body{
   color: #162661;
   font-size: 1em;
   line-height: 1.5em;
-  width: 36%; 
+  width: 36%;
   padding: 30px 40px;
   margin: 100px 2% 100px 2%;
   border-radius: 20px;
@@ -593,7 +594,7 @@ body.admin-body{
   text-align: center;
   padding: 0.5em;
 }
-.visitors-message h1 label, 
+.visitors-message h1 label,
 .body-container > h1 > label{
   color: #fe0100;
 }
@@ -620,7 +621,7 @@ body.admin-body{
   background: rgba(255, 255, 255, 0.9);
   margin: 100px 0;
 }
-.signup-form, 
+.signup-form,
 .signin-form{
   float: right;
 }
@@ -641,20 +642,20 @@ form input[type="submit"] {
   font-size: 1.05em;
 }
 
-.crime-form-container form input[type="text"], 
+.crime-form-container form input[type="text"],
 .crime-form-container form input[type="number"],
 .crime-form-container .post-text-area,
 .comment-container .comment textarea {
   background: #f5f7ff;
 }
 
-.body-container form input[type="text"], 
+.body-container form input[type="text"],
 .body-container form input[type="password"],
 .body-container form input[type="email"],
 .body-container form input[type="number"]{
   background: #dad9d9;
 }
-form input[type="text"]:focus, 
+form input[type="text"]:focus,
 form input[type="password"]:focus,
 form input[type="number"]:focus,
 form input[type="email"],
@@ -758,7 +759,7 @@ input.location-input{
   padding: 0 20px;
   text-align: justify;
 }
-.switch-signup:hover, 
+.switch-signup:hover,
 .switch-signin:hover{
   cursor: pointer;
 }
@@ -771,7 +772,7 @@ input.location-input{
 }
 .profile-body{
   background: url("../images/profile_bg.png");
-  background-size: cover; 
+  background-size: cover;
 }
 #profile{
   background: rgba(255, 255, 255, 0.9);
@@ -860,7 +861,7 @@ input.location-input{
   background: rgba(255, 255, 255, 0.5);
   padding: 0 0 20px 0;
   box-shadow: 1px 1px 1px 1px #162661;
-  margin-top: 1em; 
+  margin-top: 1em;
 }
 .redflag-list h2,
 .intervention-list h2{
@@ -922,7 +923,7 @@ footer{
     float: none;
     width: 100%;
     padding: 0 0 25px 0;
-    margin-bottom: 50px; 
+    margin-bottom: 50px;
   }
   .profile{
   padding: 0 10px;
@@ -974,7 +975,7 @@ footer{
     padding: 25px 5%;
   }
 
-  .signup-form, 
+  .signup-form,
   .signin-form{
     float: none;
     width: 100%;
@@ -1031,7 +1032,7 @@ footer{
     position: relative;
     margin-right: 15px;
     padding-top: 7px;
-    float: none;/*<------*/  
+    float: none;/*<------*/
     line-height: 50px;
     list-style: none;
     text-align: center
@@ -1048,7 +1049,7 @@ footer{
   margin-top: 1em;
  }
   .body-container {
-   padding: 0 40px; 
+   padding: 0 40px;
  }
    .hamburger{
   width: 40px;
@@ -1060,13 +1061,13 @@ footer{
   padding: 0 10px;
   text-align: center;
 }
-#howitworks div, 
+#howitworks div,
 #about div{
   box-shadow: 1px 5px 10px 1px grey;
   padding: 50px 10px;
   font-size: 100%;
 }
-#howitworks, 
+#howitworks,
 #about{
   padding: 50px 10px;
 }
@@ -1088,7 +1089,7 @@ footer{
 }
 
 @media(max-width:320px) {
-  #longitude, 
+  #longitude,
   #latitude{
     width: 250px;
   }
@@ -1102,7 +1103,7 @@ h2#compose-heading{
 .sitename{
   display: inline-block;
   position: absolute;
-  top: 10px; 
+  top: 10px;
   font-size: 1.4em;
 }
  .body-container {

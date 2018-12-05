@@ -51,6 +51,7 @@
             <div class="profile-details-border">
                 <img src="../images/avatar.png" alt="avatar" class="large-avatar" />
                 <h1>Admin</h1>
+
                 <div class="profile-details">
                     <label class="blue">Username:</label> <span>Admin</span> <br>
                     <label class="blue">Email:</label> <span>admin@rocketmail.com</span> <br>
@@ -59,7 +60,7 @@
             </div>
         </div>
 
-<div class="admin-container clearfix"> 
+<div class="admin-container clearfix">
 
         <section class="admin-nav clearfix">
             <h1>CATEGORY</h1>
@@ -90,7 +91,7 @@
                     <img src="../images/red_flag.png" class="red-flag-icon" title="Red flag" />
                     <a href="#" class="change">change</a>
                 </li>
-                
+
                 <li>
                     <a href="#" class="show-status">Murder in XYZ town</a>
                     <img src="../images/red_flag.png" class="red-flag-icon" title="Red flag" />
@@ -113,7 +114,7 @@
                     <img src="../images/intervene_icon.png" class="red-flag-icon" title="Red flag" />
                     <a href="#" class="change">change</a>
                 </li>
-            
+
                 <li>
                     <a href="#" class="show-status">Murder in XYZ town</a>
                     <img src="../images/intervene_icon.png" class="red-flag-icon" title="Red flag" />
@@ -124,7 +125,7 @@
                     <img src="../images/intervene_icon.png" class="red-flag-icon" title="Red flag" />
                     <a href="#" class="change">change</a>
                 </li>
-            
+
                 <li>
                     <a href="#" class="show-status">Murder in XYZ town</a>
                     <img src="../images/intervene_icon.png" class="red-flag-icon" title="Red flag" />
@@ -142,35 +143,37 @@
             </ul>
         </section>
 
+
+            <section class="outer-modal">
+                <div class="inner-box">
+                    <form class="update-status-form">
+                        <label class="white">Current Status:</label>
+                        <span id="current-status" class="green">Resolved</span>
+                        <br> <br>
+                        <select required>
+                            <option>Select an option</option>
+                            <option>Draft</option>
+                            <option>Under Investigation</option>
+                            <option>Resolved</option>
+                            <option>Rejected</option>
+                        </select>
+                        <input type="submit" id="update-status" value="UPDATE">
+                        <div><a href="#" class="blue">View Record</a></div>
+                    </form>
+                </div>
+            </section>
+
+
 </div>
 
 
-    <section class="outer-modal">
-        <div class="inner-box">
-            <form class="update-status-form">
-                <label class="white">Current Status:</label> 
-                <span id="current-status" class="green">Resolved</span>
-                <br> <br>
-                <select>
-                    <option>Select an option</option>
-                    <option>Draft</option>
-                    <option>Under Investigation</option>
-                    <option>Resolved</option>
-                    <option>Rejected</option>
-                </select>
-                <input type="submit" id="update-status" value="UPDATE">
-                <div><a href="#" class="blue">View Record</a></div>
-            </form>
-        </div>
-    </section>
 
-    <i id="record-frame" style="display:none"></i>
+
 
     <footer id="footer">
 
         <div class="logo-footer-container">
-            <img src="../images/ir.png" class="logo">
-            <p>&copy; <span>i</span>Reporter 2018</p>
+            <p>&copy; <span class="theme-orange">i</span>Reporter 2018</p>
         </div>
 
     </footer>

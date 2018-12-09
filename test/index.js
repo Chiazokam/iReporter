@@ -1,4 +1,5 @@
 import "./testSignInSignUp";
 import "./testCreateIncidentRecord";
-import "./testGetIncidentReport";
-import "./ztestDeleteIncidentRecord";
+import "./testUpdateIncidentRecord";
+import "./testGetIncidentRecord";
+import "./testDeleteIncidentRecord";

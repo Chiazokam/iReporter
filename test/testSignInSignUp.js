@@ -64,6 +64,30 @@ describe("Signup user end-point", () => {
       });
   });
 
+  it("should return 400 if othername field has non-alphabetic characters", (done) => {
+    request.post(signupRoute)
+      .send({
+        "username": "sulaiman103",
+        "firstname": "sule",
+        "lastname": "man",
+        "othername": "127364",
+        "phoneNumber": "07098205412",
+        "email": "slain.man@gmail.com",
+        "password": "asdfghj1",
+        "confirmPassword": "asdfghj1"
+      }).end((err, res) => {
+        expect(res.status).to.eql(400);
+        expect(res.body.error).to.eql("invalid othername character");
+        expect(res.body.error).to.be.a("string");
+        expect(res.body.status).to.be.a("number");
+        should.not.exist(err);
+        should.exist(res.body);
+        (res.body).should.be.an("object");
+        if (err) { return done(err); }
+        done();
+      });
+  });
+
   it("should return 400 if user already exist at signup", (done) => {
     request.post(signupRoute)
       .send({

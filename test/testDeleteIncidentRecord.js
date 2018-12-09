@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 const request = supertest.agent(app);
 
 const red_flags = "/api/v1/red-flags";
-const URI1 = 1;
+const URI1 = 2;
 const URI2 = 3;
 
 
@@ -21,12 +21,10 @@ describe("DELETE a specific red-flag record endpoint", () => {
   it("should return status 200 if specified red-flag record has been deleted", (done) => {
     request
       .delete(`${red_flags}/${URI1}`)
-      .send({
-        createdBy:1,
-      })
+      .set("authorization", process.env.VALID_TOKEN)
       .end((err, res) => {
         expect(res.status).to.eql(200);
-        expect(res.body.data[0].id).to.eql(URI1);
+        expect(res.body.data[0].id).to.eql(`${URI1}`);
         expect(res.body.status).to.eql(200);
         expect(res.body.data[0].message).to.eql("red-flag record has been deleted");
         expect(res.body.status).to.be.a("number");
@@ -38,16 +36,32 @@ describe("DELETE a specific red-flag record endpoint", () => {
       });
   });
 
-  it("should return status 401 if userId does match the ID of the record being deleted", (done) => {
+  it("should return status 403 if userId does match the ID of the record being deleted", (done) => {
     request
       .delete(`${red_flags}/${URI2}`)
-      .send({
-        createdBy: 1,
-      })
+      .set("authorization", process.env.VALID_TOKEN)
       .end((err, res) => {
-        expect(res.status).to.eql(401);
+        expect(res.status).to.eql(403);
         expect(res.body.error).to.eql("your not allowed to perform that action");
-        expect(res.body.status).to.eql(401);
+        expect(res.body.status).to.eql(403);
+        expect(res.body.status).to.be.a("number");
+        expect(res.body.error).to.be.a("string");
+        should.not.exist(err);
+        should.exist(res.body);
+        if (err) { return done(err); }
+        done();
+      });
+  });
+
+
+  it("should return status 404 if record has been deleted", (done) => {
+    request
+      .delete(`${red_flags}/${10000}`)
+      .set("authorization", process.env.VALID_TOKEN)
+      .end((err, res) => {
+        expect(res.status).to.eql(404);
+        expect(res.body.error).to.eql("record not found");
+        expect(res.body.status).to.eql(404);
         expect(res.body.status).to.be.a("number");
         expect(res.body.error).to.be.a("string");
         should.not.exist(err);

@@ -1,5 +1,8 @@
-import incidentRoutes from "./incidentRoutes.js";
+import redFlagRoutes from "./redFlagRoutes.js";
+import signupSigninRoutes from "./signupSigninRoutes";
+import interventionRoutes from "./interventionRoutes";
 
-export { incidentRoutes };
+
+export { redFlagRoutes, signupSigninRoutes, interventionRoutes };
 
 

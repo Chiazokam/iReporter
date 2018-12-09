@@ -1,124 +1,190 @@
 import { Helpers } from "../helpers";
 import { userDB } from "../dummyDB";
 
-let inputs;
-
-/**
- * Validate values inside an array
- * @param  { object } req - Contains the body of the request.
- * @param { object } res - Contains the returned response.
- * @param  { next } - Proceeds to the next method on the route
- */
-export const validateArrayValues = (req, res, next) => {
-	const { images, videos } = req.body;
-	const urlArray = [images, videos];
-
-	if (Helpers.isNotArray(urlArray)) {
-		Helpers.returnForError(req, res, 400, "invalid input");
-
-	} else if (Helpers.isStringInsideArray(images)) {
-		Helpers.returnForError(req, res, 400, "invalid input");
-
-	} else if (Helpers.isStringInsideArray(videos)) {
-		Helpers.returnForError(req, res, 400, "invalid input");
-
-	} else if (Helpers.isValueInsideArrayEmpty(images)) {
-		Helpers.returnForError(req, res, 400, "undefined input");
-
-	} else if (Helpers.isValueInsideArrayEmpty(videos)) {
-		Helpers.returnForError(req, res, 400, "undefined input");
-
-	} else {
-		next();
-	}
-};
-
-/**
- * Validates users location input field for a single string field
- * @param  { object } req - Contains the body of the request.
- * @param { object } res - Contains the returned response.
- * @param  { next } - Proceeds to the next method on the route
- */
-export const locationStringValidation = (req, res, next) => {
-	const { location } = req.body;
-
-	Helpers.thoroughStringCheck(req, res, location, next);
-};
-
-/**
- * Validates the comment input field for a single string field
- * @param  { object } req - Contains the body of the request.
- * @param { object } res - Contains the returned response.
- * @param  { next } - Proceeds to the next method on the route
- */
-export const commentStringValidation = (req, res, next) => {
-	const { comment } = req.body;
-
-	Helpers.thoroughStringCheck(req, res, comment, next);
-};
 
 
-/**
- * Validates users input for report creation
- * @param  { object } req - Contains the body of the request.
- * @param { object } res - Contains the returned response.
- * @param  { next } - Proceeds to the next method on the route
- */
-export const multipleStringValidation = (req, res, next) => {
-	const { title, comment, type, location, images, videos } = req.body;
-	const strings = [title, comment, type, location];
-	const reqArray = [title, comment, type, location, images, videos];
+export class PostValidator {
+  /**
+   * Validate values inside an array
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @param  {next} - Proceeds to the next method on the route
+   * @return {undefined}
+   */
+  static validateArrayValues(req, res, next) {
+    const { images, videos } = req.body;
+    const urlArray = [images, videos];
 
-	for (inputs in reqArray) {
-		if (!reqArray[inputs]) {
-			return Helpers.returnForError(req, res, 400, "undefined input");
-		}
-	}
-	for (inputs in strings) {
-		if (!(/[^\s+]/g.test(reqArray[inputs]))) {
-			return Helpers.returnForError(req, res, 400, "undefined input");
-		}
-	}
-	for (inputs in strings) {
-		if (Helpers.isNotString(strings[inputs])) {
-			return Helpers.returnForError(req, res, 400, "invalid input");
-		}
-	}
-	validateArrayValues(req, res, next);
-};
+    if (Helpers.isNotArray(urlArray)) {
+      Helpers.returnForError(req, res, 400, "images and videos should be an array");
 
-/**
- * Checks if input is a red-flag type
- * @param  { object } req - Contains the body of the request.
- * @param { object } res - Contains the returned response.
- * @param  { next } - Proceeds to the next method on the route
- */
-export const isRedFlag = (req, res, next) => {
-	const { type } = req.body;
-	if (type.toLowerCase() !== "red-flag") {
-		Helpers.returnForError(req, res, 400, "invalid input");
-	} else {
-		next();
-	}
-};
+    } else if (Helpers.isStringInsideArray(images)) {
+      Helpers.returnForError(req, res, 400, "invalid images link");
 
-/**
- * Validates if users exist in the database
- * @param  { object } req - Contains the body of the request.
- * @param { object } res - Contains the returned response.
- * @param  { next } - Proceeds to the next method on the route
- */
-export const isUser = (req, res, next) => {
-	const { createdBy } = req.body;
-	const userId = userDB.filter((user) => user.id === createdBy);
+    } else if (Helpers.isStringInsideArray(videos)) {
+      Helpers.returnForError(req, res, 400, "invalid videos link");
 
-	if (typeof createdBy !== "number") {
-		Helpers.returnForError(req, res, 400, "invalid input");
-	} else if (userId.length < 1) {
-		Helpers.returnForError(req, res, 404, "user not found");
-	} else {
-		next();
-	}
-};
+    } else if (Helpers.isValueInsideArrayEmpty(images)) {
+      Helpers.returnForError(req, res, 400, "images link required");
 
+    } else if (Helpers.isValueInsideArrayEmpty(videos)) {
+      Helpers.returnForError(req, res, 400, "videos link required");
+
+    } else {
+      next();
+    }
+  }
+
+  /**
+   * Validates users location input field for a single string field
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @param  {next} - Proceeds to the next method on the route
+   * @return {undefined}
+   */
+  static locationStringValidation  (req, res, next)  {
+    const { location } = req.body;
+
+    if (Helpers.isNotString(location)) {
+      Helpers.returnForError(req, res, 400, "invalid input location");
+    } else if (!location) {
+      Helpers.returnForError(req, res, 400, "location required");
+    } else {
+      next();
+    }
+  }
+
+  /**
+   * Validates the comment input field for a single string field
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @param  {next} - Proceeds to the next method on the route
+   * @return {undefined}
+   */
+  static commentStringValidation(req, res, next) {
+    const { comment } = req.body;
+
+    if (!comment) {
+      Helpers.returnForError(req, res, 400, "comment field is required");
+    } else {
+      next();
+    }
+  }
+
+  /**
+   * Validates the profile image input field
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @param  {next} - Proceeds to the next method on the route
+   * @return {undefined}
+   */
+  static profileImageStringValidation(req, res, next) {
+    const { profileImage } = req.body;
+
+    if (Helpers.isNotString(profileImage)) {
+      Helpers.returnForError(req, res, 400, "invalid profile image input");
+    } else if (!profileImage) {
+      Helpers.returnForError(req, res, 400, "profile image required");
+    } else {
+      next();
+    }
+  }
+
+
+  /**
+   * Validates users input for report creation
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @param  {next} - Proceeds to the next method on the route
+   * @return {undefined}
+   */
+  static multipleStringValidation(req, res, next) {
+    const { title, comment, type, location, images, videos } = req.body;
+    const strings = { title, type, location };
+    const reqObj = { title, comment, type, location, images, videos };
+    let inputs; const excessSpace = /[^\s+]/g;
+    for (inputs in reqObj) {
+      if (!reqObj[inputs]) {
+        return Helpers.returnForError(req, res, 400, `input field ${inputs} required`);
+      }
+    }
+    for (inputs in strings) {
+      if (!(excessSpace.test(strings[inputs]))) {
+        return Helpers.returnForError(req, res, 400, `${inputs} is required`);
+      }
+    }
+    for (inputs in strings) {
+      if (Helpers.isNotString(strings[inputs])) {
+        return Helpers.returnForError(req, res, 400, `invalid input field ${inputs}`);
+      }
+    }
+    next();
+  }
+
+
+  /**
+   * Checks if input is a red-flag type
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @param  {next} - Proceeds to the next method on the route
+   * @return {undefined}
+   */
+  static isRedFlag(req, res, next) {
+    const { type } = req.body;
+    if (type.toLowerCase() !== "red-flag") {
+      Helpers.returnForError(req, res, 400, "invalid incident type");
+    } else {
+      next();
+    }
+  }
+
+
+  /**
+   * Validate status input by admin
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @param  {next} - Proceeds to the next method on the route.
+   * @return {undefined}
+   */
+  static validateStatus(req, res, next) {
+    const { status } = req.body;
+    const validValues = ["draft", "under investigation", "resolved", "rejected"];
+    let inputs;
+
+    if (!status) {
+      return Helpers.returnForError(req, res, 400, "status required");
+    } else if (typeof status !== "string") {
+      return Helpers.returnForError(req, res, 400, "invalid input status");
+    }
+
+    for (inputs = 0; inputs < validValues.length; inputs++) {
+      if (status.toString().toLowerCase() === validValues[inputs] ){
+        return next();
+      }
+    }
+    Helpers.returnForError(req, res, 400, "invalid status selection");
+  }
+
+
+  /**
+   * Validates if users exist in the database
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @param  {next} - Proceeds to the next method on the route
+   * @return {undefined}
+   */
+  static isUser(req, res, next) {
+    const { createdBy } = req.body;
+    const userId = userDB.filter((user) => user.id === createdBy);
+
+    if (typeof createdBy !== "number") {
+      Helpers.returnForError(req, res, 400, "invalid user ID");
+    } else if (userId.length < 1) {
+      Helpers.returnForError(req, res, 404, "user not found");
+    } else {
+      next();
+    }
+  }
+
+}
 

@@ -7,11 +7,13 @@ footer, header, hgroup, menu, nav, output, section, summary, audio, video {
     padding: 0;
     border: 0;
     font-size: 1em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 /* setup body */
 body{
     background-color: rgb(255, 255, 255);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 /* setup pre */

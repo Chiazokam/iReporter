@@ -1,7 +1,7 @@
-import { multipleStringValidation, locationStringValidation, commentStringValidation,  isUser, isRedFlag } from "./validatePostRecords";
-import { isDummyDbEmpty, doesRedFlagRecordExist, doesSpecificRedFlagIdRecordExist } from "./validateGetRecords";
+import { PostValidator } from "./validatePostRecords";
+import { GetValidator } from "./validateGetRecords";
+import { SignUpSignInValidator } from "./validateSignupSignin";
 
-export { multipleStringValidation, locationStringValidation, commentStringValidation,
-	isUser, isRedFlag, isDummyDbEmpty, doesRedFlagRecordExist, doesSpecificRedFlagIdRecordExist };
+export { PostValidator, GetValidator, SignUpSignInValidator };
 
 

@@ -1,43 +1,32 @@
-import { incidentsDB } from "../dummyDB";
 import { Helpers } from "../helpers/predefinedMethods";
 import { db } from "../database";
 
 const strTrim = new Helpers();
 
 export class Incidents {
-  /**
-  * filter Incident Record(s)
-  * @param  {object} req - Contains the body of the request.
-  * @param {object} res - Contains the returned response.
-  * @return {array}
-  */
-  static filterRecords (req, res, incident_record) {
-    const specifiedRedFlagRecordId = parseInt(req.params.id, 10);
-    const allRedFlagsRecords = incidentsDB.filter((redFlag) => redFlag.type === incident_record);
-    const specificRedFlag = allRedFlagsRecords.filter((redFlagId) => redFlagId.id === specifiedRedFlagRecordId);
-
-    return [specifiedRedFlagRecordId, allRedFlagsRecords, specificRedFlag];
-  }
-
 
   /**
-  * Creates a red-flag or intervention record
-  * @param  {object} req - Contains the body of the request.
-  * @param {object} res - Contains the returned response.
-  * @return {undefined}
-  */
+   * Creates a red-flag or intervention record
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @return {undefined}
+   */
   createAnIncidentRecord(req, res){
     const { title, comment, type, location, images, videos } = req.body;
     const { id } = req.userInfo; //userId
 
     db.any("INSERT INTO incidents(title, comment, type, location, images, videos, status, createdBy) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-      [String(title).trim(), String(comment).trim(), strTrim.trimMe(type), strTrim.trimMe(location), images.join(" , "), videos.join(" , "), "draft", id])
+      [String(title).trim(), String(comment).trim(), strTrim.trimMe(type), String(location).trim(), images.join(" , "), videos.join(" , "), "draft", id])
       .then(() => {
         db.any("SELECT * FROM incidents WHERE createdBy = $1", [id])
           .then((data) => {
             const lastRecord = (data.length - 1);
             const recordId = data[lastRecord].id;
-            Helpers.returnForSuccess(req, res, 201, recordId, "Created red-flag record");
+            if (type === "red-flag") {
+              Helpers.returnForSuccess(req, res, 201, recordId, "Created red-flag record");
+            } else {
+              Helpers.returnForSuccess(req, res, 201, recordId, "Created intervention record");
+            }
           });
       });
 
@@ -137,43 +126,40 @@ export class Incidents {
       });
   }
 
-  /**
-   * Returns a specific redflag record
-   * @param  {object} req - Contains the body of the request
-   * @param {object} res - Contains the returned response
-   * @return {undefined}
-   */
-  getSpecificRedflagRecord(req, res) {
-    const red_flag_string = "red-flag";
-    const specificRedFlag = Incidents.filterRecords(req, res, red_flag_string)[2];
-
-    Helpers.returnSuccessForGET(req, res, 200, specificRedFlag);
-  }
-
 
   /**
-   * Delete a specific redflag record's record
+   * Delete a specific redflag record's comment
    * @param  {object} req - Contains the body of the request.
    * @param {object} res - Contains the returned response.
    * @return {undefined}
    */
-  deleteRecord(req, res) {
-    const { createdBy } = req.body;
-    const red_flag_string = "red-flag";
-    const specificRedFlag = Incidents.filterRecords(req, res, red_flag_string)[2];
-    const specifiedRedFlagRecordId = Incidents.filterRecords(req, res, red_flag_string)[0];
+  deleteRedflagRecordRecord(req, res) {
+    const recordId = req.params.id;
+    const userId = req.userInfo.id;
 
-    if (createdBy !== specificRedFlag[0].createdBy) {
-      return Helpers.returnForError(req, res, 401, "your not allowed to perform that action");
-    }
+    const deleteArgumentObject = {
+      tableName: "incidents",
+      recordId,
+      userId,
+      statusCode: 200,
+      message: "red-flag record has been deleted"
+    };
 
-    for (let count in incidentsDB) {
-      if (incidentsDB[count].id === specifiedRedFlagRecordId) {
-        incidentsDB.splice(count, 1);
-        return Helpers.returnForSuccess(req, res, 200, specifiedRedFlagRecordId, "red-flag record has been deleted");
-      }
-    }
+    Helpers.deleteSpecificRecord(req, res, deleteArgumentObject);
   }
+
+
+  /**
+   * Returns a redflag records
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @return {undefined}
+   */
+  getSpecificRedFlagRecord(req, res) {
+    const id = req.params.id;
+    Helpers.getSpecificRecord(req, res, id);
+  }
+
 }
 
 

@@ -165,26 +165,5 @@ export class PostValidator {
     Helpers.returnForError(req, res, 400, "invalid status selection");
   }
 
-
-  /**
-   * Validates if users exist in the database
-   * @param  {object} req - Contains the body of the request.
-   * @param {object} res - Contains the returned response.
-   * @param  {next} - Proceeds to the next method on the route
-   * @return {undefined}
-   */
-  static isUser(req, res, next) {
-    const { createdBy } = req.body;
-    const userId = userDB.filter((user) => user.id === createdBy);
-
-    if (typeof createdBy !== "number") {
-      Helpers.returnForError(req, res, 400, "invalid user ID");
-    } else if (userId.length < 1) {
-      Helpers.returnForError(req, res, 404, "user not found");
-    } else {
-      next();
-    }
-  }
-
 }
 

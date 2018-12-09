@@ -18,9 +18,9 @@ export class Users {
   createNewUsers(req, res) {
     const { username, firstname, lastname, othername, phoneNumber, email, password } = req.body;
     const hash = bcrypt.hashSync(password, 10);
-
-    db.none("INSERT INTO users(username, firstname, lastname, othername, email, phonenumber, password, isadmin) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-      [trim.trimMe(username), trim.trimMe(firstname), trim.trimMe(lastname), trim.trimMe(othername), trim.trimMe(email), trim.trimMe(phoneNumber), hash, false])
+    const profileimage = "https://res.cloudinary.com/shaolinmkz/image/upload/v1544370726/avatar.png";
+    db.none("INSERT INTO users(username, firstname, lastname, othername, email, phonenumber, password, isadmin, profileimage) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)",
+      [trim.trimMe(username), trim.trimMe(firstname), trim.trimMe(lastname), trim.trimMe(othername), trim.trimMe(email), trim.trimMe(phoneNumber), hash, false, profileimage])
       .then(() => {
         db.any("SELECT * FROM users WHERE email = $1", [email])
           .then((data) => {

@@ -5,7 +5,7 @@ import { PostValidator, GetValidator} from "../middlewares";
 
 const incident = new Incidents();
 
-const redFlagRoutes = express.Router();               //break all
+const redFlagRoutes = express.Router();
 
 /**Create a red-flag record */
 redFlagRoutes.post(
@@ -26,11 +26,11 @@ redFlagRoutes.get(
   incident.getAllRedflagRecords
 );
 
-/**Fetch specific red-flag record */                      /** Remaining this*/
+/**Fetch specific red-flag record */
 redFlagRoutes.get(
   "/red-flags/:id",
-  GetValidator.doesSpecificRedFlagIdRecordExist,
-  incident.getSpecificRedflagRecord
+  Helpers.verifyUsersToken,
+  incident.getSpecificRedFlagRecord
 );
 
 /**Update a red-flag record location*/
@@ -50,12 +50,11 @@ redFlagRoutes.patch(
   incident.updateRedflagRecordComment
 );
 
-/**Delete a red-flag record */                           /** Remaining this */
+/**Delete a red-flag record */
 redFlagRoutes.delete(
   "/red-flags/:id",
-  PostValidator.isUser,
-  GetValidator.doesSpecificRedFlagIdRecordExist,
-  incident.deleteRecord
+  Helpers.verifyUsersToken,
+  incident.deleteRedflagRecordRecord
 );
 
 /**Update a red-flag record status*/

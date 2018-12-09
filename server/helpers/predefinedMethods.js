@@ -220,6 +220,47 @@ export class Helpers {
 
 
   /**
+   * Checks if a record type of intervention or red-flag exists in the database
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @param {string} type - Contains the type of incident record
+   * @param  {next} - Proceeds to the next method on the route
+   * @return {undefined}
+   */
+  static doesRecordTypeExist(req, res, type, next) {
+    db.any("SELECT * FROM incidents WHERE type = $1", [type])
+      .then((data) => {
+        if (data.length < 1) {
+          Helpers.returnForError(req, res, 404, "records not found");
+        } else {
+          next();
+        }
+      });
+  }
+
+
+
+  /**
+  * Returns a specific record for both incident and red-flag type
+  * @param  {object} req - Contains the body of the request.
+  * @param {object} res - Contains the returned response.
+  * @param {number} id
+  * @return {undefined}
+  */
+  static getSpecificRecord(req, res, id) {
+    db.any("SELECT * FROM incidents WHERE id = $1", [id])
+      .then((data) => {
+        if (data.length < 1) {
+          Helpers.returnForError(req, res, 404, "record not found");
+        } else {
+          Helpers.returnSuccessForGET(req, res, 200, data);
+        }
+      });
+  }
+
+
+
+  /**
    * Updates a specific record
    * @param  {object} req - Contains the body of the request.
    * @param {object} res - Contains the returned response.
@@ -243,6 +284,32 @@ export class Helpers {
         }
       });
   }
+
+
+  /**
+   * Delete a specific record
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @param {object} deleteArgumentObject - contains parameters for updates
+   * @return {undefined}
+   */
+  static deleteSpecificRecord(req, res, deleteArgumentObject) {
+    db.any("SELECT * FROM " + deleteArgumentObject.tableName + " WHERE id = $1", [deleteArgumentObject.recordId])
+      .then((data) => {
+        if (data.length < 1) {
+          Helpers.returnForError(req, res, 404, "record not found");
+        } else if (data[0].createdby !== deleteArgumentObject.userId) {
+          Helpers.returnForError(req, res, 403, "your not allowed to perform that action");
+        } else {
+          db.any("DELETE FROM " + deleteArgumentObject.tableName + " WHERE id = $1", [deleteArgumentObject.recordId])
+            .then(() => {
+              Helpers.returnForSuccess(req, res, deleteArgumentObject.statusCode, deleteArgumentObject.recordId, deleteArgumentObject.message);
+            });
+        }
+      });
+  }
+
+
 
   /**
    * Returns all records type

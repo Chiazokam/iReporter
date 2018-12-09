@@ -1,33 +1,69 @@
 import express from "express";
-// import { Helpers } from "../helpers";
-// import { Incidents } from "../controllers";
-// import { PostValidator } from "../middlewares";
+import { Helpers } from "../helpers";
+import { Incidents } from "../controllers";
+import { PostValidator, GetValidator } from "../middlewares";
 
-// const incident = new Incidents();
+const incident = new Incidents();
 
 const interventionRoutes = express.Router();
 
 
 /**Create an intervention record */
-interventionRoutes.post("/interventions");
+interventionRoutes.post(
+  "/interventions",
+  Helpers.verifyUsersToken,
+  PostValidator.multipleStringValidation,
+  PostValidator.validateArrayValues,
+  PostValidator.isValidIncidentType,
+  Helpers.isNotAValidGeolocation,
+  incident.createAnIncidentRecord
+);
 
 /**Fetch all intervention records */
-interventionRoutes.get("/interventions");
+interventionRoutes.get(
+  "/interventions",
+  Helpers.verifyUsersToken,
+  GetValidator.doesInterventionRecordExist,
+  incident.getAllInterventionRecords);
 
 /**Fetch specific intervention record */
-interventionRoutes.get("/interventions/:id");
+interventionRoutes.get(
+  "/interventions/:id",
+  Helpers.verifyUsersToken,
+  incident.getSpecificRecord
+);
 
 /**Update an intervention record location*/
-interventionRoutes.patch("/interventions/:id/location");
+interventionRoutes.patch(
+  "/interventions/:id/location",
+  Helpers.verifyUsersToken,
+  PostValidator.locationStringValidation,
+  Helpers.isNotAValidGeolocation,
+  incident.updateInterventionLocation
+);
 
 /**Update an intervention record comment*/
-interventionRoutes.patch("/interventions/:id/comment");
+interventionRoutes.patch(
+  "/interventions/:id/comment",
+  Helpers.verifyUsersToken,
+  PostValidator.commentStringValidation,
+  incident.updateInterventionRecordComment
+);
 
 /**Delete an intervention record */
-interventionRoutes.delete("/interventions/:id");
+interventionRoutes.delete(
+  "/interventions/:id",
+  Helpers.verifyUsersToken,
+  incident.deleteInterventionRecord
+);
 
-/**Update an intervebtion record status*/
-interventionRoutes.patch("/interventions/:id/status");
+/**Update an intervention record status*/
+interventionRoutes.patch(
+  "/interventions/:id/status",
+  Helpers.verifyUsersToken,
+  PostValidator.validateStatus,
+  incident.updateIncidentsStatus
+);
 
 
 export default interventionRoutes;

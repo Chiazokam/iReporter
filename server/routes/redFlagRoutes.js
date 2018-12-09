@@ -13,7 +13,7 @@ redFlagRoutes.post(
   Helpers.verifyUsersToken,
   PostValidator.multipleStringValidation,
   PostValidator.validateArrayValues,
-  PostValidator.isRedFlag,
+  PostValidator.isValidIncidentType,
   Helpers.isNotAValidGeolocation,
   incident.createAnIncidentRecord
 );
@@ -30,7 +30,7 @@ redFlagRoutes.get(
 redFlagRoutes.get(
   "/red-flags/:id",
   Helpers.verifyUsersToken,
-  incident.getSpecificRedFlagRecord
+  incident.getSpecificRecord
 );
 
 /**Update a red-flag record location*/
@@ -54,7 +54,7 @@ redFlagRoutes.patch(
 redFlagRoutes.delete(
   "/red-flags/:id",
   Helpers.verifyUsersToken,
-  incident.deleteRedflagRecordRecord
+  incident.deleteRedflagRecord
 );
 
 /**Update a red-flag record status*/

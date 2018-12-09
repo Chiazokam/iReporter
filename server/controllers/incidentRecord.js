@@ -43,6 +43,16 @@ export class Incidents {
     Helpers.getAllRecordsType(req, res, "red-flag");
   }
 
+  /**
+   * Returns all intervention records
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @return {undefined}
+   */
+  getAllInterventionRecords(req, res) {
+    Helpers.getAllRecordsType(req, res, "intervention");
+  }
+
 
   /**
    * Updates a specific redflag record's location
@@ -63,6 +73,30 @@ export class Incidents {
       requestBodyPropertyValue: location,
       statusCode : 200,
       message: "Updated red-flag record's location"
+    };
+
+    Helpers.updateSpecificRecord(req, res, updateArgumentObject);
+  }
+
+  /**
+   * Updates a specific intervention record's location
+   * @param  { object } req - Contains the body of the request.
+   * @param { object } res - Contains the returned response.
+   * @return {undefined}
+   */
+  updateInterventionLocation(req, res) {
+    const { location } = req.body;
+    const recordId = req.params.id;
+    const userId = req.userInfo.id;
+
+    const updateArgumentObject = {
+      tableName: "incidents",
+      recordId,
+      userId,
+      requestBodyPropertyName: "location",
+      requestBodyPropertyValue: location,
+      statusCode: 200,
+      message: "Updated Intervention record's location"
     };
 
     Helpers.updateSpecificRecord(req, res, updateArgumentObject);
@@ -92,6 +126,30 @@ export class Incidents {
     Helpers.updateSpecificRecord(req, res, updateArgumentObject);
   }
 
+  /**
+   * Update a specific intervention record's comment
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @return {undefined}
+   */
+  updateInterventionRecordComment(req, res) {
+    const { comment } = req.body;
+    const recordId = req.params.id;
+    const userId = req.userInfo.id;
+
+    const updateArgumentObject = {
+      tableName: "incidents",
+      recordId,
+      userId,
+      requestBodyPropertyName: "comment",
+      requestBodyPropertyValue: comment,
+      statusCode: 200,
+      message: "Updated Intervention record's comment"
+    };
+
+    Helpers.updateSpecificRecord(req, res, updateArgumentObject);
+  }
+
 
 
   /**
@@ -108,7 +166,7 @@ export class Incidents {
     db.any("SELECT * FROM users WHERE id = $1", [userId])
       .then((data) => {
         if (data.length < 1) {
-          return Helpers.returnForError(req, res, 404, "user not found");
+          return Helpers.returnForError(req, res, 404, "admin not found");
         } else if (data[0].isadmin !== true) {
           return Helpers.returnForError(req, res, 401, "not an admin"); }
 
@@ -120,20 +178,46 @@ export class Incidents {
               db.any("UPDATE incidents SET status = $1 WHERE id = $2 RETURNING *", [status, incidentsId])
                 .then((updatedData) => {
                   const updatedRecordId = updatedData[0].id;
-                  Helpers.returnForSuccess(req, res, 200, updatedRecordId, "record's status updated");
-                }); }
+                  if (updatedData[0].type === "red-flag") {
+                    Helpers.returnForSuccess(req, res, 200, updatedRecordId, "red-flag record's status updated");
+                  } else {
+                    Helpers.returnForSuccess(req, res, 200, updatedRecordId, "intervention record's status updated");
+                  }
+                });
+            }
           });
       });
   }
 
-
   /**
-   * Delete a specific redflag record's comment
+   * Delete a specific Intervention record
    * @param  {object} req - Contains the body of the request.
    * @param {object} res - Contains the returned response.
    * @return {undefined}
    */
-  deleteRedflagRecordRecord(req, res) {
+  deleteInterventionRecord(req, res) {
+    const recordId = req.params.id;
+    const userId = req.userInfo.id;
+
+    const deleteArgumentObject = {
+      tableName: "incidents",
+      recordId,
+      userId,
+      statusCode: 200,
+      message: "Intervention record has been deleted"
+    };
+
+    Helpers.deleteSpecificRecord(req, res, deleteArgumentObject);
+  }
+
+
+  /**
+   * Delete a specific redflag record
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @return {undefined}
+   */
+  deleteRedflagRecord(req, res) {
     const recordId = req.params.id;
     const userId = req.userInfo.id;
 
@@ -150,12 +234,12 @@ export class Incidents {
 
 
   /**
-   * Returns a redflag records
+   * Returns specific records
    * @param  {object} req - Contains the body of the request.
    * @param {object} res - Contains the returned response.
    * @return {undefined}
    */
-  getSpecificRedFlagRecord(req, res) {
+  getSpecificRecord(req, res) {
     const id = req.params.id;
     Helpers.getSpecificRecord(req, res, id);
   }

@@ -117,6 +117,26 @@ describe("Update red flag location end-point", () => {
       });
   });
 
+
+  it("should return 200 if intervention record's location is updated", (done) => {
+    request.patch("/api/v1/interventions/4/location")
+      .set("authorization", validToken)
+      .send({
+        location: "11.21134, -7.2123",
+      }).end((err, res) => {
+        expect(res.status).to.eql(200);
+        expect(res.body.data[0].message).to.eql("Updated Intervention record's location");
+        expect(res.body.data[0].message).to.be.a("string");
+        expect(res.body.status).to.be.a("number");
+        should.not.exist(err);
+        should.exist(res.body);
+        (res.body).should.be.an("object");
+        if (err) { return done(err); }
+        done();
+      });
+  });
+
+
   it("should return 200 if location is updated successfully", (done) => {
     request.patch(`/api/v1/red-flags/${1}/location`)
       .set("authorization", newValidToken)
@@ -142,9 +162,9 @@ describe("Update red flag location end-point", () => {
 
 
 /**
- * Update red flag comment
+ * Update red flag and intervention comment
  */
-describe("Update red flag comment end-point", () => {
+describe("Update comment end-point", () => {
 
   it("should return 403 if the paramId doesn't match the userId of the user in the database", (done) => {
     request.patch(`/api/v1/red-flags/${3}/comment`)
@@ -164,6 +184,26 @@ describe("Update red flag comment end-point", () => {
       });
   });
 
+
+  it("should return 200 if intervention record's comment is updated", (done) => {
+    request.patch("/api/v1/interventions/4/comment")
+      .set("authorization", validToken)
+      .send({
+        comment: "i just change this intervention record",
+      }).end((err, res) => {
+        expect(res.status).to.eql(200);
+        expect(res.body.data[0].message).to.eql("Updated Intervention record's comment");
+        expect(res.body.data[0].message).to.be.a("string");
+        expect(res.body.status).to.be.a("number");
+        should.not.exist(err);
+        should.exist(res.body);
+        (res.body).should.be.an("object");
+        if (err) { return done(err); }
+        done();
+      });
+  });
+
+
   it("should return 200 if comment updates successfully", (done) => {
     request.patch(`/api/v1/red-flags/${1}/comment`)
       .set("authorization", newValidToken)
@@ -181,6 +221,7 @@ describe("Update red flag comment end-point", () => {
         done();
       });
   });
+
 
   it("should return 400 if comment is undefined", (done) => {
     request.patch(`/api/v1/red-flags/${1}/comment`)
@@ -308,8 +349,6 @@ describe("Update user profile image end-point", () => {
 
 
 
-
-
 /**
  * Update user status by Admin
  */
@@ -322,8 +361,44 @@ describe("Update status of an incident", () => {
         status: "resolved",
       }).end((err, res) => {
         expect(res.status).to.eql(200);
-        expect(res.body.data[0].message).to.eql("record's status updated");
+        expect(res.body.data[0].message).to.eql("red-flag record's status updated");
         expect(res.body.data[0].message).to.be.a("string");
+        expect(res.body.status).to.be.a("number");
+        should.not.exist(err);
+        should.exist(res.body);
+        (res.body).should.be.an("object");
+        if (err) { return done(err); }
+        done();
+      });
+  });
+
+  it("should return 200 if status updates successfully", (done) => {
+    request.patch(`/api/v1/interventions/${4}/status`)
+      .set("authorization", process.env.VALID_TOKEN)
+      .send({
+        status: "resolved",
+      }).end((err, res) => {
+        expect(res.status).to.eql(200);
+        expect(res.body.data[0].message).to.eql("intervention record's status updated");
+        expect(res.body.data[0].message).to.be.a("string");
+        expect(res.body.status).to.be.a("number");
+        should.not.exist(err);
+        should.exist(res.body);
+        (res.body).should.be.an("object");
+        if (err) { return done(err); }
+        done();
+      });
+  });
+
+  it("should return 404 if admin is not found", (done) => {
+    request.patch(`/api/v1/interventions/${4}/status`)
+      .set("authorization", process.env.INVALID_ADMIN_TOKEN)
+      .send({
+        status: "resolved",
+      }).end((err, res) => {
+        expect(res.status).to.eql(404);
+        expect(res.body.error).to.eql("admin not found");
+        expect(res.body.error).to.be.a("string");
         expect(res.body.status).to.be.a("number");
         should.not.exist(err);
         should.exist(res.body);

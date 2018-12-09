@@ -11,6 +11,7 @@ dotenv.load();
 const request = supertest.agent(app);
 
 const red_flags = "/api/v1/red-flags";
+const interventions = "/api/v1/interventions";
 const geo_location = "12.233334, 2.323123";
 
 export let validToken;
@@ -20,9 +21,9 @@ const newValidToken = process.env.VALID_TOKEN;
 
 
 /**
- * Create red-flag record
+ * Create Incident record
  */
-describe("Create red-flag record end-point", () => {
+describe("Create Incident record end-point", () => {
 
   before((done) => {
     chai.request(app)
@@ -112,6 +113,34 @@ describe("Create red-flag record end-point", () => {
       });
   });
 
+  it("should return 201 if all input fields are validated correctly", (done) => {
+    request.post(interventions)
+      .set("authorization", validToken)
+      .send({
+        "title": "This is an intervention report",
+        "type": "intervention",
+        "location": geo_location,
+        "images": [
+          "evidenceImage",
+          "imageURL2"],
+        "videos": [
+          "evidenceVideo",
+          "videoURL2"],
+        "comment": "This is a report on... To be continued"
+      }).end((err, res) => {
+        expect(res.status).to.eql(201);
+        expect(res.body.data[0].message).to.eql("Created intervention record");
+        expect(res.body.data[0].message).to.be.a("string");
+        expect(res.body.status).to.be.a("number");
+        should.not.exist(err);
+        should.exist(res.body);
+        (res.body).should.be.an("object");
+        if (err) { return done(err); }
+        done();
+      });
+  });
+
+
   it("should return 201 if all input fields are validated and their are no video or image links", (done) => {
     request.post(red_flags)
       .set("authorization", validToken)
@@ -141,7 +170,7 @@ describe("Create red-flag record end-point", () => {
       .set("authorization", validToken)
       .send({
         "title": "Theft",
-        "type": "intervention",
+        "type": "intervenx",
         "location": geo_location,
         "images": [
           "imageURL1",

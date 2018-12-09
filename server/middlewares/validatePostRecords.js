@@ -129,9 +129,9 @@ export class PostValidator {
    * @param  {next} - Proceeds to the next method on the route
    * @return {undefined}
    */
-  static isRedFlag(req, res, next) {
+  static isValidIncidentType(req, res, next) {
     const { type } = req.body;
-    if (type.toLowerCase() !== "red-flag") {
+    if (type.toLowerCase() !== "red-flag" && type.toLowerCase() !== "intervention") {
       Helpers.returnForError(req, res, 400, "invalid incident type");
     } else {
       next();

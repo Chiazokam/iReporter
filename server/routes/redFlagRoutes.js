@@ -26,6 +26,13 @@ redFlagRoutes.get(
   incident.getAllRedflagRecords
 );
 
+/**Get red-flag records status count numbers*/
+redFlagRoutes.get(
+  "/red-flags/createdby/:id/status",
+  Helpers.verifyUsersToken,
+  incident.getRedflagStatusCount
+);
+
 /**Fetch specific red-flag record */
 redFlagRoutes.get(
   "/red-flags/:id",

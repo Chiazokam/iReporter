@@ -1,7 +1,7 @@
-import { Helpers } from "../helpers/predefinedMethods";
+import { Helpers, Queries } from "../helpers";
 import { db } from "../database";
 
-const strTrim = new Helpers();
+const query = new Queries();
 
 export class Incidents {
 
@@ -13,21 +13,19 @@ export class Incidents {
    */
   createAnIncidentRecord(req, res){
     const { title, comment, type, location, images, videos } = req.body;
-    const { id } = req.userInfo; //userId
+    const { id } = req.userInfo;
 
-    db.any("INSERT INTO incidents(title, comment, type, location, images, videos, status, createdBy) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-      [String(title).trim(), String(comment).trim(), strTrim.trimMe(type), String(location).trim(), images.join(" , "), videos.join(" , "), "draft", id])
-      .then(() => {
-        db.any("SELECT * FROM incidents WHERE createdBy = $1", [id])
-          .then((data) => {
-            const lastRecord = (data.length - 1);
-            const recordId = data[lastRecord].id;
-            if (type === "red-flag") {
-              Helpers.returnForSuccess(req, res, 201, recordId, "Created red-flag record");
-            } else {
-              Helpers.returnForSuccess(req, res, 201, recordId, "Created intervention record");
-            }
-          });
+    const createObject = { title, comment, type, location, images, videos, id };
+
+    query.createIncidentQuery(createObject)
+      .then((data) => {
+        const lastRecord = (data.length - 1);
+        const recordId = data[lastRecord].id;
+        if (type === "red-flag") {
+          Helpers.returnForSuccess(req, res, 201, recordId, "Created red-flag record");
+        } else {
+          Helpers.returnForSuccess(req, res, 201, recordId, "Created intervention record");
+        }
       });
 
   }
@@ -169,7 +167,6 @@ export class Incidents {
           return Helpers.returnForError(req, res, 404, "admin not found");
         } else if (data[0].isadmin !== true) {
           return Helpers.returnForError(req, res, 401, "not an admin"); }
-
         db.any("SELECT * FROM incidents WHERE id = $1", [incidentsId])
           .then((data2) => {
             if (data2.length < 1) {
@@ -242,6 +239,32 @@ export class Incidents {
   getSpecificRecord(req, res) {
     const id = req.params.id;
     Helpers.getSpecificRecord(req, res, id);
+  }
+
+  /**
+   * Returns the status count of red-flag records on the database
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @return {undefined}
+   */
+  getRedflagStatusCount(req, res) {
+    const userId = req.params.id;
+    const redflag = "red-flag";
+
+    Helpers.getStatusCount(req, res, userId, redflag);
+  }
+
+  /**
+   * Returns the status count intervention records on the database
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @return {undefined}
+   */
+  getInterventionStatusCount(req, res) {
+    const userId = req.params.id;
+    const intervention = "intervention";
+
+    Helpers.getStatusCount(req, res, userId, intervention);
   }
 
 }

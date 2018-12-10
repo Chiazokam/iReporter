@@ -25,8 +25,8 @@ const createTables = `
             type TEXT NOT NULL,
             location TEXT NOT NULL,
             status TEXT NOT NULL,
-            images TEXT,
-            videos TEXT,
+            images TEXT[],
+            videos TEXT[],
             createdBy INT REFERENCES users(id),
             createdOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP
           );
@@ -41,7 +41,8 @@ const addAdmin = `
           email,
           phoneNumber,
           password,
-          isAdmin)
+          isAdmin,
+          profileimage)
         VALUES (
           'shaolinmkz',
           'Chukwuemeka',
@@ -50,7 +51,8 @@ const addAdmin = `
           'nwabuzor.obiora@gmail.com',
           '07067443245',
           '$2a$10$TRKGYcUtvqxaBFuBWZlccOF559mfcAFtKrrKZw/KWA507nTioM6x6',
-          'true');
+          'true',
+          'https://res.cloudinary.com/shaolinmkz/image/upload/v1544370726/avatar.png');
           `;
 
 const createIncidentRecord = `
@@ -68,8 +70,8 @@ const createIncidentRecord = `
             'It all started when the earth rumbled...',
             'red-flag',
             '12.233334, 2.323123',
-            'http://jamaica-star.com/sites/default/files/styles/460px/public/media/article_images/2017/11/21/BadroadsA20171121RM.jpg?itok=K72fUdU5',
-            'https://youtu.be/bPYbg-nrWzg',
+            '{http://jamaica-star.com/sites/default/files/styles/460px/public/media/article_images/2017/11/21/BadroadsA20171121RM.jpg?itok=K72fUdU5}',
+            '{https://youtu.be/bPYbg-nrWzg}',
             'draft',
             1);
               `;

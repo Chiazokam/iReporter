@@ -12,7 +12,11 @@ const runQuery = () => {
   const pool = new Pool({ connectionString });
   pool.connect();
 
-  const query = `${dropDB} ${createTables} ${addAdmin} ${createIncidentRecord}`;
+  let query = `${createTables} ${addAdmin} ${createIncidentRecord}`;
+
+  if (process.env.NODE_ENV === "dev") {
+    query = `${dropDB} ${createTables} ${addAdmin} ${createIncidentRecord}`;
+  }
 
   pool.query(query)
     .then(() => pool.end())

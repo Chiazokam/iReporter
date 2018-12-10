@@ -79,6 +79,63 @@ describe("GET all intervention records endpoint", () => {
 
 
 
+
+
+/**
+ * Get status number count
+ */
+describe("GET status number endpoints", () => {
+
+  it("should return status 200 if status count return was successful for red flag", (done) => {
+    request
+      .get(`${red_flags}/createdby/${1}/status`)
+      .set("authorization", validToken)
+      .end((err, res) => {
+        expect(res.status).to.eql(200);
+        expect(res.body.status).to.eql(200);
+        expect(res.body.status).to.be.a("number");
+        (res.body.data[0]).should.be.an("object");
+        should.not.exist(err);
+        should.exist(res.body);
+        if (err) { return done(err); }
+        done();
+      });
+  });
+
+  it("should return status 200 if status count return was successful for intervention", (done) => {
+    request
+      .get(`${interventions}/createdby/${1}/status`)
+      .set("authorization", validToken)
+      .end((err, res) => {
+        expect(res.status).to.eql(200);
+        expect(res.body.status).to.eql(200);
+        expect(res.body.status).to.be.a("number");
+        (res.body.data[0]).should.be.an("object");
+        should.not.exist(err);
+        should.exist(res.body);
+        if (err) { return done(err); }
+        done();
+      });
+  });
+
+  it("should return status 200 if status count returns with zero", (done) => {
+    request
+      .get(`${interventions}/${100}/status-count`)
+      .set("authorization", validToken)
+      .end((err, res) => {
+        expect(res.status).to.eql(200);
+        expect(res.body.status).to.eql(200);
+        expect(res.body.status).to.be.a("number");
+        (res.body.data[0]).should.be.an("object");
+        should.not.exist(err);
+        should.exist(res.body);
+        if (err) { return done(err); }
+        done();
+      });
+  });
+});
+
+
 /**
  * Get specific red-flag
  */

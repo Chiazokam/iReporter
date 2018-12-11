@@ -41,7 +41,8 @@ const addAdmin = `
           email,
           phoneNumber,
           password,
-          isAdmin)
+          isAdmin,
+          profileimage)
         VALUES (
           'shaolinmkz',
           'Chukwuemeka',
@@ -50,7 +51,8 @@ const addAdmin = `
           'nwabuzor.obiora@gmail.com',
           '07067443245',
           '$2a$10$TRKGYcUtvqxaBFuBWZlccOF559mfcAFtKrrKZw/KWA507nTioM6x6',
-          'true');
+          'true',
+          'https://res.cloudinary.com/shaolinmkz/image/upload/v1544370726/avatar.png');
           `;
 
 const createIncidentRecord = `

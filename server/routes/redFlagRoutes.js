@@ -1,7 +1,7 @@
 import express from "express";
 import { Helpers } from "../helpers";
 import { Incidents } from "../controllers";
-import { PostValidator, GetValidator} from "../middlewares";
+import { PostValidator, GetValidator, verifyUsersToken } from "../middlewares";
 
 const incident = new Incidents();
 
@@ -10,7 +10,7 @@ const redFlagRoutes = express.Router();
 /**Create a red-flag record */
 redFlagRoutes.post(
   "/red-flags",
-  Helpers.verifyUsersToken,
+  verifyUsersToken,
   PostValidator.multipleStringValidation,
   PostValidator.validateArrayValues,
   PostValidator.isValidIncidentType,
@@ -21,7 +21,7 @@ redFlagRoutes.post(
 /**Fetch all red-flag records */
 redFlagRoutes.get(
   "/red-flags",
-  Helpers.verifyUsersToken,
+  verifyUsersToken,
   GetValidator.doesRedFlagRecordExist,
   incident.getAllRedflagRecords
 );
@@ -29,14 +29,14 @@ redFlagRoutes.get(
 /**Fetch specific red-flag record */
 redFlagRoutes.get(
   "/red-flags/:id",
-  Helpers.verifyUsersToken,
+  verifyUsersToken,
   incident.getSpecificRecord
 );
 
 /**Update a red-flag record location*/
 redFlagRoutes.patch(
   "/red-flags/:id/location",
-  Helpers.verifyUsersToken,
+  verifyUsersToken,
   PostValidator.locationStringValidation,
   Helpers.isNotAValidGeolocation,
   incident.updateRedflagRecordLocation
@@ -45,7 +45,7 @@ redFlagRoutes.patch(
 /**Update a red-flag record comment*/
 redFlagRoutes.patch(
   "/red-flags/:id/comment",
-  Helpers.verifyUsersToken,
+  verifyUsersToken,
   PostValidator.commentStringValidation,
   incident.updateRedflagRecordComment
 );
@@ -53,14 +53,14 @@ redFlagRoutes.patch(
 /**Delete a red-flag record */
 redFlagRoutes.delete(
   "/red-flags/:id",
-  Helpers.verifyUsersToken,
+  verifyUsersToken,
   incident.deleteRedflagRecord
 );
 
 /**Update a red-flag record status*/
 redFlagRoutes.patch(
   "/red-flags/:id/status",
-  Helpers.verifyUsersToken,
+  verifyUsersToken,
   PostValidator.validateStatus,
   incident.updateIncidentsStatus
 );

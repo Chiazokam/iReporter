@@ -32,6 +32,13 @@ redFlagRoutes.get(
   incident.getSpecificRecord
 );
 
+/**Get red-flag records status count numbers*/
+redFlagRoutes.get(
+  "/red-flags/profile/status",
+  verifyUsersToken,
+  incident.getRedflagStatusCount
+);
+
 /**Update a red-flag record location*/
 redFlagRoutes.patch(
   "/red-flags/:id/location",

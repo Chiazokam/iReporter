@@ -164,4 +164,42 @@ export class Queries {
       });
   }
 
+
+  /**
+  * Returns the numbers of the different records on the database
+  * @param  {object} req - Contains the body of the request.
+  * @param {object} res - Contains the returned response
+  * @param {number} userId - createdby id
+  * @param {string} incidentType - red-flag or intervention
+  * @return {undefined}
+  */
+  getStatusCount(req, res, userId, incidentType) {
+
+    db.any("SELECT * FROM incidents WHERE createdby = $1 AND type = $2", [userId, incidentType])
+      .then((data) => {
+        const counts = {
+          draft: 0,
+          underInvestigation: 0,
+          resolved: 0,
+          rejected: 0
+        };
+        if (data.length < 1) {
+          Helpers.returnSuccessForGET(req, res, 200, [counts]);
+        } else {
+          for (let index in data) {
+            if (data[index].status.toLowerCase() === "draft") {
+              counts.draft += 1;
+            } else if (data[index].status.toLowerCase() === "under investigation") {
+              counts.underInvestigation += 1;
+            } else if (data[index].status.toLowerCase() === "resolved") {
+              counts.resolved += 1;
+            } else if (data[index].status.toLowerCase() === "rejected") {
+              counts.rejected += 1;
+            }
+          }
+          Helpers.returnSuccessForGET(req, res, 200, [counts]);
+        }
+      });
+  }
+
 }

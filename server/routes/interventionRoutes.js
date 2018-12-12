@@ -1,7 +1,7 @@
 import express from "express";
 import { Helpers } from "../helpers";
 import { Incidents } from "../controllers";
-import { PostValidator, GetValidator, verifyUsersToken } from "../middlewares";
+import { PostValidator, verifyUsersToken } from "../middlewares";
 
 const incident = new Incidents();
 
@@ -23,7 +23,6 @@ interventionRoutes.post(
 interventionRoutes.get(
   "/interventions",
   verifyUsersToken,
-  GetValidator.doesInterventionRecordExist,
   incident.getAllInterventionRecords);
 
 /**Fetch specific intervention record */

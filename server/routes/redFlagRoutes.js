@@ -1,7 +1,7 @@
 import express from "express";
 import { Helpers } from "../helpers";
 import { Incidents } from "../controllers";
-import { PostValidator, GetValidator, verifyUsersToken } from "../middlewares";
+import { PostValidator, verifyUsersToken } from "../middlewares";
 
 const incident = new Incidents();
 
@@ -22,7 +22,6 @@ redFlagRoutes.post(
 redFlagRoutes.get(
   "/red-flags",
   verifyUsersToken,
-  GetValidator.doesRedFlagRecordExist,
   incident.getAllRedflagRecords
 );
 

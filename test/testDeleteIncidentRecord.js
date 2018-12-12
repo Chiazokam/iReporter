@@ -113,22 +113,4 @@ describe("DELETE a specific red-flag record endpoint", () => {
 });
 
 
-describe("GET all intervention records endpoint", () => {
-  it("should return status 404 if an intervention doesn't records exist in the database", (done) => {
-    request
-      .get(interventions)
-      .set("authorization", process.env.VALID_TOKEN)
-      .end((err, res) => {
-        expect(res.status).to.eql(404);
-        expect(res.body.status).to.eql(404);
-        expect(res.body.error).to.eql("records not found");
-        expect(res.body.status).to.be.a("number");
-        should.not.exist(err);
-        should.exist(res.body);
-        if (err) { return done(err); }
-        done();
-      });
-  });
-});
-
 

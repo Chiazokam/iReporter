@@ -535,7 +535,7 @@ describe("Signin user end-point", () => {
         "password": "iAmInCorrect",
       }).end((err, res) => {
         expect(res.status).to.eql(400);
-        expect(res.body.error).to.eql("password incorrect");
+        expect(res.body.error).to.eql("incorrect username or password");
         expect(res.body.error).to.be.a("string");
         expect(res.body.status).to.be.a("number");
         should.not.exist(err);
@@ -626,7 +626,7 @@ describe("Signin user end-point", () => {
         "password": "xxxxxxxx",
       }).end((err, res) => {
         expect(res.status).to.eql(400);
-        expect(res.body.error).to.eql("User doesn't exist");
+        expect(res.body.error).to.eql("username/email or password doesn't exist");
         expect(res.body.error).to.be.a("string");
         expect(res.body.status).to.be.a("number");
         should.not.exist(err);

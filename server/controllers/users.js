@@ -1,10 +1,9 @@
-import { db } from "../database";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { Helpers } from "../helpers";
+import { Helpers, Queries } from "../helpers";
 
-const trim = new Helpers();
+const query = new Queries();
 
 dotenv.load();
 
@@ -19,24 +18,22 @@ export class Users {
     const { username, firstname, lastname, othername, phoneNumber, email, password } = req.body;
     const hash = bcrypt.hashSync(password, 10);
     const profileimage = "https://res.cloudinary.com/shaolinmkz/image/upload/v1544370726/avatar.png";
-    db.none("INSERT INTO users(username, firstname, lastname, othername, email, phonenumber, password, isadmin, profileimage) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)",
-      [trim.trimMe(username), trim.trimMe(firstname), trim.trimMe(lastname), trim.trimMe(othername), trim.trimMe(email), trim.trimMe(phoneNumber), hash, false, profileimage])
-      .then(() => {
-        db.any("SELECT * FROM users WHERE email = $1", [email])
-          .then((data) => {
-            const user = data[0];
-            const userdetails = {
-              id: user.id,
-              username: user.username,
-              email: user.email,
-              firstname: user.firstname,
-              lastname: user.lastname,
-              phoneNumber: user.phonenumber,
-              profileImage: user.profileimage,
-              isAdmin: user.isadmin };
-            const token = jwt.sign( userdetails, process.env.SECRET_KEY, { expiresIn: "1d" });
-            Helpers.returnForSigninSignUp(req, res, 201, token, userdetails);
-          });
+    const userDetails = { username, firstname, lastname, othername, phoneNumber, email, hash, false: false, profileimage };
+
+    query.createUserQuery(userDetails)
+      .then((data) => {
+        const user = data[0];
+        const userdetails = {
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          phoneNumber: user.phonenumber,
+          profileImage: user.profileimage,
+          isAdmin: user.isadmin };
+        const token = jwt.sign( userdetails, process.env.SECRET_KEY, { expiresIn: "1d" });
+        Helpers.returnForSigninSignUp(req, res, 201, token, userdetails);
       });
   }
 
@@ -49,13 +46,15 @@ export class Users {
    */
   signinUser(req, res) {
     const { emailUsername, password } = req.body;
-    db.any("SELECT * FROM users WHERE email = $1 OR username = $2", [trim.trimMe(emailUsername), trim.trimMe(emailUsername)])
+    const email = emailUsername;
+    const username = emailUsername;
+    query.loginQuery(email, username)
       .then(data => {
         const user = data[0];
         if (data.length > 0) {
           bcrypt.compare(password, user.password, (error, result) => {
             if (!result) {
-              Helpers.returnForError(req, res, 400, "password incorrect");
+              Helpers.returnForError(req, res, 400, "incorrect username or password");
             }	else {
               const userdetails = {
                 id: user.id,
@@ -70,7 +69,7 @@ export class Users {
               Helpers.returnForSigninSignUp(req, res, 200, token, userdetails); }
           });
         } else {
-          Helpers.returnForError(req, res, 400, "User doesn't exist"); }
+          Helpers.returnForError(req, res, 400, "username/email or password doesn't exist"); }
       });
   }
 
@@ -85,14 +84,14 @@ export class Users {
     const paramId = req.params.id;
     const userId = req.userInfo.id;
 
-    db.any("SELECT * FROM users WHERE id = $1", [paramId])
+    query.selectQuery("users", "id", paramId)
       .then((data) => {
         if (data.length < 1) {
           Helpers.returnForError(req, res, 404, "user not found");
         } else if (data[0].id !== userId) {
           Helpers.returnForError(req, res, 403, "your not allowed to perform that action");
         } else {
-          db.any("UPDATE users SET profileimage = $1 WHERE id = $2 RETURNING *", [trim.trimMe(profileImage), userId])
+          query.profileImageUpdateQuery(profileImage, userId)
             .then((updatedData) => {
               const updatedRecordId = updatedData[0].id;
               Helpers.returnForSuccess(req, res, 200, updatedRecordId, "profile image updated");

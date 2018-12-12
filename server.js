@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import logger from "morgan";
 
-import { redFlagRoutes, signupSigninRoutes, interventionRoutes } from "./server/routes";
+import { redFlagRoutes, authRoutes, interventionRoutes, profileRoutes } from "./server/routes";
 
 const port = process.env.PORT || 8000;
 
@@ -15,7 +15,7 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/json" }));
 
 
-app.use("/api/v1", redFlagRoutes, signupSigninRoutes, interventionRoutes);
+app.use("/api/v1", redFlagRoutes, authRoutes, interventionRoutes, profileRoutes);
 
 app.get("*", (req, res) => {
   res.status(200).json({

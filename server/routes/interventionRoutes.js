@@ -1,7 +1,7 @@
 import express from "express";
 import { Helpers } from "../helpers";
 import { Incidents } from "../controllers";
-import { PostValidator, GetValidator } from "../middlewares";
+import { PostValidator, GetValidator, verifyUsersToken } from "../middlewares";
 
 const incident = new Incidents();
 
@@ -11,7 +11,7 @@ const interventionRoutes = express.Router();
 /**Create an intervention record */
 interventionRoutes.post(
   "/interventions",
-  Helpers.verifyUsersToken,
+  verifyUsersToken,
   PostValidator.multipleStringValidation,
   PostValidator.validateArrayValues,
   PostValidator.isValidIncidentType,
@@ -22,21 +22,21 @@ interventionRoutes.post(
 /**Fetch all intervention records */
 interventionRoutes.get(
   "/interventions",
-  Helpers.verifyUsersToken,
+  verifyUsersToken,
   GetValidator.doesInterventionRecordExist,
   incident.getAllInterventionRecords);
 
 /**Fetch specific intervention record */
 interventionRoutes.get(
   "/interventions/:id",
-  Helpers.verifyUsersToken,
+  verifyUsersToken,
   incident.getSpecificRecord
 );
 
 /**Update an intervention record location*/
 interventionRoutes.patch(
   "/interventions/:id/location",
-  Helpers.verifyUsersToken,
+  verifyUsersToken,
   PostValidator.locationStringValidation,
   Helpers.isNotAValidGeolocation,
   incident.updateInterventionLocation
@@ -45,7 +45,7 @@ interventionRoutes.patch(
 /**Update an intervention record comment*/
 interventionRoutes.patch(
   "/interventions/:id/comment",
-  Helpers.verifyUsersToken,
+  verifyUsersToken,
   PostValidator.commentStringValidation,
   incident.updateInterventionRecordComment
 );
@@ -53,14 +53,14 @@ interventionRoutes.patch(
 /**Delete an intervention record */
 interventionRoutes.delete(
   "/interventions/:id",
-  Helpers.verifyUsersToken,
+  verifyUsersToken,
   incident.deleteInterventionRecord
 );
 
 /**Update an intervention record status*/
 interventionRoutes.patch(
   "/interventions/:id/status",
-  Helpers.verifyUsersToken,
+  verifyUsersToken,
   PostValidator.validateStatus,
   incident.updateIncidentsStatus
 );

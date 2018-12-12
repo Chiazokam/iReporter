@@ -8,7 +8,7 @@ const should = chai.should();
 const request = supertest.agent(app);
 
 const signupRoute = "/api/v1/auth/signup";
-const signinRoute = "/api/v1/auth/signin";
+const signinRoute = "/api/v1/auth/login";
 
 
 /**

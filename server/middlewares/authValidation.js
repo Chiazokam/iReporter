@@ -3,7 +3,7 @@ import { db } from "../database";
 
 
 
-export class SignUpSignInValidator {
+export class authValidator {
   /**
    * Validates users input for signup and signin
    * @param  {object} req - Contains the body of the request.

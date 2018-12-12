@@ -1,7 +1,8 @@
 import { PostValidator } from "./validatePostRecords";
 import { GetValidator } from "./validateGetRecords";
-import { SignUpSignInValidator } from "./validateSignupSignin";
+import { authValidator } from "./authValidation";
+import verifyUsersToken from "./verifyToken";
 
-export { PostValidator, GetValidator, SignUpSignInValidator };
+export { PostValidator, GetValidator, authValidator, verifyUsersToken };
 
 

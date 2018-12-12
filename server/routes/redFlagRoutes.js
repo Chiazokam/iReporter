@@ -15,7 +15,7 @@ redFlagRoutes.post(
   PostValidator.validateArrayValues,
   PostValidator.isValidIncidentType,
   Helpers.isNotAValidGeolocation,
-  incident.createAnIncidentRecord
+  incident.createRedflagRecord
 );
 
 /**Fetch all red-flag records */

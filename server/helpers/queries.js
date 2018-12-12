@@ -122,7 +122,7 @@ export class Queries {
    * Returns all records type
    * @param  {object} req - Contains the body of the request.
    * @param {object} res - Contains the returned response.
-   * @param {string}
+   * @param {string} -type
    * @return {undefined}
    */
   getAllRecordsType(req, res, type) {
@@ -130,6 +130,19 @@ export class Queries {
       .then((data) => {
         Helpers.returnSuccessForGET(req, res, 200, data);
       });
+  }
+
+  /**
+   * Checks if user exist ion the database query
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @param {string} email
+   * @param {string} username
+   * @param {string} phoneNumber
+   * @return {undefined}
+   */
+  selectUniqueFields(email, username, phoneNumber) {
+    return db.any("SELECT * FROM users WHERE email = $1 OR username = $2 OR phoneNumber = $3", [email, username, phoneNumber]);
   }
 
 

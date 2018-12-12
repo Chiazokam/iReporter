@@ -1,6 +1,7 @@
-import { Helpers } from "../helpers";
+import { Helpers, Queries } from "../helpers";
 import { db } from "../database";
 
+const query = new Queries();
 
 
 export class authValidator {
@@ -126,7 +127,7 @@ export class authValidator {
   doesUserExist(req, res, next) {
     const { email, username, phoneNumber } = req.body;
 
-    db.any("SELECT * FROM users WHERE email = $1 OR username = $2 OR phoneNumber = $3", [email, username, phoneNumber])
+    query.selectUniqueFields(email, username, phoneNumber)
       .then(data => {
         if (data.length > 0) {
           Helpers.returnForError(req, res, 400, "user already exist");

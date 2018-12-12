@@ -1,4 +1,4 @@
-import app from "../server/server";
+import app from "../server/app";
 import supertest from "supertest";
 import chai from "chai";
 const expect = chai.expect;

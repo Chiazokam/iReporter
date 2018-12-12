@@ -16,7 +16,7 @@ interventionRoutes.post(
   PostValidator.validateArrayValues,
   PostValidator.isValidIncidentType,
   Helpers.isNotAValidGeolocation,
-  incident.createAnIncidentRecord
+  incident.createInterventionRecord
 );
 
 /**Fetch all intervention records */

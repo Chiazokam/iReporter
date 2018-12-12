@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import logger from "morgan";
 
-import { redFlagRoutes, authRoutes, interventionRoutes, profileRoutes } from "./server/routes";
+import { redFlagRoutes, authRoutes, interventionRoutes, profileRoutes } from "./routes";
 
 const port = process.env.PORT || 8000;
 

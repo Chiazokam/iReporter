@@ -5,12 +5,12 @@ const query = new Queries();
 export class Incidents {
 
   /**
-   * Creates a red-flag or intervention record
+   * Creates a red-flag record
    * @param  {object} req - Contains the body of the request.
    * @param {object} res - Contains the returned response.
    * @return {undefined}
    */
-  createAnIncidentRecord(req, res) {
+  createRedflagRecord(req, res) {
     const { title, comment, type, location, images, videos } = req.body;
     const { id } = req.userInfo;
 
@@ -20,11 +20,28 @@ export class Incidents {
       .then((data) => {
         const lastRecord = (data.length - 1);
         const recordId = data[lastRecord].id;
-        if (type === "red-flag") {
-          Helpers.returnForSuccess(req, res, 201, recordId, "Created red-flag record");
-        } else {
-          Helpers.returnForSuccess(req, res, 201, recordId, "Created intervention record");
-        }
+        Helpers.returnForSuccess(req, res, 201, recordId, "Created red-flag record");
+      });
+
+  }
+
+  /**
+ * Creates an intervention record
+ * @param  {object} req - Contains the body of the request.
+ * @param {object} res - Contains the returned response.
+ * @return {undefined}
+ */
+  createInterventionRecord(req, res) {
+    const { title, comment, type, location, images, videos } = req.body;
+    const { id } = req.userInfo;
+
+    const createObject = { title, comment, type, location, images, videos, id };
+
+    query.createIncidentQuery(createObject)
+      .then((data) => {
+        const lastRecord = (data.length - 1);
+        const recordId = data[lastRecord].id;
+        Helpers.returnForSuccess(req, res, 201, recordId, "Created intervention record");
       });
 
   }

@@ -258,6 +258,33 @@ export class Incidents {
     query.getSpecificRecord(req, res, id);
   }
 
+
+  /**
+   * Returns the status count of red-flag records on the database
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @return {undefined}
+   */
+  getRedflagStatusCount(req, res) {
+    const userId = req.userInfo.id;
+    const redflag = "red-flag";
+
+    query.getStatusCount(req, res, userId, redflag);
+  }
+
+  /**
+   * Returns the status count intervention records on the database
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @return {undefined}
+   */
+  getInterventionStatusCount(req, res) {
+    const userId = req.userInfo.id;
+    const intervention = "intervention";
+
+    query.getStatusCount(req, res, userId, intervention);
+  }
+
 }
 
 

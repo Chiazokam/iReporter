@@ -32,6 +32,13 @@ interventionRoutes.get(
   incident.getSpecificRecord
 );
 
+/**Get intervention records status count number*/
+interventionRoutes.get(
+  "/interventions/profile/status",
+  verifyUsersToken,
+  incident.getInterventionStatusCount
+);
+
 /**Update an intervention record location*/
 interventionRoutes.patch(
   "/interventions/:id/location",

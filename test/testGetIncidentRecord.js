@@ -156,6 +156,21 @@ describe("GET a specific red-flag record endpoint", () => {
       });
   });
 
+  it("should return 400 if param is not an integer", (done) => {
+    request
+      .get(`${red_flags}/${1.22222}`)
+      .set("authorization", validToken)
+      .end((err, res) => {
+        expect(res.status).to.eql(400);
+        expect(res.body.error).to.eql("param is not an integer");
+        expect(res.body.status).to.eql(400);
+        expect(res.body.status).to.be.a("number");
+        expect(res.body.error).to.be.a("string");
+        if (err) { return done(err); }
+        done();
+      });
+  });
+
   it("should return status 404 if specified red-flag record doesn't exist in the database", (done) => {
     request
       .get(`${red_flags}/${invalidURI}`)

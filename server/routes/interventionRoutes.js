@@ -29,6 +29,7 @@ interventionRoutes.get(
 interventionRoutes.get(
   "/interventions/:id",
   verifyUsersToken,
+  PostValidator.validateParams,
   incident.getSpecificRecord
 );
 
@@ -43,6 +44,7 @@ interventionRoutes.get(
 interventionRoutes.patch(
   "/interventions/:id/location",
   verifyUsersToken,
+  PostValidator.validateParams,
   PostValidator.locationStringValidation,
   Helpers.isNotAValidGeolocation,
   incident.updateInterventionLocation
@@ -52,6 +54,7 @@ interventionRoutes.patch(
 interventionRoutes.patch(
   "/interventions/:id/comment",
   verifyUsersToken,
+  PostValidator.validateParams,
   PostValidator.commentStringValidation,
   incident.updateInterventionRecordComment
 );
@@ -60,6 +63,7 @@ interventionRoutes.patch(
 interventionRoutes.delete(
   "/interventions/:id",
   verifyUsersToken,
+  PostValidator.validateParams,
   incident.deleteInterventionRecord
 );
 
@@ -67,6 +71,7 @@ interventionRoutes.delete(
 interventionRoutes.patch(
   "/interventions/:id/status",
   verifyUsersToken,
+  PostValidator.validateParams,
   PostValidator.validateStatus,
   incident.updateIncidentsStatus
 );

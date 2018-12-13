@@ -93,7 +93,7 @@ export class Helpers {
    * @return {boolean}
    */
   static isNotWholeNumber(value) {
-    const wholeNumberRegex = /^\d+(?:\.\d{1,2})?$/gm;
+    const wholeNumberRegex = /^\d+$/gm;
     const bool = wholeNumberRegex.test(value.toString());
     return !bool;
   }

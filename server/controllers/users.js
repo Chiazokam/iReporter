@@ -81,10 +81,9 @@ export class Users {
    */
   updateProfileImage(req, res){
     const { profileImage } = req.body;
-    const paramId = req.params.id;
     const userId = req.userInfo.id;
 
-    query.selectQuery("users", "id", paramId)
+    query.selectQuery("users", "id", userId)
       .then((data) => {
         if (data.length < 1) {
           Helpers.returnForError(req, res, 404, "user not found");

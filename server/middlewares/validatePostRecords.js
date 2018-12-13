@@ -98,9 +98,9 @@ export class PostValidator {
    * @return {undefined}
    */
   static multipleStringValidation(req, res, next) {
-    const { title, comment, type, location, images, videos } = req.body;
-    const strings = { title, type, location };
-    const reqObj = { title, comment, type, location, images, videos };
+    const { title, comment, location, images, videos } = req.body;
+    const strings = { title, location };
+    const reqObj = { title, comment, location, images, videos };
     let inputs; const excessSpace = /[^\s+]/g;
     for (inputs in reqObj) {
       if (!reqObj[inputs]) {
@@ -118,23 +118,6 @@ export class PostValidator {
       }
     }
     next();
-  }
-
-
-  /**
-   * Checks if input is a red-flag type
-   * @param  {object} req - Contains the body of the request.
-   * @param {object} res - Contains the returned response.
-   * @param  {next} - Proceeds to the next method on the route
-   * @return {undefined}
-   */
-  static isValidIncidentType(req, res, next) {
-    const { type } = req.body;
-    if (type.toLowerCase() !== "red-flag" && type.toLowerCase() !== "intervention") {
-      Helpers.returnForError(req, res, 400, "invalid incident type");
-    } else {
-      next();
-    }
   }
 
 
@@ -162,6 +145,14 @@ export class PostValidator {
       }
     }
     Helpers.returnForError(req, res, 400, "invalid status selection");
+  }
+
+  static validateParams(req, res, next) {
+    const id = req.params.id;
+    if (Helpers.isNotWholeNumber(id)) {
+      return Helpers.returnForError(req, res, 400, "param is not an integer");
+    }
+    next();
   }
 
 }

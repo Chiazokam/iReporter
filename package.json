@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test && nyc --reporter=html --reporter=text mocha --require babel-register --timeout 10000 ./test/ --exit",
-    "start": "babel-node ./server.js",
+    "start": "babel-node ./server/app.js",
     "start:dev": "nodemon --watch server --exec babel-node ./server/app.js",
     "test:dev": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register ./test*.js --timeout 20000 --exit",
     "coverage": "nyc --reporter=html --reporter=text --reporter=lcov mocha --reporter spec --require babel-register ./test/*.js --exit",
@@ -30,14 +30,17 @@
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
+    "cors": "^2.8.5",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
     "mocha": "^5.2.0",
     "morgan": "^1.9.1",
+    "path": "^0.12.7",
     "pg": "^7.7.1",
     "pg-promise": "^8.5.2",
-    "supertest": "^3.3.0"
+    "supertest": "^3.3.0",
+    "swagger-ui-express": "^4.0.2"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",

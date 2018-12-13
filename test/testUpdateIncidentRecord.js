@@ -251,7 +251,7 @@ describe("Update comment end-point", () => {
 describe("Update user profile image end-point", () => {
 
   it("should return 200 if profile image updates successfully", (done) => {
-    request.patch(`/api/v1/users/${1}/profile-image`)
+    request.patch("/api/v1/users/profile-image")
       .set("authorization", newValidToken)
       .send({
         profileImage: "imageUrl",
@@ -270,46 +270,8 @@ describe("Update user profile image end-point", () => {
 
 
 
-
-  it("should return 403 if the resquest body createdBy ID doesn't match the createdBy ID of the redflag in the database", (done) => {
-    request.patch(`/api/v1/users/${3}/profile-image`)
-      .set("authorization", tokenId2)
-      .send({
-        profileImage: "changedImageUrl",
-      }).end((err, res) => {
-        expect(res.status).to.eql(403);
-        expect(res.body.error).to.eql("your not allowed to perform that action");
-        expect(res.body.error).to.be.a("string");
-        expect(res.body.status).to.be.a("number");
-        should.not.exist(err);
-        should.exist(res.body);
-        (res.body).should.be.an("object");
-        if (err) { return done(err); }
-        done();
-      });
-  });
-
-
-  it("should return 400 if user doesn't exist", (done) => {
-    request.patch(`/api/v1/users/${1000000}/profile-image`)
-      .set("authorization", tokenId2)
-      .send({
-        profileImage: "samplepictureUrl",
-      }).end((err, res) => {
-        expect(res.status).to.eql(404);
-        expect(res.body.error).to.eql("user not found");
-        expect(res.body.error).to.be.a("string");
-        expect(res.body.status).to.be.a("number");
-        should.not.exist(err);
-        should.exist(res.body);
-        (res.body).should.be.an("object");
-        if (err) { return done(err); }
-        done();
-      });
-  });
-
   it("should return 400 if image url isn't a string", (done) => {
-    request.patch(`/api/v1/users/${1}/profile-image`)
+    request.patch("/api/v1/users/profile-image")
       .set("authorization", process.env.VALID_TOKEN)
       .send({
         profileImage: 1234567,
@@ -327,7 +289,7 @@ describe("Update user profile image end-point", () => {
   });
 
   it("should return 400 if image is undefined", (done) => {
-    request.patch(`/api/v1/users/${1}/profile-image`)
+    request.patch("/api/v1/users/profile-image")
       .set("authorization", process.env.VALID_TOKEN)
       .send({
         profileImage: "",

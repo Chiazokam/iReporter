@@ -11,10 +11,10 @@ export class Incidents {
    * @return {undefined}
    */
   createRedflagRecord(req, res) {
-    const { title, comment, type, location, images, videos } = req.body;
+    const { title, comment, location, images, videos } = req.body;
     const { id } = req.userInfo;
 
-    const createObject = { title, comment, type, location, images, videos, id };
+    const createObject = { title, comment, type: "red-flag", location, images, videos, id };
 
     query.createIncidentQuery(createObject)
       .then((data) => {
@@ -26,16 +26,16 @@ export class Incidents {
   }
 
   /**
- * Creates an intervention record
- * @param  {object} req - Contains the body of the request.
- * @param {object} res - Contains the returned response.
- * @return {undefined}
- */
+   * Creates an intervention record
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @return {undefined}
+   */
   createInterventionRecord(req, res) {
-    const { title, comment, type, location, images, videos } = req.body;
+    const { title, comment, location, images, videos } = req.body;
     const { id } = req.userInfo;
 
-    const createObject = { title, comment, type, location, images, videos, id };
+    const createObject = { title, comment, type: "intervention", location, images, videos, id };
 
     query.createIncidentQuery(createObject)
       .then((data) => {

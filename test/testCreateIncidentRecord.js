@@ -165,35 +165,6 @@ describe("Create Incident record end-point", () => {
   });
 
 
-  it("should return 400 if the type input isn't tightly equal to red-flag", (done) => {
-    request.post(red_flags)
-      .set("authorization", validToken)
-      .send({
-        "title": "Theft",
-        "type": "intervenx",
-        "location": geo_location,
-        "images": [
-          "imageURL1",
-          "imageURL2"
-        ],
-        "videos": [
-          "videoURL1",
-          "videoURL2"
-        ],
-        "comment": "This is a report on... to be continued"
-      }).end((err, res) => {
-        expect(res.status).to.eql(400);
-        expect(res.body.error).to.be.a("string");
-        expect(res.body.error).to.eql("invalid incident type");
-        expect(res.body.status).to.be.a("number");
-        should.not.exist(err);
-        should.exist(res.body);
-        (res.body).should.be.an("object");
-        if (err) { return done(err); }
-        done();
-      });
-  });
-
   it("should return 400 if some inputs are left empty for instance TITLE", (done) => {
     request.post(red_flags)
       .set("authorization", validToken)

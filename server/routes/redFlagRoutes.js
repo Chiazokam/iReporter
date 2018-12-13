@@ -29,6 +29,7 @@ redFlagRoutes.get(
 redFlagRoutes.get(
   "/red-flags/:id",
   verifyUsersToken,
+  PostValidator.validateParams,
   incident.getSpecificRecord
 );
 
@@ -43,6 +44,7 @@ redFlagRoutes.get(
 redFlagRoutes.patch(
   "/red-flags/:id/location",
   verifyUsersToken,
+  PostValidator.validateParams,
   PostValidator.locationStringValidation,
   Helpers.isNotAValidGeolocation,
   incident.updateRedflagRecordLocation
@@ -52,6 +54,7 @@ redFlagRoutes.patch(
 redFlagRoutes.patch(
   "/red-flags/:id/comment",
   verifyUsersToken,
+  PostValidator.validateParams,
   PostValidator.commentStringValidation,
   incident.updateRedflagRecordComment
 );
@@ -60,6 +63,7 @@ redFlagRoutes.patch(
 redFlagRoutes.delete(
   "/red-flags/:id",
   verifyUsersToken,
+  PostValidator.validateParams,
   incident.deleteRedflagRecord
 );
 
@@ -67,6 +71,7 @@ redFlagRoutes.delete(
 redFlagRoutes.patch(
   "/red-flags/:id/status",
   verifyUsersToken,
+  PostValidator.validateParams,
   PostValidator.validateStatus,
   incident.updateIncidentsStatus
 );

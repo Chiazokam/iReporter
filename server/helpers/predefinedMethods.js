@@ -88,6 +88,16 @@ export class Helpers {
   }
 
   /**
+   * Validates whole numbers
+   * @param {string} value
+   * @return {boolean}
+   */
+  static isNotWholeNumber(value) {
+    const wholeNumberRegex = /^\d+(?:\.\d{1,2})?$/gm;
+    const bool = wholeNumberRegex.test(value.toString());
+    return !bool;
+  }
+  /**
    * Validates a stringed geolocation
    * @param {string} string
    * @return {undefined}

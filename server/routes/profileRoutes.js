@@ -10,7 +10,7 @@ const profileRoutes = express.Router();
 
 /**Update a user profile image*/
 profileRoutes.patch(
-  "/users/:id/profile-image",
+  "/users/profile-image",
   verifyUsersToken,
   PostValidator.profileImageStringValidation,
   users.updateProfileImage

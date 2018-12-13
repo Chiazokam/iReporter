@@ -14,7 +14,6 @@ interventionRoutes.post(
   verifyUsersToken,
   PostValidator.multipleStringValidation,
   PostValidator.validateArrayValues,
-  PostValidator.isValidIncidentType,
   Helpers.isNotAValidGeolocation,
   incident.createInterventionRecord
 );

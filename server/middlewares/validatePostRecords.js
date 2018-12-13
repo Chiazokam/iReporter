@@ -122,23 +122,6 @@ export class PostValidator {
 
 
   /**
-   * Checks if input is a red-flag type
-   * @param  {object} req - Contains the body of the request.
-   * @param {object} res - Contains the returned response.
-   * @param  {next} - Proceeds to the next method on the route
-   * @return {undefined}
-   */
-  static isValidIncidentType(req, res, next) {
-    const { type } = req.body;
-    if (type.toLowerCase() !== "red-flag" && type.toLowerCase() !== "intervention") {
-      Helpers.returnForError(req, res, 400, "invalid incident type");
-    } else {
-      next();
-    }
-  }
-
-
-  /**
    * Validate status input by admin
    * @param  {object} req - Contains the body of the request.
    * @param {object} res - Contains the returned response.

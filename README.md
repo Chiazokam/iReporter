@@ -25,7 +25,7 @@ After cloning this repo, `cd` into it and on your command line run `npm install`
 ```
 e.g
 User@guest MINGW64 ~
-$ cd fast-food-fast
+$ cd ireporter
 User@guest MINGW64 ~/iReporter
 $ npm install
 ```
@@ -54,6 +54,9 @@ You can host this application on any server that is compatible with Nodejs apps.
 
 ## Hosted server
 * [iReporter](https://eye-reporter.herokuapp.com/)- API root => Welcome message
+
+## API Documentation
+* [DOCUMENTATION](https://eye-reporter.herokuapp.com/api-documentation)- API DOCUMENTATION
 
 ## Versioning
 Git-Hub 

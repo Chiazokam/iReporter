@@ -182,7 +182,7 @@ export class Incidents {
         if (data.length < 1) {
           return Helpers.returnForError(req, res, 404, "admin not found");
         } else if (data[0].isadmin !== true) {
-          return Helpers.returnForError(req, res, 401, "not an admin"); }
+          return Helpers.returnForError(req, res, 403, "not an admin"); }
 
         query.selectQuery("incidents", "id", incidentsId)
           .then((data2) => {

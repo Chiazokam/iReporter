@@ -130,7 +130,7 @@ export class authValidator {
     query.selectUniqueFields(email, username, phoneNumber)
       .then(data => {
         if (data.length > 0) {
-          Helpers.returnForError(req, res, 400, "user already exist");
+          Helpers.returnForError(req, res, 409, "user already exist");
         } else {
           next();
         }

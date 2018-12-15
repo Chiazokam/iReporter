@@ -447,13 +447,13 @@ describe("Update status of an incident", () => {
 
 
 
-  it("should return 400 if user is not admin", (done) => {
+  it("should return 403 if user is not admin", (done) => {
     request.patch(`/api/v1/red-flags/${1}/status`)
       .set("authorization", validToken)
       .send({
         status: "under investigation",
       }).end((err, res) => {
-        expect(res.status).to.eql(401);
+        expect(res.status).to.eql(403);
         expect(res.body.error).to.eql("not an admin");
         expect(res.body.error).to.be.a("string");
         expect(res.body.status).to.be.a("number");

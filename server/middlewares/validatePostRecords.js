@@ -147,6 +147,14 @@ export class PostValidator {
     Helpers.returnForError(req, res, 400, "invalid status selection");
   }
 
+
+  /**
+   * Validate endpoints params
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @param  {next} - Proceeds to the next method on the route.
+   * @return {undefined}
+   */
   static validateParams(req, res, next) {
     const id = req.params.id;
     if (Helpers.isNotWholeNumber(id)) {

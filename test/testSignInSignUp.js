@@ -88,7 +88,7 @@ describe("Signup user end-point", () => {
       });
   });
 
-  it("should return 400 if user already exist at signup", (done) => {
+  it("should return 409 if user already exist at signup", (done) => {
     request.post(signupRoute)
       .send({
         "username": "sulaiman007",
@@ -100,7 +100,7 @@ describe("Signup user end-point", () => {
         "password": "asdfghj",
         "confirmPassword": "asdfghj"
       }).end((err, res) => {
-        expect(res.status).to.eql(400);
+        expect(res.status).to.eql(409);
         expect(res.body.error).to.eql("user already exist");
         expect(res.body.error).to.be.a("string");
         expect(res.body.status).to.be.a("number");

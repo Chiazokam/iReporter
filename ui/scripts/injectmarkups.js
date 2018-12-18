@@ -4,10 +4,10 @@
  * @return {undefined}
  */
 const injectIncidentRecord = (event) => {
-    let displayPost = document.getElementsByClassName("post-display")[0];
-    if (event.target.id === "redflag-record") {
-        displayPost.innerHTML = "";
-        displayPost.innerHTML =`
+  let displayPost = document.getElementsByClassName("post-display")[0];
+  if (event.target.id === "redflag-record") {
+    displayPost.innerHTML = "";
+    displayPost.innerHTML =`
         <div class="post">
             <article class="actual-post">
                 <img src="../images/avatar.png" class="avatar" title="avatar" /> <i class="profile-name"><a href="./profile.html">Mark</a></i>
@@ -58,9 +58,9 @@ And youâ€™ll be kind enough to send Smith & Jones enough circulars so there wonâ
                 </div>
             </article>
         </div>`;
-    } else if (event.target.id === "intervention-record") {
-        displayPost.innerHTML = "";
-        displayPost.innerHTML =  `
+  } else if (event.target.id === "intervention-record") {
+    displayPost.innerHTML = "";
+    displayPost.innerHTML =  `
          <div class="post">
         <article class="actual-post">
             <img src="../images/avatar.png" class="avatar" title="avatar" /> <i class="profile-name"><a href="./profile.html">Justice</a></i>
@@ -111,7 +111,7 @@ And youâ€™ll be kind enough to send Smith & Jones enough circulars so there wonâ
             </div>
         </article>
     </div>`;
-    }
+  }
 };
 
 window.addEventListener("click", injectIncidentRecord);

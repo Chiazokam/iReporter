@@ -37,6 +37,31 @@ User@guest MINGW64 ~/iReporter
 $ npm start
 ```
 
+### IMPLEMENTED API ENDPOINTS
+
+<table>
+<tr><th>HTTP VERBS</th><th>API ENDPOINTS</th><th>CORRESPONDING EFFECTS</th></tr>
+<tr><td>POST</td> <td>/api/v1/auth/signup</td>  <td>Signup user</td></tr>
+<tr><td>POST</td> <td>/api/v1/auth/login</td>  <td>Signin user</td></tr>
+<tr><td>POST</td> <td>/api/v1/redflags</td>  <td>Send a redflag</td></tr>
+<tr><td>POST</td> <td>/api/v1/interventions</td>  <td>Send an intervention</td></tr>
+<tr><td>GET</td> <td>/api/v1/redflags</td>  <td>Fetch all redflags</td></tr>
+<tr><td>GET</td> <td>/api/v1/interventions</td>  <td>Fetch all interventions</td></tr>
+<tr><td>GET</td> <td>/api/v1/redflags/:id</td>  <td>Fetch a redflag</td></tr>
+<tr><td>GET</td> <td>/api/v1/interventions/:id</td>  <td>Fetch an intervention</td></tr>
+<tr><td>GET</td> <td>/api/v1/redflags/profile/status</td>  <td>Fetch redflags status count</td></tr>
+<tr><td>GET</td> <td>/api/v1/interventions/profile/status</td>  <td>Fetch interventions status count</td></tr>
+<tr><td>PATCH</td> <td>/api/v1/redflags/:id/location</td>  <td>Update redflags location</td></tr>
+<tr><td>PATCH</td> <td>/api/v1/interventions/:id/location</td>  <td>Update interventions location</td></tr>
+<tr><td>PATCH</td> <td>/api/v1/redflags/:id/comment</td>  <td>Update redflags comment</td></tr>
+<tr><td>PATCH</td> <td>/api/v1/intervention/:id/location</td>  <td>Update interventions comment</td></tr>
+<tr><td>PATCH</td> <td>/api/v1/redflags/:id/status</td>  <td>Update redflags status</td></tr>
+<tr><td>PATCH</td> <td>/api/v1/interventions/:id/status</td>  <td>Update interventions status</td></tr>
+<tr><td>PATCH</td> <td>/api/v1/users/profile-image</td>  <td>Update profile image</td></tr>
+<tr><td>DELETE</td> <td>/api/v1/redflags/:id</td>  <td>Delete a redflag record</td></tr>
+<tr><td>DELETE</td> <td>/api/v1/interventions/:id</td>  <td>Delete an intervention record</td></tr>
+</table>
+
 ## Deployment
 You can host this application on any server that is compatible with Nodejs apps.
 * [Currently hosted on Heroku](https://eye-reporter.herokuapp.com/)

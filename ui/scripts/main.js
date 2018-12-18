@@ -4,8 +4,7 @@ const signupForm = document.getElementsByClassName("signup-form")[0];
 const signinForm = document.getElementsByClassName("signin-form")[0];
 
 
-const pageIndex = "http://127.0.0.1:5500/ui/index.html";
-
+// const pageIndex = "http://127.0.0.1:5500/ui/index.html";
 
 const ghpagesPageIndex = "https://shaolinmkz.github.io/iReporter/ui/";
 
@@ -31,12 +30,69 @@ const loading = document.getElementById("loading");
 
 const displayLatLng = document.getElementById("latlongdisplay");
 
-/** Dummy login function */
+const loaderOuterModal = document.getElementById("outer-modal");
+
+//hide body nav before page loads
+document.getElementsByTagName("body")[0].style.overflow = "hidden";
+
+/**
+ * Removes signin Nav
+ */
+const removeAuthNav = () => {
+  const token = localStorage.getItem("token");
+  const signinSignUp = document.querySelectorAll("li.removeAuthNav");
+  const signout = document.querySelectorAll("a.signout");
+  const hide = document.querySelectorAll("li.hide");
+  let count;
+  if (token !== null) {
+    for (count = 0; count < signinSignUp.length; count++) {
+      signinSignUp[count].remove();
+    }
+  } else if (token === null){
+    for (count = 0; count < signout.length; count++) {
+      signout[count].remove();
+    }
+    for (count = 0; count < hide.length; count++) {
+      hide[count].remove();
+    }
+  }
+};
+removeAuthNav();
+
+/**
+ * Removes admin Nav
+ */
+const removeAdminNav = () => {
+  const token = localStorage.getItem("token");
+  const adminNav = document.querySelectorAll("li.adminNav");
+  let decoded;
+
+  if (token !== null) {
+    decoded = jwt_decode(token);
+    if (decoded.isAdmin !== true) {
+      for (let count = 0; count < adminNav.length; count++) {
+        adminNav[count].remove();
+      }
+    }
+  }
+};
+removeAdminNav();
+
+
+
+/**
+ * Logout user
+ */
 window.addEventListener("click", (e) => {
-  if (e.target.id === "signup" || e.target.id === "signin") {
-    location.assign("./html/home.html");
+  if (e.target.className === "signout") {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    localStorage.setItem("logout", true);
+    localStorage.removeItem("authRequired");
+    location.href = index;
   }
 });
+
 
 /**
  * Time out function to remove display
@@ -77,7 +133,6 @@ window.addEventListener("click", switchForm);
  * @param {object} event - event object
  * @return {undefined}
  */
-
 const controlHamburgerForOtherPages = (event) => {
   if (event.target.className == "hamburger") {
     if (event.target.id == "") {
@@ -100,7 +155,7 @@ const controlHamburgerForOtherPages = (event) => {
  * @return {undefined}
  */
 const controlHamburger = (event) => {
-  if(location.href === pageIndex || location.href === ghpagesPageIndex || /index/gm.test(location.href)) {
+  if (location.href === pageIndex || RegExp(index).test(location.href) || location.href === ghpagesPageIndex || /index/gm.test(location.href)) {
     if (event.target.id === hamburgerIndex.id) {
       if (status == "close") {
         hamburger.src = "./images/menu_close_icon.png";
@@ -230,7 +285,7 @@ window.addEventListener("click", findMe);
 const revealCoordinates = (position) => {
   latitude.innerHTML = Number(position.coords.latitude).toPrecision(10);
   longitude.innerHTML = Number(position.coords.longitude).toFixed(10);
-  displayLatLng.style.display = "block";
+  displayLatLng.style.display = "inline-block";
   responseMessage.innerHTML = "<span style=\"color: green; font-weight: bold;\"> LOCATION FOUND <span>";
   timeOut(responseMessage);
   loading.style.display = "none";
@@ -249,79 +304,16 @@ const errorResponse = (err) => {
   responseMessage.style.marginTop = "0";
   timeOut(responseMessage);
   if (err.PERMISSION_DENIED === err.code) {
-		  responseMessage.innerHTML = "<span style=\"color: red\">User denied the request for Geolocation</span>";
+    responseMessage.innerHTML = "<span style=\"color: red\">User denied the request for Geolocation</span>";
   } else if (err.POSITION_UNAVAILABLE === err.code) {
-		  responseMessage.innerHTML = "<span style=\"color: red\">Location information is unavailable</span>";
+    responseMessage.innerHTML = "<span style=\"color: red\">Location information is unavailable</span>";
   } else if (err.TIMEOUT === err.code) {
-		  responseMessage.innerHTML = "<span style=\"color: red\">The request to get user location timed out</span>";
+    responseMessage.innerHTML = "<span style=\"color: red\">The request to get user location timed out</span>";
   } else if (err.UNKNOWN_ERROR === err.code) {
-		  responseMessage.innerHTML = "<span style=\"color: red\">An unknown error occurred</span>";
+    responseMessage.innerHTML = "<span style=\"color: red\">An unknown error occurred</span>";
   }
 
 };
-
-const loading2 = document.getElementById("loading2");
-const incident_Address = document.getElementById("incident_address");
-/**
- * Initiates google autocomplete
- * @return {undefined}
- */
-const initAutocomplete = (incident_Address) => {
-  const incidentAddress = (incident_Address);
-  const autocomplete = new google.maps.places.Autocomplete(incidentAddress);
-  autocomplete.setTypes(["geocode"]);
-  google.maps.event.addListener(autocomplete, "place_changed", () => {
-    let place = autocomplete.getPlace();
-    if (!place.geometry) {
-      return;
-    }
-
-    if (place.address_components) {
-      address = [
-        (place.address_components[0] && place.address_components[0].short_name || ""),
-        (place.address_components[1] && place.address_components[1].short_name || ""),
-        (place.address_components[2] && place.address_components[2].short_name || "")
-      ].join(" ");
-    }
-  });
-};
-
-if (/report/gm.test(location.href)) {
-  window.addEventListener("input", initAutocomplete(incident_Address));
-}
-
-
-/**
- * Gets the coordinates of a location
- * @param {object} event - event object
- * @return {undefined}
- */
-const getAddress = (event) => {
-  if (event.target.id !== "incident_address") {
-    return;
-  }
-  const geocoder = new google.maps.Geocoder();
-  const address = document.getElementById("incident_address").value;
-  loading2.style.display = "inline-block";
-  geocoder.geocode({ "address": address }, (results, status) => {
-    if (status == google.maps.GeocoderStatus.OK) {
-      document.getElementById("latitude").innerHTML = Number(results[0].geometry.location.lat()).toPrecision(10);
-      document.getElementById("longitude").innerHTML = Number(results[0].geometry.location.lng()).toPrecision(10);
-      displayLatLng.style.display = "block";
-      responseMessage.innerHTML = "<span style=\"color: green; font-weight: bold;\"> LOCATION FOUND <span>";
-      timeOut(responseMessage);
-      loading2.style.display = "none";
-    }
-
-    else {
-      responseMessage.innerHTML = `<span style="color: red">${status}</span>`;
-      timeOut(responseMessage);
-      loading2.style.display = "none";
-    }
-  });
-};
-window.addEventListener("input", getAddress);
-
 
 
 /**
@@ -408,43 +400,6 @@ const hideMe = (elem) => {
 
 
 /**
- * Gets the coordinates of a location
- * @param {object} event - event object
- * @return {undefined}
- */
-const updateAddress = (event) => {
-  if (event.target.id !== "location-input") {
-    return;
-  }
-  const geocoder = new google.maps.Geocoder();
-  const address = document.getElementById("location-input").value;
-  const locationMessage = document.getElementById("locationMessage");
-
-  geocoder.geocode({ "address": address }, (results, status) => {
-    if (status == google.maps.GeocoderStatus.OK) {
-      locationMessage.innerHTML = "<br><small style=\"color: green;\"> LOCATION FOUND!!!<small><br>";
-      timeOut(locationMessage);
-
-      let newCords = `${Number(results[0].geometry.location.lat()).toPrecision(10)}, ${Number(results[0].geometry.location.lng()).toPrecision(10)}`;
-
-      document.getElementById("newLocation").innerHTML = newCords;
-
-    }
-
-    else {
-      responseMessage.innerHTML = `<span style="color: red">${status}</span>`;
-      timeOut(responseMessage);
-      loading2.style.display = "none";
-    }
-  });
-};
-window.addEventListener("input", updateAddress);
-
-
-
-
-
-/**
  * Edit location
  * @param {object} event - event object
  * @return {undefined}
@@ -512,24 +467,51 @@ window.addEventListener("click", cancelLocationUpdate);
 /**
  * Spits out success or error messages
  * @param {string} message - display alert
+ * @param {boolean} style - type of display box
  */
-const toggleGeneralMessage = (message, error) => {
+const toggleGeneralMessage = (message, style) => {
   const generalMessage = document.getElementById("generalMessage");
   generalMessage.style.boxShadow = "1px 1px 20px 1px #162661";
   generalMessage.style.top = "3em";
   generalMessage.innerHTML = `${message}`;
-  if (error === true) {
+  if (style === true) { // for error
     generalMessage.style.color = "#162661";
     generalMessage.style.background = "white";
-  } else if (error === false){
+  } else if (style === false){ //for success
     generalMessage.style.color = "white";
     generalMessage.style.background = "#1e3792";
   }
   setTimeout(() => {
     generalMessage.style.top = "100000em";
-  }, 3000);
+  }, 5000);
 
 };
 
+/**
+ * Sends message to user if authentication issues occur
+ */
+window.addEventListener("load", () => {
+  const auth = localStorage.getItem("authRequired");
+  const logout = localStorage.getItem("logout");
+  const admin = localStorage.getItem("admin");
+  if (JSON.parse(auth) === true) {
+    toggleGeneralMessage("session ended, please reauthenticate", false);
+    localStorage.removeItem("authRequired");
+  }
 
+  if (JSON.parse(logout) === true) {
+    toggleGeneralMessage("logout successful", true);
+    localStorage.removeItem("logout");
+  }
+
+  if (JSON.parse(admin) === false) {
+    toggleGeneralMessage("your not an admin", false);
+    localStorage.removeItem("admin");
+  }
+});
+
+window.addEventListener("load", ()=> {
+  loaderOuterModal.style.display = "none";
+  document.getElementsByTagName("body")[0].style.overflow = "scroll";
+});
 

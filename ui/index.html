@@ -8,7 +8,9 @@
     <link rel="icon" href="./images/favicon.png" class="favicon" />
     <link rel="stylesheet" type="text/css" media="screen" href="./css/reset.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
-
+    <script src="./scripts/links.js"></script>
+    <script src="./scripts/jwt-decode.min.js"></script>
+    <script src="./scripts/authCheck.js"></script>
 </head>
 
 <body>
@@ -32,6 +34,7 @@
             </ul>
         </nav>
         <img src="./images/menu_icon.png" class="hamburger" id="hamburger"/>
+        <div id="generalMessage"></div>
     </header>
 
     <section class="body-container clearfix">
@@ -59,32 +62,36 @@
 
         <form class="signup-form clearfix">
             <h2><span class="switch-signup">SIGNUP</span> | <span class="switch-signin">LOGIN</span></h2>
-            <input type="text" placeholder="Username" required/>
-            <input type="email" placeholder="Email" required/>
-            <input type="text" placeholder="Firstname" required/>
-            <input type="text" placeholder="Lastname" required/>
-            <input type="text" placeholder="Othername" required/>
-            <input type="number" placeholder="Phone number" required/>
-            <input type="password" placeholder="Password" required/>
-            <input type="password" placeholder="Confirm password" required />
+            <input type="text" id="username" placeholder="Username" required/>
+            <input type="email" id="email" placeholder="Email" required/>
+            <input type="text" id="firstname" placeholder="Firstname" required/>
+            <input type="text" id="lastname" placeholder="Lastname" required/>
+            <input type="text" id="othername" placeholder="Othername" />
+            <input type="number" id="phoneNumber" placeholder="Phone number" required/>
+            <input type="password" id="password" placeholder="Password" required/>
+            <input type="password" id="confirmPassword" placeholder="Confirm password" required />
             <input type="submit" value="CREATE ACCOUNT" id="signup">
+
+            <img src="./images/loader_blue.GIF" class="loader" style="display:none; width: 20%;"/>
             <br>
             <span class="theme-blue">Already have an account?</span>
             <br>
             <br>
-            <button class="switch-signin deactivate" title="existing user signin"> Sign in here</button>
+            <input type="button" title="existing user signin" class="switch-signin deactivate" value="Sign in here" />
         </form>
 
         <form class="signin-form clearfix">
             <h2><span class="switch-signup">SIGNUP</span> | <span class="switch-signin">LOGIN</span></h2>
-            <input type="text" placeholder="Email or Username" required/>
-            <input type="password" placeholder="Password" required/>
+            <input type="text" id="emailUsername" placeholder="Email or Username" required/>
+            <input type="password" id="loginPassword" placeholder="Password" required/>
             <input type="submit" value="LOGIN" id="signin"/>
+
+            <img src="./images/loader_blue.GIF" class="loader" style="display:none; width: 20%;"/>
             <br>
             <span class="theme-blue">New user?</span>
             <br>
             <br>
-            <button title="new user sign-up" class="switch-signup theme-orange deactivate">Create an account here</button>
+            <input type="button" title="new user sign-up" class="switch-signup theme-orange deactivate" value="Create an account here"/>
         </form>
 
     </section>
@@ -94,6 +101,12 @@
             <h1>SEE SOMETHING SAY SOMETHING...</h1>
         </section>
 
+          <section id="outer-modal" class="outer-modal-loader" style="display:block">
+            <div class="inner-box-loader">
+              <img src="./images/loader.gif" class="image-enlarge">
+              <h1>PLEASE WAIT</h1>
+            </div>
+          </section>
 
     <footer id="footer">
 
@@ -103,6 +116,7 @@
 
     </footer>
     <script src="./scripts/main.js"></script>
+    <script src="./scripts/authentication.js"></script>
 </body>
 
 </html>

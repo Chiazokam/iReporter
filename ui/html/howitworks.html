@@ -8,6 +8,7 @@
     <link rel="icon" href="../images/favicon.png" class="favicon" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/reset.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
+    <script src="../scripts/links.js"></script>
 </head>
 
 <body>
@@ -21,32 +22,31 @@
 
         <nav class="main-nav clearfix">
             <ul class="clearfix" id="desktop-nav">
-                <li><a href="./home.html" >home</a></li>
+                <li class="hide"><a href="./home.html" >home</a></li>
                 <li><a href="./howitworks.html" id="current">how it works</a></li>
                 <li><a href="./about.html">about</a></li>
-                <li><a href="./report.html">report</a></li>
-                <li><a href="./profile.html">profile</a></li>
-                <li><a href="./admin.html">admin</a></li>
-                <li><a href="../index.html">signup/signin</a></li>
-                <li><a href="../index.html">signout</a></li>
+                <li class="hide"><a href="./report.html">report</a></li>
+                <li class="hide"><a href="./profile.html">profile</a></li>
+                <li class="adminNav hide"><a href="./admin.html">admin</a></li>
+                <li class="removeAuthNav"><a href="../index.html">signup/signin</a></li>
+                <li><a href="../index.html" class="signout">signout</a></li>
             </ul>
         </nav>
 
         <nav class="main-nav clearfix" id="mobile-nav">
             <ul class="clearfix">
-                <li><a href="./home.html">home</a></li>
+                <li class="hide"><a href="./home.html">home</a></li>
                 <li><a href="./howitworks.html" id="mobile-current">how it works</a></li>
                 <li><a href="./about.html">about</a></li>
-                <li><a href="./report.html">report</a></li>
-                <li><a href="./profile.html">profile</a></li>
-                <li><a href="./admin.html">admin</a></li>
-                <li><a href="../index.html">signup/signin</a></li>
-                <li><a href="../index.html">signout</a></li>
+                <li class="hide"><a href="./report.html">report</a></li>
+                <li class="hide"><a href="./profile.html">profile</a></li>
+                <li class="adminNav hide"><a href="./admin.html">admin</a></li>
+                <li class="removeAuthNav"><a href="../index.html">signup/signin</a></li>
+                <li><a href="../index.html" class="signout">signout</a></li>
             </ul>
         </nav>
         <img src="../images/menu_icon.png" class="hamburger" />
     </header>
-
     <article class="actual-post" id="howitworks">
         <div>
             <h1 class="theme-blue"> HOW IT WORKS</h1>
@@ -61,7 +61,14 @@
             <p>Thats it!</p>
         </div>
     </article>
-<i id="record-frame" style="display:none"></i>
+
+  <section id="outer-modal" class="outer-modal-loader" style="display:block">
+    <div class="inner-box-loader">
+      <img src="../images/loader.gif" class="image-enlarge">
+      <h1>PLEASE WAIT</h1>
+    </div>
+  </section>
+
     <footer id="footer">
 
         <div class="logo-footer-container">
@@ -69,6 +76,7 @@
         </div>
 
     </footer>
+    <script src="../scripts/jwt-decode.min.js"></script>
     <script src="../scripts/main.js"></script>
 </body>
 

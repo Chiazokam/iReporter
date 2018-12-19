@@ -4,6 +4,9 @@
 <head>
     <meta charset="utf-8" />
     <title>iR | Home</title>
+    <script src="../scripts/links.js"></script>
+    <script src="../scripts/jwt-decode.min.js"></script>
+    <script src="../scripts/authCheck.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="../images/favicon.png" class="favicon" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/reset.css" />
@@ -26,8 +29,8 @@
                 <li><a href="./about.html">about</a></li>
                 <li><a href="./report.html" >report</a></li>
                 <li><a href="./profile.html">profile</a></li>
-                <li><a href="./admin.html">admin</a></li>
-                <li><a href="../index.html">signout</a></li>
+                <li class="adminNav"><a href="./admin.html">admin</a></li>
+                <li><a href="../index.html" class="signout">signout</a></li>
             </ul>
         </nav>
 
@@ -38,17 +41,13 @@
                 <li><a href="./about.html">about</a></li>
                 <li><a href="./report.html" >report</a></li>
                 <li><a href="./profile.html">profile</a></li>
-                <li><a href="./admin.html">admin</a></li>
-                <li><a href="../index.html">signout</a></li>
+                <li class="adminNav"><a href="./admin.html">admin</a></li>
+                <li><a href="../index.html" class="signout">signout</a></li>
             </ul>
         </nav>
         <img src="../images/menu_icon.png" class="hamburger" />
+        <div id="generalMessage"></div>
     </header>
-
-        <section class="crime-report-container">
-            <img src="../images/crime_report.png" class="crime_report_image" />
-            <h1>SEE SOMETHING SAY SOMETHING...</h1>
-        </section>
 
         <section class="home-feeds">
 
@@ -113,6 +112,14 @@ And youâ€™ll be kind enough to send Smith & Jones enough circulars so there wonâ
 
 
         </section>
+
+  <section id="outer-modal" class="outer-modal-loader" style="display:block">
+    <div class="inner-box-loader">
+      <img src="../images/loader.gif" class="image-enlarge">
+      <h1>PLEASE WAIT</h1>
+    </div>
+  </section>
+
 <section class="outer-modal">
     <div class="inner-box">
         <img class="image-enlarge">
@@ -126,9 +133,10 @@ And youâ€™ll be kind enough to send Smith & Jones enough circulars so there wonâ
         </div>
 
     </footer>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeFdalDissHNDZBQ_utZRn-0dkTSkNS3g&libraries=places"></script>
     <script src="../scripts/main.js"></script>
     <script src="../scripts/injectmarkups.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeFdalDissHNDZBQ_utZRn-0dkTSkNS3g&libraries=places"></script>
+    <script src="../scripts/initiategoogle.js"></script>
 </body>
 
 </html>

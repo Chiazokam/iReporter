@@ -1,3 +1,4 @@
+let booleanStatus = true;
 /**
  * Redirects user
  * @param {string} link
@@ -36,7 +37,6 @@ window.addEventListener("load", checkAuth);
 const serverAuth = () => {
   const token = localStorage.getItem("token");
   fetch(securePages, {
-    method: "GET",
     headers: {
       "Accept": "application/json, text/plain, */*",
       "Content-type": "application/json",
@@ -45,7 +45,7 @@ const serverAuth = () => {
   })
     .then((res) => res.json())
     .then((responseData) => {
-      const { status } = responseData;
+      const { status, message } = responseData;
       if (status === 401) {
         const pageArray = ["/home", "/report", "/displayrecords", "/admin", "/profile"];
         for (let page = 0; page < pageArray.length; page++) {
@@ -57,10 +57,12 @@ const serverAuth = () => {
         }
       }
     })
-    .catch(err => {
-      return toggleGeneralMessage(err, false);
-    });
+    .catch((err) => err);
 };
 
-serverAuth();
+if (booleanStatus) {
+  booleanStatus = false;
+  serverAuth();
+}
+
 

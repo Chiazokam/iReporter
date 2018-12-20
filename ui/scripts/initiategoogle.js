@@ -1,5 +1,5 @@
 const loading2 = document.getElementById("loading2");
-const incident_Address = document.getElementById("incident_address");
+
 /**
  * Initiates google autocomplete
  * @return {undefined}
@@ -24,9 +24,12 @@ const initAutocomplete = (incident_Address) => {
   });
 };
 
-if (/report/gm.test(location.href)) {
-  window.addEventListener("input", initAutocomplete(incident_Address));
-}
+window.addEventListener("input", (e) => {
+  const incident_Address = document.getElementById("incident_address");
+  if (e.target.id === "incident_address") {
+    initAutocomplete(incident_Address);
+  }
+});
 
 
 /**
@@ -35,28 +38,27 @@ if (/report/gm.test(location.href)) {
  * @return {undefined}
  */
 const getAddress = (event) => {
-  if (event.target.id !== "incident_address") {
-    return;
+  const responseMessage = document.getElementById("responseMessage");
+  if (event.target.id === "incident_address") {
+    const geocoder = new google.maps.Geocoder();
+    const address = document.getElementById("incident_address").value;
+    loading2.style.display = "inline-block";
+    geocoder.geocode({ "address": address }, (results, status) => {
+      if (status == google.maps.GeocoderStatus.OK) {
+        document.getElementById("latitude").innerHTML = Number(results[0].geometry.location.lat()).toPrecision(10);
+        document.getElementById("longitude").innerHTML = Number(results[0].geometry.location.lng()).toPrecision(10);
+        displayLatLng.style.display = "block";
+        responseMessage.innerHTML = "<span style=\"color: green; font-weight: bold;\"> LOCATION FOUND <span>";
+        timeOut(responseMessage);
+        loading2.style.display = "none";
+      }
+      else {
+        responseMessage.innerHTML = `<span style="color: red">${status}</span>`;
+        timeOut(responseMessage);
+        loading2.style.display = "none";
+      }
+    });
   }
-  const geocoder = new google.maps.Geocoder();
-  const address = document.getElementById("incident_address").value;
-  loading2.style.display = "inline-block";
-  geocoder.geocode({ "address": address }, (results, status) => {
-    if (status == google.maps.GeocoderStatus.OK) {
-      document.getElementById("latitude").innerHTML = Number(results[0].geometry.location.lat()).toPrecision(10);
-      document.getElementById("longitude").innerHTML = Number(results[0].geometry.location.lng()).toPrecision(10);
-      displayLatLng.style.display = "block";
-      responseMessage.innerHTML = "<span style=\"color: green; font-weight: bold;\"> LOCATION FOUND <span>";
-      timeOut(responseMessage);
-      loading2.style.display = "none";
-    }
-
-    else {
-      responseMessage.innerHTML = `<span style="color: red">${status}</span>`;
-      timeOut(responseMessage);
-      loading2.style.display = "none";
-    }
-  });
 };
 window.addEventListener("input", getAddress);
 
@@ -67,29 +69,31 @@ window.addEventListener("input", getAddress);
  * @return {undefined}
  */
 const updateAddress = (event) => {
-  if (event.target.id !== "location-input") {
-    return;
+  if (event.target.id === "location-input") {
+    const geocoder = new google.maps.Geocoder();
+    const address = document.getElementById("location-input").value;
+    const locationMessage = document.getElementById("locationMessage");
+
+    geocoder.geocode({ "address": address }, (results, status) => {
+      if (status == google.maps.GeocoderStatus.OK) {
+        locationMessage.innerHTML = "<br><small style=\"color: green;\"> LOCATION FOUND!!!<small><br>";
+        timeOut(locationMessage);
+
+        let newCords = `${Number(results[0].geometry.location.lat()).toPrecision(10)}, ${Number(results[0].geometry.location.lng()).toPrecision(10)}`;
+
+        document.getElementById("newLocation").innerHTML = newCords;
+
+      }
+    });
   }
-  const geocoder = new google.maps.Geocoder();
-  const address = document.getElementById("location-input").value;
-  const locationMessage = document.getElementById("locationMessage");
-
-  geocoder.geocode({ "address": address }, (results, status) => {
-    if (status == google.maps.GeocoderStatus.OK) {
-      locationMessage.innerHTML = "<br><small style=\"color: green;\"> LOCATION FOUND!!!<small><br>";
-      timeOut(locationMessage);
-
-      let newCords = `${Number(results[0].geometry.location.lat()).toPrecision(10)}, ${Number(results[0].geometry.location.lng()).toPrecision(10)}`;
-
-      document.getElementById("newLocation").innerHTML = newCords;
-
-    }
-
-    else {
-      responseMessage.innerHTML = `<span style="color: red">${status}</span>`;
-      timeOut(responseMessage);
-      loading2.style.display = "none";
-    }
-  });
 };
 window.addEventListener("input", updateAddress);
+
+window.addEventListener("input", (e)=>{
+  const updateAddy = document.getElementById("location-input");
+  if (e.target.id === "location-input") {
+    initAutocomplete(updateAddy);
+  }
+});
+
+

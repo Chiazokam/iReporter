@@ -3,6 +3,19 @@ body{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   min-width: 320px;
 }
+.vid-uploads,
+.img-uploads{
+  width: 20px;
+  height: 20px;
+}
+.uploadLoader{
+  width: 60px;
+  display: inline-table;
+  position: absolute;
+  top: -20px;
+  display:none;
+}
+
 #generalMessage{
   position: fixed;
   width: 320px;
@@ -39,7 +52,8 @@ body{
 }
 #loading,
 #loading2,
-#latlongdisplay{
+#latlongdisplay,
+.vid-uploads{
   display: none;
 }
 textarea{
@@ -136,7 +150,8 @@ text-decoration: underline;
 a:hover{
   text-decoration: underline;
 }
-.hamburger{
+#open-hamburger,
+#close-hamburger{
   display: none;
   cursor: pointer;
 }
@@ -346,6 +361,7 @@ div.logo-container{
 .crime-form-container .image-uploads{
   margin: 0.5em 0;
   font-style: italic;
+  list-style: none;
 }
 #incident_address{
   width: 64%;
@@ -1049,12 +1065,18 @@ footer{
   .reply p{
    text-align: left;
  }
-  .hamburger{
+ #close-hamburger{
+  width: 30px;
+  height: 30px;
+  float: right;
+  margin: 20px 40px 0 0;
+ }
+#open-hamburger{
   width: 30px;
   height: 30px;
   display: block;
   float: right;
-  margin: 20px 60px 0 0;
+  margin: 20px 40px 0 0;
 }
 #desktop-nav{
   display: none;
@@ -1151,7 +1173,8 @@ footer{
   .body-container {
    padding: 0 40px;
  }
-   .hamburger{
+#open-hamburger,
+#close-hamburger{
   width: 40px;
   height: 40px;
   margin: 10px 25px 0 0;
@@ -1185,6 +1208,14 @@ footer{
 #incident_address{
   width: 90%;
 }
+.uploadLoader{
+  position: relative;
+  margin: 0 auto;
+  top: 0;
+}
+.separateIncidentType{
+  display: block;
+}
 
 }
 
@@ -1212,7 +1243,7 @@ h2#compose-heading{
  .body-container h1{
   font-size: 120%
  }
-  .hamburger{
+  #open-hamburger{
   width: 40px;
   height: 40px;
   display: block;

@@ -58,7 +58,7 @@ body{
 }
 textarea{
 		font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-		text-align: left;
+    text-align: left;
 }
 #boundary{
   border: 1px ridge #162661;
@@ -433,6 +433,7 @@ text-align: center;
 }
 .actual-post div p{
   line-height: 2em;
+  word-break: break-all;
 }
 .picture-evidence{
   width: 30%;

@@ -45,7 +45,7 @@ const serverAuth = () => {
   })
     .then((res) => res.json())
     .then((responseData) => {
-      const { status, message } = responseData;
+      const { status } = responseData;
       if (status === 401) {
         const pageArray = ["/home", "/report", "/displayrecords", "/admin", "/profile"];
         for (let page = 0; page < pageArray.length; page++) {

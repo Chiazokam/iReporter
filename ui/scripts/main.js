@@ -1,18 +1,5 @@
-const switchToSignup = document.getElementsByClassName("switch-signup")[0];
-const switchToSignin = document.getElementsByClassName("switch-signin")[0];
-const signupForm = document.getElementsByClassName("signup-form")[0];
-const signinForm = document.getElementsByClassName("signin-form")[0];
-
-
-// const pageIndex = "http://127.0.0.1:5500/ui/index.html";
-
-const ghpagesPageIndex = "https://shaolinmkz.github.io/iReporter/ui/";
-
 let status = "close";
-
-const hamburger = document.getElementsByClassName("hamburger")[0];
-const hamburgerIndex = document.getElementById("hamburger");
-
+let bodyboolean = false;
 const mobileNav = document.getElementById("mobile-nav");
 
 const redFlagRecord = document.getElementById("redflag-record");
@@ -21,9 +8,6 @@ const interventionRecord = document.getElementById("intervention-record");
 const adminRedFlagSwitch = document.getElementById("admin-red-flag");
 const adminInterventionSwitch = document.getElementById("admin-intervention");
 
-
-const latitude = document.getElementById("latitude");
-const longitude = document.getElementById("longitude");
 const responseMessage = document.getElementById("responseMessage");
 
 const loading = document.getElementById("loading");
@@ -111,6 +95,10 @@ const timeOut = (elem) => {
  * @return {undefined}
  */
 const switchForm = (event) => {
+  const switchToSignup = document.getElementsByClassName("switch-signup")[0];
+  const switchToSignin = document.getElementsByClassName("switch-signin")[0];
+  const signupForm = document.getElementsByClassName("signup-form")[0];
+  const signinForm = document.getElementsByClassName("signin-form")[0];
   if (/switch-signup/gm.test(event.target.className)){
     signinForm.style.display = "none";
     signupForm.style.display = "block";
@@ -128,65 +116,56 @@ window.addEventListener("click", switchForm);
 window.addEventListener("click", switchForm);
 
 
-/**
- * Control hamburger menu
- * @param {object} event - event object
- * @return {undefined}
- */
-const controlHamburgerForOtherPages = (event) => {
-  if (event.target.className == "hamburger") {
-    if (event.target.id == "") {
-      if (status == "close") {
-        hamburger.src = "../images/menu_close_icon.png";
-        mobileNav.style.display = "block";
-        status = "open";
-      } else if (status == "open") {
-        hamburger.src = "../images/menu_icon.png";
-        mobileNav.style.display = "none";
-        status = "close";
-      }
-    }
-  }
-};
 
 /**
- * Control hamburger menu for the index-page
+ * Controls hamburger menu
  * @param {object} event - event object
  * @return {undefined}
  */
 const controlHamburger = (event) => {
-  if (location.href === pageIndex || RegExp(index).test(location.href) || location.href === ghpagesPageIndex || /index/gm.test(location.href)) {
-    if (event.target.id === hamburgerIndex.id) {
-      if (status == "close") {
-        hamburger.src = "./images/menu_close_icon.png";
-        mobileNav.style.display = "block";
-        status = "open";
-      } else if (status == "open") {
-        hamburger.src = "./images/menu_icon.png";
-        mobileNav.style.display = "none";
-        status = "close";
-      }
+  const open = document.getElementById("open-hamburger");
+  const close = document.getElementById("close-hamburger");
+  if (bodyboolean === true && event.target.id !== "open-hamburger" && event.target.id !== "close-hamburger") {
+    open.style.display = "inline-block";
+    close.style.display = "none";
+    mobileNav.style.display = "none";
+    status = "close";
+    bodyboolean = false;
+  }
+  if (event.target.id === "open-hamburger" || event.target.id === "close-hamburger") {
+    if (status == "close") {
+      open.style.display = "none";
+      close.style.display = "inline-block";
+      mobileNav.style.display = "block";
+      status = "open";
+      bodyboolean = true;
+    } else if (status == "open") {
+      open.style.display = "inline-block";
+      close.style.display = "none";
+      mobileNav.style.display = "none";
+      status = "close";
+      bodyboolean = false;
     }
   }
-  controlHamburgerForOtherPages(event);
 };
-
-
 window.addEventListener("click", controlHamburger);
 
 
 /** Hamburger menu initializer */
 window.addEventListener("resize", () => {
-  if (screen.availWidth > 999) {
-    if (location.href === pageIndex || location.href === ghpagesPageIndex || /index/gm.test(location.href)) {
-      mobileNav.style.display = "none";
-      hamburger.src = "./images/menu_icon.png";
-      status = "close";
-    } else {
-      mobileNav.style.display = "none";
-      hamburger.src = "../images/menu_icon.png";
-      status = "close";
-    }
+  const open = document.getElementById("open-hamburger");
+  const close = document.getElementById("close-hamburger");
+
+  if (document.body.clientWidth > 1000) {
+    mobileNav.style.display = "none";
+    status = "close";
+    open.style.display = "none";
+    close.style.display = "none";
+  } else if (document.body.clientWidth <= 1000) {
+    mobileNav.style.display = "none";
+    status = "close";
+    open.style.display = "inline-block";
+    close.style.display = "none";
   }
 });
 
@@ -264,6 +243,7 @@ const findMe = (e) => {
     return;
   } else if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(revealCoordinates, errorResponse);
+    document.getElementById("incident_address").style.display = "none";
     loading.style.display = "inline-block";
     responseMessage.style.marginTop = "1em";
   } else {
@@ -283,6 +263,8 @@ window.addEventListener("click", findMe);
  * @return {undefined}
  */
 const revealCoordinates = (position) => {
+  const latitude = document.getElementById("latitude");
+  const longitude = document.getElementById("longitude");
   latitude.innerHTML = Number(position.coords.latitude).toPrecision(10);
   longitude.innerHTML = Number(position.coords.longitude).toFixed(10);
   displayLatLng.style.display = "inline-block";
@@ -474,10 +456,10 @@ const toggleGeneralMessage = (message, style) => {
   generalMessage.style.boxShadow = "1px 1px 20px 1px #162661";
   generalMessage.style.top = "3em";
   generalMessage.innerHTML = `${message}`;
-  if (style === true) { // for error
-    generalMessage.style.color = "#162661";
+  if (style === true) { // for success
+    generalMessage.style.color = "green";
     generalMessage.style.background = "white";
-  } else if (style === false){ //for success
+  } else if (style === false){ //for error
     generalMessage.style.color = "white";
     generalMessage.style.background = "#1e3792";
   }

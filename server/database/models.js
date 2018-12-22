@@ -52,7 +52,7 @@ const addAdmin = `
           '07067443245',
           '$2a$10$TRKGYcUtvqxaBFuBWZlccOF559mfcAFtKrrKZw/KWA507nTioM6x6',
           'true',
-          'https://res.cloudinary.com/shaolinmkz/image/upload/v1544370726/avatar.png');
+          'https://res.cloudinary.com/shaolinmkz/image/upload/v1545510301/olmgs5naq7jyig8uhxru.jpg');
           `;
 
 const createIncidentRecord = `

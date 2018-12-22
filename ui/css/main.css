@@ -25,7 +25,7 @@ body{
   text-align: center;
   font-size: 100%;
   top: 100000em;
-  right: 0.5em;
+  right: 0.1em;
   text-transform: uppercase;
   border-radius: 0.2em;
 
@@ -36,6 +36,15 @@ body{
 #outer-modal,
 .outer-modal-loader{
   overflow: hidden;
+}
+.profileLoader{
+  display: none;
+  width: 100px;
+  margin: 0 auto;
+}
+.hover:hover{
+  cursor: pointer;
+  text-decoration: underline;
 }
 .remove-element{
   color: #162661;
@@ -53,7 +62,8 @@ body{
 #loading,
 #loading2,
 #latlongdisplay,
-.vid-uploads{
+.vid-uploads,
+#uploadProfileImage{
   display: none;
 }
 textarea{
@@ -172,8 +182,9 @@ a:hover{
 }
 
 .avatar{
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
 }
 
 /*------------NAV MENU----------*/
@@ -450,7 +461,7 @@ input[type="button"]{
 }
 .actual-post div p{
   line-height: 2em;
-  word-break: break-all;
+  overflow-wrap: break-word
 }
 .picture-evidence{
   width: 30%;
@@ -909,7 +920,7 @@ input.location-input{
   width: 280px;
   text-align: center;
   margin: 50px auto 0 auto;
-  padding: 1em 2em;
+  padding: 0 2em 1em 2em;
 }
 .profile .profile-details{
   text-align: left;
@@ -919,6 +930,8 @@ input.location-input{
   height: 100px;
   margin: 50px auto 0 auto;
   display: block;
+  border-radius: 100%;
+  padding-top: 2em;
 }
 .border-radius-bl{
   border-bottom-left-radius: 20px;
@@ -1074,6 +1087,9 @@ footer{
 
 
 @media(max-width:1000px) {
+  .post-display .profile-name span{
+  position: relative;
+}
   #mobile-nav ul{
   box-shadow: 1px 5px 20px 1px rgb(0, 0, 0);
 }
@@ -1135,6 +1151,7 @@ footer{
   padding: 50px 15px;
   text-align: center;
 }
+
 .actual-post h1{
   font-size: 1.2em;
   display: inline-block;
@@ -1205,7 +1222,7 @@ footer{
 #howitworks div,
 #about div{
   box-shadow: 1px 5px 10px 1px grey;
-  padding: 50px 10px;
+  padding: 50px 10px 50px 40px;
   font-size: 100%;
 }
 #howitworks,
@@ -1284,7 +1301,7 @@ h2#compose-heading{
   padding-right: 0;
 }
 .profile-details-border{
-  padding: 1em 0;
+  padding: 1em 0.8em;
 }
 .profile .profile-details{
   text-align: center;

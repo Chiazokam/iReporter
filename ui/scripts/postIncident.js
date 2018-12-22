@@ -27,9 +27,10 @@ const fetchNewIncident = ()=>{
     .then((responseData) => {
       const { status, data, error } = responseData;
       if (status === 200) {
+      document.getElementsByClassName("post-display")[0].style.marginTop = "4em";
         data.forEach((obj) => {
           document.getElementsByClassName("post-display")[0].innerHTML +=
-            `   <div class="post">
+            `   <div class="post" >
                     <article class="actual-post" id=${obj.id}>
                         <img src=${decoded.profileImage} class="avatar" title="avatar" /> <i class="profile-name"><a href="./profile.html">${decoded.firstname} ${decoded.lastname.charAt(0)}.</a></i>
                         <br>
@@ -70,6 +71,9 @@ ${obj.comment}
                 `;
         });
       } else {
+        document.getElementsByClassName("post-display")[0].innerHTML = `
+    <h1 style='color:grey; padding: 3em 0 0 0; text-align:center; font-size:2em'>NO RECENT POST</h1>
+    `;
         toggleGeneralMessage(error, false);
       }
     })
@@ -181,13 +185,16 @@ const postIncident = (event) => {
           document.getElementById("send-Incident").style.display = "inline-block";
           toggleGeneralMessage(error, false);
         }
-      })
-      .catch(err => err);
+      });
   }
 };
 window.addEventListener("submit", postIncident);
 
-//Turn on loader
+
+/**
+ * Turn on loader
+ * @param {number} num array index
+ */
 const loaderOn = (num) => {
   if (document.body.clientWidth > 500) {
     return document.querySelectorAll("img.uploadLoader")[num].style.display = "inline-block";
@@ -196,7 +203,10 @@ const loaderOn = (num) => {
   }
 };
 
-//Turn off loader
+/**
+ * Turn off loader
+ * @param {number} num array index
+ */
 const loaderOff = (num) => {
   return document.querySelectorAll("img.uploadLoader")[num].style.display = "none";
 };
@@ -315,9 +325,6 @@ window.addEventListener("click", (e) => {
   }
 });
 
-
-
-// window.addEventListener("load", collectUploads);
 
 
 const loadImageEvidence = () =>{

@@ -6,14 +6,21 @@
 const injectRedflagRecords = () => {
   const token = localStorage.getItem("token");
   const decoded = jwt_decode(token);
-
+  let incidentURL;
+  const recordId = localStorage.getItem("recordId");
   let displayPost = document.getElementsByClassName("post-display")[0];
   const incidentIcon = "../images/red_flag.png";
   displayPost.innerHTML = "";
   const loader = document.querySelector("#homeLoaderContainer .homeLoader");
   loader.style.display = "inline-block";
 
-  fetch(`${redflagURL}`, {
+  if (RegExp("/displayrecord").test(location.href)){
+    incidentURL = `${redflagURL}/${recordId}`;
+  } else {
+    incidentURL = redflagURL;
+  }
+
+  fetch(`${incidentURL}`, {
     method: "GET",
     headers: {
       "Accept": "application/json, text/plain, */*",
@@ -26,7 +33,7 @@ const injectRedflagRecords = () => {
       const { status, data } = responseData;
       if (data.length < 1) {
         document.getElementsByClassName("post-display")[0].innerHTML = `
-          <h1 style='color:grey; padding: 3em 0 0 0; text-align:center; font-size:2em'>NO RED-FLAG RECORDS</h1>
+          <h1 style='margin-bottom: 50%; color:grey; padding: 3em 0 0 0; text-align:center; font-size:2em'>NO RED-FLAG RECORDS</h1>
           `;
         loader.style.display = "none";
       } else if (status === 200) {
@@ -80,7 +87,6 @@ ${obj.comment}
             forEachRemove(editComment);
             forEachRemove(editLocation);
             forEachRemove(deleteButton);
-            console.log(editComment, editLocation, deleteButton);
           }
         });
       }
@@ -94,40 +100,52 @@ window.addEventListener("load", ()=> {
     injectRedflagRecords();
   }
 });
-document.getElementById("redflag-record").addEventListener("click", injectRedflagRecords);
+
+window.addEventListener("click", (e)=>{
+  if (e.target.id === "redflag-record"){
+    injectRedflagRecords();
+  }
+});
 
 
 
-const injectInterventionRecords = (event) => {
+
+const injectInterventionRecords = () => {
   const token = localStorage.getItem("token");
   const decoded = jwt_decode(token);
+  let incidentURL;
+  const recordId = localStorage.getItem("recordId");
+  if (RegExp("/displayrecord").test(location.href)) {
+    incidentURL = `${interventionURL}/${recordId}`;
+  } else {
+    incidentURL = interventionURL;
+  }
 
-  if (event.target.id === "intervention-record") {
-    let displayPost = document.getElementsByClassName("post-display")[0];
-    displayPost.innerHTML = "";
-    const incidentIcon = "../images/intervene_icon.png";
-    const loader = document.querySelector("#homeLoaderContainer .homeLoader");
-    loader.style.display = "inline-block";
+  let displayPost = document.getElementsByClassName("post-display")[0];
+  displayPost.innerHTML = "";
+  const incidentIcon = "../images/intervene_icon.png";
+  const loader = document.querySelector("#homeLoaderContainer .homeLoader");
+  loader.style.display = "inline-block";
 
-    fetch(`${interventionURL}`, {
-      method: "GET",
-      headers: {
-        "Accept": "application/json, text/plain, */*",
-        "Content-type": "application/json",
-        "authorization": token
-      }
-    })
-      .then((res) => res.json())
-      .then((responseData) => {
-        const { status, data } = responseData;
-        if (data.length < 1){
-          document.getElementsByClassName("post-display")[0].innerHTML =`
-          <h1 style='color:grey; padding: 3em 0 0 0; text-align:center; font-size:2em'>NO INTERVENTION RECORDS</h1>
+  fetch(`${incidentURL}`, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json, text/plain, */*",
+      "Content-type": "application/json",
+      "authorization": token
+    }
+  })
+    .then((res) => res.json())
+    .then((responseData) => {
+      const { status, data } = responseData;
+      if (data.length < 1){
+        document.getElementsByClassName("post-display")[0].innerHTML =`
+          <h1 style='margin-bottom: 50%; color:grey; padding: 3em 0 0 0; text-align:center; font-size:2em'>NO INTERVENTION RECORDS</h1>
           `;
-          loader.style.display = "none";
-        } else if (status === 200) {
-          data.forEach((obj) => {
-            document.getElementsByClassName("post-display")[0].innerHTML +=
+        loader.style.display = "none";
+      } else if (status === 200) {
+        data.forEach((obj) => {
+          document.getElementsByClassName("post-display")[0].innerHTML +=
               `   <div class="post">
                     <article class="actual-post" id=${obj.id}>
                         <img src=${obj.profileimage} class="avatar" title="avatar" /> <i class="profile-name"><span>${obj.firstname} ${obj.lastname.charAt(0)}.</span></i>
@@ -168,24 +186,26 @@ ${obj.comment}
                 </div>
                 `;
 
-            if (decoded.id !== obj.createdby) {
-              const editComment = document.querySelectorAll("button.edit-comment");
-              const editLocation = document.querySelectorAll("button.edit-location");
-              const deleteButton = document.querySelectorAll("button.delete");
+          if (decoded.id !== obj.createdby) {
+            const editComment = document.querySelectorAll("button.edit-comment");
+            const editLocation = document.querySelectorAll("button.edit-location");
+            const deleteButton = document.querySelectorAll("button.delete");
 
-              forEachRemove(editComment);
-              forEachRemove(editLocation);
-              forEachRemove(deleteButton);
-            }
-          });
-          loader.style.display = "none";
-        }
-      });
-  }
+            forEachRemove(editComment);
+            forEachRemove(editLocation);
+            forEachRemove(deleteButton);
+          }
+        });
+        loader.style.display = "none";
+      }
+    });
 };
 
-window.addEventListener("click", injectInterventionRecords);
-
+window.addEventListener("click", (e) => {
+  if (e.target.id === "intervention-record") {
+    injectInterventionRecords();
+  }
+});
 
 
 

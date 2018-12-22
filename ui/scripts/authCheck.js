@@ -1,4 +1,3 @@
-let booleanStatus = true;
 /**
  * Redirects user
  * @param {string} link
@@ -46,23 +45,27 @@ const serverAuth = () => {
     .then((res) => res.json())
     .then((responseData) => {
       const { status } = responseData;
+      const pageArray = ["/home", "/report", "/displayrecords", "/admin", "/profile"];
       if (status === 401) {
-        const pageArray = ["/home", "/report", "/displayrecords", "/admin", "/profile"];
+
         for (let page = 0; page < pageArray.length; page++) {
           if (RegExp(pageArray[page]).test(location.href)) {
             localStorage.setItem("authRequired", true);
             localStorage.removeItem("token");
+            localStorage.clear();
             return redirect(index);
           }
         }
+      } else if (status === 200){
+        if (RegExp("/index").test(location.href) || index === location.href) {
+          return redirect(home);
+        }
+
       }
-    })
-    .catch((err) => err);
+    });
 };
 
-if (booleanStatus) {
-  booleanStatus = false;
-  serverAuth();
-}
+serverAuth();
+
 
 

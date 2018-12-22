@@ -72,9 +72,7 @@ window.addEventListener("click", (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
     localStorage.setItem("logout", true);
-    localStorage.removeItem("authRequired");
-    localStorage.removeItem("incidentURLType");
-    localStorage.removeItem("newIncidentId");
+    localStorage.clear();
     location.href = index;
   }
 });

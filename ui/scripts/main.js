@@ -499,3 +499,49 @@ window.addEventListener("load", ()=> {
   document.getElementsByTagName("body")[0].style.overflow = "scroll";
 });
 
+/**
+ * loops over elements and removes them
+ * @param {array} elem
+ */
+const forEachRemove = (arrayElem) => {
+  arrayElem.forEach(elem => {
+    elem.remove();
+  });
+};
+
+
+/**
+ * unpacks an array of  images
+ * @param {array} arr
+ */
+const unpackImages = (arr, returnTag) => {
+  let markup = "";
+  arr.forEach(elem => {
+    markup += `<img src=${elem} class="picture-evidence" title="picture-evidence"/>`;
+  });
+  if (arr.length === 0) {
+    return returnTag;
+  } else {
+    return markup;
+  }
+};
+
+/**
+ * unpacks an array of videos
+ * @param {array} arr
+ */
+const unpackVideos = (arr, returnTag) => {
+  let markup = "";
+  arr.forEach(elem => {
+    markup += ` <video controls class="video-evidence">
+                    <source src=${elem}>
+                </video>`;
+  });
+
+  if (arr.length === 0) {
+    return returnTag;
+  } else {
+    return markup;
+  }
+};
+

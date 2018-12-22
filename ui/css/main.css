@@ -129,6 +129,13 @@ text-decoration: underline;
 .post-display .profile-name a{
   position: absolute;
   bottom: 0.2em;
+  width: 200px;
+}
+.post-display .profile-name span{
+  position: absolute;
+  bottom: 0.2em;
+  color: #162661;
+  width: 200px;
 }
 .signin-form .deactivate:hover,
 .signup-form .deactivate:hover{
@@ -419,6 +426,16 @@ text-align: center;
   font-size: 1.5em;
   padding: 1em 0;
   text-decoration: underline;
+}
+input[type="button"]{
+  outline: none;
+}
+#homeLoaderContainer{
+  text-align: center;
+}
+#homeLoaderContainer .homeLoader{
+  display: none;
+  width: 10%;
 }
 .post{
   background: #9cb1ff28;
@@ -1203,6 +1220,11 @@ footer{
   display: block;
 }
 .post-display .profile-name a{
+  position: initial;
+  bottom: 0;
+}
+
+.post-display .profile-name span{
   position: initial;
   bottom: 0;
 }

@@ -126,8 +126,9 @@ export class Queries {
    * @return {undefined}
    */
   getAllRecordsType(req, res, type) {
-    db.any("SELECT * FROM incidents WHERE type = $1", [type])
-      .then((data) => {
+    db.any("SELECT incidents.id, incidents.title, incidents.comment, incidents.type, incidents.location, incidents.status, incidents.images, incidents.videos, incidents.createdby, incidents.createdon, users.username, users.firstname, users.lastname, users.othername, users.email, users.profileimage, users.phonenumber, users.isadmin FROM incidents, users WHERE incidents.createdby = users.id")
+      .then((recordData) => {
+        const data = recordData.filter((elem)=> elem.type === type);
         Helpers.returnSuccessForGET(req, res, 200, data);
       });
   }
@@ -154,13 +155,13 @@ export class Queries {
    * @return {undefined}
    */
   getSpecificRecord(req, res, id) {
-    db.any("SELECT * FROM incidents WHERE id = $1", [id])
-      .then((data) => {
-        if (data.length < 1) {
-          Helpers.returnForError(req, res, 404, "record not found");
-        } else {
-          Helpers.returnSuccessForGET(req, res, 200, data);
+    db.any("SELECT incidents.id, incidents.title, incidents.comment, incidents.type, incidents.location, incidents.status, incidents.images, incidents.videos, incidents.createdby, incidents.createdon, users.username, users.firstname, users.lastname, users.othername, users.email, users.profileimage, users.phonenumber, users.isadmin FROM incidents, users WHERE incidents.createdby = users.id AND incidents.id = $1", [id])
+      .then((incidentData) => {
+        const data = incidentData;
+        if (incidentData.length < 1) {
+          return Helpers.returnForError(req, res, 404, "record not found");
         }
+        Helpers.returnSuccessForGET(req, res, 200, data);
       });
   }
 
@@ -199,6 +200,23 @@ export class Queries {
           }
           Helpers.returnSuccessForGET(req, res, 200, [counts]);
         }
+      });
+  }
+
+
+  /**
+   * Returns all records for a specific user
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response
+   * @param {number} userId - createdby id
+   * @param {string} incidentType - red-flag or intervention
+   * @return {undefined}
+   */
+  getUsersRecords(req, res, userId, incidentType) {
+
+    db.any("SELECT * FROM incidents WHERE createdby = $1 AND type = $2", [userId, incidentType])
+      .then((data) => {
+        Helpers.returnSuccessForGET(req, res, 200, data);
       });
   }
 

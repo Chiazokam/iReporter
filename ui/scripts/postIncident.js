@@ -1,29 +1,3 @@
-const unpackImages = (arr) => {
-  let markup = "";
-  arr.forEach(elem => {
-    markup += `<img src=${elem} class="picture-evidence" title="picture-evidence"/>`;
-  });
-  if (arr.length === 0) {
-    return "<span></span>";
-  } else {
-    return markup;
-  }
-};
-
-const unpackVideos = (arr) => {
-  let markup = "";
-  arr.forEach(elem => {
-    markup += ` <video controls class="video-evidence">
-                    <source src=${elem}>
-                </video>`;
-  });
-
-  if(arr.length === 0){
-    return "<span></span>";
-  } else {
-    return markup;
-  }
-};
 /**
  * Get an incident
  */
@@ -55,9 +29,9 @@ const fetchNewIncident = ()=>{
       if (status === 200) {
         data.forEach((obj) => {
           document.getElementsByClassName("post-display")[0].innerHTML +=
-            `          <div class="post">
-                    <article class="actual-post">
-                        <img src=${decoded.profileImage} class="avatar" title="avatar" /> <i class="profile-name"><a href="./profile.html">${decoded.username}</a></i>
+            `   <div class="post">
+                    <article class="actual-post" id=${obj.id}>
+                        <img src=${decoded.profileImage} class="avatar" title="avatar" /> <i class="profile-name"><a href="./profile.html">${decoded.firstname} ${decoded.lastname.charAt(0)}.</a></i>
                         <br>
                         <h1> ${obj.title}</h1>
                         <img src=${incidentIcon} class="red-flag-icon" title="Red flag" />
@@ -81,11 +55,11 @@ ${obj.comment}
                         <br>
 
                         <div class="image-display">
-                        ${unpackImages(obj.images)}
+                        ${unpackImages(obj.images,"<h3 style=color:grey;>NO IMAGE EVIDENCE</h3>")}
                         </div>
                         <br>
                         <div class="video-display">
-                        ${unpackVideos(obj.videos)}
+                        ${unpackVideos(obj.videos, "<h3 style=color:grey;>NO VIDEO EVIDENCE</h3>")}
                         </div>
 
                         <div class="delete-record-container">
@@ -93,7 +67,7 @@ ${obj.comment}
                         </div>
                     </article>
                 </div>
-`;
+                `;
         });
       } else {
         toggleGeneralMessage(error, false);
@@ -101,8 +75,23 @@ ${obj.comment}
     })
     .catch(err => err);
 };
-window.addEventListener("load", fetchNewIncident);
 
+//Load recent post
+window.addEventListener("load",()=>{
+  const newIncidentId = localStorage.getItem("newIncidentId");
+  const incidentURLType = localStorage.getItem("incidentURLType");
+  if (newIncidentId && incidentURLType){
+    fetchNewIncident();
+  } else {
+    document.getElementsByClassName("post-display")[0].innerHTML = `
+    <h1 style='color:grey; padding: 3em 0 0 0; text-align:center; font-size:2em'>NO RECENT POST</h1>
+    `;
+  }
+});
+
+/**
+ *Reset Form Fields
+ */
 const resetForm = () => {
   localStorage.removeItem("saveVideoUploads");
   localStorage.removeItem("saveImageUploads");
@@ -139,6 +128,7 @@ const postIncident = (event) => {
   const intervention = document.getElementById("intervention");
 
   if (event.target.id === target) {
+
     if (img_uploads.length > 0) {
       for (uploads = 0; uploads < img_uploads.length; uploads++) {
         imagesUploads.push(img_uploads[uploads].innerHTML);
@@ -369,5 +359,4 @@ const loadVideoEvidence = () => {
 
 window.addEventListener("load", loadImageEvidence);
 window.addEventListener("load", loadVideoEvidence);
-
 

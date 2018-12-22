@@ -81,11 +81,11 @@ ${obj.comment}
                         <br>
 
                         <div class="image-display">
-                        ${unpackImages(obj.images)}
+                        ${unpackImages(obj.images, "<h3 style=color:grey;>NO IMAGE EVIDENCE</h3>")}
                         </div>
                         <br>
                         <div class="video-display">
-                        ${unpackVideos(obj.videos)}
+                        ${unpackVideos(obj.videos, "<h3 style=color:grey;>NO VIDEO EVIDENCE</h3>")}
                         </div>
 
                         <div class="delete-record-container">

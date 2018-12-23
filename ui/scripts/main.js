@@ -459,7 +459,7 @@ const toggleGeneralMessage = (message, style) => {
   if (style === true) { // for success
     generalMessage.style.color = "green";
     generalMessage.style.background = "white";
-  } else if (style === false){ //for error
+  } else if (style === false){ //for error/ warning alerts
     generalMessage.style.color = "white";
     generalMessage.style.background = "#1e3792";
   }
@@ -490,11 +490,6 @@ window.addEventListener("load", () => {
     toggleGeneralMessage("your not an admin", false);
     localStorage.removeItem("admin");
   }
-});
-
-window.addEventListener("load", ()=> {
-  loaderOuterModal.style.display = "none";
-  document.getElementsByTagName("body")[0].style.overflow = "scroll";
 });
 
 /**
@@ -542,4 +537,30 @@ const unpackVideos = (arr, returnTag) => {
     return markup;
   }
 };
+
+let time = 0;
+const timeInterval = setInterval(()=>{
+  time++;
+}, 1000);
+
+const endTimer = () => {
+  if (time > 60) {
+    clearInterval(timeInterval);
+    clearInterval(clearTimeInterval);
+    loaderOuterModal.style.display = "none";
+    document.getElementsByTagName("body")[0].style.overflow = "scroll";
+    toggleGeneralMessage("please check internet connection", false);
+  }
+};
+
+const clearTimeInterval = setInterval(() => {
+  endTimer();
+}, 1000);
+
+window.addEventListener("load", () => {
+  clearInterval(timeInterval);
+  clearInterval(clearTimeout);
+  loaderOuterModal.style.display = "none";
+  document.getElementsByTagName("body")[0].style.overflow = "scroll";
+});
 

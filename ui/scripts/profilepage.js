@@ -227,3 +227,97 @@ window.addEventListener("load", () => {
   }
 });
 
+/**
+ * LOAD personal redflag records
+ * @param {object} event
+ */
+const loadAllPersonalRedflags = () => {
+  const token = localStorage.getItem("token");
+  fetch(personalRedflagURL, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json, text/plain, */*",
+      "Content-type": "application/json",
+      "authorization": token
+    }
+  })
+    .then((res) => res.json())
+    .then((responseData) => {
+      const { status, data } = responseData;
+      if (status === 200) {
+        if (data.length < 1) {
+          return document.getElementById("redflag-list").innerHTML += `
+           <h1 style='color:grey; padding: 1em 0 1em 0; text-align:center; font-size:1.2em'>NO RED-FLAG RECORD</h1>
+          `;
+        } else {
+          data.forEach(elem => {
+            document.getElementById("redflag-list").innerHTML +=
+            ` <li>
+          <a href="./displayrecords.html" class="redflag-link" id=${elem.id}>${elem.title.slice(0, 30)}...</a>
+          <img src="../images/red_flag.png" class="red-flag-icon" title="Red flag" />
+        </li>`;
+          });
+        }
+      }
+    });
+};
+
+
+/**
+ * LOAD personal redflag records
+ * @param {object} event
+ */
+const loadAllPersonalInterventions = () => {
+  const token = localStorage.getItem("token");
+  fetch(personalInterventionURL, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json, text/plain, */*",
+      "Content-type": "application/json",
+      "authorization": token
+    }
+  })
+    .then((res) => res.json())
+    .then((responseData) => {
+      const { status, data } = responseData;
+      if (status === 200) {
+        if (data.length < 1) {
+          return document.getElementById("intervention-list").innerHTML += `
+           <h2 style='color:grey; padding: 1em 0 1em 0; text-align:center; font-size:1.2em'>NO INTERVENTION RECORD</h2>
+          `;
+        } else{
+          data.forEach(elem => {
+            document.getElementById("intervention-list").innerHTML +=
+            ` <li>
+         <a href="./displayrecords.html" class="intervention-link" id=${elem.id}>${elem.title.slice(0, 30)}...</a>
+         <img src="../images/intervene_icon.png" class="red-flag-icon" title="intervention" />
+         </li>
+        `;
+          });
+        }
+      }
+    });
+};
+
+window.addEventListener("load", () => {
+  const redflagList = document.querySelectorAll(".redflag-list");
+  const interventionList = document.querySelectorAll(".intervention-list");
+  if (redflagList.length > 0 && interventionList.length > 0) {
+    loadAllPersonalRedflags();
+    loadAllPersonalInterventions();
+  }
+});
+
+//Set record ID and type to local storage
+window.addEventListener("click", (e)=>{
+  if (e.target.className === "intervention-link"){
+    localStorage.setItem("recordId", e.target.id);
+    localStorage.setItem("record-type", "intervention");
+  } else if (e.target.className === "redflag-link"){
+    localStorage.setItem("recordId", e.target.id);
+    localStorage.setItem("record-type", "red-flag");
+  }
+});
+
+
+

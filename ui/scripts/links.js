@@ -7,7 +7,8 @@ const securePages = "http://localhost:8000/api/v1/auth/secure-pages";
 const redflagURL = "http://localhost:8000/api/v1/red-flags";
 const interventionURL = "http://localhost:8000/api/v1/interventions";
 const profileImageUploadURL = "http://localhost:8000/api/v1/users/profile-image";
-
+const personalInterventionURL = "http://localhost:8000/api/v1/profile/interventions";
+const personalRedflagURL = "http://localhost:8000/api/v1/profile/red-flags";
 
 
 /**
@@ -38,3 +39,5 @@ const pageIndex = "http://localhost:8000";
 // const redflagURL = "https://eye-reporter.herokuapp.com/api/v1/red-flags";
 // const interventionURL = "https://eye-reporter.herokuapp.com/api/v1/interventions";
 // const securePages = "https://eye-reporter.herokuapp.com/api/v1/auth/secure-pages";
+// const personalInterventionURL = "https://eye-reporter.herokuapp.com/api/v1/profile/interventions";
+// const personalRedflagURL = "https://eye-reporter.herokuapp.com/api/v1/profile/red-flags";

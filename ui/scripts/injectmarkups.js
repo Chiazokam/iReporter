@@ -14,7 +14,7 @@ const injectRedflagRecords = () => {
   const loader = document.querySelector("#homeLoaderContainer .homeLoader");
   loader.style.display = "inline-block";
 
-  if (RegExp("/displayrecord").test(location.href)){
+  if (RegExp("/displayrecords").test(location.href)) {
     incidentURL = `${redflagURL}/${recordId}`;
   } else {
     incidentURL = redflagURL;
@@ -107,7 +107,15 @@ window.addEventListener("click", (e)=>{
   }
 });
 
-
+window.addEventListener("load", ()=> {
+  const displayRecordsHere = document.querySelectorAll("#displayrecordshere");
+  const recordType = localStorage.getItem("record-type");
+  if (displayRecordsHere.length > 0 && recordType === "intervention") {
+    injectInterventionRecords();
+  } else if (displayRecordsHere.length > 0 && recordType === "red-flag") {
+    injectRedflagRecords();
+  }
+});
 
 
 const injectInterventionRecords = () => {
@@ -115,7 +123,7 @@ const injectInterventionRecords = () => {
   const decoded = jwt_decode(token);
   let incidentURL;
   const recordId = localStorage.getItem("recordId");
-  if (RegExp("/displayrecord").test(location.href)) {
+  if (RegExp("/displayrecords").test(location.href)) {
     incidentURL = `${interventionURL}/${recordId}`;
   } else {
     incidentURL = interventionURL;

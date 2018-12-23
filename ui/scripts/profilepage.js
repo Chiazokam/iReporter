@@ -247,7 +247,7 @@ const loadAllPersonalRedflags = () => {
       if (status === 200) {
         if (data.length < 1) {
           return document.getElementById("redflag-list").innerHTML += `
-           <h1 style='color:grey; padding: 1em 0 1em 0; text-align:center; font-size:1.2em'>NO RED-FLAG RECORD</h1>
+           <h1 style='color:grey; padding: 1em 0 1em 0; text-align:center; font-size:1.2em'>NO RED-FLAG RECORDS</h1>
           `;
         } else {
           data.forEach(elem => {
@@ -264,7 +264,7 @@ const loadAllPersonalRedflags = () => {
 
 
 /**
- * LOAD personal redflag records
+ * LOAD personal intervention records
  * @param {object} event
  */
 const loadAllPersonalInterventions = () => {
@@ -283,7 +283,7 @@ const loadAllPersonalInterventions = () => {
       if (status === 200) {
         if (data.length < 1) {
           return document.getElementById("intervention-list").innerHTML += `
-           <h2 style='color:grey; padding: 1em 0 1em 0; text-align:center; font-size:1.2em'>NO INTERVENTION RECORD</h2>
+           <h2 style='color:grey; padding: 1em 0 1em 0; text-align:center; font-size:1.2em'>NO INTERVENTION RECORDS</h2>
           `;
         } else{
           data.forEach(elem => {
@@ -320,4 +320,93 @@ window.addEventListener("click", (e)=>{
 });
 
 
+/**
+ * LOAD all redflag records for Admin
+ * @param {object} event
+ */
+const loadAllRedflagsAdmin = () => {
+  const token = localStorage.getItem("token");
+  fetch(redflagURL, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json, text/plain, */*",
+      "Content-type": "application/json",
+      "authorization": token
+    }
+  })
+    .then((res) => res.json())
+    .then((responseData) => {
+      const { status, data } = responseData;
+      if (status === 200) {
+        if (data.length < 1) {
+          return document.querySelectorAll(".admin-redflag-list")[0].innerHTML += `
+           <h1 style='color:grey; padding: 1em 0 1em 0; text-align:center; font-size:1.2em'>NO RED-FLAG RECORDS</h1>
+          `;
+        } else {
+          data.forEach(elem => {
+            document.querySelectorAll(".admin-redflag-list")[0].innerHTML  +=
+              ` <li>
+                    <a href="#" class="show-status">${elem.title.slice(0, 30)}...</a>
+                    <img src="../images/red_flag.png" class="red-flag-icon" title="Red flag" />
+                    <a href="#" class="change" id=${elem.id}>change</a>
+                </li>`;
+          });
+        }
+      }
+    });
+};
+
+window.addEventListener("click", (e)=>{
+  if (e.target.id === "admin-red-flag") {
+    document.querySelectorAll(".admin-intervention-list")[0].innerHTML = "";
+    loadAllRedflagsAdmin();
+  } else if (e.target.id === "admin-intervention") {
+    document.querySelectorAll(".admin-redflag-list")[0].innerHTML = "";
+    loadAllInterventionsAdmin();
+  }
+});
+
+window.addEventListener("load", () => {
+  const adminRedFlags = document.querySelectorAll("#admin-red-flag");
+  if (adminRedFlags.length > 0) {
+    loadAllRedflagsAdmin();
+  }
+});
+
+/**
+ * LOAD all intervention records for Admin
+ * @param {object} event
+ */
+const loadAllInterventionsAdmin = () => {
+  const token = localStorage.getItem("token");
+  fetch(interventionURL, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json, text/plain, */*",
+      "Content-type": "application/json",
+      "authorization": token
+    }
+  })
+    .then((res) => res.json())
+    .then((responseData) => {
+      const { status, data } = responseData;
+      if (status === 200) {
+        if (data.length < 1) {
+          return document.querySelectorAll(".admin-intervention-list")[0].innerHTML  += `
+           <h2 style='color:grey; padding: 1em 0 1em 0; text-align:center; font-size:1.2em'>NO INTERVENTION RECORDS</h2>
+          `;
+        } else {
+          data.forEach(elem => {
+            document.querySelectorAll(".admin-intervention-list")[0].innerHTML +=
+              ` <li>
+                    <a href="#" class="show-status">${elem.title.slice(0, 30)}...</a>
+                    <img src="../images/intervene_icon.png" class="intervention-icon" title="intervention" />
+                    <a href="#" class="change" id=${elem.id}>change</a>
+                </li>
+        `;
+          });
+        }
+      }
+    });
+};
 

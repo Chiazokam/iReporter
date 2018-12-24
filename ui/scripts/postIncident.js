@@ -49,7 +49,7 @@ ${obj.comment}
                         <br>
                         <br>
                         <label class="blue">STATUS</label> : <span>${obj.status}</span> <br>
-                        <label class="blue">LOCATION</label> : <span>${obj.location}</span>
+                        <label class="blue">LOCATION</label> : <span class="geolocation">${obj.location}</span>
                         <span> &nbsp; </span> <span class="insert-location-editing-tag-here"></span>
                         <button class="blue edit-location" >modify location</button><br>
                         <br>
@@ -110,6 +110,8 @@ const resetForm = () => {
   document.getElementById("place-videos").innerHTML = "";
   document.getElementById("send-Incident").style.display = "inline-block";
 };
+
+
 
 /**
  * Sends an Incident report

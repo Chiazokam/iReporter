@@ -497,10 +497,23 @@ input[type="button"]{
   margin-top: 50px;
 }
 
+.geolocation{
+  color: #162661;
+}
+#google-map{
+  height: 80%;
+  width: 90%;
+}
+.geolocation:hover{
+  color: #fc5151;
+  cursor: pointer;
+  text-decoration: underline;
+}
 
 /*------Modal-------*/
 
-.outer-modal {
+.outer-modal,
+.map-outer-modal {
     position: fixed;
     z-index: 1;
     display: none;
@@ -512,7 +525,8 @@ input[type="button"]{
     background-color: rgba(255, 255, 255, 0.9);
 }
 
-.inner-box {
+.inner-box,
+.map-inner-box {
     width:80%;
     min-width: 320px;
     top: 50%;
@@ -672,6 +686,7 @@ body.admin-body{
 .list-of-records .change{
   color: red;
   font-size: 0.8em;
+  cursor: pointer;
 }
 .outer-modal .inner-box
 .update-status-form div{

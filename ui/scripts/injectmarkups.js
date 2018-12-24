@@ -1,6 +1,5 @@
 /**
- * Indicates Current records switch
- * @param {object} event - event object
+ * Load redflags
  * @return {undefined}
  */
 const injectRedflagRecords = () => {
@@ -58,7 +57,7 @@ ${obj.comment}
                         <br>
                         <br>
                         <label class="blue">STATUS</label> : <span>${obj.status}</span> <br>
-                        <label class="blue">LOCATION</label> : <span>${obj.location}</span>
+                        <label class="blue">LOCATION</label> : <span class="geolocation">${obj.location}</span>
                         <span> &nbsp; </span> <span class="insert-location-editing-tag-here"></span>
                         <button class="blue edit-location" >modify location</button><br>
                         <br>
@@ -117,23 +116,26 @@ window.addEventListener("load", ()=> {
   }
 });
 
-
+/**
+ * Load interventions
+ * @return {undefined}
+ */
 const injectInterventionRecords = () => {
   const token = localStorage.getItem("token");
   const decoded = jwt_decode(token);
   let incidentURL;
   const recordId = localStorage.getItem("recordId");
-  if (RegExp("/displayrecords").test(location.href)) {
-    incidentURL = `${interventionURL}/${recordId}`;
-  } else {
-    incidentURL = interventionURL;
-  }
-
   let displayPost = document.getElementsByClassName("post-display")[0];
   displayPost.innerHTML = "";
   const incidentIcon = "../images/intervene_icon.png";
   const loader = document.querySelector("#homeLoaderContainer .homeLoader");
   loader.style.display = "inline-block";
+
+  if (RegExp("/displayrecords").test(location.href)) {
+    incidentURL = `${interventionURL}/${recordId}`;
+  } else {
+    incidentURL = interventionURL;
+  }
 
   fetch(`${incidentURL}`, {
     method: "GET",
@@ -173,7 +175,7 @@ ${obj.comment}
                         <br>
                         <br>
                         <label class="blue">STATUS</label> : <span>${obj.status}</span> <br>
-                        <label class="blue">LOCATION</label> : <span>${obj.location}</span>
+                        <label class="blue">LOCATION</label> : <span class="geolocation">${obj.location}</span>
                         <span> &nbsp; </span> <span class="insert-location-editing-tag-here"></span>
                         <button class="blue edit-location" >modify location</button><br>
                         <br>

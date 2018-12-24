@@ -345,10 +345,10 @@ const loadAllRedflagsAdmin = () => {
         } else {
           data.forEach(elem => {
             document.querySelectorAll(".admin-redflag-list")[0].innerHTML  +=
-              ` <li>
-                    <a href="#" class="show-status">${elem.title.slice(0, 30)}...</a>
+              ` <li id=${elem.id} class='${elem.status} ${elem.type}' style="padding-top:0.5em">
+                    <a href="./displayrecords.html" class="redflag-link" id=${elem.id}>${elem.title.slice(0, 30)}...</a>
                     <img src="../images/red_flag.png" class="red-flag-icon" title="Red flag" />
-                    <a href="#" class="change" id=${elem.id}>change</a>
+                    <button class="change" >change</button>
                 </li>`;
           });
         }
@@ -356,22 +356,7 @@ const loadAllRedflagsAdmin = () => {
     });
 };
 
-window.addEventListener("click", (e)=>{
-  if (e.target.id === "admin-red-flag") {
-    document.querySelectorAll(".admin-intervention-list")[0].innerHTML = "";
-    loadAllRedflagsAdmin();
-  } else if (e.target.id === "admin-intervention") {
-    document.querySelectorAll(".admin-redflag-list")[0].innerHTML = "";
-    loadAllInterventionsAdmin();
-  }
-});
 
-window.addEventListener("load", () => {
-  const adminRedFlags = document.querySelectorAll("#admin-red-flag");
-  if (adminRedFlags.length > 0) {
-    loadAllRedflagsAdmin();
-  }
-});
 
 /**
  * LOAD all intervention records for Admin
@@ -398,10 +383,10 @@ const loadAllInterventionsAdmin = () => {
         } else {
           data.forEach(elem => {
             document.querySelectorAll(".admin-intervention-list")[0].innerHTML +=
-              ` <li>
-                    <a href="#" class="show-status">${elem.title.slice(0, 30)}...</a>
+              ` <li id=${elem.id} class='${elem.status} ${elem.type}'>
+                    <a href="./displayrecords.html" class="intervention-link" >${elem.title.slice(0, 30)}...</a>
                     <img src="../images/intervene_icon.png" class="intervention-icon" title="intervention" />
-                    <a href="#" class="change" id=${elem.id}>change</a>
+                    <a href="#" class="change">change</a>
                 </li>
         `;
           });
@@ -409,4 +394,58 @@ const loadAllInterventionsAdmin = () => {
       }
     });
 };
+
+window.addEventListener("click", (e) => {
+  if (e.target.id === "admin-red-flag") {
+    document.querySelectorAll(".admin-intervention-list")[0].innerHTML = "";
+    loadAllRedflagsAdmin();
+  } else if (e.target.id === "admin-intervention") {
+    document.querySelectorAll(".admin-redflag-list")[0].innerHTML = "";
+    loadAllInterventionsAdmin();
+  }
+});
+
+window.addEventListener("load", () => {
+  const adminRedFlags = document.querySelectorAll("#admin-red-flag");
+  if (adminRedFlags.length > 0) {
+    loadAllRedflagsAdmin();
+  }
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target.className === "change") {
+    let color;
+    const info = e.target.parentNode.className.split(" ");
+    const recordId = e.target.parentNode.id;
+    console.log(info, recordId);
+    const status = info[0].toLowerCase();
+    const type = info[1];
+    localStorage.setItem("recordId", recordId);
+    localStorage.setItem("record-type", type);
+
+    if (status === "draft") {
+      color = "style=color:grey";
+    } else if (status === "resolved"){
+      color = "style=color:green";
+    } else if (status === "under investgation"){
+      color = "style=color:yellow";
+    } else if (status === "rejected"){
+      color = "style=color:red";
+    }
+
+    document.querySelectorAll(".update-status-form")[0].innerHTML =
+   ` <label class="theme-blue">Current Status:</label>
+        <span id="current-status" ${color}>${info[0]}</span>
+        <br> <br>
+        <select required>
+            <option>Select an option</option>
+            <option>Draft</option>
+            <option>Under Investigation</option>
+            <option>Resolved</option>
+            <option>Rejected</option>
+        </select>
+        <input type="submit" id=${recordId} value="UPDATE">
+        <div><a href=./displayrecords.html class="blue admin-view-record">View Record</a></div>`;
+  }
+});
 

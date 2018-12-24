@@ -90,7 +90,7 @@
             <img src="../images/loader_blue.GIF" id="loading2" title="loading please wait"  class="loader" style="width: 50px;" />
 
             <br>
-            <input type="text" id="incident_address" placeholder="ENTER INCIDENT ADDRESS" >
+            <input type="text" onselect="getAddress(this)" id="incident_address" placeholder="ENTER INCIDENT ADDRESS" value="">
             <br>
             <br>
             <div id="latlongdisplay">
@@ -172,6 +172,14 @@
             <img src="" class="image-enlarge">
         </div>
     </section>
+
+    <section class="map-outer-modal">
+      <div class="map-inner-box" id="google-map">
+
+      </div>
+    </section>
+
+<span class="allow"></span>
 
     <footer id="footer">
 

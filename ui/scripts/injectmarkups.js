@@ -133,6 +133,7 @@ const injectInterventionRecords = () => {
 
   if (RegExp("/displayrecords").test(location.href)) {
     incidentURL = `${interventionURL}/${recordId}`;
+    console.log("******************************.....");
   } else {
     incidentURL = interventionURL;
   }
@@ -154,7 +155,12 @@ const injectInterventionRecords = () => {
           `;
         loader.style.display = "none";
       } else if (status === 200) {
+        let bool = true;
         data.forEach((obj) => {
+          if (bool) {
+            document.getElementsByClassName("post-display")[0].innerHTML = "";
+            bool = false;
+          }
           document.getElementsByClassName("post-display")[0].innerHTML +=
               `   <div class="post">
                     <article class="actual-post" id=${obj.id}>

@@ -72,7 +72,6 @@ window.addEventListener("click", (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
     localStorage.setItem("logout", true);
-    localStorage.clear();
     location.href = index;
   }
 });
@@ -479,11 +478,13 @@ window.addEventListener("load", () => {
   if (JSON.parse(auth) === true) {
     toggleGeneralMessage("session ended, please reauthenticate", false);
     localStorage.removeItem("authRequired");
+    localStorage.clear();
   }
 
   if (JSON.parse(logout) === true) {
     toggleGeneralMessage("logout successful", true);
     localStorage.removeItem("logout");
+    localStorage.clear();
   }
 
   if (JSON.parse(admin) === false) {
@@ -544,12 +545,12 @@ const timeInterval = setInterval(()=>{
 }, 1000);
 
 const endTimer = () => {
-  if (time > 60) {
+  if (time > 30) {
     clearInterval(timeInterval);
     clearInterval(clearTimeInterval);
     loaderOuterModal.style.display = "none";
     document.getElementsByTagName("body")[0].style.overflow = "scroll";
-    toggleGeneralMessage("please check internet connection", false);
+    toggleGeneralMessage("slow internet connection", false);
   }
 };
 

@@ -1,58 +1,58 @@
-/**
- * Indicates Current records switch
- * @param {object} event - event object
- * @return {undefined}
- */
-const injectRedflagRecords = () => {
-  const token = localStorage.getItem("token");
-  const decoded = jwt_decode(token);
-  let incidentURL;
-  const recordId = localStorage.getItem("recordId");
-  const loader = document.querySelector("#homeLoaderContainer .homeLoader");
-  loader.style.display = "inline-block";
+// /**
+//  * Indicates Current records switch
+//  * @param {object} event - event object
+//  * @return {undefined}
+//  */
+// const injectRedflagRecords = () => {
+//   const token = localStorage.getItem("token");
+//   const decoded = jwt_decode(token);
+//   let incidentURL;
+//   const recordId = localStorage.getItem("recordId");
+//   const loader = document.querySelector("#homeLoaderContainer .homeLoader");
+//   loader.style.display = "inline-block";
 
-  if (RegExp("/displayrecord").test(location.href)) {
-    incidentURL = `${redflagURL}/${recordId}`;
-  } else {
-    incidentURL = redflagURL;
-  }
+//   if (RegExp("/displayrecord").test(location.href)) {
+//     incidentURL = `${redflagURL}/${recordId}`;
+//   } else {
+//     incidentURL = redflagURL;
+//   }
 
-  fetch(`${incidentURL}`, {
-    method: "GET",
-    headers: {
-      "Accept": "application/json, text/plain, */*",
-      "Content-type": "application/json",
-      "authorization": token
-    }
-  })
-    .then((res) => res.json())
-    .then((responseData) => {
-      const { status, data } = responseData;
-      if (data.length < 1) {
-        document.getElementsByClassName("post-display")[0].innerHTML = `
-          <h1 style='margin-bottom: 50%; color:grey; padding: 3em 0 0 0; text-align:center; font-size:2em'>NO RED-FLAG RECORDS</h1>
-          `;
-        loader.style.display = "none";
-      } else if (status === 200) {
-        data.forEach((obj) => {
-          document.getElementsByClassName("post-display")[0].innerHTML +=
-            `
-                `;
+//   fetch(`${incidentURL}`, {
+//     method: "GET",
+//     headers: {
+//       "Accept": "application/json, text/plain, */*",
+//       "Content-type": "application/json",
+//       "authorization": token
+//     }
+//   })
+//     .then((res) => res.json())
+//     .then((responseData) => {
+//       const { status, data } = responseData;
+//       if (data.length < 1) {
+//         document.getElementsByClassName("post-display")[0].innerHTML = `
+//           <h1 style='margin-bottom: 50%; color:grey; padding: 3em 0 0 0; text-align:center; font-size:2em'>NO RED-FLAG RECORDS</h1>
+//           `;
+//         loader.style.display = "none";
+//       } else if (status === 200) {
+//         data.forEach((obj) => {
+//           document.getElementsByClassName("post-display")[0].innerHTML +=
+//             `
+//                 `;
 
-          if (decoded.id !== obj.createdby) {
-            const editComment = document.querySelectorAll("button.edit-comment");
-            const editLocation = document.querySelectorAll("button.edit-location");
-            const deleteButton = document.querySelectorAll("button.delete");
+//           if (decoded.id !== obj.createdby) {
+//             const editComment = document.querySelectorAll("button.edit-comment");
+//             const editLocation = document.querySelectorAll("button.edit-location");
+//             const deleteButton = document.querySelectorAll("button.delete");
 
-            forEachRemove(editComment);
-            forEachRemove(editLocation);
-            forEachRemove(deleteButton);
-          }
-        });
-      }
-      loader.style.display = "none";
-    });
-};
+//             forEachRemove(editComment);
+//             forEachRemove(editLocation);
+//             forEachRemove(deleteButton);
+//           }
+//         });
+//       }
+//       loader.style.display = "none";
+//     });
+// };
 
 
 window.addEventListener("load", ()=>{
@@ -145,7 +145,6 @@ const changeProfileImage = (event) => {
         if (typeof data.secure_url !== "undefined") {
           loader.style.display = "none";
           toggleGeneralMessage("Almost completed", false);
-          console.log(data.secure_url);
           imageURL = data.secure_url;
           updateProfilePicture();
         } else {
@@ -247,12 +246,12 @@ const loadAllPersonalRedflags = () => {
       if (status === 200) {
         if (data.length < 1) {
           return document.getElementById("redflag-list").innerHTML += `
-           <h1 style='color:grey; padding: 1em 0 1em 0; text-align:center; font-size:1.2em'>NO RED-FLAG RECORDS</h1>
+           <h2 style='color:grey; padding: 1em 0 1em 0; text-align:center; font-size:1.2em'>NO RED-FLAG RECORDS</h2>
           `;
         } else {
           data.forEach(elem => {
             document.getElementById("redflag-list").innerHTML +=
-            ` <li>
+              ` <li>
           <a href="./displayrecords.html" class="redflag-link" id=${elem.id}>${elem.title.slice(0, 30)}...</a>
           <img src="../images/red_flag.png" class="red-flag-icon" title="Red flag" />
         </li>`;
@@ -288,8 +287,8 @@ const loadAllPersonalInterventions = () => {
         } else{
           data.forEach(elem => {
             document.getElementById("intervention-list").innerHTML +=
-            ` <li>
-         <a href="./displayrecords.html" class="intervention-link" id=${elem.id}>${elem.title.slice(0, 30)}...</a>
+              ` <li >
+         <a href="./displayrecords.html" class="intervention-link" id=${elem.id} >${elem.title.slice(0, 30)}...</a>
          <img src="../images/intervene_icon.png" class="red-flag-icon" title="intervention" />
          </li>
         `;
@@ -299,23 +298,23 @@ const loadAllPersonalInterventions = () => {
     });
 };
 
+//Set record ID and type to local storage
+window.addEventListener("click", (e) => {
+  if (e.target.className === "intervention-link") {
+    localStorage.setItem("recordId", e.target.id);
+    localStorage.setItem("record-type", "intervention");
+  } else if (e.target.className === "redflag-link") {
+    localStorage.setItem("recordId", e.target.id);
+    localStorage.setItem("record-type", "red-flag");
+  }
+});
+
 window.addEventListener("load", () => {
   const redflagList = document.querySelectorAll(".redflag-list");
   const interventionList = document.querySelectorAll(".intervention-list");
   if (redflagList.length > 0 && interventionList.length > 0) {
     loadAllPersonalRedflags();
     loadAllPersonalInterventions();
-  }
-});
-
-//Set record ID and type to local storage
-window.addEventListener("click", (e)=>{
-  if (e.target.className === "intervention-link"){
-    localStorage.setItem("recordId", e.target.id);
-    localStorage.setItem("record-type", "intervention");
-  } else if (e.target.className === "redflag-link"){
-    localStorage.setItem("recordId", e.target.id);
-    localStorage.setItem("record-type", "red-flag");
   }
 });
 
@@ -346,7 +345,7 @@ const loadAllRedflagsAdmin = () => {
           data.forEach(elem => {
             document.querySelectorAll(".admin-redflag-list")[0].innerHTML  +=
               ` <li id=${elem.id} class='${elem.status} ${elem.type}' style="padding-top:0.5em">
-                    <a href="./displayrecords.html" class="redflag-link" id=${elem.id}>${elem.title.slice(0, 30)}...</a>
+                    <a href="./displayrecords.html" class="admin-redflag-link" >${elem.title.slice(0, 30)}...</a>
                     <img src="../images/red_flag.png" class="red-flag-icon" title="Red flag" />
                     <button class="change" >change</button>
                 </li>`;
@@ -384,7 +383,7 @@ const loadAllInterventionsAdmin = () => {
           data.forEach(elem => {
             document.querySelectorAll(".admin-intervention-list")[0].innerHTML +=
               ` <li id=${elem.id} class='${elem.status} ${elem.type}'>
-                    <a href="./displayrecords.html" class="intervention-link" >${elem.title.slice(0, 30)}...</a>
+                    <a href="./displayrecords.html" class="admin-intervention-link" >${elem.title.slice(0, 30)}...</a>
                     <img src="../images/intervene_icon.png" class="intervention-icon" title="intervention" />
                     <a href="#" class="change">change</a>
                 </li>
@@ -394,6 +393,21 @@ const loadAllInterventionsAdmin = () => {
       }
     });
 };
+
+//Set record ID and type to local storage
+window.addEventListener("click", (e) => {
+  const info = e.target.parentNode.className.split(" ");
+  const type = info[1];
+  const recordId = e.target.parentNode.id;
+  if (e.target.className === "admin-intervention-link") {
+    localStorage.setItem("recordId", recordId);
+    localStorage.setItem("record-type", type);
+  } else if (e.target.className === "admin-redflag-link") {
+    localStorage.setItem("recordId", recordId);
+    localStorage.setItem("record-type", type);
+  }
+});
+
 
 window.addEventListener("click", (e) => {
   if (e.target.id === "admin-red-flag") {

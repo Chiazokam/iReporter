@@ -27,7 +27,8 @@ const fetchNewIncident = ()=>{
     .then((responseData) => {
       const { status, data, error } = responseData;
       if (status === 200) {
-      document.getElementsByClassName("post-display")[0].style.marginTop = "4em";
+        document.getElementsByClassName("post-display")[0].style.marginTop = "4em";
+        document.getElementsByClassName("post-display")[0].innerHTML = "";
         data.forEach((obj) => {
           document.getElementsByClassName("post-display")[0].innerHTML +=
             `   <div class="post" >

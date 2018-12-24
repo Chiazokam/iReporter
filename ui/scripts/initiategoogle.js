@@ -37,7 +37,7 @@ window.addEventListener("input", (e) => {
 window.addEventListener("mousedown", (e) => {
   localStorage.setItem("allow", true);
   const allow = localStorage.getItem("allow");
-  if (e.target.className === "geolocation") {
+  if (e.target.className === "geolocation" || e.path[4].id === "google-map") {
     localStorage.setItem("allow", false);
   } else if ((JSON.parse(allow) === true) && (e.target.nodeName.toLowerCase() === "div" || e.target.nodeName.toLowerCase() === "span")) {
     setTimeout(() => {

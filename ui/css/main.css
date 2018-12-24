@@ -28,6 +28,7 @@ body{
   right: 0.1em;
   text-transform: uppercase;
   border-radius: 0.2em;
+  z-index: 10000;
 
   transition-duration: 0.25s;
   transition-property: top;
@@ -484,6 +485,10 @@ input[type="button"]{
   text-transform: capitalize;
   font-style: italic;
 }
+.edit-comment,
+.edit-location{
+  font-size: 0.9em;
+}
 .edit-comment:hover,
 .edit-location:hover,
 .edit:hover{
@@ -498,7 +503,7 @@ input[type="button"]{
 }
 
 .geolocation{
-  color: #162661;
+  color: #fe0100;
 }
 #google-map{
   height: 80%;
@@ -550,12 +555,12 @@ input[type="button"]{
 }
 .inner-box-loader  img{
   display: block;
-  width: 10%;
+  width: 50px;
   margin: 0 auto;
 }
 .inner-box-loader  h1{
   display: block;
-  font-size: 1.5em;
+  font-size: 1.2em;
   color: #162661;
   text-align: center;
   padding: 0.5em;

@@ -114,6 +114,43 @@ describe("GET status number endpoints", () => {
 });
 
 
+/**
+ * Get a specific users records for profile display
+ */
+describe("GET specific user records endpoints for profile display", () => {
+
+  it("should return status 200 if status count return was successful for red flag", (done) => {
+    request
+      .get("/api/v1/profile/red-flags")
+      .set("authorization", validToken)
+      .end((err, res) => {
+        expect(res.status).to.eql(200);
+        expect(res.body.status).to.eql(200);
+        expect(res.body.status).to.be.a("number");
+        should.not.exist(err);
+        should.exist(res.body);
+        if (err) { return done(err); }
+        done();
+      });
+  });
+
+  it("should return status 200 if status count return was successful for intervention", (done) => {
+    request
+      .get("/api/v1/profile/interventions")
+      .set("authorization", validToken)
+      .end((err, res) => {
+        expect(res.status).to.eql(200);
+        expect(res.body.status).to.eql(200);
+        expect(res.body.status).to.be.a("number");
+        should.not.exist(err);
+        should.exist(res.body);
+        if (err) { return done(err); }
+        done();
+      });
+  });
+});
+
+
 
 /**
  * Get specific red-flag

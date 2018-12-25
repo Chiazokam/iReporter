@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 app.use("/api-documentation", swaggerUI.serve, swaggerUI.setup(apiDocs));
 
 //Secure WEB pages
-app.use("/api/v1/auth/secure-pages", verifyUsersToken, (req, res) => res.status(200).json({message: "valid user"}));
+app.use("/api/v1/auth/secure-pages", verifyUsersToken, (req, res) => res.status(200).json({status: 200}));
 
 //Serve HTML pages
 app.use("/", express.static("ui"));

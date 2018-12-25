@@ -72,7 +72,6 @@ window.addEventListener("click", (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
     localStorage.setItem("logout", true);
-    localStorage.removeItem("authRequired");
     location.href = index;
   }
 });
@@ -459,7 +458,7 @@ const toggleGeneralMessage = (message, style) => {
   if (style === true) { // for success
     generalMessage.style.color = "green";
     generalMessage.style.background = "white";
-  } else if (style === false){ //for error
+  } else if (style === false){ //for error/ warning alerts
     generalMessage.style.color = "white";
     generalMessage.style.background = "#1e3792";
   }
@@ -479,11 +478,13 @@ window.addEventListener("load", () => {
   if (JSON.parse(auth) === true) {
     toggleGeneralMessage("session ended, please reauthenticate", false);
     localStorage.removeItem("authRequired");
+    localStorage.clear();
   }
 
   if (JSON.parse(logout) === true) {
     toggleGeneralMessage("logout successful", true);
     localStorage.removeItem("logout");
+    localStorage.clear();
   }
 
   if (JSON.parse(admin) === false) {
@@ -492,8 +493,80 @@ window.addEventListener("load", () => {
   }
 });
 
-window.addEventListener("load", ()=> {
+/**
+ * loops over elements and removes them
+ * @param {array} elem
+ */
+const forEachRemove = (arrayElem) => {
+  arrayElem.forEach(elem => {
+    elem.remove();
+  });
+};
+
+
+/**
+ * unpacks an array of  images
+ * @param {array} arr
+ */
+const unpackImages = (arr, returnTag) => {
+  let markup = "";
+  arr.forEach(elem => {
+    markup += `<img src=${elem} class="picture-evidence" title="picture-evidence"/>`;
+  });
+  if (arr.length === 0) {
+    return returnTag;
+  } else {
+    return markup;
+  }
+};
+
+/**
+ * unpacks an array of videos
+ * @param {array} arr
+ */
+const unpackVideos = (arr, returnTag) => {
+  let markup = "";
+  arr.forEach(elem => {
+    markup += ` <video controls class="video-evidence">
+                    <source src=${elem}>
+                </video>`;
+  });
+
+  if (arr.length === 0) {
+    return returnTag;
+  } else {
+    return markup;
+  }
+};
+
+let time = 0;
+const timeInterval = setInterval(()=>{
+  time++;
+}, 1000);
+
+const endTimer = () => {
+  if (time > 30) {
+    clearInterval(timeInterval);
+    clearInterval(clearTimeInterval);
+    loaderOuterModal.style.display = "none";
+    document.getElementsByTagName("body")[0].style.overflow = "scroll";
+    toggleGeneralMessage("slow internet connection", false);
+  }
+};
+
+const clearTimeInterval = setInterval(() => {
+  endTimer();
+}, 1000);
+
+window.addEventListener("load", () => {
+  clearInterval(timeInterval);
+  clearInterval(clearTimeout);
   loaderOuterModal.style.display = "none";
   document.getElementsByTagName("body")[0].style.overflow = "scroll";
 });
+
+
+
+
+
 

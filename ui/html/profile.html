@@ -53,67 +53,52 @@
     <section class="profile" id="profile">
         <section class="inner-profile-border clearfix">
             <div class="profile-image-container clearfix">
-                <div class="profile-details-border">
-                        <img src="../images/avatar.png" alt="avatar" class="large-avatar"/>
-                        <h1>Justice John</h1>
 
-                    <div class="profile-details">
-                        <label class="blue">Username:</label> <span>justice</span> <br>
-                        <label class="blue">Email:</label> <span>justice_john@rocketmail.com</span> <br>
-                        <label class="blue">Phone:</label> <span>08017263846</span> <br>
-                    </div>
-                </div>
             </div>
 
             <div class="redflag-count-container clearfix">
                 <h1>RED FLAG STATUS</h1>
                 <div class="record-count .border-radius-bl">
-                  <label class="grey">3</label> <br> <span class="grey">DRAFT</span>
+                  <label class="grey" id="rf-draft">0</label> <br> <span class="grey">DRAFT</span>
                 </div>
                 <div class="record-count middle .border-radius-bl">
-                    <label class="green">12</label> <br> <span class="green">RESOLVED</span>
+                    <label class="green" id="rf-resolved">0</label> <br> <span class="green">RESOLVED</span>
                 </div>
                 <div class="record-count middle .border-radius-br">
-                    <label class="yellow">5</label> <br> <span class="yellow">UNDER INVESTIGATION</span>
+                    <label class="yellow" id="rf-under-investigation">0</label> <br> <span class="yellow">UNDER INVESTIGATION</span>
                 </div>
                 <div class="record-count .border-radius-br">
-                    <label class="red">4</label> <br> <span class="red">REJECTED</span>
+                    <label class="red" id="rf-rejected">0</label> <br> <span class="red">REJECTED</span>
                 </div>
             </div>
 
             <div class="intervention-count-container clearfix">
                 <h1>INTERVENTION STATUS</h1>
                 <div class="record-count .border-radius-bl">
-                  <label class="grey">10</label> <br> <span class="grey">DRAFT</span>
+                  <label class="grey" id="int-draft">0</label> <br> <span class="grey">DRAFT</span>
                 </div>
                 <div class="record-count middle .border-radius-bl">
-                    <label class="green">6</label> <br> <span class="green">RESOLVED</span>
+                    <label class="green" id="int-resolved">0</label> <br> <span class="green">RESOLVED</span>
                 </div>
                 <div class="record-count middle .border-radius-br">
-                    <label class="yellow">3</label> <br> <span class="yellow">UNDER INVESTIGATION</span>
+                    <label class="yellow" id="int-under-investigation">0</label> <br> <span class="yellow">UNDER INVESTIGATION</span>
                 </div>
                 <div class="record-count .border-radius-br">
-                    <label class="red">1</label> <br> <span class="red">REJECTED</span>
+                    <label class="red" id="int-rejected">0</label> <br> <span class="red">REJECTED</span>
                 </div>
             </div>
         </section>
 
         <section class="record-list clearfix">
             <h1>YOUR RECORDS</h1>
-                <ul class="redflag-list clearfix">
+                <ul class="redflag-list clearfix" id="redflag-list">
                     <h2 class="font-setting theme-orange">RED FLAGS</h2>
-                    <li><a href="./displayrecords.html" class="link">Bad road in Lagos</a><img src="../images/red_flag.png" class="red-flag-icon" title="Red flag" /></li>
-                    <li><a href="./displayrecords.html" class="link">Murder in ABC town</a><img src="../images/red_flag.png" class="red-flag-icon" title="Red flag" /></li>
-                    <li><a href="./displayrecords.html" class="link">Bad road in Lagos</a><img src="../images/red_flag.png" class="red-flag-icon" title="Red flag" /></li>
-                    <li><a href="./displayrecords.html" class="link">Murder in ABC town</a><img src="../images/red_flag.png" class="red-flag-icon" title="Red flag" /></li>
+
                 </ul>
 
-                <ul class="intervention-list clearfix">
+                <ul class="intervention-list clearfix" id="intervention-list">
                     <h2 class="font-setting theme-blue">INTERVENTION</h2>
-                    <li><a href="./displayrecords.html" class="link">Bad road in Lagos</a><img src="../images/intervene_icon.png" class="red-flag-icon" title="intervention" /></li>
-                    <li><a href="./displayrecords.html" class="link">Murder in ABC town</a><img src="../images/intervene_icon.png" class="red-flag-icon" title="intervention" /></li>
-                    <li><a href="./displayrecords.html" class="link">Bad road in Lagos</a><img src="../images/intervene_icon.png" class="red-flag-icon" title="intervention" /></li>
-                    <li><a href="./displayrecords.html" class="link">Murder in ABC town</a><img src="../images/intervene_icon.png" class="red-flag-icon" title="intervention" /></li>
+
                 </ul>
         </section>
     </section>
@@ -138,6 +123,7 @@
     </footer>
 
     <script src="../scripts/main.js"></script>
+    <script src="../scripts/profilepage.js"></script>
 </body>
 
 </html>

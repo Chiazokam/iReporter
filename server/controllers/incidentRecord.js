@@ -285,6 +285,32 @@ export class Incidents {
     query.getStatusCount(req, res, userId, intervention);
   }
 
+  /**
+   * Returns all intervention records of a specific user
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @return {undefined}
+   */
+  getSpecificUsersInterventionRecords(req, res) {
+    const userId = req.userInfo.id;
+    const intervention = "intervention";
+
+    query.getUsersRecords(req, res, userId, intervention);
+  }
+
+  /**
+   * Returns all intervention records of a specific user
+   * @param  {object} req - Contains the body of the request.
+   * @param {object} res - Contains the returned response.
+   * @return {undefined}
+   */
+  getSpecificUsersRedflagRecords(req, res) {
+    const userId = req.userInfo.id;
+    const redflag = "red-flag";
+
+    query.getUsersRecords(req, res, userId, redflag);
+  }
+
 }
 
 

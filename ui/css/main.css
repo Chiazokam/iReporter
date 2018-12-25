@@ -25,9 +25,10 @@ body{
   text-align: center;
   font-size: 100%;
   top: 100000em;
-  right: 0.5em;
+  right: 0.1em;
   text-transform: uppercase;
   border-radius: 0.2em;
+  z-index: 10000;
 
   transition-duration: 0.25s;
   transition-property: top;
@@ -36,6 +37,15 @@ body{
 #outer-modal,
 .outer-modal-loader{
   overflow: hidden;
+}
+.profileLoader{
+  display: none;
+  width: 100px;
+  margin: 0 auto;
+}
+.hover:hover{
+  cursor: pointer;
+  text-decoration: underline;
 }
 .remove-element{
   color: #162661;
@@ -53,12 +63,13 @@ body{
 #loading,
 #loading2,
 #latlongdisplay,
-.vid-uploads{
+.vid-uploads,
+#uploadProfileImage{
   display: none;
 }
 textarea{
 		font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-		text-align: left;
+    text-align: left;
 }
 #boundary{
   border: 1px ridge #162661;
@@ -129,6 +140,13 @@ text-decoration: underline;
 .post-display .profile-name a{
   position: absolute;
   bottom: 0.2em;
+  width: 200px;
+}
+.post-display .profile-name span{
+  position: absolute;
+  bottom: 0.2em;
+  color: #162661;
+  width: 200px;
 }
 .signin-form .deactivate:hover,
 .signup-form .deactivate:hover{
@@ -165,8 +183,9 @@ a:hover{
 }
 
 .avatar{
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
 }
 
 /*------------NAV MENU----------*/
@@ -420,6 +439,16 @@ text-align: center;
   padding: 1em 0;
   text-decoration: underline;
 }
+input[type="button"]{
+  outline: none;
+}
+#homeLoaderContainer{
+  text-align: center;
+}
+#homeLoaderContainer .homeLoader{
+  display: none;
+  width: 10%;
+}
 .post{
   background: #9cb1ff28;
   margin: 20px 100px;
@@ -433,6 +462,7 @@ text-align: center;
 }
 .actual-post div p{
   line-height: 2em;
+  overflow-wrap: break-word
 }
 .picture-evidence{
   width: 30%;
@@ -441,7 +471,8 @@ text-align: center;
   box-shadow: 1px 1px 1px 1px black;
   cursor: pointer;
 }
-.red-flag-icon{
+.red-flag-icon,
+.intervention-icon {
   width: 20px;
   height: 20px;
 }
@@ -453,6 +484,10 @@ text-align: center;
   cursor: pointer;
   text-transform: capitalize;
   font-style: italic;
+}
+.edit-comment,
+.edit-location{
+  font-size: 0.9em;
 }
 .edit-comment:hover,
 .edit-location:hover,
@@ -467,10 +502,23 @@ text-align: center;
   margin-top: 50px;
 }
 
+.geolocation{
+  color: #fe0100;
+}
+#google-map{
+  height: 80%;
+  width: 90%;
+}
+.geolocation:hover{
+  color: #fc5151;
+  cursor: pointer;
+  text-decoration: underline;
+}
 
 /*------Modal-------*/
 
-.outer-modal {
+.outer-modal,
+.map-outer-modal {
     position: fixed;
     z-index: 1;
     display: none;
@@ -482,7 +530,8 @@ text-align: center;
     background-color: rgba(255, 255, 255, 0.9);
 }
 
-.inner-box {
+.inner-box,
+.map-inner-box {
     width:80%;
     min-width: 320px;
     top: 50%;
@@ -506,12 +555,12 @@ text-align: center;
 }
 .inner-box-loader  img{
   display: block;
-  width: 10%;
+  width: 50px;
   margin: 0 auto;
 }
 .inner-box-loader  h1{
   display: block;
-  font-size: 1.5em;
+  font-size: 1.2em;
   color: #162661;
   text-align: center;
   padding: 0.5em;
@@ -642,6 +691,7 @@ body.admin-body{
 .list-of-records .change{
   color: red;
   font-size: 0.8em;
+  cursor: pointer;
 }
 .outer-modal .inner-box
 .update-status-form div{
@@ -891,7 +941,7 @@ input.location-input{
   width: 280px;
   text-align: center;
   margin: 50px auto 0 auto;
-  padding: 1em 2em;
+  padding: 0 2em 1em 2em;
 }
 .profile .profile-details{
   text-align: left;
@@ -901,6 +951,8 @@ input.location-input{
   height: 100px;
   margin: 50px auto 0 auto;
   display: block;
+  border-radius: 100%;
+  padding-top: 2em;
 }
 .border-radius-bl{
   border-bottom-left-radius: 20px;
@@ -1056,6 +1108,9 @@ footer{
 
 
 @media(max-width:1000px) {
+  .post-display .profile-name span{
+  position: relative;
+}
   #mobile-nav ul{
   box-shadow: 1px 5px 20px 1px rgb(0, 0, 0);
 }
@@ -1117,6 +1172,7 @@ footer{
   padding: 50px 15px;
   text-align: center;
 }
+
 .actual-post h1{
   font-size: 1.2em;
   display: inline-block;
@@ -1187,7 +1243,7 @@ footer{
 #howitworks div,
 #about div{
   box-shadow: 1px 5px 10px 1px grey;
-  padding: 50px 10px;
+  padding: 50px 10px 50px 40px;
   font-size: 100%;
 }
 #howitworks,
@@ -1202,6 +1258,11 @@ footer{
   display: block;
 }
 .post-display .profile-name a{
+  position: initial;
+  bottom: 0;
+}
+
+.post-display .profile-name span{
   position: initial;
   bottom: 0;
 }
@@ -1261,7 +1322,7 @@ h2#compose-heading{
   padding-right: 0;
 }
 .profile-details-border{
-  padding: 1em 0;
+  padding: 1em 0.8em;
 }
 .profile .profile-details{
   text-align: center;

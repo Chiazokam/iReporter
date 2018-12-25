@@ -52,7 +52,7 @@ const addAdmin = `
           '07067443245',
           '$2a$10$TRKGYcUtvqxaBFuBWZlccOF559mfcAFtKrrKZw/KWA507nTioM6x6',
           'true',
-          'https://res.cloudinary.com/shaolinmkz/image/upload/v1544370726/avatar.png');
+          'https://res.cloudinary.com/shaolinmkz/image/upload/v1545510301/olmgs5naq7jyig8uhxru.jpg');
           `;
 
 const createIncidentRecord = `
@@ -66,12 +66,12 @@ const createIncidentRecord = `
           status,
           createdBy)
           VALUES (
-            'People are suffering from mal-nutrition',
-            'It all started when the earth rumbled...',
+            'This is just a test post',
+            'The Pool constructor does not support passing a Database URL as the parameter. To use pg-pool on heroku, for example, you need to parse the URL into a config object. Here is an example of how to parse a Database URL.',
             'red-flag',
-            '12.233334, 2.323123',
+            '6.473953, 3.356525',
             '{http://jamaica-star.com/sites/default/files/styles/460px/public/media/article_images/2017/11/21/BadroadsA20171121RM.jpg?itok=K72fUdU5}',
-            '{https://youtu.be/bPYbg-nrWzg}',
+            '{https://res.cloudinary.com/shaolinmkz/video/upload/v1545492316/xmc98tp64goqf3dtuuoa.mp4}',
             'draft',
             1);
               `;

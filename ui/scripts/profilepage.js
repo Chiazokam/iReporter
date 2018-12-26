@@ -53,9 +53,6 @@ const updateProfilePicture = () => {
         loader.style.display = "none";
         localStorage.setItem("profileimage", updateURL);
         toggleGeneralMessage(data[0].message, true);
-        setTimeout(() => {
-          toggleGeneralMessage("Reauthenticate to effect full change", false);
-        }, 5000);
       } else {
         loader.style.display = "none";
         toggleGeneralMessage(error, false);
@@ -376,39 +373,49 @@ window.addEventListener("load", () => {
   }
 });
 
+
+
+
 //Change status modal
 window.addEventListener("click", (e) => {
   if (e.target.className === "change") {
     let color;
+    const title = e.target.parentNode.children[0].innerHTML;
     const info = e.target.parentNode.className.split(" ");
     const recordId = e.target.parentNode.id;
     const status = info[0].toLowerCase();
     const type = info[1];
     localStorage.setItem("recordId", recordId);
+    localStorage.setItem("record_type", type);
     localStorage.setItem("record-type", type);
 
     if (status === "draft") {
       color = "style=color:grey";
     } else if (status === "resolved"){
       color = "style=color:green";
-    } else if (status === "under investgation"){
-      color = "style=color:yellow";
+    } else if (status === "under-investigation"){
+      color = "style=color:green";
     } else if (status === "rejected"){
       color = "style=color:red";
     }
 
     document.querySelectorAll(".update-status-form")[0].innerHTML =
-   ` <label class="theme-blue">Current Status:</label>
+      `
+      <label class="theme-blue">Current Status:</label>
         <span id="current-status" ${color}>${info[0]}</span>
         <br> <br>
-        <select required>
+      <label class="theme-orange">Title:</label>
+        <span title="Incident title" class="theme-blue">${title}</span>
+         <br> <br>
+        <select required id="select-status">
             <option>Select an option</option>
             <option>Draft</option>
-            <option>Under Investigation</option>
+            <option>Under-Investigation</option>
             <option>Resolved</option>
             <option>Rejected</option>
         </select>
-        <input type="submit" id=${recordId} value="UPDATE">
+        <input type="button" id=${recordId} value="UPDATE" class="admin_update_status">
+        <div style="text-align:center;"><img src="../images/loader_blue.GIF"  id="updateStatusLoader" /></div>
         <div><a href=./displayrecords.html class="blue admin-view-record">View Record</a></div>`;
   }
 });

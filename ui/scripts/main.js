@@ -242,7 +242,6 @@ const findMe = (e) => {
     return;
   } else if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(revealCoordinates, errorResponse);
-    document.getElementById("incident_address").style.display = "none";
     loading.style.display = "inline-block";
     responseMessage.style.marginTop = "1em";
   } else {
@@ -425,6 +424,7 @@ const editLocation = (event) => {
         <img src="../images/loader_blue.GIF"  id="updateLocationLoader" />
         </span> `;
   }
+  return true;
 };
 
 window.addEventListener("click", editLocation);

@@ -40,11 +40,15 @@ window.addEventListener("mousedown", (e) => {
   const allow = localStorage.getItem("allow");
   if (e.target.className === "geolocation" || e.path[4].id === "google-map") {
     localStorage.setItem("allow", false);
-  } else if ((JSON.parse(allow) === true) && (e.target.nodeName.toLowerCase() === "div" || e.target.nodeName.toLowerCase() === "span")) {
-    setTimeout(() => {
-      getAddress();
-      localStorage.removeItem("allow");
-    }, 100);
+  } else if ((JSON.parse(allow) === true)) {
+    e.path.forEach(elem => {
+      if (RegExp("pac").test(elem.className) && RegExp("/report").test(location.href)) {
+        setTimeout(() => {
+          getAddress();
+          localStorage.removeItem("allow");
+        }, 100);
+      }
+    });
   }
 });
 
@@ -122,11 +126,15 @@ window.addEventListener("input", () => {
 window.addEventListener("mousedown", (e) => {
   localStorage.setItem("allow", "update");
   const allow = localStorage.getItem("allow");
-  if ((allow === "update") && (e.target.nodeName.toLowerCase() === "div" || e.target.nodeName.toLowerCase() === "span")) {
-    setTimeout(() => {
-      updateAddress();
-      localStorage.removeItem("allow");
-    }, 100);
+  if ((allow === "update")) {
+    e.path.forEach(elem => {
+      if (RegExp("pac").test(elem.className) && (RegExp("/displayrecords").test(location.href) || RegExp("/report").test(location.href) || RegExp("/home").test(location.href))) {
+        setTimeout(() => {
+          updateAddress();
+          localStorage.removeItem("allow");
+        }, 100);
+      }
+    });
   }
 });
 
@@ -202,7 +210,7 @@ window.addEventListener("click", (e) => {
 });
 
 //Fill input field with location geocode address
-window.addEventListener("mousedown", (event) => {
+window.addEventListener("click", (event) => {
   if (/edit-location/gm.test(event.target.className)) {
     const geocoder = new google.maps.Geocoder;
     const locationInputField = event.target.parentNode.children[12].innerHTML;
@@ -211,7 +219,9 @@ window.addEventListener("mousedown", (event) => {
     geocoder.geocode({ "location": latlng }, (results, status) => {
       if (status === "OK") {
         if (results[0]) {
-          document.getElementById("location-input").value = results[0].formatted_address;
+          setTimeout(()=> {
+            document.getElementById("location-input").value = results[0].formatted_address;
+          }, 100);
         }
       }
     });

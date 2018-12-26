@@ -470,7 +470,7 @@ describe("Update status of an incident", () => {
     request.patch(`/api/v1/red-flags/${1}/status`)
       .set("authorization", validToken)
       .send({
-        status: "under investigation",
+        status: "under-investigation",
       }).end((err, res) => {
         expect(res.status).to.eql(403);
         expect(res.body.error).to.eql("not an admin");

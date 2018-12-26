@@ -16,7 +16,8 @@ body{
   display:none;
 }
 #updateLocationLoader,
-#updateCommentLoader{
+#updateCommentLoader,
+#updateStatusLoader{
   display: none;
   width:50px;
   margin-bottom:-20px;
@@ -45,7 +46,7 @@ body{
 }
 .profileLoader{
   display: none;
-  width: 100px;
+  width: 50px;
   margin: 0 auto;
 }
 .hover:hover{
@@ -776,11 +777,13 @@ body.admin-body{
   float: right;
 }
 
+
 form input[type="text"],
 form input[type="number"],
 form input[type="email"],
 form input[type="password"],
-form input[type="submit"] {
+form input[type="submit"],
+form input[type="button"].admin_update_status{
   text-align: center;
   display: block;
   padding: 10px 0px;
@@ -790,6 +793,17 @@ form input[type="submit"] {
   margin-top: 10px;
   width: 100%;
   font-size: 1.05em;
+}
+
+form input[type="button"].admin_update_status,
+form input[type="button"]#myCurrentLocation{
+  background: #162661;
+  color: white;
+}
+form input[type="button"].admin_update_status:hover,
+form input[type="button"]#myCurrentLocation:hover{
+ background: #2744aa;
+ cursor: pointer;
 }
 
 .crime-form-container form input[type="text"],
@@ -1113,6 +1127,9 @@ footer{
 
 
 @media(max-width:1000px) {
+  .post-display .profile-name a {
+   position: relative;;
+}
   .post-display .profile-name span{
   position: relative;
 }
@@ -1286,10 +1303,7 @@ footer{
 }
 
 @media(max-width:320px) {
-  /* #updateLocationLoader,
-  #updateCommentLoader{
-  margin-bottom: 0;
-} */
+
   #longitude,
   #latitude{
     width: 250px;

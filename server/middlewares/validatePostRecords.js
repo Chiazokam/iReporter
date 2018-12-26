@@ -132,7 +132,7 @@ export class PostValidator {
    */
   static validateStatus(req, res, next) {
     const { status } = req.body;
-    const validValues = ["draft", "under investigation", "resolved", "rejected"];
+    const validValues = ["draft", "under-investigation", "resolved", "rejected"];
     let inputs;
 
     if (!status) {

@@ -108,7 +108,6 @@ const resetForm = () => {
   document.getElementById("post-text-area").value = "";
   document.getElementById("latlongdisplay").style.display = "none";
   document.getElementById("incident_address").value = "";
-  document.getElementById("incident_address").style.display = "inline-block";
   document.getElementById("red-flag").checked = false;
   document.getElementById("intervention").checked = false;
   document.getElementById("place-images").innerHTML = "";

@@ -73,3 +73,33 @@ window.addEventListener("click", (event) => {
 });
 
 
+//Update Status
+window.addEventListener("click", (event) => {
+  if (event.target.className === "admin_update_status") {
+    let recordURL;
+    if (localStorage.getItem("record_type") === "red-flag") {
+      recordURL = redflagURL;
+    } else if (localStorage.getItem("record_type") === "intervention") {
+      recordURL = interventionURL;
+    }
+    document.querySelectorAll(".profileLoader")[0].style.display = "none";
+    const newStatus = document.querySelectorAll("#select-status")[0].value;
+    const recordId = event.target.id;
+    const updateFieldKey = "status";
+    const updatObject = { status: newStatus.toLowerCase() };
+    const loaderSelector = "#updateStatusLoader";
+
+    const completed = updateRecords(recordURL, recordId, updateFieldKey, updatObject, loaderSelector);
+
+    Promise.all([completed])
+      .then(result => {
+        if (result[0] === true){
+          document.getElementById("current-status").innerHTML = newStatus;
+        }
+      });
+  }
+});
+
+
+
+

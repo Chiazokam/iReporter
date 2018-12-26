@@ -1,7 +1,7 @@
 /**----------------------------------TEST-------------------------------------*/
-// /**
-//  * Heroku Endpoints
-//  */
+/**
+ * Heroku Endpoints
+ */
 // const signup = "http://localhost:8000/api/v1/auth/signup";
 // const login = "http://localhost:8000/api/v1/auth/login";
 // const securePages = "http://localhost:8000/api/v1/auth/secure-pages";

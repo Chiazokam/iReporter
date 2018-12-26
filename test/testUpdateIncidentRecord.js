@@ -241,6 +241,25 @@ describe("Update comment end-point", () => {
       });
   });
 
+  it("should return 400 if comment is filled with only spaces", (done) => {
+    request.patch(`/api/v1/red-flags/${1}/comment`)
+      .set("authorization", newValidToken)
+      .send({
+        "comment": "       ",
+      }).end((err, res) => {
+        expect(res.status).to.eql(400);
+        expect(res.body.error).to.eql("comment field is required");
+        expect(res.body.error).to.be.a("string");
+        expect(res.body.status).to.be.a("number");
+        should.not.exist(err);
+        should.exist(res.body);
+        (res.body).should.be.an("object");
+        if (err) { return done(err); }
+        done();
+      });
+  });
+
+
 });
 
 
@@ -451,7 +470,7 @@ describe("Update status of an incident", () => {
     request.patch(`/api/v1/red-flags/${1}/status`)
       .set("authorization", validToken)
       .send({
-        status: "under investigation",
+        status: "under-investigation",
       }).end((err, res) => {
         expect(res.status).to.eql(403);
         expect(res.body.error).to.eql("not an admin");

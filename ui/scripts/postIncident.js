@@ -1,5 +1,6 @@
 /**
- * Get an incident
+ * Get an incident record
+ * @return {undefined}
  */
 const fetchNewIncident = ()=>{
   let incidentURL;
@@ -8,12 +9,15 @@ const fetchNewIncident = ()=>{
   let incidentIcon;
   const incidentURLType = localStorage.getItem("incidentURLType");
   const decoded = jwt_decode(token);
+  let record_type;
   if (incidentURLType === redflagURL) {
     incidentURL = redflagURL;
+    record_type = "red-flag";
     incidentIcon = "../images/red_flag.png";
   } else if (incidentURLType === interventionURL) {
     incidentURL = interventionURL;
     incidentIcon = "../images/intervene_icon.png";
+    record_type = "intervention";
   }
   fetch(`${incidentURL}/${newIncidentId}`, {
     method: "GET",
@@ -45,14 +49,14 @@ ${obj.comment}
 
                             <div class="insert-editing-tag-here"></div>
 
-                            <button class="blue edit-comment" >modify comment</button>
+                            <button class="blue edit-comment ${record_type}">modify comment</button>
                         </div>
                         <br>
                         <br>
                         <label class="blue">STATUS</label> : <span>${obj.status}</span> <br>
-                        <label class="blue">LOCATION</label> : <span class="geolocation">${obj.location}</span>
+                        <label class="blue">LOCATION</label> : <span title="Click to view on map" class="geolocation">${obj.location}</span>
                         <span> &nbsp; </span> <span class="insert-location-editing-tag-here"></span>
-                        <button class="blue edit-location" >modify location</button><br>
+                        <button class="blue edit-location ${record_type}" >modify location</button><br>
                         <br>
                         <br>
 
@@ -77,8 +81,7 @@ ${obj.comment}
     `;
         toggleGeneralMessage(error, false);
       }
-    })
-    .catch(err => err);
+    });
 };
 
 //Load recent post
@@ -95,7 +98,8 @@ window.addEventListener("load",()=>{
 });
 
 /**
- *Reset Form Fields
+ * Reset Form Fields
+ * @return {undefined}
  */
 const resetForm = () => {
   localStorage.removeItem("saveVideoUploads");
@@ -104,7 +108,6 @@ const resetForm = () => {
   document.getElementById("post-text-area").value = "";
   document.getElementById("latlongdisplay").style.display = "none";
   document.getElementById("incident_address").value = "";
-  document.getElementById("incident_address").style.display = "inline-block";
   document.getElementById("red-flag").checked = false;
   document.getElementById("intervention").checked = false;
   document.getElementById("place-images").innerHTML = "";
@@ -117,6 +120,7 @@ const resetForm = () => {
 /**
  * Sends an Incident report
  * @param {object} event
+ * @return {undefined}
  */
 const postIncident = (event) => {
   loaderOn(2);
@@ -196,7 +200,8 @@ window.addEventListener("submit", postIncident);
 
 /**
  * Turn on loader
- * @param {number} num array index
+ * @param {number} num - array index
+ * @return {undefined}
  */
 const loaderOn = (num) => {
   if (document.body.clientWidth > 500) {
@@ -208,13 +213,18 @@ const loaderOn = (num) => {
 
 /**
  * Turn off loader
- * @param {number} num array index
+ * @param {number} num - array index
+ * @return {undefined}
  */
 const loaderOff = (num) => {
   return document.querySelectorAll("img.uploadLoader")[num].style.display = "none";
 };
 
-
+/**
+ * Upload video evidence to cloudinary
+ * @param {object} event
+ * @return {undefined}
+ */
 const uploadVideoEvidence= (event) => {
   loaderOn(1);
   const videoFile = document.getElementById("video-upload");
@@ -253,11 +263,16 @@ const uploadVideoEvidence= (event) => {
       toggleGeneralMessage(err, false);
     });
 };
+
 //add event listener to the video input field
 document.getElementById("video-upload")
   .addEventListener("change", uploadVideoEvidence);
 
-
+/**
+ * Upload video evidence to cloudinary
+ * @param {object} event
+ * @return {undefined}
+ */
 const uploadImageEvidence = (event) => {
   loaderOn(0);
   const placeImages = document.getElementById("place-images");

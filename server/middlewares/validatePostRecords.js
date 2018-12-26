@@ -62,8 +62,10 @@ export class PostValidator {
    */
   static commentStringValidation(req, res, next) {
     const { comment } = req.body;
-
+    const excessSpace = /[^\s+]/g;
     if (!comment) {
+      Helpers.returnForError(req, res, 400, "comment field is required");
+    } else if( !excessSpace.test(comment) && !Helpers.isValidAlphabet(comment)) {
       Helpers.returnForError(req, res, 400, "comment field is required");
     } else {
       next();
@@ -99,7 +101,7 @@ export class PostValidator {
    */
   static multipleStringValidation(req, res, next) {
     const { title, comment, location, images, videos } = req.body;
-    const strings = { title, location };
+    const strings = { title, location, comment };
     const reqObj = { title, comment, location, images, videos };
     let inputs; const excessSpace = /[^\s+]/g;
     for (inputs in reqObj) {
@@ -108,7 +110,7 @@ export class PostValidator {
       }
     }
     for (inputs in strings) {
-      if (!(excessSpace.test(strings[inputs]))) {
+      if (!excessSpace.test(strings[inputs]) && !Helpers.isValidAlphabet(strings[inputs])) {
         return Helpers.returnForError(req, res, 400, `${inputs} is required`);
       }
     }
@@ -130,7 +132,7 @@ export class PostValidator {
    */
   static validateStatus(req, res, next) {
     const { status } = req.body;
-    const validValues = ["draft", "under investigation", "resolved", "rejected"];
+    const validValues = ["draft", "under-investigation", "resolved", "rejected"];
     let inputs;
 
     if (!status) {

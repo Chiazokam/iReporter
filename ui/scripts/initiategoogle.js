@@ -34,16 +34,21 @@ window.addEventListener("input", (e) => {
   }
 });
 
+//Get geolocation on mouse down (click)
 window.addEventListener("mousedown", (e) => {
   localStorage.setItem("allow", true);
   const allow = localStorage.getItem("allow");
   if (e.target.className === "geolocation" || e.path[4].id === "google-map") {
     localStorage.setItem("allow", false);
-  } else if ((JSON.parse(allow) === true) && (e.target.nodeName.toLowerCase() === "div" || e.target.nodeName.toLowerCase() === "span")) {
-    setTimeout(() => {
-      getAddress();
-      localStorage.removeItem("allow");
-    }, 100);
+  } else if ((JSON.parse(allow) === true)) {
+    e.path.forEach(elem => {
+      if (RegExp("pac").test(elem.className) && RegExp("/report").test(location.href)) {
+        setTimeout(() => {
+          getAddress();
+          localStorage.removeItem("allow");
+        }, 100);
+      }
+    });
   }
 });
 
@@ -78,6 +83,7 @@ const getAddress = (event) => {
     });
   }
 };
+
 window.addEventListener("input", (e) => {
   if (e.target.id === "incident_address") {
     getAddress();
@@ -120,11 +126,15 @@ window.addEventListener("input", () => {
 window.addEventListener("mousedown", (e) => {
   localStorage.setItem("allow", "update");
   const allow = localStorage.getItem("allow");
-  if ((allow === "update") && (e.target.nodeName.toLowerCase() === "div" || e.target.nodeName.toLowerCase() === "span")) {
-    setTimeout(() => {
-      updateAddress();
-      localStorage.removeItem("allow");
-    }, 100);
+  if ((allow === "update")) {
+    e.path.forEach(elem => {
+      if (RegExp("pac").test(elem.className) && (RegExp("/displayrecords").test(location.href) || RegExp("/report").test(location.href) || RegExp("/home").test(location.href))) {
+        setTimeout(() => {
+          updateAddress();
+          localStorage.removeItem("allow");
+        }, 100);
+      }
+    });
   }
 });
 
@@ -136,7 +146,13 @@ window.addEventListener("input", (e)=>{
 });
 
 
-
+/**
+ * Show geolocation with address on google map
+ * @param {object} geocode
+ * @param {object} map
+ * @param {object} infowindow
+ * @return {undefined}
+ */
 const geocodeLatLng = (geocoder, map, infowindow) => {
   document.querySelectorAll(".map-outer-modal")[0].style.display = "block";
   const input = localStorage.getItem("geolocation");
@@ -156,12 +172,16 @@ const geocodeLatLng = (geocoder, map, infowindow) => {
         toggleGeneralMessage("No results found", false);
       }
     } else {
-      toggleGeneralMessage("Geocoder failed due to: " + status);
+      toggleGeneralMessage(`Geocoder failed due to ${status}`, false);
     }
   });
 };
 
 
+/**
+ * Initialize google map
+ * @return {undefined}
+ */
 const initMap = () => {
   const map = new google.maps.Map(document.getElementById("google-map"), {
     zoom: 8,
@@ -189,3 +209,21 @@ window.addEventListener("click", (e) => {
   }
 });
 
+//Fill input field with location geocode address
+window.addEventListener("click", (event) => {
+  if (/edit-location/gm.test(event.target.className)) {
+    const geocoder = new google.maps.Geocoder;
+    const locationInputField = event.target.parentNode.children[12].innerHTML;
+    const latlngStr = locationInputField.split(",", 2);
+    const latlng = { lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1]) };
+    geocoder.geocode({ "location": latlng }, (results, status) => {
+      if (status === "OK") {
+        if (results[0]) {
+          setTimeout(()=> {
+            document.getElementById("location-input").value = results[0].formatted_address;
+          }, 100);
+        }
+      }
+    });
+  }
+});

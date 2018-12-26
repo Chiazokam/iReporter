@@ -190,7 +190,7 @@ export class Queries {
           for (let index in data) {
             if (data[index].status.toLowerCase() === "draft") {
               counts.draft += 1;
-            } else if (data[index].status.toLowerCase() === "under investigation") {
+            } else if (data[index].status.toLowerCase() === "under-investigation") {
               counts.underInvestigation += 1;
             } else if (data[index].status.toLowerCase() === "resolved") {
               counts.resolved += 1;

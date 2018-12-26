@@ -15,7 +15,13 @@ body{
   top: -20px;
   display:none;
 }
-
+#updateLocationLoader,
+#updateCommentLoader,
+#updateStatusLoader{
+  display: none;
+  width:50px;
+  margin-bottom:-20px;
+}
 #generalMessage{
   position: fixed;
   width: 320px;
@@ -40,7 +46,7 @@ body{
 }
 .profileLoader{
   display: none;
-  width: 100px;
+  width: 50px;
   margin: 0 auto;
 }
 .hover:hover{
@@ -503,14 +509,14 @@ input[type="button"]{
 }
 
 .geolocation{
-  color: #fe0100;
+  color: #1e3792;
 }
 #google-map{
   height: 80%;
   width: 90%;
 }
 .geolocation:hover{
-  color: #fc5151;
+  color: #fe0100;
   cursor: pointer;
   text-decoration: underline;
 }
@@ -771,11 +777,13 @@ body.admin-body{
   float: right;
 }
 
+
 form input[type="text"],
 form input[type="number"],
 form input[type="email"],
 form input[type="password"],
-form input[type="submit"] {
+form input[type="submit"],
+form input[type="button"].admin_update_status{
   text-align: center;
   display: block;
   padding: 10px 0px;
@@ -785,6 +793,17 @@ form input[type="submit"] {
   margin-top: 10px;
   width: 100%;
   font-size: 1.05em;
+}
+
+form input[type="button"].admin_update_status,
+form input[type="button"]#myCurrentLocation{
+  background: #162661;
+  color: white;
+}
+form input[type="button"].admin_update_status:hover,
+form input[type="button"]#myCurrentLocation:hover{
+ background: #2744aa;
+ cursor: pointer;
 }
 
 .crime-form-container form input[type="text"],
@@ -1108,6 +1127,9 @@ footer{
 
 
 @media(max-width:1000px) {
+  .post-display .profile-name a {
+   position: relative;;
+}
   .post-display .profile-name span{
   position: relative;
 }
@@ -1281,6 +1303,7 @@ footer{
 }
 
 @media(max-width:320px) {
+
   #longitude,
   #latitude{
     width: 250px;

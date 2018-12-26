@@ -6,7 +6,11 @@ const redirect = (link) => {
   location.href = link;
 };
 
-//checks if token is valid
+
+/**
+ * checks if token is valid
+ * @return {undefined}
+ */
 const checkAuth = () => {
   if (localStorage.getItem("token") !== null) {
     let current_time = new Date().getTime();
@@ -32,6 +36,7 @@ window.addEventListener("load", checkAuth);
 
 /**
  * Secure Pages
+ * @return {undefined}
  */
 const serverAuth = () => {
   if (location.href !== index || index2 === location.href){

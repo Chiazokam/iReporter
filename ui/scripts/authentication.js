@@ -1,5 +1,5 @@
 /**
- * Fetch Signup
+ * Signup User
  */
 window.addEventListener("click", (e) => {
   if (e.target.id === "signup") {
@@ -52,7 +52,7 @@ window.addEventListener("click", (e) => {
 
 
 /**
- * Fetch Signin
+ * Signin User
  */
 window.addEventListener("click", (e) => {
   if (e.target.id === "signin") {

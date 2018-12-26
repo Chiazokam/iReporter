@@ -37,31 +37,31 @@ User@guest MINGW64 ~/iReporter
 $ npm start
 ```
 
-### IMPLEMENTED API ENDPOINTS
+### FUNCTIONAL API ENDPOINTS
 
 <table>
-<tr><th>HTTP VERBS</th><th>API ENDPOINTS</th><th>CORRESPONDING EFFECTS</th></tr>
-<tr><td>POST</td> <td>/api/v1/auth/signup</td>  <td>Signup user</td></tr>
-<tr><td>POST</td> <td>/api/v1/auth/login</td>  <td>Signin user</td></tr>
-<tr><td>POST</td> <td>/api/v1/red-flags</td>  <td>Send a redflag</td></tr>
-<tr><td>POST</td> <td>/api/v1/interventions</td>  <td>Send an intervention</td></tr>
-<tr><td>GET</td> <td>/api/v1/red-flags</td>  <td>Fetch all users redflags records</td></tr>
-<tr><td>GET</td> <td>/api/v1/interventions</td>  <td>Fetch all users interventions records</td></tr>
-<tr><td>GET</td> <td>/api/v1/red-flags/:id</td>  <td>Fetch specific redflag of any user</td></tr>
-<tr><td>GET</td> <td>/api/v1/interventions/:id</td>  <td>Fetch a specific intervention of any user</td></tr>
-<tr><td>GET</td> <td>/api/v1/profile/red-flags</td>  <td>Fetch specific users redflag records</td></tr>
-<tr><td>GET</td> <td>/api/v1/profile/interventions</td>  <td>Fetch specific users intervention records</td></tr>
-<tr><td>GET</td> <td>/api/v1/red-flags/profile/status</td>  <td>Fetch redflags status count</td></tr>
-<tr><td>GET</td> <td>/api/v1/interventions/profile/status</td>  <td>Fetch interventions status count</td></tr>
-<tr><td>PATCH</td> <td>/api/v1/red-flags/:id/location</td>  <td>Update redflags location</td></tr>
-<tr><td>PATCH</td> <td>/api/v1/interventions/:id/location</td>  <td>Update interventions location</td></tr>
-<tr><td>PATCH</td> <td>/api/v1/red-flags/:id/comment</td>  <td>Update redflags comment</td></tr>
-<tr><td>PATCH</td> <td>/api/v1/intervention/:id/location</td>  <td>Update interventions comment</td></tr>
-<tr><td>PATCH</td> <td>/api/v1/red-flags/:id/status</td>  <td>Update redflags status</td></tr>
-<tr><td>PATCH</td> <td>/api/v1/interventions/:id/status</td>  <td>Update interventions status</td></tr>
-<tr><td>PATCH</td> <td>/api/v1/users/profile-image</td>  <td>Update profile image</td></tr>
-<tr><td>DELETE</td> <td>/api/v1/red-flags/:id</td>  <td>Delete a redflag record</td></tr>
-<tr><td>DELETE</td> <td>/api/v1/interventions/:id</td>  <td>Delete an intervention record</td></tr>
+<tr><th>S/N</th><th>HTTP VERBS</th><th>API ENDPOINTS</th><th>CORRESPONDING EFFECTS</th></tr>
+<tr><td>1</td><td>POST</td> <td>/api/v1/auth/signup</td>  <td>Signup (Creates) a user</td></tr>
+<tr><td>2</td><td>POST</td> <td>/api/v1/auth/login</td>  <td>Signin (Login) a user</td></tr>
+<tr><td>3</td><td>POST</td> <td>/api/v1/red-flags</td>  <td>Send a redflag</td></tr>
+<tr><td>4</td><td>POST</td> <td>/api/v1/interventions</td>  <td>Send an intervention</td></tr>
+<tr><td>5</td><td>GET</td> <td>/api/v1/red-flags</td>  <td>Fetch all users redflags records</td></tr>
+<tr><td>6</td><td>GET</td> <td>/api/v1/interventions</td>  <td>Fetch all users interventions records</td></tr>
+<tr><td>7</td><td>GET</td> <td>/api/v1/red-flags/:id</td>  <td>Fetch specific redflag of any user</td></tr>
+<tr><td>8</td><td>GET</td> <td>/api/v1/interventions/:id</td>  <td>Fetch a specific intervention of any user</td></tr>
+<tr><td>9</td><td>GET</td> <td>/api/v1/profile/red-flags</td>  <td>Fetch specific users redflag records</td></tr>
+<tr><td>10</td><td>GET</td> <td>/api/v1/profile/interventions</td>  <td>Fetch specific users intervention records</td></tr>
+<tr><td>11</td><td>GET</td> <td>/api/v1/red-flags/profile/status</td>  <td>Fetch redflags status count</td></tr>
+<tr><td>12</td><td>GET</td> <td>/api/v1/interventions/profile/status</td>  <td>Fetch interventions status count</td></tr>
+<tr><td>13</td><td>PATCH</td> <td>/api/v1/red-flags/:id/location</td>  <td>Update redflags location</td></tr>
+<tr><td>14</td><td>PATCH</td> <td>/api/v1/interventions/:id/location</td>  <td>Update interventions location</td></tr>
+<tr><td>15</td><td>PATCH</td> <td>/api/v1/red-flags/:id/comment</td>  <td>Update redflags comment</td></tr>
+<tr><td>16</td><td>PATCH</td> <td>/api/v1/intervention/:id/location</td>  <td>Updates an intervention comment</td></tr>
+<tr><td>17</td><td>PATCH</td> <td>/api/v1/red-flags/:id/status</td>  <td>Updates a redflag status</td></tr>
+<tr><td>18</td><td>PATCH</td> <td>/api/v1/interventions/:id/status</td>  <td>Updates an intervention status</td></tr>
+<tr><td>19</td><td>PATCH</td> <td>/api/v1/users/profile-image</td>  <td>Updates a users profile image</td></tr>
+<tr><td>20</td><td>DELETE</td> <td>/api/v1/red-flags/:id</td>  <td>Deletes a redflag record</td></tr>
+<tr><td>21</td><td>DELETE</td> <td>/api/v1/interventions/:id</td>  <td>Deletes an intervention record</td></tr>
 </table>
 
 ## Deployment

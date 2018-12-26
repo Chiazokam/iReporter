@@ -323,7 +323,12 @@ const editComment = (event) => {
     //Insert HTML mark-up into the the second child of the target element
     target.children[1].innerHTML = `
         <textarea class="editing-tag" id="updatedComment">${initialComment}</textarea>
-        <span class="editing-tag"><a class="red edit cancel">cancel</a> <span>&nbsp;</span><a class="blue edit">update</a></span>
+        <span class="editing-tag">
+          <button class="red edit cancel">cancel</button>
+        <span> &nbsp; </span>
+          <button id="update-comment" class="blue edit">update</button>
+          <img src="../images/loader_blue.GIF"  id="updateCommentLoader"/>
+        </span>
         `;
   }
 };
@@ -334,8 +339,8 @@ window.addEventListener("click", editComment);
  * Cancels modification of the comment field
  * @return {undefined}
  */
-const cancelCommentUpdate = () => {
-  if (/cancel/gm.test(event.target.className)) {
+const cancelCommentUpdate = (action) => {
+  if (action === "end" || /cancel/gm.test(event.target.className)) {
     const target = event.target.parentNode.parentNode.parentNode;
     const childrenLength = target.children.length;
 
@@ -350,7 +355,9 @@ const cancelCommentUpdate = () => {
   }
 };
 
-window.addEventListener("click", cancelCommentUpdate);
+window.addEventListener("click", ()=>{
+  cancelCommentUpdate();
+});
 
 
 /**
@@ -413,7 +420,10 @@ const editLocation = (event) => {
         </span>
         <span class="editing-button-tag">
         <a class="red edit exit">cancel</a>
-        <span>&nbsp;</span><a class="blue edit">update</a></span> `;
+        <span>&nbsp;</span>
+        <button id="update-location" class="blue edit" id="update-location">update</button>
+        <img src="../images/loader_blue.GIF"  id="updateLocationLoader" />
+        </span> `;
   }
 };
 
@@ -449,6 +459,7 @@ window.addEventListener("click", cancelLocationUpdate);
  * Spits out success or error messages
  * @param {string} message - display alert
  * @param {boolean} style - type of display box
+ * @return {undefined}
  */
 const toggleGeneralMessage = (message, style) => {
   const generalMessage = document.getElementById("generalMessage");
@@ -507,6 +518,8 @@ const forEachRemove = (arrayElem) => {
 /**
  * unpacks an array of  images
  * @param {array} arr
+ * @param {string} returnTag
+ * @return {string}
  */
 const unpackImages = (arr, returnTag) => {
   let markup = "";
@@ -523,6 +536,8 @@ const unpackImages = (arr, returnTag) => {
 /**
  * unpacks an array of videos
  * @param {array} arr
+ * @param {string} returnTag
+ * @return {string}
  */
 const unpackVideos = (arr, returnTag) => {
   let markup = "";
@@ -544,6 +559,10 @@ const timeInterval = setInterval(()=>{
   time++;
 }, 1000);
 
+/**
+ * End Timer
+ * @return {undefined}
+ */
 const endTimer = () => {
   if (time > 30) {
     clearInterval(timeInterval);
@@ -567,6 +586,45 @@ window.addEventListener("load", () => {
 
 
 
+/**
+ * Represents an update function for redflag and intervention
+ * @return {undefined}
+ */
+const updateRecords = (recordURL, recordId, updateFieldKey, updatObject, loaderSelector) => {
+  const token = localStorage.getItem("token");
+  const loader = document.querySelectorAll(loaderSelector)[0];
+  loader.style.display = "inline-block";
+  return fetch(`${recordURL}/${recordId}/${updateFieldKey}`, {
+    method: "PATCH",
+    headers: {
+      "Accept": "application/json, text/plain, */*",
+      "Content-type": "application/json",
+      "authorization": token
+    },
+    body: JSON.stringify(updatObject)
+  })
+    .then((res) => res.json())
+    .then((responseData) => {
+      const { status, data, error } = responseData;
+      if (status === 200) {
+        loader.style.display = "none";
+        toggleGeneralMessage(data[0].message, true);
+        localStorage.setItem("return", true);
+        return true;
+      } else {
+        loader.style.display = "none";
+        localStorage.setItem("return", false);
+        toggleGeneralMessage(error, false);
+        return false;
+      }
+    });
+};
 
-
+window.addEventListener("click", (e) => {
+  if (RegExp("red-flag").test(e.target.className) ) {
+    localStorage.setItem("record_type", "red-flag");
+  } else if (RegExp("intervention").test(e.target.className)) {
+    localStorage.setItem("record_type", "intervention");
+  }
+});
 

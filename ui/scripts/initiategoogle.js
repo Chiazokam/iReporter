@@ -34,6 +34,7 @@ window.addEventListener("input", (e) => {
   }
 });
 
+//Get geolocation on mouse down (click)
 window.addEventListener("mousedown", (e) => {
   localStorage.setItem("allow", true);
   const allow = localStorage.getItem("allow");
@@ -78,6 +79,7 @@ const getAddress = (event) => {
     });
   }
 };
+
 window.addEventListener("input", (e) => {
   if (e.target.id === "incident_address") {
     getAddress();
@@ -136,7 +138,13 @@ window.addEventListener("input", (e)=>{
 });
 
 
-
+/**
+ * Show geolocation with address on google map
+ * @param {object} geocode
+ * @param {object} map
+ * @param {object} infowindow
+ * @return {undefined}
+ */
 const geocodeLatLng = (geocoder, map, infowindow) => {
   document.querySelectorAll(".map-outer-modal")[0].style.display = "block";
   const input = localStorage.getItem("geolocation");
@@ -156,12 +164,16 @@ const geocodeLatLng = (geocoder, map, infowindow) => {
         toggleGeneralMessage("No results found", false);
       }
     } else {
-      toggleGeneralMessage("Geocoder failed due to: " + status);
+      toggleGeneralMessage(`Geocoder failed due to ${status}`, false);
     }
   });
 };
 
 
+/**
+ * Initialize google map
+ * @return {undefined}
+ */
 const initMap = () => {
   const map = new google.maps.Map(document.getElementById("google-map"), {
     zoom: 8,
@@ -189,3 +201,19 @@ window.addEventListener("click", (e) => {
   }
 });
 
+//Fill input field with location geocode address
+window.addEventListener("mousedown", (event) => {
+  if (/edit-location/gm.test(event.target.className)) {
+    const geocoder = new google.maps.Geocoder;
+    const locationInputField = event.target.parentNode.children[12].innerHTML;
+    const latlngStr = locationInputField.split(",", 2);
+    const latlng = { lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1]) };
+    geocoder.geocode({ "location": latlng }, (results, status) => {
+      if (status === "OK") {
+        if (results[0]) {
+          document.getElementById("location-input").value = results[0].formatted_address;
+        }
+      }
+    });
+  }
+});

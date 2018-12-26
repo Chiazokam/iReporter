@@ -15,7 +15,12 @@ body{
   top: -20px;
   display:none;
 }
-
+#updateLocationLoader,
+#updateCommentLoader{
+  display: none;
+  width:50px;
+  margin-bottom:-20px;
+}
 #generalMessage{
   position: fixed;
   width: 320px;
@@ -503,14 +508,14 @@ input[type="button"]{
 }
 
 .geolocation{
-  color: #fe0100;
+  color: #1e3792;
 }
 #google-map{
   height: 80%;
   width: 90%;
 }
 .geolocation:hover{
-  color: #fc5151;
+  color: #fe0100;
   cursor: pointer;
   text-decoration: underline;
 }
@@ -1281,6 +1286,10 @@ footer{
 }
 
 @media(max-width:320px) {
+  /* #updateLocationLoader,
+  #updateCommentLoader{
+  margin-bottom: 0;
+} */
   #longitude,
   #latitude{
     width: 250px;

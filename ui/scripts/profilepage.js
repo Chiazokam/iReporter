@@ -1,60 +1,3 @@
-// /**
-//  * Indicates Current records switch
-//  * @param {object} event - event object
-//  * @return {undefined}
-//  */
-// const injectRedflagRecords = () => {
-//   const token = localStorage.getItem("token");
-//   const decoded = jwt_decode(token);
-//   let incidentURL;
-//   const recordId = localStorage.getItem("recordId");
-//   const loader = document.querySelector("#homeLoaderContainer .homeLoader");
-//   loader.style.display = "inline-block";
-
-//   if (RegExp("/displayrecord").test(location.href)) {
-//     incidentURL = `${redflagURL}/${recordId}`;
-//   } else {
-//     incidentURL = redflagURL;
-//   }
-
-//   fetch(`${incidentURL}`, {
-//     method: "GET",
-//     headers: {
-//       "Accept": "application/json, text/plain, */*",
-//       "Content-type": "application/json",
-//       "authorization": token
-//     }
-//   })
-//     .then((res) => res.json())
-//     .then((responseData) => {
-//       const { status, data } = responseData;
-//       if (data.length < 1) {
-//         document.getElementsByClassName("post-display")[0].innerHTML = `
-//           <h1 style='margin-bottom: 50%; color:grey; padding: 3em 0 0 0; text-align:center; font-size:2em'>NO RED-FLAG RECORDS</h1>
-//           `;
-//         loader.style.display = "none";
-//       } else if (status === 200) {
-//         data.forEach((obj) => {
-//           document.getElementsByClassName("post-display")[0].innerHTML +=
-//             `
-//                 `;
-
-//           if (decoded.id !== obj.createdby) {
-//             const editComment = document.querySelectorAll("button.edit-comment");
-//             const editLocation = document.querySelectorAll("button.edit-location");
-//             const deleteButton = document.querySelectorAll("button.delete");
-
-//             forEachRemove(editComment);
-//             forEachRemove(editLocation);
-//             forEachRemove(deleteButton);
-//           }
-//         });
-//       }
-//       loader.style.display = "none";
-//     });
-// };
-
-
 window.addEventListener("load", ()=>{
   const token = localStorage.getItem("token");
   const decoded = jwt_decode(token);
@@ -87,7 +30,7 @@ window.addEventListener("load", ()=>{
 let imageURL;
 /**
  * PATCH profile image
- * @param {object} event
+ * @return {undefined}
  */
 const updateProfilePicture = () => {
   const token = localStorage.getItem("token");
@@ -125,6 +68,7 @@ const updateProfilePicture = () => {
 /**
  * Upload image to cloudinary
  * @param {object} event event object
+ * @return {undefined}
  */
 const changeProfileImage = (event) => {
   const loader = document.querySelectorAll(".profileLoader")[0];
@@ -162,6 +106,7 @@ window.addEventListener("change", changeProfileImage);
 /**
  * LOAD redflag status count
  * @param {object} event
+ * @return {undefined}
  */
 const loadRedflagStatusCount = () => {
   const token = localStorage.getItem("token");
@@ -196,6 +141,7 @@ window.addEventListener("load", () => {
 /**
  * LOAD intervention status count
  * @param {object} event
+ * @return {undefined}
  */
 const loadInterventionStatusCount = () => {
   const token = localStorage.getItem("token");
@@ -229,6 +175,7 @@ window.addEventListener("load", () => {
 /**
  * LOAD personal redflag records
  * @param {object} event
+ * @return {undefined}
  */
 const loadAllPersonalRedflags = () => {
   const token = localStorage.getItem("token");
@@ -265,6 +212,7 @@ const loadAllPersonalRedflags = () => {
 /**
  * LOAD personal intervention records
  * @param {object} event
+ * @return {undefined}
  */
 const loadAllPersonalInterventions = () => {
   const token = localStorage.getItem("token");
@@ -322,6 +270,7 @@ window.addEventListener("load", () => {
 /**
  * LOAD all redflag records for Admin
  * @param {object} event
+ * @return {undefined}
  */
 const loadAllRedflagsAdmin = () => {
   const token = localStorage.getItem("token");
@@ -360,6 +309,7 @@ const loadAllRedflagsAdmin = () => {
 /**
  * LOAD all intervention records for Admin
  * @param {object} event
+ * @return {undefined}
  */
 const loadAllInterventionsAdmin = () => {
   const token = localStorage.getItem("token");
@@ -426,12 +376,12 @@ window.addEventListener("load", () => {
   }
 });
 
+//Change status modal
 window.addEventListener("click", (e) => {
   if (e.target.className === "change") {
     let color;
     const info = e.target.parentNode.className.split(" ");
     const recordId = e.target.parentNode.id;
-    console.log(info, recordId);
     const status = info[0].toLowerCase();
     const type = info[1];
     localStorage.setItem("recordId", recordId);

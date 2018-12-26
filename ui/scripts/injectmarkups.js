@@ -1,5 +1,5 @@
 /**
- * Load redflags
+ * Load redflag records
  * @return {undefined}
  */
 const injectRedflagRecords = () => {
@@ -12,7 +12,7 @@ const injectRedflagRecords = () => {
   displayPost.innerHTML = "";
   const loader = document.querySelector("#homeLoaderContainer .homeLoader");
   loader.style.display = "inline-block";
-
+  const record_type = "red-flag";
   if (RegExp("/displayrecords").test(location.href)) {
     incidentURL = `${redflagURL}/${recordId}`;
   } else {
@@ -52,14 +52,14 @@ ${obj.comment}
 
                             <div class="insert-editing-tag-here"></div>
 
-                            <button class="blue edit-comment" >modify comment</button>
+                            <button class="blue edit-comment ${record_type}" >modify comment</button>
                         </div>
                         <br>
                         <br>
                         <label class="blue">STATUS</label> : <span>${obj.status}</span> <br>
-                        <label class="blue">LOCATION</label> : <span class="geolocation">${obj.location}</span>
+                        <label class="blue">LOCATION</label> : <span class="geolocation" title="Click to view on map">${obj.location}</span>
                         <span> &nbsp; </span> <span class="insert-location-editing-tag-here"></span>
-                        <button class="blue edit-location" >modify location</button><br>
+                        <button class="blue edit-location ${record_type}" >modify location</button><br>
                         <br>
                         <br>
 
@@ -93,6 +93,7 @@ ${obj.comment}
     });
 };
 
+//Onload populate windows with redflag records(Default)
 window.addEventListener("load", ()=> {
   const chooseRecord = document.getElementsByClassName("choose-record");
   if (chooseRecord.length > 0){
@@ -100,12 +101,14 @@ window.addEventListener("load", ()=> {
   }
 });
 
+//Onclick populate windows with redflag records
 window.addEventListener("click", (e)=>{
   if (e.target.id === "redflag-record"){
     injectRedflagRecords();
   }
 });
 
+//Onload polulate window with redflag or intervention records
 window.addEventListener("load", ()=> {
   const displayRecordsHere = document.querySelectorAll("#displayrecordshere");
   const recordType = localStorage.getItem("record-type");
@@ -117,7 +120,7 @@ window.addEventListener("load", ()=> {
 });
 
 /**
- * Load interventions
+ * Load intervention records
  * @return {undefined}
  */
 const injectInterventionRecords = () => {
@@ -130,10 +133,9 @@ const injectInterventionRecords = () => {
   const incidentIcon = "../images/intervene_icon.png";
   const loader = document.querySelector("#homeLoaderContainer .homeLoader");
   loader.style.display = "inline-block";
-
+  const record_type = "intervention";
   if (RegExp("/displayrecords").test(location.href)) {
     incidentURL = `${interventionURL}/${recordId}`;
-    console.log("******************************.....");
   } else {
     incidentURL = interventionURL;
   }
@@ -176,14 +178,14 @@ ${obj.comment}
 
                             <div class="insert-editing-tag-here"></div>
 
-                            <button class="blue edit-comment" >modify comment</button>
+                            <button class="blue edit-comment ${record_type}" >modify comment</button>
                         </div>
                         <br>
                         <br>
                         <label class="blue">STATUS</label> : <span>${obj.status}</span> <br>
-                        <label class="blue">LOCATION</label> : <span class="geolocation">${obj.location}</span>
+                        <label class="blue">LOCATION</label> : <span title="Click to view on map" class="geolocation">${obj.location}</span>
                         <span> &nbsp; </span> <span class="insert-location-editing-tag-here"></span>
-                        <button class="blue edit-location" >modify location</button><br>
+                        <button class="blue edit-location ${record_type}" >modify location</button><br>
                         <br>
                         <br>
 

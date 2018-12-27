@@ -30,12 +30,7 @@ const injectRedflagRecords = () => {
     .then((res) => res.json())
     .then((responseData) => {
       const { status, data } = responseData;
-      if (data.length < 1) {
-        document.getElementsByClassName("post-display")[0].innerHTML = `
-          <h1 style='margin-bottom: 50%; color:grey; padding: 3em 0 0 0; text-align:center; font-size:2em'>NO RED-FLAG RECORDS</h1>
-          `;
-        loader.style.display = "none";
-      } else if (status === 200) {
+      if (status === 200 && data.length > 0) {
         data.forEach((obj) => {
           document.getElementsByClassName("post-display")[0].innerHTML +=
               `   <div class="post">
@@ -72,7 +67,7 @@ ${obj.comment}
                         </div>
 
                         <div class="delete-record-container">
-                            <button class="red delete">delete</button>
+                            <button class="red delete ${record_type}">delete</button>
                         </div>
                     </article>
                 </div>
@@ -88,8 +83,13 @@ ${obj.comment}
             forEachRemove(deleteButton);
           }
         });
+        loader.style.display = "none";
+      } else {
+        document.getElementsByClassName("post-display")[0].innerHTML = `
+          <h1 style='margin-bottom: 50%; color:grey; padding: 3em 0 0 0; text-align:center; font-size:2em'>NO RED-FLAG RECORDS</h1>
+          `;
+        loader.style.display = "none";
       }
-      loader.style.display = "none";
     });
 };
 
@@ -151,12 +151,7 @@ const injectInterventionRecords = () => {
     .then((res) => res.json())
     .then((responseData) => {
       const { status, data } = responseData;
-      if (data.length < 1){
-        document.getElementsByClassName("post-display")[0].innerHTML =`
-          <h1 style='margin-bottom: 50%; color:grey; padding: 3em 0 0 0; text-align:center; font-size:2em'>NO INTERVENTION RECORDS</h1>
-          `;
-        loader.style.display = "none";
-      } else if (status === 200) {
+      if (status === 200 && data.length > 0) {
         let bool = true;
         data.forEach((obj) => {
           if (bool) {
@@ -198,7 +193,7 @@ ${obj.comment}
                         </div>
 
                         <div class="delete-record-container">
-                            <button class="red delete">delete</button>
+                            <button class="red delete ${record_type}">delete</button>
                         </div>
                     </article>
                 </div>
@@ -215,11 +210,16 @@ ${obj.comment}
           }
         });
         loader.style.display = "none";
+      } else {
+        document.getElementsByClassName("post-display")[0].innerHTML = `
+          <h1 style='margin-bottom: 50%; color:grey; padding: 3em 0 0 0; text-align:center; font-size:2em'>NO INTERVENTION RECORDS</h1>
+          `;
+        loader.style.display = "none";
       }
     });
 };
 
-window.addEventListener("click", (e) => {
+window.addEventListener("mousedown", (e) => {
   if (e.target.id === "intervention-record") {
     injectInterventionRecords();
   }

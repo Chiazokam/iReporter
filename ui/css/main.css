@@ -17,7 +17,8 @@ body{
 }
 #updateLocationLoader,
 #updateCommentLoader,
-#updateStatusLoader{
+#updateStatusLoader,
+#deleteLoader{
   display: none;
   width:50px;
   margin-bottom:-20px;
@@ -485,6 +486,7 @@ input[type="button"]{
 .edit-comment,
 .edit-location,
  .delete,
+ .delete-record,
  .edit{
   display: inline-table;
   cursor: pointer;
@@ -1035,15 +1037,15 @@ input.location-input{
 .intervention-list{
   float: left;
   width: 50%;
-  background: rgba(255, 255, 255, 0.5);
+  background: lightgrey;
   padding: 0 0 20px 0;
   box-shadow: 1px 1px 1px 1px #162661;
   margin-top: 1em;
 }
-.redflag-list h2,
-.intervention-list h2{
-  background: #d4d4d6;
-
+.redflag-list h2:first-child,
+.intervention-list h2:first-child{
+  background: #ffffff;
+  padding: 0.5em 0;
 }
 #howitworks div,
 #about div{

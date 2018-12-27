@@ -1,7 +1,7 @@
-/**----------------------------------TEST-------------------------------------*/
-/**
- * Heroku Endpoints
- */
+// /**----------------------------------TEST-------------------------------------*/
+// /**
+//  * Heroku Endpoints
+//  */
 // const signup = "http://localhost:8000/api/v1/auth/signup";
 // const login = "http://localhost:8000/api/v1/auth/login";
 // const securePages = "http://localhost:8000/api/v1/auth/secure-pages";
@@ -16,12 +16,6 @@
 // const index2 = "http://localhost:8000/index.html";
 // const home = "http://localhost:8000/html/home";
 // const pageIndex = "http://localhost:8000";
-
-
-
-
-
-
 
 
 

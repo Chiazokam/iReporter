@@ -30,7 +30,7 @@ const fetchNewIncident = ()=>{
     .then((res) => res.json())
     .then((responseData) => {
       const { status, data, error } = responseData;
-      if (status === 200) {
+      if (status === 200 && data.length > 0) {
         document.getElementsByClassName("post-display")[0].style.marginTop = "4em";
         document.getElementsByClassName("post-display")[0].innerHTML = "";
         data.forEach((obj) => {
@@ -69,7 +69,7 @@ ${obj.comment}
                         </div>
 
                         <div class="delete-record-container">
-                            <button class="red delete">delete</button>
+                            <button class="red delete ${record_type}">delete</button>
                         </div>
                     </article>
                 </div>

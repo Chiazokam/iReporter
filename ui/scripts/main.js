@@ -586,40 +586,6 @@ window.addEventListener("load", () => {
 
 
 
-/**
- * Represents an update function for redflag and intervention
- * @return {undefined}
- */
-const updateRecords = (recordURL, recordId, updateFieldKey, updatObject, loaderSelector) => {
-  const token = localStorage.getItem("token");
-  const loader = document.querySelectorAll(loaderSelector)[0];
-  loader.style.display = "inline-block";
-  return fetch(`${recordURL}/${recordId}/${updateFieldKey}`, {
-    method: "PATCH",
-    headers: {
-      "Accept": "application/json, text/plain, */*",
-      "Content-type": "application/json",
-      "authorization": token
-    },
-    body: JSON.stringify(updatObject)
-  })
-    .then((res) => res.json())
-    .then((responseData) => {
-      const { status, data, error } = responseData;
-      if (status === 200) {
-        loader.style.display = "none";
-        toggleGeneralMessage(data[0].message, true);
-        localStorage.setItem("return", true);
-        return true;
-      } else {
-        loader.style.display = "none";
-        localStorage.setItem("return", false);
-        toggleGeneralMessage(error, false);
-        return false;
-      }
-    });
-};
-
 window.addEventListener("click", (e) => {
   if (RegExp("red-flag").test(e.target.className) ) {
     localStorage.setItem("record_type", "red-flag");

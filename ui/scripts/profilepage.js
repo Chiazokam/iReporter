@@ -189,8 +189,9 @@ const loadAllPersonalRedflags = () => {
       const { status, data } = responseData;
       if (status === 200) {
         if (data.length < 1) {
-          return document.getElementById("redflag-list").innerHTML += `
-           <h2 style='color:grey; padding: 1em 0 1em 0; text-align:center; font-size:1.2em'>NO RED-FLAG RECORDS</h2>
+          return document.getElementById("redflag-list").innerHTML = `
+          <h2 class="font-setting theme-orange">RED FLAGS</h2>
+           <h2 style='color:grey; padding: 0.55em 0 0 0; text-align:center; font-size:1.2em'>NO RED-FLAG RECORDS</h2>
           `;
         } else {
           data.forEach(elem => {
@@ -198,6 +199,7 @@ const loadAllPersonalRedflags = () => {
               ` <li>
           <a href="./displayrecords.html" class="redflag-link" id=${elem.id}>${elem.title.slice(0, 30)}...</a>
           <img src="../images/red_flag.png" class="red-flag-icon" title="Red flag" />
+          <button class="red delete-record ${elem.type}">delete</button>
         </li>`;
           });
         }
@@ -226,8 +228,9 @@ const loadAllPersonalInterventions = () => {
       const { status, data } = responseData;
       if (status === 200) {
         if (data.length < 1) {
-          return document.getElementById("intervention-list").innerHTML += `
-           <h2 style='color:grey; padding: 1em 0 1em 0; text-align:center; font-size:1.2em'>NO INTERVENTION RECORDS</h2>
+          return document.getElementById("intervention-list").innerHTML = `
+          <h2 class="font-setting theme-blue">INTERVENTION</h2>
+           <h2 style='color:grey; padding: 0.55em 0 0 0; text-align:center; font-size:1.2em'>NO INTERVENTION RECORDS</h2>
           `;
         } else{
           data.forEach(elem => {
@@ -235,6 +238,7 @@ const loadAllPersonalInterventions = () => {
               ` <li >
          <a href="./displayrecords.html" class="intervention-link" id=${elem.id} >${elem.title.slice(0, 30)}...</a>
          <img src="../images/intervene_icon.png" class="red-flag-icon" title="intervention" />
+         <button class="red delete-record ${elem.type}">delete</button>
          </li>
         `;
           });

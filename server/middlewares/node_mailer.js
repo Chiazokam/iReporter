@@ -6,7 +6,7 @@ const query = new Queries();
 const sendEmail = (req, res) => {
   const createdby = req.createdby;
   const status = req.status;
-
+  const title = req.title;
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -24,10 +24,9 @@ const sendEmail = (req, res) => {
         to: userEmail,
         subject: "INCIDENT STATUS UPDATE",
         html: `
-        <h1>Your Status has been updated</h1>
-
         <p>Hello ${fullname}.</p>
-        <p>Your report status has been changed to <strong>${status.toUpperCase()}</strong></p>
+        <h2>Your report status, "${title}" have been changed</h2>
+        <p>It has been updated to <strong>${status.toUpperCase()}</strong></p>
         <p>Click <a href="eye-reporter.herokuapp.com">here</a> to login to iReporter.</p>
 
 

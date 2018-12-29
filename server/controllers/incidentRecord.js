@@ -199,6 +199,7 @@ export class Incidents {
                   }
                   req.createdby = data2[0].createdby;
                   req.status = status;
+                  req.title = data2[0].title;
                   next();
                 });
             }

@@ -25,8 +25,8 @@ const sendEmail = (req, res) => {
         subject: "INCIDENT STATUS UPDATE",
         html: `
         <p>Hello ${fullname}.</p>
-        <h2>Your report status, "${title}" have been changed</h2>
-        <p>It has been updated to <strong>${status.toUpperCase()}</strong></p>
+        <h2>Your report status with title, "${title}" have been updated</h2>
+        <p>It has been changed to <strong>${status.toUpperCase()}</strong></p>
         <p>Click <a href="eye-reporter.herokuapp.com">here</a> to login to iReporter.</p>
 
 

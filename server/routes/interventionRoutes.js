@@ -1,7 +1,7 @@
 import express from "express";
 import { Helpers } from "../helpers";
 import { Incidents } from "../controllers";
-import { PostValidator, verifyUsersToken } from "../middlewares";
+import { PostValidator, verifyUsersToken, sendEmail } from "../middlewares";
 
 const incident = new Incidents();
 
@@ -79,7 +79,8 @@ interventionRoutes.patch(
   verifyUsersToken,
   PostValidator.validateParams,
   PostValidator.validateStatus,
-  incident.updateIncidentsStatus
+  incident.updateIncidentsStatus,
+  sendEmail
 );
 
 

@@ -172,7 +172,7 @@ export class Incidents {
    * @param {object} res - Contains the returned response.
    * @return {undefined}
    */
-  updateIncidentsStatus(req, res) {
+  updateIncidentsStatus(req, res, next) {
     const { status } = req.body;
     const incidentsId = req.params.id;
     const userId = req.userInfo.id;
@@ -197,6 +197,10 @@ export class Incidents {
                   } else {
                     Helpers.returnForSuccess(req, res, 200, updatedRecordId, "intervention record's status updated");
                   }
+                  req.createdby = data2[0].createdby;
+                  req.status = status;
+                  req.title = data2[0].title;
+                  next();
                 });
             }
           });

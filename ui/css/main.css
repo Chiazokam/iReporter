@@ -18,7 +18,8 @@ body{
 #updateLocationLoader,
 #updateCommentLoader,
 #updateStatusLoader,
-#deleteLoader{
+#deleteLoader,
+#adminRecordLoader{
   display: none;
   width:50px;
   margin-bottom:-20px;

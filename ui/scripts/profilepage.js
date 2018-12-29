@@ -11,7 +11,7 @@ window.addEventListener("load", ()=>{
   if (profile.length > 0) {
     profile[0].innerHTML = `
     <div class="profile-details-border">
-            <img src="${image}" alt="avatar" class="large-avatar"/> <br>
+            <img src="${image}" alt="avatar" class="large-avatar" id="user-profile-image"/> <br>
             <label for="uploadProfileImage" class="theme-orange hover">change image</label>
             <input type="file" id="uploadProfileImage" accept="image/*"/>
             <img src="../images/loader_blue.GIF" class="profileLoader" />
@@ -52,6 +52,7 @@ const updateProfilePicture = () => {
       if (status === 200) {
         loader.style.display = "none";
         localStorage.setItem("profileimage", updateURL);
+        document.getElementById("user-profile-image").src = updateURL;
         toggleGeneralMessage(data[0].message, true);
       } else {
         loader.style.display = "none";
@@ -275,6 +276,8 @@ window.addEventListener("load", () => {
  */
 const loadAllRedflagsAdmin = () => {
   const token = localStorage.getItem("token");
+  const loader = document.getElementById("adminRecordLoader");
+  loader.style.display = "inline-block";
   fetch(redflagURL, {
     method: "GET",
     headers: {
@@ -288,6 +291,7 @@ const loadAllRedflagsAdmin = () => {
       const { status, data } = responseData;
       if (status === 200) {
         if (data.length < 1) {
+          loader.style.display = "none";
           return document.querySelectorAll(".admin-redflag-list")[0].innerHTML += `
            <h1 style='color:grey; padding: 1em 0 1em 0; text-align:center; font-size:1.2em'>NO RED-FLAG RECORDS</h1>
           `;
@@ -300,6 +304,7 @@ const loadAllRedflagsAdmin = () => {
                     <button class="change" >change</button>
                 </li>`;
           });
+          loader.style.display = "none";
         }
       }
     });
@@ -314,6 +319,8 @@ const loadAllRedflagsAdmin = () => {
  */
 const loadAllInterventionsAdmin = () => {
   const token = localStorage.getItem("token");
+  const loader = document.getElementById("adminRecordLoader");
+  loader.style.display = "inline-block";
   fetch(interventionURL, {
     method: "GET",
     headers: {
@@ -327,6 +334,7 @@ const loadAllInterventionsAdmin = () => {
       const { status, data } = responseData;
       if (status === 200) {
         if (data.length < 1) {
+          loader.style.display = "none";
           return document.querySelectorAll(".admin-intervention-list")[0].innerHTML  += `
            <h2 style='color:grey; padding: 1em 0 1em 0; text-align:center; font-size:1.2em'>NO INTERVENTION RECORDS</h2>
           `;
@@ -340,6 +348,7 @@ const loadAllInterventionsAdmin = () => {
                 </li>
         `;
           });
+          loader.style.display = "none";
         }
       }
     });

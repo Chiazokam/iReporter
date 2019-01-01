@@ -376,8 +376,8 @@ div.logo-container{
 }
 .crime-form-container #boundary h1{
   padding: 0.1em 0;
-  background: #162661;
-  color: white;
+  background: #cdd0e0;
+  color: #162661;
   width: 100%;
 }
 #boundary .place-images li,
@@ -833,7 +833,7 @@ form input[type="email"],
   h2#compose-heading{
     color: #162661;
     text-align: center;
-    font-size: 1.2em;
+    font-size: 1.4em;
     padding: 0.5em 0 0.5em 0;
     margin: 0 auto 2em auto;
     background: white;

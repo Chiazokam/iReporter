@@ -277,6 +277,7 @@ window.addEventListener("load", () => {
 const loadAllRedflagsAdmin = () => {
   const token = localStorage.getItem("token");
   const loader = document.getElementById("adminRecordLoader");
+  const redflaglist_container = document.querySelectorAll(".admin-redflag-list")[0];
   loader.style.display = "inline-block";
   fetch(redflagURL, {
     method: "GET",
@@ -289,15 +290,16 @@ const loadAllRedflagsAdmin = () => {
     .then((res) => res.json())
     .then((responseData) => {
       const { status, data } = responseData;
+      redflaglist_container.innerHTML = "";
       if (status === 200) {
         if (data.length < 1) {
           loader.style.display = "none";
-          return document.querySelectorAll(".admin-redflag-list")[0].innerHTML += `
+          return redflaglist_container.innerHTML += `
            <h1 style='color:grey; padding: 1em 0 1em 0; text-align:center; font-size:1.2em'>NO RED-FLAG RECORDS</h1>
           `;
         } else {
           data.forEach(elem => {
-            document.querySelectorAll(".admin-redflag-list")[0].innerHTML  +=
+            redflaglist_container.innerHTML +=
               ` <li id=${elem.id} class='${elem.status} ${elem.type}' style="padding-top:0.5em">
                     <a href="./displayrecords.html" class="admin-redflag-link" >${elem.title.slice(0, 30)}...</a>
                     <img src="../images/red_flag.png" class="red-flag-icon" title="Red flag" />
@@ -320,6 +322,7 @@ const loadAllRedflagsAdmin = () => {
 const loadAllInterventionsAdmin = () => {
   const token = localStorage.getItem("token");
   const loader = document.getElementById("adminRecordLoader");
+  const interventionList_container = document.querySelectorAll(".admin-intervention-list")[0];
   loader.style.display = "inline-block";
   fetch(interventionURL, {
     method: "GET",
@@ -332,15 +335,16 @@ const loadAllInterventionsAdmin = () => {
     .then((res) => res.json())
     .then((responseData) => {
       const { status, data } = responseData;
+      interventionList_container.innerHTML = "";
       if (status === 200) {
         if (data.length < 1) {
           loader.style.display = "none";
-          return document.querySelectorAll(".admin-intervention-list")[0].innerHTML  += `
+          return interventionList_container.innerHTML  += `
            <h2 style='color:grey; padding: 1em 0 1em 0; text-align:center; font-size:1.2em'>NO INTERVENTION RECORDS</h2>
           `;
         } else {
           data.forEach(elem => {
-            document.querySelectorAll(".admin-intervention-list")[0].innerHTML +=
+            interventionList_container.innerHTML +=
               ` <li id=${elem.id} class='${elem.status} ${elem.type}'>
                     <a href="./displayrecords.html" class="admin-intervention-link" >${elem.title.slice(0, 30)}...</a>
                     <img src="../images/intervene_icon.png" class="intervention-icon" title="intervention" />

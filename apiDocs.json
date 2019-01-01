@@ -1,685 +1,794 @@
 {
-  "openapi" : "3.0.1",
-  "info" : {
-    "title" : "iReporter",
-    "description" : "The is a Swagger Spec for the REST API used by the iReporter App. iReporter enables any/every citizen to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention.  You can find out more about iReporter on [my github repo](https://github.com/shaolinmkz/iReporter) also view UI templates on [client](https://shaolinmkz.github.io/iReporter/ui/).",
-    "termsOfService" : "https://github.com/shaolinmkz/iReporter",
-    "contact" : {
-      "email" : "nwabuzor.obiora@gmail.com"
+  "openapi": "3.0.1",
+  "info": {
+    "title": "iReporter",
+    "description": "The is a Swagger Spec for the REST API used by the iReporter App. iReporter enables any/every citizen to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention.  You can find out more about iReporter on [my github repo](https://github.com/shaolinmkz/iReporter) also view UI templates on [client](https://shaolinmkz.github.io/iReporter/ui/).",
+    "termsOfService": "https://github.com/shaolinmkz/iReporter",
+    "contact": {
+      "email": "nwabuzor.obiora@gmail.com"
     },
-    "version" : "1.0.0"
+    "version": "1.0.0"
   },
-  "servers" : [ {
-    "url" : "https://eye-reporter.herokuapp.com"
-  } ],
-  "tags" : [ {
-    "name" : "red-flags",
-    "description" : "About the red-flag routes",
-    "externalDocs" : {
-      "description" : "All users operational activities"
+  "servers": [
+    {
+      "url": "https://eye-reporter.herokuapp.com"
     }
-  }, {
-    "name" : "interventions",
-    "description" : "About the intervention routes",
-    "externalDocs" : {
-      "description" : "All user operational activities"
+  ],
+  "tags": [
+    {
+      "name": "red-flags",
+      "description": "About the red-flag routes",
+      "externalDocs": {
+        "description": "All users operational activities"
+      }
+    },
+    {
+      "name": "interventions",
+      "description": "About the intervention routes",
+      "externalDocs": {
+        "description": "All user operational activities"
+      }
+    },
+    {
+      "name": "authentication",
+      "description": "Signup and Login routes",
+      "externalDocs": {
+        "description": "Authentication Routes"
+      }
+    },
+    {
+      "name": "users",
+      "description": "users activities",
+      "externalDocs": {
+        "description": "users Activities"
+      }
     }
-  }, {
-    "name" : "authentication",
-    "description" : "Signup and Login routes",
-    "externalDocs" : {
-      "description" : "Authentication Routes"
-    }
-  }, {
-    "name" : "users",
-    "description" : "users activities",
-    "externalDocs" : {
-      "description" : "users Activities"
-    }
-  } ],
-  "paths" : {
-    "/api/v1/auth/login" : {
-      "post" : {
-        "tags" : [ "authentication" ],
-        "summary" : "Login Route",
-        "description" : "Auto generated using Swagger Inspector",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/body"
+  ],
+  "paths": {
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": [
+          "authentication"
+        ],
+        "summary": "Login Route",
+        "description": "Auto generated using Swagger Inspector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body"
               },
-              "examples" : {
-                "0" : {
-                  "value" : "{\n\n\t\"emailUsername\": \"johndoe@gmail.com\",\n\t\"password\": \"asdf;lkj\"\n}"
+              "examples": {
+                "0": {
+                  "value": "{\n\n\t\"emailUsername\": \"johndoe@gmail.com\",\n\t\"password\": \"asdf;lkj\"\n}"
                 }
               }
             }
           }
         },
-        "responses" : {
-          "200" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       }
     },
-    "/api/v1/auth/signup" : {
-      "post" : {
-        "tags" : [ "authentication" ],
-        "summary" : "Signup Route",
-        "description" : "Auto generated using Swagger Inspector",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/body_1"
+    "/api/v1/auth/signup": {
+      "post": {
+        "tags": [
+          "authentication"
+        ],
+        "summary": "Signup Route",
+        "description": "Auto generated using Swagger Inspector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_1"
               },
-              "examples" : {
-                "0" : {
-                  "value" : "{\n\t\"username\": \"John007\",\n\t\"firstname\": \"John\",\n\t\"lastname\": \"Doe\",\n\t\"othername\": \"Johnny\",\n\t\"phoneNumber\": \"08076400112\",\n\t\"email\": \"johndoe@gmail.com\",\n\t\"password\": \"asdf;lkj\",\n\t\"confirmPassword\": \"asdf;lkj\" \n}"
+              "examples": {
+                "0": {
+                  "value": "{\n\t\"username\": \"John007\",\n\t\"firstname\": \"John\",\n\t\"lastname\": \"Doe\",\n\t\"othername\": \"Johnny\",\n\t\"phoneNumber\": \"08076400112\",\n\t\"email\": \"johndoe@gmail.com\",\n\t\"password\": \"asdf;lkj\",\n\t\"confirmPassword\": \"asdf;lkj\" \n}"
                 }
               }
             }
           }
         },
-        "responses" : {
-          "201" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+        "responses": {
+          "201": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       }
     },
-    "/api/v1/interventions" : {
-      "get" : {
-        "tags" : [ "interventions" ],
-        "summary" : "Get all intervention route",
-        "description" : "Auto generated using Swagger Inspector",
-        "responses" : {
-          "200" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+    "/api/v1/interventions": {
+      "get": {
+        "tags": [
+          "interventions"
+        ],
+        "summary": "Get all intervention route",
+        "description": "Auto generated using Swagger Inspector",
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       },
-      "post" : {
-        "tags" : [ "interventions" ],
-        "summary" : "Create Intervention Route",
-        "description" : "Auto generated using Swagger Inspector",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/body_2"
+      "post": {
+        "tags": [
+          "interventions"
+        ],
+        "summary": "Create Intervention Route",
+        "description": "Auto generated using Swagger Inspector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_2"
               },
-              "examples" : {
-                "0" : {
-                  "value" : "{\n    \"title\": \"Musa please fix the roads\",\n    \"type\": \"intervention\",\n    \"location\": \"12.2333333, -3.1232313\",\n    \"images\": [\"imageurl\"],\n    \"videos\": [\"videourl\"],\n    \"comment\": \"In a few days along comes the letter you expect.\"\n}"
+              "examples": {
+                "0": {
+                  "value": "{\n    \"title\": \"Musa please fix the roads\",\n    \"type\": \"intervention\",\n    \"location\": \"12.2333333, -3.1232313\",\n    \"images\": [\"imageurl\"],\n    \"videos\": [\"videourl\"],\n    \"comment\": \"In a few days along comes the letter you expect.\"\n}"
                 }
               }
             }
           }
         },
-        "responses" : {
-          "201" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+        "responses": {
+          "201": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       }
     },
-    "/api/v1/red-flags" : {
-      "get" : {
-        "tags" : [ "red-flags" ],
-        "summary" : "Get all red-flags",
-        "description" : "Auto generated using Swagger Inspector",
-        "responses" : {
-          "200" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+    "/api/v1/red-flags": {
+      "get": {
+        "tags": [
+          "red-flags"
+        ],
+        "summary": "Get all red-flags",
+        "description": "Auto generated using Swagger Inspector",
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       },
-      "post" : {
-        "tags" : [ "red-flags" ],
-        "summary" : "Create Red-flag Route",
-        "description" : "Auto generated using Swagger Inspector",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/body_3"
+      "post": {
+        "tags": [
+          "red-flags"
+        ],
+        "summary": "Create Red-flag Route",
+        "description": "Auto generated using Swagger Inspector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_3"
               },
-              "examples" : {
-                "0" : {
-                  "value" : "{\n    \"title\": \"Musa please fix the roads\",\n    \"type\": \"intervention\",\n    \"location\": \"12.2333333, -3.1232313\",\n    \"images\": [\"imageurl\"],\n    \"videos\": [\"videourl\"],\n    \"comment\": \"In a few days along comes the letter you expect.\"\n}"
+              "examples": {
+                "0": {
+                  "value": "{\n    \"title\": \"Musa please fix the roads\",\n    \"type\": \"intervention\",\n    \"location\": \"12.2333333, -3.1232313\",\n    \"images\": [\"imageurl\"],\n    \"videos\": [\"videourl\"],\n    \"comment\": \"In a few days along comes the letter you expect.\"\n}"
                 }
               }
             }
           }
         },
-        "responses" : {
-          "201" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+        "responses": {
+          "201": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       }
     },
-    "/api/v1/red-flags/{redflagId}/location" : {
-      "patch" : {
-        "tags" : [ "red-flags" ],
-        "summary" : "Update Red-flag Location",
-        "description" : "Auto generated using Swagger Inspector",
-        "parameters" : [ {
-          "name" : "redflagId",
-          "in" : "path",
-          "description" : "Numeric ID of redflag",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
+    "/api/v1/red-flags/{redflagId}/location": {
+      "patch": {
+        "tags": [
+          "red-flags"
+        ],
+        "summary": "Update Red-flag Location",
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "redflagId",
+            "in": "path",
+            "description": "Numeric ID of redflag",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
           }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/body_4"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_4"
               },
-              "examples" : {
-                "0" : {
-                  "value" : "{\n    \"location\": \"-13.2333333, 1.1232313\"\n}"
+              "examples": {
+                "0": {
+                  "value": "{\n    \"location\": \"-13.2333333, 1.1232313\"\n}"
                 }
               }
             }
           }
         },
-        "responses" : {
-          "200" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       }
     },
-    "/api/v1/red-flags/{redflagId}" : {
-      "get" : {
-        "tags" : [ "red-flags" ],
-        "summary" : "Get specific Red-flag Route",
-        "description" : "Auto generated using Swagger Inspector",
-        "parameters" : [ {
-          "name" : "redflagId",
-          "in" : "path",
-          "description" : "Numeric ID of redflag",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
+    "/api/v1/red-flags/{redflagId}": {
+      "get": {
+        "tags": [
+          "red-flags"
+        ],
+        "summary": "Get specific Red-flag Route",
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "redflagId",
+            "in": "path",
+            "description": "Numeric ID of redflag",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+        ],
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       }
     },
-    "/api/v1/red-flags/{redflagId}/status" : {
-      "patch" : {
-        "tags" : [ "red-flags" ],
-        "summary" : "Update Red-flag status Route",
-        "description" : "Auto generated using Swagger Inspector",
-        "parameters" : [ {
-          "name" : "redflagId",
-          "in" : "path",
-          "description" : "Numeric ID of redflag",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
+    "/api/v1/red-flags/{redflagId}/status": {
+      "patch": {
+        "tags": [
+          "red-flags"
+        ],
+        "summary": "Update Red-flag status Route",
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "redflagId",
+            "in": "path",
+            "description": "Numeric ID of redflag",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
           }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/body_5"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_5"
               },
-              "examples" : {
-                "0" : {
-                  "value" : "{\n    \"status\": \"under investigation\"\n}"
+              "examples": {
+                "0": {
+                  "value": "{\n    \"status\": \"under investigation\"\n}"
                 }
               }
             }
           }
         },
-        "responses" : {
-          "200" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       }
     },
-    "/api/v1/red-flags/{redflagID}" : {
-      "delete" : {
-        "tags" : [ "red-flags" ],
-        "summary" : "Delete Red-flag Route",
-        "description" : "Auto generated using Swagger Inspector",
-        "parameters" : [ {
-          "name" : "redflagID",
-          "in" : "path",
-          "description" : "Numeric ID of redflag",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
+    "/api/v1/red-flags/{redflagID}": {
+      "delete": {
+        "tags": [
+          "red-flags"
+        ],
+        "summary": "Delete Red-flag Route",
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "redflagID",
+            "in": "path",
+            "description": "Numeric ID of redflag",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+        ],
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       }
     },
-    "/api/v1/interventions/{interventionId}/status" : {
-      "patch" : {
-        "tags" : [ "interventions" ],
-        "summary" : "Update intervention status Route",
-        "description" : "Auto generated using Swagger Inspector",
-        "parameters" : [ {
-          "name" : "interventionId",
-          "in" : "path",
-          "description" : "Numeric ID of intervention",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
+    "/api/v1/interventions/{interventionId}/status": {
+      "patch": {
+        "tags": [
+          "interventions"
+        ],
+        "summary": "Update intervention status Route",
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "description": "Numeric ID of intervention",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
           }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/body_6"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_6"
               },
-              "examples" : {
-                "0" : {
-                  "value" : "{\n    \"status\": \"under investigation\"\n}"
+              "examples": {
+                "0": {
+                  "value": "{\n    \"status\": \"under investigation\"\n}"
                 }
               }
             }
           }
         },
-        "responses" : {
-          "200" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       }
     },
-    "/api/v1/users/profile-image" : {
-      "patch" : {
-        "tags" : [ "users" ],
-        "summary" : "Update profile image Route",
-        "description" : "Auto generated using Swagger Inspector",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/body_7"
+    "/api/v1/users/profile-image": {
+      "patch": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Update profile image Route",
+        "description": "Auto generated using Swagger Inspector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_7"
               },
-              "examples" : {
-                "0" : {
-                  "value" : "{\n    \"profileImage\": \"validimageurl\"\n}"
+              "examples": {
+                "0": {
+                  "value": "{\n    \"profileImage\": \"validimageurl\"\n}"
                 }
               }
             }
           }
         },
-        "responses" : {
-          "200" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       }
     },
-    "/api/v1/interventions/profile/status" : {
-      "get" : {
-        "tags" : [ "interventions" ],
-        "summary" : "Get intervention status count route",
-        "description" : "Auto generated using Swagger Inspector",
-        "responses" : {
-          "200" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+    "/api/v1/interventions/profile/status": {
+      "get": {
+        "tags": [
+          "interventions"
+        ],
+        "summary": "Get intervention status count route",
+        "description": "Auto generated using Swagger Inspector",
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       }
     },
-    "/api/v1/interventions/{interventionId}/location" : {
-      "patch" : {
-        "tags" : [ "interventions" ],
-        "summary" : "Update intervention location Route",
-        "description" : "Auto generated using Swagger Inspector",
-        "parameters" : [ {
-          "name" : "interventionId",
-          "in" : "path",
-          "description" : "Numeric ID of intervention",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
+    "/api/v1/interventions/{interventionId}/location": {
+      "patch": {
+        "tags": [
+          "interventions"
+        ],
+        "summary": "Update intervention location Route",
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "description": "Numeric ID of intervention",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
           }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/body_8"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_8"
               },
-              "examples" : {
-                "0" : {
-                  "value" : "{\n    \"location\": \"-13.2333333, 1.1232313\"\n}"
+              "examples": {
+                "0": {
+                  "value": "{\n    \"location\": \"-13.2333333, 1.1232313\"\n}"
                 }
               }
             }
           }
         },
-        "responses" : {
-          "200" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       }
     },
-    "/api/v1/interventions/{interventionId}" : {
-      "get" : {
-        "tags" : [ "interventions" ],
-        "summary" : "Get Specific intervention Route",
-        "description" : "Auto generated using Swagger Inspector",
-        "parameters" : [ {
-          "name" : "interventionId",
-          "in" : "path",
-          "description" : "Numeric ID of interventionId",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
+    "/api/v1/interventions/{interventionId}": {
+      "get": {
+        "tags": [
+          "interventions"
+        ],
+        "summary": "Get Specific intervention Route",
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "description": "Numeric ID of interventionId",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+        ],
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       },
-      "delete" : {
-        "tags" : [ "interventions" ],
-        "summary" : "Delete specific intervention Route",
-        "description" : "Auto generated using Swagger Inspector",
-        "parameters" : [ {
-          "name" : "interventionId",
-          "in" : "path",
-          "description" : "Numeric ID of intervention",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
+      "delete": {
+        "tags": [
+          "interventions"
+        ],
+        "summary": "Delete specific intervention Route",
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "description": "Numeric ID of intervention",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+        ],
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       }
     },
-    "/api/v1/red-flags/{redflagId}/comment" : {
-      "patch" : {
-        "tags" : [ "red-flags" ],
-        "summary" : "Update red-flag comment route",
-        "description" : "Auto generated using Swagger Inspector",
-        "parameters" : [ {
-          "name" : "redflagId",
-          "in" : "path",
-          "description" : "Numeric ID of redflag",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
+    "/api/v1/red-flags/{redflagId}/comment": {
+      "patch": {
+        "tags": [
+          "red-flags"
+        ],
+        "summary": "Update red-flag comment route",
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "redflagId",
+            "in": "path",
+            "description": "Numeric ID of redflag",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
           }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/body_9"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_9"
               },
-              "examples" : {
-                "0" : {
-                  "value" : "{\n    \"comment\": \"I feel like changing you\"\n}"
+              "examples": {
+                "0": {
+                  "value": "{\n    \"comment\": \"I feel like changing you\"\n}"
                 }
               }
             }
           }
         },
-        "responses" : {
-          "200" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       }
     },
-    "/api/v1/interventions/{interventionId}/comment" : {
-      "patch" : {
-        "tags" : [ "interventions" ],
-        "summary" : "Update intervention comment route",
-        "description" : "Auto generated using Swagger Inspector",
-        "parameters" : [ {
-          "name" : "interventionId",
-          "in" : "path",
-          "description" : "Numeric ID of intervention",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
+    "/api/v1/interventions/{interventionId}/comment": {
+      "patch": {
+        "tags": [
+          "interventions"
+        ],
+        "summary": "Update intervention comment route",
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "description": "Numeric ID of intervention",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
           }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/body_10"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_10"
               },
-              "examples" : {
-                "0" : {
-                  "value" : "{\n    \"comment\": \"I feel like changing you\"\n}"
+              "examples": {
+                "0": {
+                  "value": "{\n    \"comment\": \"I feel like changing you\"\n}"
                 }
               }
             }
           }
         },
-        "responses" : {
-          "200" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
               }
             }
           }
         }
       }
     },
-    "/api/v1/red-flags/profile/status" : {
-      "get" : {
-        "tags" : [ "red-flags" ],
-        "summary" : "Get red-flag status count route",
-        "description" : "Auto generated using Swagger Inspector",
-        "responses" : {
-          "200" : {
-            "description" : "Auto generated using Swagger Inspector",
-            "content" : {
-              "application/json; charset=utf-8" : {
-                "schema" : {
-                  "type" : "string"
+    "/api/v1/red-flags/profile/status": {
+      "get": {
+        "tags": [
+          "red-flags"
+        ],
+        "summary": "Get red-flag status count route",
+        "description": "Auto generated using Swagger Inspector",
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
                 },
-                "examples" : { }
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/profile/interventions": {
+      "get": {
+        "tags": [
+          "interventions"
+        ],
+        "summary": "Get users personal interventions",
+        "description": "Auto generated using Swagger Inspector",
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/profile/red-flags": {
+      "get": {
+        "tags": [
+          "red-flags"
+        ],
+        "summary": "Get users personal red-flags",
+        "description": "Auto generated using Swagger Inspector",
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
               }
             }
           }
@@ -687,159 +796,159 @@
       }
     }
   },
-  "components" : {
-    "schemas" : {
-      "body" : {
-        "type" : "object",
-        "properties" : {
-          "password" : {
-            "type" : "string"
+  "components": {
+    "schemas": {
+      "body": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
           },
-          "emailUsername" : {
-            "type" : "string"
+          "emailUsername": {
+            "type": "string"
           }
         }
       },
-      "body_1" : {
-        "type" : "object",
-        "properties" : {
-          "firstname" : {
-            "type" : "string"
+      "body_1": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string"
           },
-          "password" : {
-            "type" : "string"
+          "password": {
+            "type": "string"
           },
-          "phoneNumber" : {
-            "type" : "string"
+          "phoneNumber": {
+            "type": "string"
           },
-          "othername" : {
-            "type" : "string"
+          "othername": {
+            "type": "string"
           },
-          "confirmPassword" : {
-            "type" : "string"
+          "confirmPassword": {
+            "type": "string"
           },
-          "email" : {
-            "type" : "string"
+          "email": {
+            "type": "string"
           },
-          "username" : {
-            "type" : "string"
+          "username": {
+            "type": "string"
           },
-          "lastname" : {
-            "type" : "string"
+          "lastname": {
+            "type": "string"
           }
         }
       },
-      "body_2" : {
-        "type" : "object",
-        "properties" : {
-          "images" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+      "body_2": {
+        "type": "object",
+        "properties": {
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
-          "location" : {
-            "type" : "string"
+          "location": {
+            "type": "string"
           },
-          "videos" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+          "videos": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
-          "comment" : {
-            "type" : "string"
+          "comment": {
+            "type": "string"
           },
-          "title" : {
-            "type" : "string"
+          "title": {
+            "type": "string"
           },
-          "type" : {
-            "type" : "string"
+          "type": {
+            "type": "string"
           }
         }
       },
-      "body_3" : {
-        "type" : "object",
-        "properties" : {
-          "images" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+      "body_3": {
+        "type": "object",
+        "properties": {
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
-          "location" : {
-            "type" : "string"
+          "location": {
+            "type": "string"
           },
-          "videos" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
+          "videos": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
-          "comment" : {
-            "type" : "string"
+          "comment": {
+            "type": "string"
           },
-          "title" : {
-            "type" : "string"
+          "title": {
+            "type": "string"
           },
-          "type" : {
-            "type" : "string"
+          "type": {
+            "type": "string"
           }
         }
       },
-      "body_4" : {
-        "type" : "object",
-        "properties" : {
-          "location" : {
-            "type" : "string"
+      "body_4": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string"
           }
         }
       },
-      "body_5" : {
-        "type" : "object",
-        "properties" : {
-          "status" : {
-            "type" : "string"
+      "body_5": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
           }
         }
       },
-      "body_6" : {
-        "type" : "object",
-        "properties" : {
-          "status" : {
-            "type" : "string"
+      "body_6": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
           }
         }
       },
-      "body_7" : {
-        "type" : "object",
-        "properties" : {
-          "profileImage" : {
-            "type" : "string"
+      "body_7": {
+        "type": "object",
+        "properties": {
+          "profileImage": {
+            "type": "string"
           }
         }
       },
-      "body_8" : {
-        "type" : "object",
-        "properties" : {
-          "location" : {
-            "type" : "string"
+      "body_8": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string"
           }
         }
       },
-      "body_9" : {
-        "type" : "object",
-        "properties" : {
-          "comment" : {
-            "type" : "string"
+      "body_9": {
+        "type": "object",
+        "properties": {
+          "comment": {
+            "type": "string"
           }
         }
       },
-      "body_10" : {
-        "type" : "object",
-        "properties" : {
-          "comment" : {
-            "type" : "string"
+      "body_10": {
+        "type": "object",
+        "properties": {
+          "comment": {
+            "type": "string"
           }
         }
       }
